@@ -85,6 +85,18 @@ async function deleteOwnedFile(filePath: string) {
   }
 }
 
+function shouldDeleteTargetDemoFile(target: {
+  demoFilePath: string | null;
+  ownedDownloadFilePath: string | null;
+  ownedArchiveFilePath: string | null;
+  ownsDatabaseMatch: boolean;
+}) {
+  return (
+    target.demoFilePath !== null &&
+    (target.ownsDatabaseMatch || target.ownedDownloadFilePath !== null || target.ownedArchiveFilePath !== null)
+  );
+}
+
 class FaceitScoutingSessionManager {
   private watcher: FSWatcher | null = null;
   private watchedFolderPath: string | null = null;
@@ -206,11 +218,18 @@ class FaceitScoutingSessionManager {
         await deleteOrphanDemos();
       }
 
-      const ownedFilePaths = [...new Set(
-        session.targets.flatMap((target) => {
-          return [target.ownedArchiveFilePath, target.ownedDownloadFilePath].filter((filePath) => filePath !== null);
-        }),
-      )] as string[];
+      const ownedFilePaths = [
+        ...new Set(
+          session.targets.flatMap((target) => {
+            const filePaths = [target.ownedArchiveFilePath, target.ownedDownloadFilePath];
+            if (shouldDeleteTargetDemoFile(target)) {
+              filePaths.push(target.demoFilePath);
+            }
+
+            return filePaths.filter((filePath) => filePath !== null);
+          }),
+        ),
+      ] as string[];
       for (const filePath of ownedFilePaths) {
         await deleteOwnedFile(filePath);
       }
@@ -390,10 +409,7 @@ class FaceitScoutingSessionManager {
         .selectAll()
         .where('id', '=', session.id)
         .executeTakeFirstOrThrow();
-      const sessionCreatedAt = sessionRow.created_at.getTime();
       const opponentSteamIds: string[] = JSON.parse(sessionRow.opponent_steam_ids_json);
-      const stat = await fs.stat(filePath);
-      const isDownloadedForThisSession = stat.mtimeMs >= sessionCreatedAt;
       const archiveFormat = detectDemoArchiveFormat(filePath);
       demoFilePath = filePath;
       if (archiveFormat !== null) {
@@ -401,8 +417,8 @@ class FaceitScoutingSessionManager {
         await extractDemoArchiveToFile(filePath, extractedDemoPath, archiveFormat);
         demoFilePath = extractedDemoPath;
         ownedDownloadFilePath = extractedDemoPath;
-        ownedArchiveFilePath = isDownloadedForThisSession ? filePath : null;
-      } else if (isDownloadedForThisSession) {
+        ownedArchiveFilePath = filePath;
+      } else {
         ownedDownloadFilePath = filePath;
       }
 
