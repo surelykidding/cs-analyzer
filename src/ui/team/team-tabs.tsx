@@ -16,6 +16,9 @@ export function TeamTabs() {
       <TabLink url={RoutePath.TeamHeatmap}>
         <Trans context="Tab link">Heatmap</Trans>
       </TabLink>
+      <TabLink url={RoutePath.TeamTactics}>
+        <Trans context="Tab link">Tactics</Trans>
+      </TabLink>
       <TabLink url={RoutePath.TeamPerformance}>
         <Trans context="Tab link">Performance</Trans>
       </TabLink>

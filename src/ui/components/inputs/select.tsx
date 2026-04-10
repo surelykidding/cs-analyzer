@@ -27,7 +27,11 @@ export function Select<ValueType extends string | number = string>({
       disabled={isDisabled}
       value={value}
       onChange={(event) => {
-        onChange(event.target.value as ValueType);
+        const selectedOption = options.find((option) => {
+          return String(option.value) === event.target.value;
+        });
+
+        onChange((selectedOption?.value ?? event.target.value) as ValueType);
       }}
     >
       {options.map((option) => {

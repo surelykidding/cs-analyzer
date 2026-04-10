@@ -13,6 +13,7 @@ import type {
 import type { Video } from 'csdm/common/types/video';
 import type { ExportToXlsxProgressPayload, ExportToXlsxSuccessPayload } from 'csdm/common/types/xlsx';
 import type { CounterStrikeErrorPayload } from 'csdm/server/counter-strike';
+import type { FaceitScoutingSession } from 'csdm/common/types/faceit-scouting';
 
 // Message names sent from the WebSocket server to the renderer Electron process.
 export const RendererServerMessageName = {
@@ -30,6 +31,8 @@ export const RendererServerMessageName = {
   VideoQueueResumed: 'video-queue-resumed',
   AnalysisUpdated: 'analysis-status-changed',
   InsertingMatchPositions: 'inserting-match-positions',
+  InsertingMatchPistolRoundPositions: 'inserting-match-pistol-round-positions',
+  InsertingMatchTacticsPositions: 'inserting-match-tactics-positions',
   MatchInserted: 'match-inserted',
   FetchLastValveMatchesStart: 'fetch-last-valve-matches-start',
   FetchLastValveMatchesSuccess: 'fetch-last-valve-matches-success',
@@ -54,6 +57,7 @@ export const RendererServerMessageName = {
   ResetTablesStateSuccess: 'reset-tables-state-success',
   IgnoredSteamAccountsChanged: 'ignored-steam-accounts-changed',
   TeamNamesUpdated: 'team-names-updated',
+  FaceitScoutingSessionUpdated: 'faceit-scouting-session-updated',
 } as const;
 
 export type RendererServerMessageName =
@@ -77,6 +81,8 @@ export interface RendererServerMessagePayload extends SharedServerMessagePayload
   [RendererServerMessageName.VideoQueuePaused]: void;
   [RendererServerMessageName.DemosRemovedFromAnalyses]: string[];
   [RendererServerMessageName.InsertingMatchPositions]: void;
+  [RendererServerMessageName.InsertingMatchPistolRoundPositions]: void;
+  [RendererServerMessageName.InsertingMatchTacticsPositions]: void;
   [RendererServerMessageName.AnalysisUpdated]: Analysis;
   [RendererServerMessageName.MatchInserted]: MatchTable;
   [RendererServerMessageName.FetchLastValveMatchesStart]: void;
@@ -102,4 +108,5 @@ export interface RendererServerMessagePayload extends SharedServerMessagePayload
   [RendererServerMessageName.ResetTablesStateSuccess]: void;
   [RendererServerMessageName.IgnoredSteamAccountsChanged]: void;
   [RendererServerMessageName.TeamNamesUpdated]: number;
+  [RendererServerMessageName.FaceitScoutingSessionUpdated]: FaceitScoutingSession | undefined;
 }

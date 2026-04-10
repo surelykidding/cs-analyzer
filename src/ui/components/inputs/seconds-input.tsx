@@ -4,14 +4,15 @@ import { InputNumber } from './number-input';
 
 type Props = {
   label: ReactNode;
-  defaultValue: number;
+  value?: number;
+  defaultValue?: number;
+  min?: number;
+  max?: number;
   onChange: (value: number) => void;
 };
 
-export function SecondsInput({ label, defaultValue, onChange }: Props) {
+export function SecondsInput({ label, value, defaultValue, min = 0, max = 30, onChange }: Props) {
   const id = useId();
-  const min = 0;
-  const max = 30;
 
   return (
     <div className="flex flex-col gap-y-8">
@@ -22,6 +23,7 @@ export function SecondsInput({ label, defaultValue, onChange }: Props) {
           min={min}
           max={max}
           placeholder={String(2)}
+          value={value}
           defaultValue={defaultValue}
           onChange={(event) => {
             if (!(event.target instanceof HTMLInputElement)) {

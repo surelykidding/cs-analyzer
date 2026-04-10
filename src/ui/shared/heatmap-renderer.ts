@@ -36,12 +36,19 @@ export class HeatmapRenderer {
 
   public setPoints(points: HeatmapPoint[]) {
     this.points = points;
+    this.max = Math.max(1, ...points.map((point) => point[2]));
 
     return this;
   }
 
   public setAlpha(alpha: number) {
     this.alpha = alpha;
+
+    return this;
+  }
+
+  public setMinOpacity(minOpacity: number) {
+    this.minOpacity = minOpacity;
 
     return this;
   }

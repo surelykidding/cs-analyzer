@@ -272,6 +272,7 @@ msgstr ""
 #: src/ui/settings/video/hlae/hlae-location.tsx
 #: src/ui/settings/video/hlae/hlae-location.tsx
 #: src/ui/team/heatmap/team-heatmap.tsx
+#: src/ui/team/tactics/team-tactics.tsx
 #: src/ui/videos/use-remove-videos.tsx
 #: src/ui/videos/video-entry.tsx
 msgid "An error occurred"
@@ -1390,11 +1391,13 @@ msgid "Event"
 msgstr "Evento"
 
 #: src/ui/components/heatmap/heatmap-select-map.tsx
+#: src/ui/team/tactics/team-tactics-filters.tsx
 msgctxt "Input label"
 msgid "Map"
 msgstr "Mapa"
 
 #: src/ui/components/heatmap/heatmap.tsx
+#: src/ui/team/tactics/team-tactics-map.tsx
 msgid "Select a map."
 msgstr "Selecione um mapa."
 
@@ -3001,6 +3004,290 @@ msgstr "É necessária uma pasta de downloads."
 msgctxt "Button"
 msgid "Select downloads folder"
 msgstr "Selecionar pasta de downloads"
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "An error occurred while loading the scouting session."
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "An error occurred while loading scouting tactics."
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "FACEIT scouting session started."
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "An error occurred while starting the scouting session."
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "FACEIT scouting session deleted."
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "An error occurred while deleting the scouting session."
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "Tactics positions generated for imported scouting demos."
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "An error occurred while generating tactics positions."
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "Loading FACEIT scouting..."
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "FACEIT Scouting"
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "Paste a FACEIT room URL or match ID, find the opponent's recent matches on the same map, then download them from your browser. Keep the downloaded file name unchanged so the app can match it automatically."
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "Imported demos use the same shared tactics positions pipeline for pistol, eco, semi, force buy and full buy rounds."
+msgstr ""
+
+#. placeholder {0}: currentAccount.nickname
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "Current FACEIT account: {0}"
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgctxt "Input label"
+msgid "FACEIT room URL or match ID"
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgctxt "Input placeholder"
+msgid "https://www.faceit.com/en/cs2/room/1-..."
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "Start scouting session"
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "Refresh"
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "Source Match"
+msgstr ""
+
+#. placeholder {0}: session.sourceMatch.mapName
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "Map: {0}"
+msgstr ""
+
+#. placeholder {0}: session.sourceMatch.ourTeamName
+#. placeholder {1}: session.sourceMatch.ourTeamScore
+#. placeholder {2}: session.sourceMatch.opponentTeamScore
+#. placeholder {3}: session.sourceMatch.opponentTeamName
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "{0} {1} - {2} {3}"
+msgstr ""
+
+#. placeholder {0}: session.status
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "Status: {0}"
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "See source room on FACEIT"
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "Open next pending match"
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "Refresh session"
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "Delete scouting session"
+msgstr ""
+
+#. placeholder {0}: session.readyTargetCount
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "Targets ready: {0}"
+msgstr ""
+
+#. placeholder {0}: session.awaitingDownloadTargetCount
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "Targets waiting for download: {0}"
+msgstr ""
+
+#. placeholder {0}: session.processingTargetCount
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "Targets processing: {0}"
+msgstr ""
+
+#. placeholder {0}: session.errorTargetCount
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "Targets with errors: {0}"
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/team/tactics/team-tactics-filters.tsx
+msgctxt "Input label"
+msgid "Side"
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/team/tactics/team-tactics-filters.tsx
+msgctxt "Input label"
+msgid "Economy"
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/team/tactics/team-tactics-filters.tsx
+msgctxt "Input label"
+msgid "Window start"
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/team/tactics/team-tactics-filters.tsx
+msgctxt "Input label"
+msgid "Window end"
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "Some imported matches are still missing player positions required for the tactics heatmap."
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "Generate tactics positions for imported demos"
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "Targets"
+msgstr ""
+
+#. placeholder {0}: target.order + 1
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "Match {0}"
+msgstr ""
+
+#. placeholder {0}: target.sharedHistoryPlayerCount
+#. placeholder {1}: target.rosterOverlapCount
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "Shared history players: {0}, roster overlap: {1}"
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "See on FACEIT"
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "Start a scouting session to see opponent tactics."
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "Download opponent demos from your browser and this page will import them automatically."
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "Loading scouting tactics..."
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "Fire Grenades"
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "No fire grenade data found for the current filters."
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "Smoke Grenades"
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "No smoke grenade data found for the current filters."
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "Flashbangs"
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "No flashbang data found for the current filters."
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "T Heatmap"
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "No T position data found for the current filters."
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "Kill Positions"
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "No kill data found for the current filters."
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "Death Positions"
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "No death data found for the current filters."
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "HE Grenades"
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "No HE grenade data found for the current filters."
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "AWP Holder Heatmap"
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "No AWP holder position data found for the current filters."
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "CT Heatmap"
+msgstr ""
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "No CT position data found for the current filters."
+msgstr ""
 
 #: src/ui/downloads/faceit/current-match.tsx
 msgctxt "Button"
@@ -6975,6 +7262,15 @@ msgstr ""
 msgid "Maximum number of analyses that can run at the same time."
 msgstr ""
 
+#: src/ui/settings/analyze/max-concurrent-tactics-position-generations-select.tsx
+msgctxt "Settings title"
+msgid "Maximum number of concurrent tactics position generations"
+msgstr ""
+
+#: src/ui/settings/analyze/max-concurrent-tactics-position-generations-select.tsx
+msgid "Maximum number of pistol-round tactics position generations that can run at the same time."
+msgstr ""
+
 #: src/ui/settings/analyze/toggle-analyze-positions.tsx
 msgid "Analyze player/grenade positions during analysis. Positions are required only for the 2D viewer. When enabled it increases time to insert matches into database and disk space usage."
 msgstr ""
@@ -8372,8 +8668,109 @@ msgctxt "Panel title"
 msgid "Side"
 msgstr ""
 
+#: src/ui/team/tactics/team-tactics-filters.tsx
+msgid "Tactics v1"
+msgstr ""
+
+#: src/ui/team/tactics/team-tactics-filters.tsx
+msgid "CS2 tactics filters the currently loaded team matches by map, side and economy type. Position heatmaps use only the freeze-end window needed for tactics."
+msgstr ""
+
+#: src/ui/team/tactics/team-tactics-filters.tsx
+msgid "Some matches on the current map are missing player positions required for the tactics heatmap."
+msgstr ""
+
+#: src/ui/team/tactics/team-tactics-filters.tsx
+msgid "Generate tactics positions once for the current map matches to cover pistol, eco, semi, force buy and full buy rounds."
+msgstr ""
+
+#. placeholder {0}: response.skippedMatchesWithoutPositions
+#. placeholder {1}: response.skippedRoundCount
+#: src/ui/team/tactics/team-tactics-filters.tsx
+msgid "Missing matches: {0}, missing rounds: {1}"
+msgstr ""
+
+#: src/ui/team/tactics/team-tactics-filters.tsx
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "Generate tactics positions for current map matches"
+msgstr ""
+
+#. placeholder {0}: response.selectedMatchCount
+#: src/ui/team/tactics/team-tactics-filters.tsx
+msgid "Matches in scope: {0}"
+msgstr ""
+
+#. placeholder {0}: response.roundCount
+#: src/ui/team/tactics/team-tactics-filters.tsx
+msgid "Rounds found: {0}"
+msgstr ""
+
+#. placeholder {0}: response.analyzedMatchCount
+#: src/ui/team/tactics/team-tactics-filters.tsx
+msgid "Matches analyzed: {0}"
+msgstr ""
+
+#. placeholder {0}: response.skippedMatchesWithoutPositions
+#. placeholder {1}: response.skippedRoundCount
+#: src/ui/team/tactics/team-tactics-filters.tsx
+msgid "Skipped matches without positions: {0} ({1} rounds)"
+msgstr ""
+
+#. placeholder {0}: points.length
+#: src/ui/team/tactics/team-tactics-map.tsx
+msgid "{0} samples"
+msgstr ""
+
+#. placeholder {0}: points.length
+#: src/ui/team/tactics/team-tactics-map.tsx
+msgid "{0} points"
+msgstr ""
+
+#. placeholder {0}: points.length
+#: src/ui/team/tactics/team-tactics-map.tsx
+msgid "{0} cells"
+msgstr ""
+
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "No CT position data was found on the current radar level for these filters. Switched to the other level."
+msgstr ""
+
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "Tactics positions generated for skipped matches."
+msgstr ""
+
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "Tactics v1 only supports teams with CS2 matches."
+msgstr ""
+
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "Loading tactics..."
+msgstr ""
+
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "An error occurred while loading tactics."
+msgstr ""
+
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "Missing Positions"
+msgstr ""
+
+#. placeholder {0}: response.skippedMatchesWithoutPositions
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "{0} matches on this map are missing player positions for the tactics heatmap."
+msgstr ""
+
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "No position data found for the current filters."
+msgstr ""
+
 #: src/ui/team/team-loader.tsx
 msgid "Loading team…"
+msgstr ""
+
+#: src/ui/team/team-tabs.tsx
+msgctxt "Tab link"
+msgid "Tactics"
 msgstr ""
 
 #: src/ui/team/team-tabs.tsx

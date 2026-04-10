@@ -29,6 +29,7 @@ import { PendingDownloads } from 'csdm/ui/downloads/pending/pending-downloads';
 import { GrenadesStats } from 'csdm/ui/match/grenades/stats/grenades-stats';
 import { GrenadesFinderLoader } from 'csdm/ui/match/grenades/finder/grenades-finder-loader';
 import { LastMatches as FaceitLastMatches } from 'csdm/ui/downloads/faceit/last-matches';
+import { FaceitScouting } from 'csdm/ui/downloads/faceit-scouting/faceit-scouting';
 import { LastMatches as RenownLastMatches } from 'csdm/ui/downloads/renown/last-matches';
 import { BanStats } from 'csdm/ui/ban/stats/ban-stats';
 import { MatchPlayers } from 'csdm/ui/match/players/match-players';
@@ -48,6 +49,7 @@ import { TeamOverview } from 'csdm/ui/team/overview/team-overview';
 import { TeamMatchesTable } from './team/matches/team-matches-table';
 import { TeamMaps } from './team/maps/team-maps';
 import { TeamHeatmap } from './team/heatmap/team-heatmap';
+import { TeamTactics } from './team/tactics/team-tactics';
 import { Videos } from './videos/videos';
 import { FiveEPlayLastMatches } from './downloads/five-eplay/5eplay-last-matches';
 import { TeamPerformance } from './team/performance/team-performance';
@@ -103,6 +105,7 @@ export const router = createHashRouter(
         <Route index={true} element={<TeamOverview />} />
         <Route path={RoutePath.TeamMaps} element={<TeamMaps />} />
         <Route path={RoutePath.TeamHeatmap} element={<TeamHeatmap />} />
+        <Route path={RoutePath.TeamTactics} element={<TeamTactics />} />
         <Route path={RoutePath.TeamPerformance} element={<TeamPerformance />} />
         <Route path={RoutePath.TeamMatches} element={<TeamMatchesTable />} />
       </Route>
@@ -112,6 +115,7 @@ export const router = createHashRouter(
       <Route path={RoutePath.Downloads} element={<Downloads />}>
         <Route index={true} element={<ValveLastMatchesLoader />} />
         <Route path={RoutePath.DownloadsFaceit} element={<FaceitLastMatches />} />
+        <Route path={RoutePath.DownloadsFaceitScouting} element={<FaceitScouting />} />
         <Route path={RoutePath.DownloadsRenown} element={<RenownLastMatches />} />
         <Route path={RoutePath.Downloads5EPlay} element={<FiveEPlayLastMatches />} />
         <Route path={RoutePath.DownloadsPending} element={<PendingDownloads />} />

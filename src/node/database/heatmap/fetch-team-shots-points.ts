@@ -2,6 +2,7 @@ import { sql } from 'kysely';
 import type { Point } from 'csdm/common/types/point';
 import type { TeamHeatmapFilter } from 'csdm/common/types/heatmap-filters';
 import { db } from 'csdm/node/database/database';
+import { applyMatchRoundsFilter } from './apply-match-rounds-filter';
 
 export async function fetchTeamShotsPoints(filters: TeamHeatmapFilter): Promise<Point[]> {
   let query = db
@@ -52,6 +53,14 @@ export async function fetchTeamShotsPoints(filters: TeamHeatmapFilter): Promise<
     query = query
       .innerJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
       .where('checksum_tags.tag_id', 'in', filters.tagIds);
+  }
+
+  if (filters.matchChecksums !== undefined && filters.matchChecksums.length > 0) {
+    query = query.where('matches.checksum', 'in', filters.matchChecksums);
+  }
+
+  if (filters.matchRounds !== undefined && filters.matchRounds.length > 0) {
+    query = applyMatchRoundsFilter(query, filters.matchRounds, 'shots.match_checksum', 'shots.round_number');
   }
 
   const points = await query.execute();

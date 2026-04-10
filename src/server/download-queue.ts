@@ -1,11 +1,9 @@
 import fs from 'fs-extra';
 import { pipeline } from 'node:stream';
 import { Client, interceptors } from 'undici';
-import b2 from 'unbzip2-stream';
-import unzipper from 'unzipper';
-import zlib from 'node:zlib';
 import path from 'node:path';
 import util from 'node:util';
+import { createDemoArchiveExtractStream, detectDemoArchiveFormat } from 'csdm/node/demo-archive/demo-archive';
 import { assertDownloadFolderIsValid } from 'csdm/node/download/assert-download-folder-is-valid';
 import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
 import { server } from 'csdm/server/server';
@@ -209,17 +207,12 @@ class DownloadDemoQueue {
       });
 
       const out = fs.createWriteStream(demoPath);
-      let transformStream: NodeJS.WritableStream;
       const { demoUrl } = currentDownload;
-      if (demoUrl.endsWith('.gz')) {
-        transformStream = zlib.createGunzip();
-      } else if (demoUrl.endsWith('.bz2')) {
-        transformStream = b2();
-      } else if (demoUrl.endsWith('.zip')) {
-        transformStream = unzipper.ParseOne();
-      } else {
+      const archiveFormat = detectDemoArchiveFormat(demoUrl);
+      if (archiveFormat === null) {
         throw new Error('Unsupported demo archive');
       }
+      const transformStream = createDemoArchiveExtractStream(archiveFormat);
 
       await streamPipeline(response.body, transformStream, out);
       if (currentDownload.source === DownloadSource.Valve) {

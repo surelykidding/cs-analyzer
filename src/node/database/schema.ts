@@ -54,6 +54,9 @@ import type { TimestampTable } from './timestamps/timestamp-table';
 import type { RoundCommentTable } from './comments/round-comments-table';
 import type { CamerasTable } from './cameras/cameras-table';
 import type { RenownAccountTable } from './renown-account/renown-account-row';
+import type { TeamTacticsPlayerPositionTable } from './team-tactics-player-position/team-tactics-player-position-table';
+import type { FaceitScoutingSessionTable } from './faceit-scouting/faceit-scouting-session-row';
+import type { FaceitScoutingTargetTable } from './faceit-scouting/faceit-scouting-target-row';
 
 export type Database = {
   bombs_defuse_start: BombDefuseStartTable;
@@ -77,6 +80,8 @@ export type Database = {
   faceit_match_players: FaceitMatchPlayerTable;
   faceit_match_teams: FaceitMatchTeamTable;
   faceit_matches: FaceitMatchTable;
+  faceit_scouting_sessions: FaceitScoutingSessionTable;
+  faceit_scouting_targets: FaceitScoutingTargetTable;
   '5eplay_accounts': FiveEPlayAccountTable;
   flashbangs_explode: FlashbangExplodeTable;
   grenade_bounces: GrenadeBounceTable;
@@ -111,5 +116,6 @@ export type Database = {
   steam_account_overrides: SteamAccountOverridesTable;
   steam_account_tags: SteamAccountTagTable;
   tags: TagTable;
+  team_tactics_player_positions: TeamTacticsPlayerPositionTable;
   teams: TeamTable;
 };

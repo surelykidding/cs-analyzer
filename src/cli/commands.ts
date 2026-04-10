@@ -7,6 +7,7 @@ import { JsonCommand } from './commands/json-command';
 import { VideoCommand } from './commands/video-command';
 import { DownloadRenownCommand } from './commands/download-renown-command';
 import { Download5EPlayCommand } from './commands/download-5eplay-command';
+import { ProbeFaceitDownloadsCommand } from './commands/probe-faceit-downloads-command';
 
 export const commands = {
   [AnalyzeCommand.Name]: AnalyzeCommand,
@@ -16,6 +17,7 @@ export const commands = {
   [Download5EPlayCommand.Name]: Download5EPlayCommand,
   [HelpCommand.Name]: HelpCommand,
   [JsonCommand.Name]: JsonCommand,
+  [ProbeFaceitDownloadsCommand.Name]: ProbeFaceitDownloadsCommand,
   [XlsxCommand.Name]: XlsxCommand,
   [VideoCommand.Name]: VideoCommand,
 };

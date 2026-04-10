@@ -44,6 +44,7 @@ type UISettings = {
 
 type AnalyzeSettings = {
   maxConcurrentAnalyses?: number;
+  maxConcurrentTacticsPositionGenerations?: number;
   analyzePositions: boolean;
 };
 

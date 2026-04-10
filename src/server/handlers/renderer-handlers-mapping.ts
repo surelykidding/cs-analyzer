@@ -101,6 +101,10 @@ import { disableHlaeCustomLocationHandler } from './renderer-process/settings/di
 import { fetchLastFaceitMatchesHandler } from './renderer-process/faceit/fetch-last-faceit-matches-handler';
 import { updateCurrentFaceitAccountHandler } from './renderer-process/faceit/update-current-faceit-account-handler';
 import { deleteFaceitAccountHandler } from './renderer-process/faceit/delete-faceit-account-handler';
+import { startFaceitScoutingSessionHandler } from './renderer-process/faceit-scouting/start-faceit-scouting-session-handler';
+import { fetchCurrentFaceitScoutingSessionHandler } from './renderer-process/faceit-scouting/fetch-current-faceit-scouting-session-handler';
+import { fetchFaceitScoutingTacticsHandler } from './renderer-process/faceit-scouting/fetch-faceit-scouting-tactics-handler';
+import { deleteFaceitScoutingSessionHandler } from './renderer-process/faceit-scouting/delete-faceit-scouting-session-handler';
 import { abortDownloadsHandler } from './renderer-process/download/abort-downloads-handler';
 import type { RenameDemoPayload } from './renderer-process/demo/rename-demo-handler';
 import { renameDemoHandler } from './renderer-process/demo/rename-demo-handler';
@@ -131,6 +135,13 @@ import type { GrenadeThrow } from 'csdm/common/types/grenade-throw';
 import type { FfmpegVersionChangedPayload } from './renderer-process/settings/ffmpeg-version-changed-payload';
 import type { HlaeVersionChangedPayload } from './renderer-process/settings/hlae-version-changed-payload';
 import type { FaceitMatch } from 'csdm/common/types/faceit-match';
+import type {
+  DeleteFaceitScoutingSessionPayload,
+  FaceitScoutingSession,
+  FaceitScoutingTacticsPayload,
+  FaceitScoutingTacticsResponse,
+  StartFaceitScoutingSessionPayload,
+} from 'csdm/common/types/faceit-scouting';
 import {
   exportMatchesToJsonHandler,
   type ExportMatchesToJsonPayload,
@@ -143,6 +154,14 @@ import {
   generateMatchPositionsHandler,
   type GenerateMatchPositionsPayload,
 } from './renderer-process/match/generate-match-positions-handler';
+import {
+  generateMatchPistolRoundPositionsHandler,
+  type GenerateMatchPistolRoundPositionsPayload,
+} from './renderer-process/match/generate-match-pistol-round-positions-handler';
+import {
+  generateMatchTacticsPositionsHandler,
+  type GenerateMatchTacticsPositionsPayload,
+} from './renderer-process/match/generate-match-tactics-positions-handler';
 import type { Game } from 'csdm/common/types/counter-strike';
 import {
   updatePlayerCommentHandler,
@@ -173,6 +192,8 @@ import { fetchTeamHandler } from './renderer-process/team/fetch-team-handler';
 import type { TeamFilters } from 'csdm/node/database/team/team-filters';
 import type { TeamProfile } from 'csdm/common/types/team-profile';
 import { fetchTeamHeatmapPointsHandler } from './renderer-process/team/fetch-team-heatmap-points-handler';
+import type { TeamTacticsPayload, TeamTacticsResponse } from 'csdm/common/types/team-tactics';
+import { fetchTeamTacticsHandler } from './renderer-process/team/fetch-team-tactics-handler';
 import {
   updateMatchesTeamNamesHandler,
   type MatchesTeamNamesUpdatedPayload,
@@ -251,9 +272,12 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.FetchPlayersTable]: Handler<PlayersTableFilter, PlayerTable[]>;
   [RendererClientMessageName.FetchTeamsTable]: Handler<TeamsTableFilter, TeamTable[]>;
   [RendererClientMessageName.FetchTeam]: Handler<TeamFilters, TeamProfile>;
+  [RendererClientMessageName.FetchTeamTactics]: Handler<TeamTacticsPayload, TeamTacticsResponse>;
   [RendererClientMessageName.AddDemosToAnalyses]: Handler<Demo[]>;
   [RendererClientMessageName.RemoveDemosFromAnalyses]: Handler<string[]>;
   [RendererClientMessageName.GenerateMatchPositions]: Handler<GenerateMatchPositionsPayload>;
+  [RendererClientMessageName.GenerateMatchPistolRoundPositions]: Handler<GenerateMatchPistolRoundPositionsPayload>;
+  [RendererClientMessageName.GenerateMatchTacticsPositions]: Handler<GenerateMatchTacticsPositionsPayload>;
   [RendererClientMessageName.RenameDemo]: Handler<RenameDemoPayload>;
   [RendererClientMessageName.DeleteMatches]: Handler<string[]>;
   [RendererClientMessageName.DeleteIgnoredSteamAccount]: Handler<string>;
@@ -339,6 +363,16 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.AddFaceitAccount]: Handler<string, FaceitAccount>;
   [RendererClientMessageName.UpdateCurrentFaceitAccount]: Handler<string, FaceitAccount[]>;
   [RendererClientMessageName.DeleteFaceitAccount]: Handler<string, FaceitAccount[]>;
+  [RendererClientMessageName.StartFaceitScoutingSession]: Handler<
+    StartFaceitScoutingSessionPayload,
+    FaceitScoutingSession | undefined
+  >;
+  [RendererClientMessageName.FetchCurrentFaceitScoutingSession]: Handler<void, FaceitScoutingSession | undefined>;
+  [RendererClientMessageName.FetchFaceitScoutingTactics]: Handler<
+    FaceitScoutingTacticsPayload,
+    FaceitScoutingTacticsResponse
+  >;
+  [RendererClientMessageName.DeleteFaceitScoutingSession]: Handler<DeleteFaceitScoutingSessionPayload>;
   [RendererClientMessageName.SearchEvent]: Handler<SearchPayload, SearchResult>;
   [RendererClientMessageName.SearchPlayers]: Handler<PlayersFilter, PlayerResult[]>;
   [RendererClientMessageName.SearchMaps]: Handler<MapNamesFilter, string[]>;
@@ -379,9 +413,12 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.FetchPlayersTable]: fetchPlayersHandler,
   [RendererClientMessageName.FetchTeamsTable]: fetchTeamsTableHandler,
   [RendererClientMessageName.FetchTeam]: fetchTeamHandler,
+  [RendererClientMessageName.FetchTeamTactics]: fetchTeamTacticsHandler,
   [RendererClientMessageName.AddDemosToAnalyses]: addDemosToAnalysesHandler,
   [RendererClientMessageName.RemoveDemosFromAnalyses]: removeDemosFromAnalysesHandler,
   [RendererClientMessageName.GenerateMatchPositions]: generateMatchPositionsHandler,
+  [RendererClientMessageName.GenerateMatchPistolRoundPositions]: generateMatchPistolRoundPositionsHandler,
+  [RendererClientMessageName.GenerateMatchTacticsPositions]: generateMatchTacticsPositionsHandler,
   [RendererClientMessageName.RenameDemo]: renameDemoHandler,
   [RendererClientMessageName.DeleteMatches]: deleteMatchesHandler,
   [RendererClientMessageName.DeleteIgnoredSteamAccount]: deleteIgnoredSteamAccountHandler,
@@ -451,6 +488,10 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.AddFaceitAccount]: addFaceitAccountHandler,
   [RendererClientMessageName.UpdateCurrentFaceitAccount]: updateCurrentFaceitAccountHandler,
   [RendererClientMessageName.DeleteFaceitAccount]: deleteFaceitAccountHandler,
+  [RendererClientMessageName.StartFaceitScoutingSession]: startFaceitScoutingSessionHandler,
+  [RendererClientMessageName.FetchCurrentFaceitScoutingSession]: fetchCurrentFaceitScoutingSessionHandler,
+  [RendererClientMessageName.FetchFaceitScoutingTactics]: fetchFaceitScoutingTacticsHandler,
+  [RendererClientMessageName.DeleteFaceitScoutingSession]: deleteFaceitScoutingSessionHandler,
   [RendererClientMessageName.SearchEvent]: searchHandler,
   [RendererClientMessageName.SearchPlayers]: searchPlayersHandler,
   [RendererClientMessageName.SearchMaps]: searchMapNamesHandler,

@@ -4,28 +4,27 @@ import type { Point } from 'csdm/common/types/point';
 import type { TeamHeatmapFilter } from 'csdm/common/types/heatmap-filters';
 import { db } from 'csdm/node/database/database';
 import { HeatmapEvent } from 'csdm/common/types/heatmap-event';
+import { applyMatchRoundsFilter } from './apply-match-rounds-filter';
 
 export async function fetchTeamGrenadePoints(filters: TeamHeatmapFilter): Promise<Point[]> {
-  const grenadeNames: GrenadeName[] = [];
-  switch (filters.event) {
-    case HeatmapEvent.Smoke:
-      grenadeNames.push(GrenadeName.Smoke);
-      break;
-    case HeatmapEvent.Decoy:
-      grenadeNames.push(GrenadeName.Decoy);
-      break;
-    case HeatmapEvent.Flashbang:
-      grenadeNames.push(GrenadeName.Flashbang);
-      break;
-    case HeatmapEvent.HeGrenade:
-      grenadeNames.push(GrenadeName.HE);
-      break;
-    case HeatmapEvent.Molotov:
-      grenadeNames.push(GrenadeName.Molotov, GrenadeName.Incendiary);
-      break;
-    default:
-      throw new Error(`Unsupported grenade event: ${filters.event}`);
-  }
+  const grenadeNames: GrenadeName[] =
+    filters.grenadeNames ??
+    (() => {
+      switch (filters.event) {
+        case HeatmapEvent.Smoke:
+          return [GrenadeName.Smoke];
+        case HeatmapEvent.Decoy:
+          return [GrenadeName.Decoy];
+        case HeatmapEvent.Flashbang:
+          return [GrenadeName.Flashbang];
+        case HeatmapEvent.HeGrenade:
+          return [GrenadeName.HE];
+        case HeatmapEvent.Molotov:
+          return [GrenadeName.Molotov, GrenadeName.Incendiary];
+        default:
+          throw new Error(`Unsupported grenade event: ${filters.event}`);
+      }
+    })();
 
   let query = db
     .selectFrom('grenade_projectiles_destroy')
@@ -76,6 +75,14 @@ export async function fetchTeamGrenadePoints(filters: TeamHeatmapFilter): Promis
     query = query
       .innerJoin('checksum_tags', 'checksum_tags.checksum', 'matches.checksum')
       .where('checksum_tags.tag_id', 'in', filters.tagIds);
+  }
+
+  if (filters.matchChecksums !== undefined && filters.matchChecksums.length > 0) {
+    query = query.where('matches.checksum', 'in', filters.matchChecksums);
+  }
+
+  if (filters.matchRounds !== undefined && filters.matchRounds.length > 0) {
+    query = applyMatchRoundsFilter(query, filters.matchRounds, 'match_checksum', 'round_number');
   }
 
   const points = query.execute();
