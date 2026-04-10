@@ -1,9 +1,44 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
 import fs from 'fs-extra';
 
 const projectPath = fileURLToPath(new URL('..', import.meta.url));
 const staticFolderPath = fileURLToPath(new URL('../static', import.meta.url));
+const execFileAsync = promisify(execFile);
+
+const enhancedAnalyzerFlags = [
+  '-rounds',
+  '-position-entities',
+  '-position-window-start-seconds',
+  '-position-window-end-seconds',
+];
+
+function outputChunkToString(chunk) {
+  if (chunk === undefined) {
+    return '';
+  }
+
+  return typeof chunk === 'string' ? chunk : chunk.toString();
+}
+
+async function supportsEnhancedDemoAnalyzer(binaryPath) {
+  if (!(await fs.pathExists(binaryPath))) {
+    return false;
+  }
+
+  try {
+    const { stdout, stderr } = await execFileAsync(binaryPath, ['--help'], {
+      windowsHide: true,
+    });
+    const output = `${stdout}\n${stderr}`;
+    return enhancedAnalyzerFlags.every((flag) => output.includes(flag));
+  } catch (error) {
+    const output = `${outputChunkToString(error?.stdout)}\n${outputChunkToString(error?.stderr)}`;
+    return enhancedAnalyzerFlags.every((flag) => output.includes(flag));
+  }
+}
 
 export async function installCounterStrikeVoiceExtractor(platform = process.platform) {
   const supportedPlatforms = ['darwin', 'win32', 'linux'];
@@ -49,5 +84,9 @@ export async function installDemoAnalyzer(platform = process.platform, arch = pr
 
   const npmBinPath = path.join(projectPath, 'node_modules/@akiver/cs-demo-analyzer/dist/bin', getBinarySubpath());
   const destinationPath = path.join(staticFolderPath, platform === 'win32' ? 'csda.exe' : 'csda');
+  if (await supportsEnhancedDemoAnalyzer(destinationPath)) {
+    return;
+  }
+
   await fs.copy(npmBinPath, destinationPath);
 }
