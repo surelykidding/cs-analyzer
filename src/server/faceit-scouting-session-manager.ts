@@ -29,6 +29,10 @@ import {
   extractDemoArchiveToFile,
   isPotentialDemoDownloadPath,
 } from 'csdm/node/demo-archive/demo-archive';
+import {
+  DEFAULT_MAX_CONCURRENT_TACTICS_POSITION_GENERATIONS,
+  MAX_CONCURRENT_ANALYSES,
+} from 'csdm/common/analyses';
 import { RendererServerMessageName } from './renderer-server-message-name';
 import { server } from './server';
 import { runTacticsPositionsTask } from './tactics-positions-task-runner';
@@ -101,7 +105,7 @@ class FaceitScoutingSessionManager {
   private watcher: FSWatcher | null = null;
   private watchedFolderPath: string | null = null;
   private queuedFilePaths = new Set<string>();
-  private isProcessingQueue = false;
+  private activeQueueWorkerCount = 0;
   private processingTargetIds = new Set<number>();
 
   public fetchCurrentSession = async () => {
@@ -339,17 +343,34 @@ class FaceitScoutingSessionManager {
     }
 
     this.queuedFilePaths.add(filePath);
-    if (!this.isProcessingQueue) {
-      void this.processQueue();
+    void this.startQueueWorkers();
+  };
+
+  private getMaxConcurrentProcessingCount = async () => {
+    const settings = await getSettings();
+    const maxConcurrentAnalyses = Math.min(
+      MAX_CONCURRENT_ANALYSES,
+      settings.analyze.maxConcurrentAnalyses ?? MAX_CONCURRENT_ANALYSES / 2,
+    );
+    const maxConcurrentTacticsPositionGenerations =
+      settings.analyze.maxConcurrentTacticsPositionGenerations ?? DEFAULT_MAX_CONCURRENT_TACTICS_POSITION_GENERATIONS;
+
+    return Math.max(1, Math.min(maxConcurrentAnalyses, maxConcurrentTacticsPositionGenerations));
+  };
+
+  private startQueueWorkers = async () => {
+    const maxConcurrentProcessingCount = await this.getMaxConcurrentProcessingCount();
+
+    while (
+      this.activeQueueWorkerCount < maxConcurrentProcessingCount &&
+      this.queuedFilePaths.size > 0
+    ) {
+      this.activeQueueWorkerCount += 1;
+      void this.processQueueWorker();
     }
   };
 
-  private processQueue = async () => {
-    if (this.isProcessingQueue) {
-      return;
-    }
-
-    this.isProcessingQueue = true;
+  private processQueueWorker = async () => {
     try {
       while (this.queuedFilePaths.size > 0) {
         const [filePath] = this.queuedFilePaths;
@@ -366,7 +387,10 @@ class FaceitScoutingSessionManager {
         }
       }
     } finally {
-      this.isProcessingQueue = false;
+      this.activeQueueWorkerCount = Math.max(0, this.activeQueueWorkerCount - 1);
+      if (this.queuedFilePaths.size > 0) {
+        void this.startQueueWorkers();
+      }
     }
   };
 
@@ -560,8 +584,8 @@ class FaceitScoutingSessionManager {
       }
     }
 
-    if (this.queuedFilePaths.size > 0 && !this.isProcessingQueue) {
-      void this.processQueue();
+    if (this.queuedFilePaths.size > 0) {
+      void this.startQueueWorkers();
     }
   };
 
