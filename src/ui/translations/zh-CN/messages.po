@@ -7271,14 +7271,6 @@ msgstr ""
 msgid "Maximum number of pistol-round tactics position generations that can run at the same time."
 msgstr ""
 
-#: src/ui/settings/analyze/toggle-analyze-positions.tsx
-msgid "Analyze player/grenade positions during analysis. Positions are required only for the 2D viewer. When enabled it increases time to insert matches into database and disk space usage."
-msgstr "分析玩家/手榴弹位置。只有 2D 查看器需要分析位置。 启用此选项会增加插入数据库的时间以及占用更多磁盘空间。"
-
-#: src/ui/settings/analyze/toggle-analyze-positions.tsx
-msgid "Analyze player/grenade positions"
-msgstr "分析玩家/手榴弹位置"
-
 #: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
 msgctxt "Dialog title"
 msgid "Ignore Steam account"

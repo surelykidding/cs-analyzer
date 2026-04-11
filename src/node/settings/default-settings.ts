@@ -45,7 +45,6 @@ export const defaultSettings: Settings = {
   analyze: {
     maxConcurrentAnalyses: 4,
     maxConcurrentTacticsPositionGenerations: DEFAULT_MAX_CONCURRENT_TACTICS_POSITION_GENERATIONS,
-    analyzePositions: false,
   },
   playback: {
     width: 1024,

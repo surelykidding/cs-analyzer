@@ -89,7 +89,7 @@ class AnalysesListener {
       const analysis = this.analyses.shift();
       if (analysis) {
         this.currentAnalyses.push(analysis);
-        const analysisPromise = this.processAnalysis(analysis, settings.analyze.analyzePositions)
+        const analysisPromise = this.processAnalysis(analysis)
           .catch((error) => {
             logger.error('Unhandled error during analysis');
             logger.error(error);
@@ -112,7 +112,7 @@ class AnalysesListener {
     }
   }
 
-  private readonly processAnalysis = async (analysis: Analysis, analyzePositions: boolean) => {
+  private readonly processAnalysis = async (analysis: Analysis) => {
     const { demoChecksum: checksum, demoPath, source } = analysis;
     try {
       this.updateAnalysisStatus(analysis, AnalysisStatus.Analyzing);
@@ -120,7 +120,7 @@ class AnalysesListener {
         demoPath,
         outputFolderPath: this.getAnalysisOutputFolderPath(analysis),
         source,
-        analyzePositions,
+        analyzePositions: true,
         onStdout: (data) => {
           logger.log(data);
           analysis.output += data;
