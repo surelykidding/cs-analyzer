@@ -1,6 +1,7 @@
 import { Game } from 'csdm/common/types/counter-strike';
 import { fetchMatch, type FaceitFactionDTO, type FaceitFactionV1DTO, type FaceitMatchDTO } from 'csdm/node/faceit-web-api/fetch-match';
 import { fetchFaceitMatchStats, type FaceitMatchStatsDTO } from 'csdm/node/faceit-web-api/fetch-match-stats';
+import { FaceitResourceNotFound } from 'csdm/node/faceit-web-api/errors/faceit-resource-not-found';
 
 type FaceitRosterPlayer = {
   faceitPlayerId: string;
@@ -66,13 +67,13 @@ function getPlayersPerTeamId(match: FaceitMatchDTO) {
 }
 
 function buildTeams(match: FaceitMatchDTO, stats: FaceitMatchStatsDTO): FaceitRosterTeam[] {
-  if (stats.rounds.length === 0) {
-    throw new Error('No rounds found');
+  const playersPerTeamId = getPlayersPerTeamId(match);
+  const round = stats.rounds[0];
+  if (round === undefined) {
+    return [];
   }
 
-  const playersPerTeamId = getPlayersPerTeamId(match);
-
-  return stats.rounds[0].teams.map((team) => {
+  return round.teams.map((team) => {
     return {
       id: team.team_id,
       name: team.team_stats.Team,
@@ -82,15 +83,48 @@ function buildTeams(match: FaceitMatchDTO, stats: FaceitMatchStatsDTO): FaceitRo
   });
 }
 
+function buildFallbackTeams(match: FaceitMatchDTO): FaceitRosterTeam[] {
+  return [
+    {
+      id: match.teams.faction1.faction_id,
+      name: match.teams.faction1.name,
+      score: match.results.score.faction1,
+      players: getPlayersPerTeamId(match).get(match.teams.faction1.faction_id) ?? [],
+    },
+    {
+      id: match.teams.faction2.faction_id,
+      name: match.teams.faction2.name,
+      score: match.results.score.faction2,
+      players: getPlayersPerTeamId(match).get(match.teams.faction2.faction_id) ?? [],
+    },
+  ];
+}
+
+function getFallbackMapName(match: FaceitMatchDTO) {
+  return normalizeMapName(match.voting?.map?.pick?.[0] ?? '');
+}
+
 export async function fetchFaceitMatchWithRoster(matchId: string, apiKey: string): Promise<FaceitMatchWithRoster> {
-  const [match, stats] = await Promise.all([fetchMatch(matchId, apiKey), fetchFaceitMatchStats(matchId, apiKey)]);
-  const teams = buildTeams(match, stats);
+  const match = await fetchMatch(matchId, apiKey);
+
+  let stats: FaceitMatchStatsDTO | undefined;
+  try {
+    stats = await fetchFaceitMatchStats(matchId, apiKey);
+  } catch (error) {
+    if (!(error instanceof FaceitResourceNotFound)) {
+      throw error;
+    }
+  }
+
+  const teamsFromStats = stats === undefined ? [] : buildTeams(match, stats);
+  const teams = teamsFromStats.length > 0 ? teamsFromStats : buildFallbackTeams(match);
+  const mapNameFromStats = stats?.rounds[0]?.round_stats.Map;
 
   return {
     id: match.match_id,
     url: match.faceit_url.replace('{lang}', 'en'),
     game: match.game === 'cs2' ? Game.CS2 : Game.CSGO,
-    mapName: normalizeMapName(stats.rounds[0]?.round_stats.Map ?? ''),
+    mapName: normalizeMapName(mapNameFromStats ?? getFallbackMapName(match)),
     resourceUrlAvailable: (match.demo_url?.length ?? 0) > 0,
     teams,
   };

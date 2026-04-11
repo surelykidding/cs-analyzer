@@ -56,6 +56,11 @@ export type FaceitMatchDTO = {
     faction1: FaceitFactionDTO | FaceitFactionV1DTO;
     faction2: FaceitFactionDTO | FaceitFactionV1DTO;
   };
+  voting?: {
+    map?: {
+      pick?: string[];
+    };
+  };
 };
 
 export async function fetchMatch(matchId: string, apiKey?: string) {
