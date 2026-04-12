@@ -21,6 +21,7 @@ import { insertDownloadHistory } from 'csdm/node/database/download-history/inser
 import { InvalidDemoHeader } from 'csdm/node/demo/errors/invalid-demo-header';
 import { insertDemos } from 'csdm/node/database/demos/insert-demos';
 const streamPipeline = util.promisify(pipeline);
+const MAX_CONCURRENT_DOWNLOADS = 2;
 
 export type DownloadQueueEvent =
   | {
@@ -50,7 +51,7 @@ type DownloadQueueListener = (event: DownloadQueueEvent) => void | Promise<void>
 
 class DownloadDemoQueue {
   private downloads: Download[] = [];
-  private currentDownload: Download | undefined;
+  private activeDownloads = new Map<string, Download>();
   private abortControllersPerMatchId: { [matchId: string]: AbortController | undefined } = {};
   private listeners = new Set<DownloadQueueListener>();
 
@@ -85,7 +86,7 @@ class DownloadDemoQueue {
       payload: [download],
     });
 
-    void this.loopUntilDownloadsDone();
+    this.fillDownloadWorkers();
   };
 
   public addDownloads = async (downloads: Download[]) => {
@@ -95,9 +96,13 @@ class DownloadDemoQueue {
 
     const downloadFolderPath = await this.getDownloadFolderPath();
 
+    const knownMatchIds = new Set([
+      ...this.downloads.map((download) => download.matchId),
+      ...this.activeDownloads.keys(),
+    ]);
     const validDownloads: Download[] = [];
     for (const download of downloads) {
-      const isAlreadyInQueue = this.isMatchAlreadyInQueue(download.matchId);
+      const isAlreadyInQueue = knownMatchIds.has(download.matchId);
       if (isAlreadyInQueue) {
         continue;
       }
@@ -113,6 +118,7 @@ class DownloadDemoQueue {
       }
 
       validDownloads.push(download);
+      knownMatchIds.add(download.matchId);
     }
 
     if (validDownloads.length === 0) {
@@ -126,21 +132,13 @@ class DownloadDemoQueue {
       payload: validDownloads,
     });
 
-    void this.loopUntilDownloadsDone();
+    this.fillDownloadWorkers();
 
     return validDownloads;
   };
 
   public getDownloads = () => {
-    const downloads: Download[] = [];
-    for (const download of this.downloads) {
-      downloads.push(download);
-    }
-    if (this.currentDownload !== undefined) {
-      downloads.push(this.currentDownload);
-    }
-
-    return downloads;
+    return [...this.downloads, ...this.activeDownloads.values()];
   };
 
   public abortDownload(matchId: string) {
@@ -151,9 +149,8 @@ class DownloadDemoQueue {
 
     this.abortControllersPerMatchId[matchId] = undefined;
     this.downloads = this.downloads.filter((download) => download.matchId !== matchId);
-    if (this.currentDownload?.matchId === matchId) {
-      this.currentDownload = undefined;
-    }
+    this.activeDownloads.delete(matchId);
+    this.fillDownloadWorkers();
   }
 
   public abortDownloads() {
@@ -163,39 +160,36 @@ class DownloadDemoQueue {
 
     this.abortControllersPerMatchId = {};
     this.downloads = [];
-    this.currentDownload = undefined;
+    this.activeDownloads.clear();
   }
 
-  private async loopUntilDownloadsDone() {
-    if (this.downloads.length === 0 || this.currentDownload !== undefined) {
-      return;
-    }
+  private fillDownloadWorkers() {
+    while (this.downloads.length > 0 && this.activeDownloads.size < MAX_CONCURRENT_DOWNLOADS) {
+      const nextDownload = this.downloads.shift();
+      if (nextDownload === undefined) {
+        break;
+      }
 
-    try {
-      this.currentDownload = this.downloads.shift();
-      await this.processCurrentDownload();
-    } finally {
-      void this.loopUntilDownloadsDone();
+      this.activeDownloads.set(nextDownload.matchId, nextDownload);
+      void this.processDownload(nextDownload);
     }
   }
 
-  private readonly processCurrentDownload = async () => {
-    if (this.currentDownload === undefined) {
-      return;
-    }
+  private readonly processDownload = async (currentDownload: Download) => {
+    let demoPath = '';
+    let infoPath = '';
 
-    const currentDownload = this.currentDownload;
-    if (!currentDownload.demoUrl) {
-      return;
-    }
-
-    const downloadFolderPath = await this.getDownloadFolderPath();
-    const controller = new AbortController();
-    this.abortControllersPerMatchId[currentDownload.matchId] = controller;
-
-    const demoPath = this.buildDemoPath(downloadFolderPath, currentDownload.fileName);
-    const infoPath = this.buildDemoInfoFilePath(demoPath);
     try {
+      if (!currentDownload.demoUrl) {
+        return;
+      }
+
+      const downloadFolderPath = await this.getDownloadFolderPath();
+      const controller = new AbortController();
+      this.abortControllersPerMatchId[currentDownload.matchId] = controller;
+
+      demoPath = this.buildDemoPath(downloadFolderPath, currentDownload.fileName);
+      infoPath = this.buildDemoInfoFilePath(demoPath);
       const url = new URL(currentDownload.demoUrl);
       const client = new Client(url.origin).compose(interceptors.redirect({ maxRedirections: 1 }));
       const response = await client.request({
@@ -324,10 +318,16 @@ class DownloadDemoQueue {
           },
         });
       }
-      await fs.remove(demoPath);
-      await fs.remove(infoPath);
+      if (demoPath !== '') {
+        await fs.remove(demoPath);
+      }
+      if (infoPath !== '') {
+        await fs.remove(infoPath);
+      }
     } finally {
-      this.currentDownload = undefined;
+      this.activeDownloads.delete(currentDownload.matchId);
+      delete this.abortControllersPerMatchId[currentDownload.matchId];
+      this.fillDownloadWorkers();
     }
   };
 
@@ -354,7 +354,7 @@ class DownloadDemoQueue {
 
   private isMatchAlreadyInQueue(matchId: string): boolean {
     return (
-      this.currentDownload?.matchId === matchId ||
+      this.activeDownloads.has(matchId) ||
       this.downloads.some((download) => {
         return download.matchId === matchId;
       })
