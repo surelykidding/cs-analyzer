@@ -14,6 +14,7 @@ export function Downloads() {
         <TabLink url={RoutePath.DownloadsFaceitScouting}>FACEIT Scouting</TabLink>
         <TabLink url={RoutePath.DownloadsRenown}>Renown</TabLink>
         <TabLink url={RoutePath.Downloads5EPlay}>5EPlay</TabLink>
+        <TabLink url={RoutePath.Downloads5EPlayScouting}>5EPlay Scouting</TabLink>
         <PendingDownloadsLink />
       </TabLinks>
       <Outlet />

@@ -14,6 +14,7 @@ import type { Video } from 'csdm/common/types/video';
 import type { ExportToXlsxProgressPayload, ExportToXlsxSuccessPayload } from 'csdm/common/types/xlsx';
 import type { CounterStrikeErrorPayload } from 'csdm/server/counter-strike';
 import type { FaceitScoutingSession } from 'csdm/common/types/faceit-scouting';
+import type { FiveEPlayScoutingSession } from 'csdm/common/types/5eplay-scouting';
 
 // Message names sent from the WebSocket server to the renderer Electron process.
 export const RendererServerMessageName = {
@@ -58,6 +59,7 @@ export const RendererServerMessageName = {
   IgnoredSteamAccountsChanged: 'ignored-steam-accounts-changed',
   TeamNamesUpdated: 'team-names-updated',
   FaceitScoutingSessionUpdated: 'faceit-scouting-session-updated',
+  FiveEPlayScoutingSessionUpdated: '5eplay-scouting-session-updated',
 } as const;
 
 export type RendererServerMessageName =
@@ -109,4 +111,5 @@ export interface RendererServerMessagePayload extends SharedServerMessagePayload
   [RendererServerMessageName.IgnoredSteamAccountsChanged]: void;
   [RendererServerMessageName.TeamNamesUpdated]: number;
   [RendererServerMessageName.FaceitScoutingSessionUpdated]: FaceitScoutingSession | undefined;
+  [RendererServerMessageName.FiveEPlayScoutingSessionUpdated]: FiveEPlayScoutingSession | undefined;
 }

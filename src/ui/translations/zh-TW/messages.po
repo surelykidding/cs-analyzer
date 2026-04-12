@@ -3007,11 +3007,15 @@ msgstr "選擇下載文件夾"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "An error occurred while loading the scouting session."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "An error occurred while loading scouting tactics."
 msgstr ""
 
@@ -3020,6 +3024,7 @@ msgid "FACEIT scouting session started."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "An error occurred while starting the scouting session."
 msgstr ""
 
@@ -3028,14 +3033,17 @@ msgid "FACEIT scouting session deleted."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "An error occurred while deleting the scouting session."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "Tactics positions generated for imported scouting demos."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "An error occurred while generating tactics positions."
 msgstr ""
@@ -3053,6 +3061,7 @@ msgid "Paste a FACEIT room URL or match ID, find the opponent's recent matches o
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "Imported demos use the same shared tactics positions pipeline for pistol, eco, semi, force buy and full buy rounds."
 msgstr ""
 
@@ -3072,19 +3081,23 @@ msgid "https://www.faceit.com/en/cs2/room/1-..."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "Start scouting session"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "Refresh"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "Source Match"
 msgstr ""
 
 #. placeholder {0}: session.sourceMatch.mapName
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "Map: {0}"
 msgstr ""
 
@@ -3093,11 +3106,13 @@ msgstr ""
 #. placeholder {2}: session.sourceMatch.opponentTeamScore
 #. placeholder {3}: session.sourceMatch.opponentTeamName
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "{0} {1} - {2} {3}"
 msgstr ""
 
 #. placeholder {0}: session.status
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "Status: {0}"
 msgstr ""
 
@@ -3110,77 +3125,92 @@ msgid "Open next pending match"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "Refresh session"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "Delete scouting session"
 msgstr ""
 
 #. placeholder {0}: session.readyTargetCount
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "Targets ready: {0}"
 msgstr ""
 
 #. placeholder {0}: session.awaitingDownloadTargetCount
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "Targets waiting for download: {0}"
 msgstr ""
 
 #. placeholder {0}: session.processingTargetCount
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "Targets processing: {0}"
 msgstr ""
 
 #. placeholder {0}: session.errorTargetCount
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "Targets with errors: {0}"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/team/tactics/team-tactics-filters.tsx
 msgctxt "Input label"
 msgid "Side"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/team/tactics/team-tactics-filters.tsx
 msgctxt "Input label"
 msgid "Economy"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/team/tactics/team-tactics-filters.tsx
 msgctxt "Input label"
 msgid "Window start"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/team/tactics/team-tactics-filters.tsx
 msgctxt "Input label"
 msgid "Window end"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "Some imported matches are still missing player positions required for the tactics heatmap."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "Generate tactics positions for imported demos"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "Targets"
 msgstr ""
 
 #. placeholder {0}: target.order + 1
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "Match {0}"
 msgstr ""
 
 #. placeholder {0}: target.sharedHistoryPlayerCount
 #. placeholder {1}: target.rosterOverlapCount
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "Shared history players: {0}, roster overlap: {1}"
 msgstr ""
 
@@ -3189,6 +3219,7 @@ msgid "See on FACEIT"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "Start a scouting session to see opponent tactics."
 msgstr ""
 
@@ -3197,95 +3228,114 @@ msgid "Download opponent demos from your browser and this page will import them 
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "Loading scouting tactics..."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "Fire Grenades"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No fire grenade data found for the current filters."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "Smoke Grenades"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No smoke grenade data found for the current filters."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "Flashbangs"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No flashbang data found for the current filters."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "T Heatmap"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No T position data found for the current filters."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "Kill Positions"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No kill data found for the current filters."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "Death Positions"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No death data found for the current filters."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "HE Grenades"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No HE grenade data found for the current filters."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "AWP Holder Heatmap"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No AWP holder position data found for the current filters."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "CT Heatmap"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "No CT position data found for the current filters."
 msgstr ""
 
@@ -3427,6 +3477,58 @@ msgstr "無效請求。"
 msgctxt "Context menu"
 msgid "Open 5EPlay profile"
 msgstr "打開 5EPlay 配置文件"
+
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+msgid "5EPlay scouting session started."
+msgstr ""
+
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+msgid "5EPlay scouting session deleted."
+msgstr ""
+
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+msgid "Loading 5EPlay scouting..."
+msgstr ""
+
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+msgid "5EPlay Scouting"
+msgstr ""
+
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+msgid "Paste a 5EPlay room URL or match ID to find the opponent's recent matches on the same map. Matching demos are downloaded, imported and analyzed automatically."
+msgstr ""
+
+#. placeholder {0}: currentAccount.nickname
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+msgid "Current 5EPlay account: {0}"
+msgstr ""
+
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+msgctxt "Input label"
+msgid "5EPlay room URL or match ID"
+msgstr ""
+
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+msgctxt "Input placeholder"
+msgid "https://arena.5eplay.com/data/match/..."
+msgstr ""
+
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+msgid "See source room on 5EPlay"
+msgstr ""
+
+#. placeholder {0}: session.downloadingTargetCount
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+msgid "Targets downloading: {0}"
+msgstr ""
+
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+msgid "See on 5EPlay"
+msgstr ""
+
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+msgid "Opponent demos are being downloaded, imported and analyzed automatically."
+msgstr ""
 
 #: src/ui/downloads/five-eplay/five-eplay-account-instructions.tsx
 msgid "How can I find my 5EPlay ID?"

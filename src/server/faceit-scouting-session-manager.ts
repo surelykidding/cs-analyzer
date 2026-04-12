@@ -15,15 +15,10 @@ import { deleteFaceitScoutingSession } from 'csdm/node/database/faceit-scouting/
 import { fetchCurrentFaceitScoutingSession } from 'csdm/node/database/faceit-scouting/fetch-current-faceit-scouting-session';
 import { fetchFaceitScoutingSession } from 'csdm/node/database/faceit-scouting/fetch-faceit-scouting-session';
 import { deleteMatchesByChecksums } from 'csdm/node/database/matches/delete-matches-by-checksums';
-import { generateMatchTacticsPositions } from 'csdm/node/database/matches/generate-match-tactics-positions';
-import { getDemoFromFilePath } from 'csdm/node/demo/get-demo-from-file-path';
-import { analyzeDemo } from 'csdm/node/demo/analyze-demo';
-import { CorruptedDemoError } from 'csdm/node/demo-analyzer/corrupted-demo-error';
 import { discoverFaceitScoutingTargets } from 'csdm/node/faceit/discover-faceit-scouting-targets';
 import { getFaceitApiKey } from 'csdm/node/faceit-web-api/get-faceit-api-key';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { fetchCurrentFaceitAccount } from 'csdm/node/database/faceit-account/fetch-current-faceit-account';
-import { processMatchInsertion } from 'csdm/node/database/matches/process-match-insertion';
 import {
   detectDemoArchiveFormat,
   extractDemoArchiveToFile,
@@ -35,7 +30,7 @@ import {
 } from 'csdm/common/analyses';
 import { RendererServerMessageName } from './renderer-server-message-name';
 import { server } from './server';
-import { runTacticsPositionsTask } from './tactics-positions-task-runner';
+import { processScoutingImportedDemo } from './process-scouting-imported-demo';
 
 function buildTargetOutputFolderPath(sessionId: string, faceitMatchId: string) {
   return path.join(os.tmpdir(), 'cs-demo-manager', 'faceit-scouting', sessionId, faceitMatchId);
@@ -446,57 +441,18 @@ class FaceitScoutingSessionManager {
         ownedDownloadFilePath = filePath;
       }
 
-      const demo = await getDemoFromFilePath(demoFilePath);
-      const matchExists = await db
-        .selectFrom('matches')
-        .select('checksum')
-        .where('checksum', '=', demo.checksum)
-        .executeTakeFirst();
-      let ownsDatabaseMatch = false;
-      if (matchExists === undefined) {
-        const outputFolderPath = buildTargetOutputFolderPath(session.id, target.faceitMatchId);
-        await fs.ensureDir(outputFolderPath);
-        try {
-          try {
-            await analyzeDemo({
-              demoPath: demoFilePath,
-              outputFolderPath,
-              source: DemoSource.FaceIt,
-              analyzePositions: false,
-            });
-          } catch (error) {
-            if (!(error instanceof CorruptedDemoError)) {
-              throw error;
-            }
-          }
-
-          await processMatchInsertion({
-            checksum: demo.checksum,
-            demoPath: demoFilePath,
-            outputFolderPath,
+      const result = await processScoutingImportedDemo({
+        demoPath: demoFilePath,
+        outputFolderPath: buildTargetOutputFolderPath(session.id, target.faceitMatchId),
+        source: DemoSource.FaceIt,
+        resolveLocalTeamName: async (checksum) => {
+          return this.resolveLocalTeamName(checksum, opponentSteamIds, session.sourceMatch.opponentTeamName);
+        },
+        onInsertionStart: () => {
+          server.sendMessageToRendererProcess({
+            name: RendererServerMessageName.InsertingMatchTacticsPositions,
           });
-          ownsDatabaseMatch = true;
-        } finally {
-          await fs.remove(outputFolderPath);
-        }
-      }
-
-      const localTeamName = await this.resolveLocalTeamName(demo.checksum, opponentSteamIds, session.sourceMatch.opponentTeamName);
-      if (localTeamName === null) {
-        throw new Error('Could not match the opponent team inside the imported demo.');
-      }
-
-      await runTacticsPositionsTask(demo.checksum, 'all', async () => {
-        await generateMatchTacticsPositions({
-          checksum: demo.checksum,
-          demoPath: demoFilePath!,
-          source: DemoSource.FaceIt,
-          onInsertionStart: () => {
-            server.sendMessageToRendererProcess({
-              name: RendererServerMessageName.InsertingMatchTacticsPositions,
-            });
-          },
-        });
+        },
       });
 
       await db
@@ -504,10 +460,10 @@ class FaceitScoutingSessionManager {
         .set({
           status: FaceitScoutingTargetStatus.Ready,
           failure_message: null,
-          local_team_name: localTeamName,
-          demo_checksum: demo.checksum,
+          local_team_name: result.localTeamName,
+          demo_checksum: result.demoChecksum,
           demo_file_path: demoFilePath,
-          owns_database_match: ownsDatabaseMatch,
+          owns_database_match: result.ownsDatabaseMatch,
           owned_download_file_path: ownedDownloadFilePath,
           owned_archive_file_path: ownedArchiveFilePath,
         })

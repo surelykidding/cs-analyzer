@@ -10,7 +10,7 @@ import { server } from 'csdm/server/server';
 import { loadDemoByPath } from 'csdm/node/demo/load-demo-by-path';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { getDemoFromFilePath } from 'csdm/node/demo/get-demo-from-file-path';
-import type { Download, DownloadDemoProgressPayload } from 'csdm/common/download/download-types';
+import type { Download, DownloadDemoProgressPayload, DownloadDemoSuccess } from 'csdm/common/download/download-types';
 import { DownloadSource } from 'csdm/common/download/download-types';
 import { MatchAlreadyInDownloadQueue } from 'csdm/node/download/errors/match-already-in-download-queue';
 import { MatchAlreadyDownloaded } from 'csdm/node/download/errors/match-already-downloaded';
@@ -22,10 +22,45 @@ import { InvalidDemoHeader } from 'csdm/node/demo/errors/invalid-demo-header';
 import { insertDemos } from 'csdm/node/database/demos/insert-demos';
 const streamPipeline = util.promisify(pipeline);
 
+export type DownloadQueueEvent =
+  | {
+      type: 'success';
+      payload: DownloadDemoSuccess;
+    }
+  | {
+      type: 'expired';
+      payload: {
+        download: Download;
+      };
+    }
+  | {
+      type: 'error';
+      payload: {
+        download: Download;
+      };
+    }
+  | {
+      type: 'corrupted';
+      payload: {
+        download: Download;
+      };
+    };
+
+type DownloadQueueListener = (event: DownloadQueueEvent) => void | Promise<void>;
+
 class DownloadDemoQueue {
   private downloads: Download[] = [];
   private currentDownload: Download | undefined;
   private abortControllersPerMatchId: { [matchId: string]: AbortController | undefined } = {};
+  private listeners = new Set<DownloadQueueListener>();
+
+  public addListener(listener: DownloadQueueListener) {
+    this.listeners.add(listener);
+
+    return () => {
+      this.listeners.delete(listener);
+    };
+  }
 
   public addDownload = async (download: Download) => {
     const downloadFolderPath = await this.getDownloadFolderPath();
@@ -173,6 +208,12 @@ class DownloadDemoQueue {
           name: RendererServerMessageName.DownloadDemoExpired,
           payload: currentDownload.matchId,
         });
+        this.emit({
+          type: 'expired',
+          payload: {
+            download: currentDownload,
+          },
+        });
         return;
       }
 
@@ -237,6 +278,15 @@ class DownloadDemoQueue {
         name: RendererServerMessageName.DownloadDemoSuccess,
         payload: {
           demoChecksum: demo.checksum,
+          demoFilePath: demoPath,
+          download: currentDownload,
+        },
+      });
+      this.emit({
+        type: 'success',
+        payload: {
+          demoChecksum: demo.checksum,
+          demoFilePath: demoPath,
           download: currentDownload,
         },
       });
@@ -253,6 +303,12 @@ class DownloadDemoQueue {
           name: RendererServerMessageName.DownloadDemoError,
           payload: currentDownload.matchId,
         });
+        this.emit({
+          type: 'error',
+          payload: {
+            download: currentDownload,
+          },
+        });
       }
       if (error instanceof InvalidDemoHeader) {
         logger.error('Invalid demo header from downloaded demo');
@@ -260,6 +316,12 @@ class DownloadDemoQueue {
         server.sendMessageToRendererProcess({
           name: RendererServerMessageName.DownloadDemoCorrupted,
           payload: currentDownload.matchId,
+        });
+        this.emit({
+          type: 'corrupted',
+          payload: {
+            download: currentDownload,
+          },
         });
       }
       await fs.remove(demoPath);
@@ -324,6 +386,15 @@ class DownloadDemoQueue {
 
   private buildDemoInfoFilePath(demoPath: string) {
     return `${demoPath}.info`;
+  }
+
+  private emit(event: DownloadQueueEvent) {
+    for (const listener of this.listeners) {
+      void Promise.resolve(listener(event)).catch((error) => {
+        logger.error('Error while handling download queue event');
+        logger.error(error);
+      });
+    }
   }
 
   private loadDownloadedDemo = async (demoPath: string) => {

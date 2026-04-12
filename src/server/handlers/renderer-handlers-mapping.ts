@@ -221,6 +221,17 @@ import { updateCurrent5EPlayAccountHandler } from './renderer-process/5eplay/upd
 import type { FiveEPlayMatch } from 'csdm/common/types/5eplay-match';
 import { fetchLast5EPlayMatchesHandler } from './renderer-process/5eplay/fetch-last-5eplay-matches-handler';
 import { delete5EPlayAccountHandler } from './renderer-process/5eplay/delete-5eplay-account-handler';
+import type {
+  Delete5EPlayScoutingSessionPayload,
+  FiveEPlayScoutingSession,
+  FiveEPlayScoutingTacticsPayload,
+  FiveEPlayScoutingTacticsResponse,
+  Start5EPlayScoutingSessionPayload,
+} from 'csdm/common/types/5eplay-scouting';
+import { start5EPlayScoutingSessionHandler } from './renderer-process/5eplay-scouting/start-5eplay-scouting-session-handler';
+import { fetchCurrent5EPlayScoutingSessionHandler } from './renderer-process/5eplay-scouting/fetch-current-5eplay-scouting-session-handler';
+import { delete5EPlayScoutingSessionHandler } from './renderer-process/5eplay-scouting/delete-5eplay-scouting-session-handler';
+import { fetch5EPlayScoutingTacticsHandler } from './renderer-process/5eplay-scouting/fetch-5eplay-scouting-tactics-handler';
 import {
   exportMatchesChatMessagesHandler,
   type ExportMatchesChatMessagesPayload,
@@ -382,6 +393,16 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.Add5EPlayAccount]: Handler<string, FiveEPlayAccount>;
   [RendererClientMessageName.Delete5EPlayAccount]: Handler<string, FiveEPlayAccount[]>;
   [RendererClientMessageName.UpdateCurrent5EPlayAccount]: Handler<string, FiveEPlayAccount[]>;
+  [RendererClientMessageName.Start5EPlayScoutingSession]: Handler<
+    Start5EPlayScoutingSessionPayload,
+    FiveEPlayScoutingSession | undefined
+  >;
+  [RendererClientMessageName.FetchCurrent5EPlayScoutingSession]: Handler<void, FiveEPlayScoutingSession | undefined>;
+  [RendererClientMessageName.Fetch5EPlayScoutingTactics]: Handler<
+    FiveEPlayScoutingTacticsPayload,
+    FiveEPlayScoutingTacticsResponse
+  >;
+  [RendererClientMessageName.Delete5EPlayScoutingSession]: Handler<Delete5EPlayScoutingSessionPayload>;
   [RendererClientMessageName.FetchLastRenownMatches]: Handler<string, RenownMatch[]>;
   [RendererClientMessageName.AddRenownAccount]: Handler<string, RenownAccount>;
   [RendererClientMessageName.DeleteRenownAccount]: Handler<string, RenownAccount[]>;
@@ -501,6 +522,10 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.Add5EPlayAccount]: add5EPlayAccountHandler,
   [RendererClientMessageName.Delete5EPlayAccount]: delete5EPlayAccountHandler,
   [RendererClientMessageName.UpdateCurrent5EPlayAccount]: updateCurrent5EPlayAccountHandler,
+  [RendererClientMessageName.Start5EPlayScoutingSession]: start5EPlayScoutingSessionHandler,
+  [RendererClientMessageName.FetchCurrent5EPlayScoutingSession]: fetchCurrent5EPlayScoutingSessionHandler,
+  [RendererClientMessageName.Fetch5EPlayScoutingTactics]: fetch5EPlayScoutingTacticsHandler,
+  [RendererClientMessageName.Delete5EPlayScoutingSession]: delete5EPlayScoutingSessionHandler,
   [RendererClientMessageName.FetchLastRenownMatches]: fetchLastRenownMatchesHandler,
   [RendererClientMessageName.AddRenownAccount]: addRenownAccountHandler,
   [RendererClientMessageName.DeleteRenownAccount]: deleteRenownAccountHandler,

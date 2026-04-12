@@ -20,6 +20,7 @@ export type DownloadDemoProgressPayload = {
 export type DownloadDemoSuccess = {
   download: Download;
   demoChecksum: string;
+  demoFilePath: string;
 };
 
 type BaseDownload = {
