@@ -118,6 +118,92 @@ describe('fetchFaceitMatchWithRoster', () => {
     });
   });
 
+  it('should fall back to zero scores when the match payload has no results yet', async () => {
+    const mockedFetchMatch = vi.mocked(fetchMatch);
+    const mockedFetchFaceitMatchStats = vi.mocked(fetchFaceitMatchStats);
+
+    mockedFetchMatch.mockResolvedValue({
+      demo_url: [],
+      faceit_url: 'https://www.faceit.com/{lang}/cs2/room/1-pending-results-match',
+      game: 'cs2',
+      match_id: '1-pending-results-match',
+      started_at: 0,
+      finished_at: 0,
+      status: 'ONGOING',
+      teams: {
+        faction1: {
+          faction_id: 'team-1',
+          avatar: '',
+          leader: '',
+          name: 'Our Team',
+          roster: [
+            {
+              player_id: 'player-1',
+              nickname: 'Player 1',
+              avatar: '',
+              game_player_id: '76561198000000001',
+              game_player_name: 'Player 1',
+              game_skill_level: 10,
+              anticheat_required: true,
+            },
+          ],
+        },
+        faction2: {
+          faction_id: 'team-2',
+          avatar: '',
+          leader: '',
+          name: 'Opponent Team',
+          roster: [
+            {
+              player_id: 'player-2',
+              nickname: 'Player 2',
+              avatar: '',
+              game_player_id: '76561198000000002',
+              game_player_name: 'Player 2',
+              game_skill_level: 10,
+              anticheat_required: true,
+            },
+          ],
+        },
+      },
+      voting: {
+        map: {
+          pick: ['de_mirage'],
+        },
+      },
+    });
+    mockedFetchFaceitMatchStats.mockRejectedValue(new FaceitResourceNotFound());
+
+    const match = await fetchFaceitMatchWithRoster('1-pending-results-match', 'faceit-key');
+
+    expect(match.teams).toEqual([
+      {
+        id: 'team-1',
+        name: 'Our Team',
+        score: 0,
+        players: [
+          {
+            faceitPlayerId: 'player-1',
+            nickname: 'Player 1',
+            steamId: '76561198000000001',
+          },
+        ],
+      },
+      {
+        id: 'team-2',
+        name: 'Opponent Team',
+        score: 0,
+        players: [
+          {
+            faceitPlayerId: 'player-2',
+            nickname: 'Player 2',
+            steamId: '76561198000000002',
+          },
+        ],
+      },
+    ]);
+  });
+
   it('should keep using stats when they are available', async () => {
     const mockedFetchMatch = vi.mocked(fetchMatch);
     const mockedFetchFaceitMatchStats = vi.mocked(fetchFaceitMatchStats);

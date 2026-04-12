@@ -84,18 +84,22 @@ function buildTeams(match: FaceitMatchDTO, stats: FaceitMatchStatsDTO): FaceitRo
 }
 
 function buildFallbackTeams(match: FaceitMatchDTO): FaceitRosterTeam[] {
+  const faction1Score = match.results?.score?.faction1 ?? 0;
+  const faction2Score = match.results?.score?.faction2 ?? 0;
+  const playersPerTeamId = getPlayersPerTeamId(match);
+
   return [
     {
       id: match.teams.faction1.faction_id,
       name: match.teams.faction1.name,
-      score: match.results.score.faction1,
-      players: getPlayersPerTeamId(match).get(match.teams.faction1.faction_id) ?? [],
+      score: faction1Score,
+      players: playersPerTeamId.get(match.teams.faction1.faction_id) ?? [],
     },
     {
       id: match.teams.faction2.faction_id,
       name: match.teams.faction2.name,
-      score: match.results.score.faction2,
-      players: getPlayersPerTeamId(match).get(match.teams.faction2.faction_id) ?? [],
+      score: faction2Score,
+      players: playersPerTeamId.get(match.teams.faction2.faction_id) ?? [],
     },
   ];
 }

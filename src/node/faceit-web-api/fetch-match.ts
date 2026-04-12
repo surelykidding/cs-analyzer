@@ -48,7 +48,7 @@ export type FaceitMatchDTO = {
   faceit_url: string;
   game: FaceitGameId;
   match_id: string;
-  results: FaceitResultDTO;
+  results?: FaceitResultDTO;
   started_at: number;
   finished_at: number;
   status: string;
