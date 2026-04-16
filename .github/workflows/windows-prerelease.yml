@@ -7,6 +7,7 @@ on:
     branches:
       - main
     paths:
+      # Keep this workflow self-triggerable for refreshed prerelease assets.
       - .github/workflows/windows-prerelease.yml
 
 permissions:
