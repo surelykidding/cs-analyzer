@@ -6,6 +6,7 @@ This guide is for testers using the packaged Windows beta build of `CS Analyzer 
 
 - Team tactics analysis
 - FACEIT scouting and tactics review
+- 5EPlay last-match downloads and scouting
 - Economy filters: `Pistol`, `Eco`, `Semi`, `ForceBuy`, `Full`
 - Faster windowed tactics positions
 - Perfect World account import, login, scouting, and demo processing
@@ -111,6 +112,57 @@ Supported input formats include:
 - `.dem.zip`
 - `.dem.zst`
 
+## 5EPlay Setup
+
+Open `Settings > Downloads > 5EPlay`.
+
+What to do:
+
+- Click `Add 5EPlay account`.
+- Enter your numeric `5EPlay ID`, not your nickname.
+- You can find the ID at the end of your profile URL.
+- Example: if your profile URL is `https://arena.5eplay.com/data/player/111111`, the ID is `111111`.
+- If you add multiple accounts, make sure the correct one is selected as current.
+
+Recommended checks:
+
+- Leave the 5EPlay auto-download settings enabled for this beta.
+- Confirm the current account switches correctly after restart.
+
+## 5EPlay Recent Matches Workflow
+
+1. Open `Downloads > 5EPlay`.
+2. Refresh the recent matches for the current account.
+3. Select a match from the sidebar.
+4. Verify the scoreboard and match details load correctly.
+5. Use `Download`, `Download all`, or copy/open the demo link when available.
+6. Confirm the downloaded demo appears in the configured download folder.
+7. Verify `See demo`, `Watch demo`, and other demo actions become available after processing.
+
+Expected behavior:
+
+- Recent matches load for the selected account.
+- Switching the current account refreshes the list correctly.
+- Individual and bulk demo downloads queue correctly.
+- Imported 5EPlay demos become available for normal analysis and playback flows.
+
+## 5EPlay Scouting Workflow
+
+1. Open `Downloads > 5EPlay Scouting`.
+2. Paste a 5EPlay room URL or match ID.
+3. Start the scouting session.
+4. Let the app discover same-map opponent samples and process the related demos automatically.
+5. Review the generated tactics heatmaps with side, economy, radar level, and time-window filters.
+6. If the app reports skipped imported demos without positions, run `Generate tactics positions for imported demos`.
+7. Delete the scouting session and confirm the temporary scouting data is cleaned up.
+
+Expected behavior:
+
+- A current 5EPlay account is required and shown in the scouting panel.
+- Targets move from waiting/downloading/processing to ready without manual database edits.
+- Ready targets feed tactics automatically once demo processing finishes.
+- The scouting session can be refreshed and deleted cleanly.
+
 ## Team Tactics Workflow
 
 1. Open a processed match.
@@ -181,6 +233,24 @@ Expected behavior:
 - Confirm your browser or download flow saves files into that folder.
 - Keep the app open until processing finishes.
 
+### 5EPlay account cannot be added
+
+- Make sure you entered the numeric `5EPlay ID`, not the nickname.
+- Open your 5EPlay profile page and copy the last URL segment.
+- If the account already exists, switch the current account instead of adding it again.
+
+### 5EPlay recent matches stay empty
+
+- Confirm the correct 5EPlay account is set as current.
+- Click refresh again after switching accounts.
+- Some matches may not expose a demo download; try another recent match if needed.
+
+### 5EPlay scouting stays on waiting or processing
+
+- Keep the app open while the scouting session downloads and analyzes demos.
+- Confirm the configured download folder is writable and still selected.
+- Try another 5EPlay room URL or match ID if the current one has no usable same-map samples.
+
 ### Perfect World import or SMS login fails
 
 - Retry with the current account selected.
@@ -201,7 +271,7 @@ When reporting feedback, please include:
 - Whether you used `Setup` or `Portable`
 - PostgreSQL version
 - Whether `psql --version` worked before launch
-- Which workflow you tested: `FACEIT`, `Team Tactics`, `Perfect World`
+- Which workflow you tested: `FACEIT`, `5EPlay`, `5EPlay Scouting`, `Team Tactics`, `Perfect World`
 - Match URL / match ID if the problem is reproducible
 - What you expected
 - What actually happened
