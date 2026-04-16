@@ -48,13 +48,8 @@ jobs:
       - name: Validate release secrets
         shell: pwsh
         env:
-          STEAM_API_KEYS: ${{ secrets.STEAM_API_KEYS }}
           FACEIT_API_KEY: ${{ secrets.FACEIT_API_KEY }}
         run: |
-          if ([string]::IsNullOrWhiteSpace($env:STEAM_API_KEYS)) {
-            throw "Missing repository secret: STEAM_API_KEYS"
-          }
-
           if ([string]::IsNullOrWhiteSpace($env:FACEIT_API_KEY)) {
             throw "Missing repository secret: FACEIT_API_KEY"
           }
