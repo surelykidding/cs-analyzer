@@ -53,17 +53,18 @@ export async function replaceTeamTacticsPlayerPositions({
 }: ReplaceTeamTacticsPlayerPositionsParameters) {
   const csvFilePath = getCsvFilePath(outputFolderPath, demoName, '_positions.csv');
   const { database, username, hostname, port, password } = databaseSettings;
-  const connectionUri = `"postgresql://${username}:${encodeURIComponent(password)}@${formatHostnameForUri(hostname)}:${port}/${database}"`;
+  const connectionUri = `postgresql://${username}:${encodeURIComponent(password)}@${formatHostnameForUri(hostname)}:${port}/${database}`;
   const columnNames = playerPositionColumns.join(',');
   const escapedChecksum = checksum.replaceAll("'", "''");
   const escapedCsvFilePath = csvFilePath.replaceAll("'", "''");
   const tempTableName = 'team_tactics_player_positions_import';
-  const command = [
-    `-c "CREATE TEMP TABLE ${tempTableName} (LIKE team_tactics_player_positions INCLUDING DEFAULTS)"`,
-    `-c "\\copy ${tempTableName}(${columnNames}) FROM '${escapedCsvFilePath}' ENCODING 'UTF8' CSV DELIMITER ','"`,
-    `-c "BEGIN; DELETE FROM team_tactics_player_positions WHERE match_checksum = '${escapedChecksum}'; INSERT INTO team_tactics_player_positions(${columnNames}) SELECT ${columnNames} FROM ${tempTableName}; COMMIT;"`,
+  await executePsql([
+    '-c',
+    `CREATE TEMP TABLE ${tempTableName} (LIKE team_tactics_player_positions INCLUDING DEFAULTS)`,
+    '-c',
+    `\\copy ${tempTableName}(${columnNames}) FROM '${escapedCsvFilePath}' ENCODING 'UTF8' CSV DELIMITER ','`,
+    '-c',
+    `BEGIN; DELETE FROM team_tactics_player_positions WHERE match_checksum = '${escapedChecksum}'; INSERT INTO team_tactics_player_positions(${columnNames}) SELECT ${columnNames} FROM ${tempTableName}; COMMIT;`,
     connectionUri,
-  ].join(' ');
-
-  await executePsql(command);
+  ]);
 }

@@ -71,7 +71,10 @@ export function createApplicationMenu(client: WebSocketClient) {
           role: 'hide',
           label: i18n.t({
             id: 'menu.hideAnalyzer',
-            message: `Hide ${APP_DISPLAY_NAME}`,
+            message: 'Hide {appName}',
+            values: {
+              appName: APP_DISPLAY_NAME,
+            },
           }),
         },
         {
@@ -93,7 +96,10 @@ export function createApplicationMenu(client: WebSocketClient) {
         {
           label: i18n.t({
             id: 'menu.quitAnalyzer',
-            message: `Quit ${APP_DISPLAY_NAME}`,
+            message: 'Quit {appName}',
+            values: {
+              appName: APP_DISPLAY_NAME,
+            },
           }),
           accelerator: 'CommandOrControl+Q',
           click: (menu, window) => {
@@ -138,7 +144,10 @@ export function createApplicationMenu(client: WebSocketClient) {
           role: 'quit',
           label: i18n.t({
             id: 'menu.quitAnalyzer',
-            message: `Quit ${APP_DISPLAY_NAME}`,
+            message: 'Quit {appName}',
+            values: {
+              appName: APP_DISPLAY_NAME,
+            },
           }),
         },
       ],

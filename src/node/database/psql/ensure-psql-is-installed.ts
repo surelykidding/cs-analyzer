@@ -18,7 +18,7 @@ function isPsqlBinaryNotFoundError(error: unknown) {
 
 export async function ensurePsqlIsInstalled() {
   try {
-    await executePsql('--version');
+    await executePsql(['--version']);
   } catch (error) {
     logger.log('psql check failed');
     logger.log(error);

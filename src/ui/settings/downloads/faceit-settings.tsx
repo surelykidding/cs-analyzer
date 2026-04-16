@@ -18,12 +18,43 @@ import { ErrorMessage } from 'csdm/ui/components/error-message';
 import { FaceitDownloadsWarning } from './faceit-downloads-warning';
 import { ThirdPartyAccounts } from './third-party-accounts';
 import { FaceitLogo } from 'csdm/ui/logos/faceit-logo';
+import { useLocale } from 'csdm/ui/settings/ui/use-locale';
 
 function AddAccountDialog() {
   const [nickname, setNickname] = useState('');
   const { addFaceitAccount, errorMessage, isBusy } = useAddFaceitAccount();
   const { hideDialog } = useDialog();
   const { t } = useLingui();
+  const locale = useLocale();
+  const isSimplifiedChinese = locale === 'zh-CN';
+  const isTraditionalChinese = locale === 'zh-TW';
+
+  const title = isSimplifiedChinese
+    ? '添加 FACEIT 账号'
+    : isTraditionalChinese
+      ? '新增 FACEIT 帳號'
+      : <Trans>Add FACEIT account</Trans>;
+  const label = isSimplifiedChinese
+    ? 'FACEIT 昵称'
+    : isTraditionalChinese
+      ? 'FACEIT 暱稱'
+      : t({
+          context: 'Input label',
+          message: 'FACEIT nickname',
+        });
+  const placeholder = isSimplifiedChinese
+    ? '昵称'
+    : isTraditionalChinese
+      ? '暱稱'
+      : t({
+          context: 'Input placeholder',
+          message: 'Nickname',
+        });
+  const caseSensitiveMessage = isSimplifiedChinese
+    ? '昵称区分大小写！'
+    : isTraditionalChinese
+      ? '暱稱區分大小寫！'
+      : 'The nickname is case sensitive!';
 
   const onConfirm = async () => {
     const accountAdded = await addFaceitAccount(nickname);
@@ -34,20 +65,14 @@ function AddAccountDialog() {
 
   return (
     <ConfirmDialog
-      title={<Trans>Add FACEIT account</Trans>}
+      title={title}
       onConfirm={onConfirm}
       closeOnConfirm={false}
       isBusy={isBusy}
     >
       <TextInput
-        label={t({
-          context: 'Input label',
-          message: 'FACEIT nickname',
-        })}
-        placeholder={t({
-          context: 'Input placeholder',
-          message: 'Nickname',
-        })}
+        label={label}
+        placeholder={placeholder}
         value={nickname}
         onChange={(event) => {
           setNickname(event.target.value);
@@ -58,9 +83,7 @@ function AddAccountDialog() {
       />
       <div className="mt-4 flex items-center gap-x-4">
         <ExclamationTriangleIcon className="size-12 text-orange-700" />
-        <p className="text-caption">
-          <Trans>The nickname is case sensitive!</Trans>
-        </p>
+        <p className="text-caption">{caseSensitiveMessage}</p>
       </div>
       {errorMessage && (
         <div className="mt-8">

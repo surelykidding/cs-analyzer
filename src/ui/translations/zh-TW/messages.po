@@ -242,6 +242,7 @@ msgstr "正在加載封禁數據…"
 #: src/ui/downloads/five-eplay/use-update-current-5eplay-account.tsx
 #: src/ui/downloads/pending/remove-download-button.tsx
 #: src/ui/downloads/pending/remove-downloads-button.tsx
+#: src/ui/downloads/perfect-world/use-update-current-perfect-world-account.tsx
 #: src/ui/downloads/renown/use-update-current-renown-account.tsx
 #: src/ui/hooks/use-export-match-chat-messages.tsx
 #: src/ui/match/duels/players-duels-matrix.tsx
@@ -262,6 +263,7 @@ msgstr "正在加載封禁數據…"
 #: src/ui/settings/cameras/edit-camera-dialog.tsx
 #: src/ui/settings/downloads/5eplay-settings.tsx
 #: src/ui/settings/downloads/faceit-settings.tsx
+#: src/ui/settings/downloads/perfect-world-settings.tsx
 #: src/ui/settings/downloads/renown-settings.tsx
 #: src/ui/settings/maps/add-map-dialog.tsx
 #: src/ui/settings/maps/edit-map-dialog.tsx
@@ -339,12 +341,12 @@ msgid "Connect"
 msgstr "連接"
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
-msgid "It looks like you installed an older version of CS Demo Manager and the current database schema is not compatible with it."
-msgstr "看起來你安裝了舊版本的 CS Demo Manager，而當前數據庫架構與它不兼容。"
+msgid "It looks like you installed an older version of CS Analyzer and the current database schema is not compatible with it."
+msgstr ""
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
-msgid "You can either update CS Demo Manager to the latest version or reset the database to start from scratch."
-msgstr "你可以選擇更新 CS Demo Manager 到最新版本，或者重置數據庫從零開始。"
+msgid "You can either update CS Analyzer to the latest version or reset the database to start from scratch."
+msgstr ""
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "It usually means that PostgreSQL is not installed on your system or the path to the <0>psql</0> executable is not in your <1>PATH</1> environment variable."
@@ -367,8 +369,8 @@ msgid "The connection to the database failed with the following error:"
 msgstr "與數據庫的連接失敗，錯誤如下："
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
-msgid "CS Demo Manager requires a PostgreSQL database."
-msgstr "CS Demo Manager 需要你的電腦上安裝 PostgreSQL 數據庫。"
+msgid "{APP_DISPLAY_NAME} requires a PostgreSQL database."
+msgstr ""
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "{secondsBeforeNextTry, plural, one {Retrying in # second…} other {Retrying in # seconds…}}"
@@ -407,16 +409,53 @@ msgid "An error occurred connecting to the WebSocket server."
 msgstr "連接到遠程服務器時出錯。"
 
 #: src/ui/changelog/changelog-dialog.tsx
-msgid "Failed to load changelog."
-msgstr "加載更新日誌失敗。"
+msgid "{APP_DISPLAY_NAME} {APP_VERSION}"
+msgstr ""
 
 #: src/ui/changelog/changelog-dialog.tsx
-msgid "Changelog version {APP_VERSION}"
-msgstr "更新日誌 {APP_VERSION}"
+msgid "Windows beta release focused on tactics analysis and scouting workflows."
+msgstr ""
 
 #: src/ui/changelog/changelog-dialog.tsx
-msgid "Visit website"
-msgstr "訪問我們的網站"
+msgid "Team tactics and scouting tactics remain the main focus of this release."
+msgstr ""
+
+#: src/ui/changelog/changelog-dialog.tsx
+msgid "Perfect World account import, validation, match scouting, and demo processing are included."
+msgstr ""
+
+#: src/ui/changelog/changelog-dialog.tsx
+msgid "FACEIT works out of the box with the bundled beta API key, with an optional user override."
+msgstr ""
+
+#: src/ui/changelog/changelog-dialog.tsx
+msgid "Beta builds use manual updates from GitHub pre-releases instead of in-app auto-update."
+msgstr ""
+
+#: src/ui/changelog/changelog-dialog.tsx
+msgid "Need setup steps or troubleshooting?"
+msgstr ""
+
+#: src/ui/changelog/changelog-dialog.tsx
+msgid "Open the testing guides for detailed installation, PostgreSQL setup, FACEIT scouting, team tactics, and Perfect World workflows."
+msgstr ""
+
+#: src/ui/changelog/changelog-dialog.tsx
+msgid "Testing guide (EN)"
+msgstr ""
+
+#: src/ui/changelog/changelog-dialog.tsx
+msgid "Testing guide (ZH-CN)"
+msgstr ""
+
+#: src/ui/changelog/changelog-dialog.tsx
+#: src/ui/settings/about/about.tsx
+msgid "GitHub pre-releases"
+msgstr ""
+
+#: src/ui/changelog/changelog-dialog.tsx
+msgid "Open release page"
+msgstr ""
 
 #: src/ui/components/buttons/analyze-button.tsx
 msgctxt "Button"
@@ -1153,16 +1192,16 @@ msgid "Donate"
 msgstr "捐助"
 
 #: src/ui/components/donate.tsx
-msgid "CS Demo Manager is a project that I started during college in 2014 and maintained as much as I can since then."
-msgstr "CS Demo Manager 是我在 2014 年大學期間啟動的一個項目，從那時起我一直在盡力維護它。"
+msgid "CS Analyzer is a community Counter-Strike analysis tool focused on tactics review, demo scouting, and match study."
+msgstr ""
 
 #: src/ui/components/donate.tsx
-msgid "It's not backed by any corporate entity and is a free and open-source software that I hope you enjoy using."
-msgstr "它沒有任何公司實體的支持，是一個自由和開放源碼軟件，我希望你們能夠享受它。"
+msgid "It is not backed by a corporate entity and remains a free, open-source project maintained with community feedback."
+msgstr ""
 
 #: src/ui/components/donate.tsx
-msgid "Your <0>donation</0> is greatly appreciated and motivates me to continue working on CS Demo Manager. Thank you!"
-msgstr "非常感謝您的 <0> 捐贈 </0> ，這將鼓勵我繼續改進 CS Demo Manager。謝謝！"
+msgid "Your <0>support</0> is greatly appreciated and helps keep this release line moving forward. Thank you!"
+msgstr ""
 
 #: src/ui/components/dropdown-filter/analysis-status-select.tsx
 msgctxt "Option label for demo analysis status"
@@ -3009,6 +3048,8 @@ msgstr "選擇下載文件夾"
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "An error occurred while loading the scouting session."
 msgstr ""
 
@@ -3016,6 +3057,8 @@ msgstr ""
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "An error occurred while loading scouting tactics."
 msgstr ""
 
@@ -3025,6 +3068,7 @@ msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "An error occurred while starting the scouting session."
 msgstr ""
 
@@ -3034,16 +3078,19 @@ msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "An error occurred while deleting the scouting session."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Tactics positions generated for imported scouting demos."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "An error occurred while generating tactics positions."
 msgstr ""
@@ -3082,22 +3129,26 @@ msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Start scouting session"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Refresh"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Source Match"
 msgstr ""
 
 #. placeholder {0}: session.sourceMatch.mapName
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Map: {0}"
 msgstr ""
 
@@ -3107,12 +3158,16 @@ msgstr ""
 #. placeholder {3}: session.sourceMatch.opponentTeamName
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "{0} {1} - {2} {3}"
 msgstr ""
 
+#. placeholder {0}: currentAccount.isValid ? 'active' : 'stale'
 #. placeholder {0}: session.status
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Status: {0}"
 msgstr ""
 
@@ -3126,40 +3181,47 @@ msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Refresh session"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Delete scouting session"
 msgstr ""
 
 #. placeholder {0}: session.readyTargetCount
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Targets ready: {0}"
 msgstr ""
 
 #. placeholder {0}: session.awaitingDownloadTargetCount
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Targets waiting for download: {0}"
 msgstr ""
 
 #. placeholder {0}: session.processingTargetCount
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Targets processing: {0}"
 msgstr ""
 
 #. placeholder {0}: session.errorTargetCount
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Targets with errors: {0}"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics-filters.tsx
 msgctxt "Input label"
 msgid "Side"
@@ -3167,6 +3229,7 @@ msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics-filters.tsx
 msgctxt "Input label"
 msgid "Economy"
@@ -3174,6 +3237,7 @@ msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics-filters.tsx
 msgctxt "Input label"
 msgid "Window start"
@@ -3181,6 +3245,7 @@ msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics-filters.tsx
 msgctxt "Input label"
 msgid "Window end"
@@ -3188,22 +3253,26 @@ msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Some imported matches are still missing player positions required for the tactics heatmap."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Generate tactics positions for imported demos"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Targets"
 msgstr ""
 
 #. placeholder {0}: target.order + 1
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Match {0}"
 msgstr ""
 
@@ -3211,6 +3280,7 @@ msgstr ""
 #. placeholder {1}: target.rosterOverlapCount
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Shared history players: {0}, roster overlap: {1}"
 msgstr ""
 
@@ -3220,6 +3290,7 @@ msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Start a scouting session to see opponent tactics."
 msgstr ""
 
@@ -3229,113 +3300,132 @@ msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Loading scouting tactics..."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "Fire Grenades"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No fire grenade data found for the current filters."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "Smoke Grenades"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No smoke grenade data found for the current filters."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "Flashbangs"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No flashbang data found for the current filters."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "T Heatmap"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No T position data found for the current filters."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "Kill Positions"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No kill data found for the current filters."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "Death Positions"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No death data found for the current filters."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "HE Grenades"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No HE grenade data found for the current filters."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "AWP Holder Heatmap"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No AWP holder position data found for the current filters."
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "CT Heatmap"
 msgstr ""
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "No CT position data found for the current filters."
 msgstr ""
 
@@ -3377,6 +3467,7 @@ msgstr "API請求出錯，請稍後重試。"
 
 #: src/ui/downloads/faceit/last-matches-loader.tsx
 #: src/ui/downloads/five-eplay/5eplay-last-matches-loader.tsx
+#: src/ui/downloads/perfect-world/perfect-world-last-matches-loader.tsx
 #: src/ui/downloads/renown/last-matches-loader.tsx
 msgid "No matches found for the current account."
 msgstr "當前帳戶沒有比賽。"
@@ -3519,6 +3610,7 @@ msgstr ""
 
 #. placeholder {0}: session.downloadingTargetCount
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Targets downloading: {0}"
 msgstr ""
 
@@ -3527,6 +3619,7 @@ msgid "See on 5EPlay"
 msgstr ""
 
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Opponent demos are being downloaded, imported and analyzed automatically."
 msgstr ""
 
@@ -3655,6 +3748,142 @@ msgstr "沒有等待中的下載。"
 msgctxt "Button"
 msgid "Remove downloads"
 msgstr "刪除下載"
+
+#: src/ui/downloads/perfect-world/get-perfect-world-error-message.tsx
+msgid "Add a Perfect World account before using Perfect World downloads or scouting."
+msgstr ""
+
+#: src/ui/downloads/perfect-world/get-perfect-world-error-message.tsx
+msgid "The saved Perfect World session has expired. Re-import it from the client or sign in again to continue."
+msgstr ""
+
+#: src/ui/downloads/perfect-world/get-perfect-world-error-message.tsx
+msgid "This match needs a participant Steam ID to resolve the live room. Enter a player Steam ID from the ongoing match and try again."
+msgstr ""
+
+#: src/ui/downloads/perfect-world/get-perfect-world-error-message.tsx
+msgid "The provided participant Steam ID is not part of this match room."
+msgstr ""
+
+#. placeholder {0}: currentAccount?.nickname ?? 'this account'
+#: src/ui/downloads/perfect-world/no-perfect-world-account.tsx
+msgid "The saved Perfect World session for {0} has expired. Import a fresh client session, or sign in again with your mobile phone and SMS security code."
+msgstr ""
+
+#: src/ui/downloads/perfect-world/no-perfect-world-account.tsx
+msgid "Import your current Perfect World desktop client session, or enter your mobile phone number and SMS security code."
+msgstr ""
+
+#: src/ui/downloads/perfect-world/no-perfect-world-account.tsx
+msgctxt "Button"
+msgid "Import from client"
+msgstr ""
+
+#: src/ui/downloads/perfect-world/no-perfect-world-account.tsx
+msgid "Or refresh the saved login manually:"
+msgstr ""
+
+#: src/ui/downloads/perfect-world/no-perfect-world-account.tsx
+msgid "Or sign in manually:"
+msgstr ""
+
+#: src/ui/downloads/perfect-world/no-perfect-world-account.tsx
+msgctxt "Input placeholder"
+msgid "Mobile phone"
+msgstr ""
+
+#: src/ui/downloads/perfect-world/no-perfect-world-account.tsx
+msgctxt "Input placeholder"
+msgid "Security code"
+msgstr ""
+
+#: src/ui/downloads/perfect-world/no-perfect-world-account.tsx
+msgctxt "Button"
+msgid "Login"
+msgstr ""
+
+#: src/ui/downloads/perfect-world/perfect-world-account-instructions.tsx
+msgid "Perfect World scouting requires a logged-in platform account stored in the app."
+msgstr ""
+
+#: src/ui/downloads/perfect-world/perfect-world-account-instructions.tsx
+msgid "If the Perfect World desktop client is already logged in, you can import that session directly."
+msgstr ""
+
+#: src/ui/downloads/perfect-world/perfect-world-account-instructions.tsx
+msgid "After importing, the desktop client does not need to keep running. You only need to refresh the saved session if the token expires."
+msgstr ""
+
+#: src/ui/downloads/perfect-world/perfect-world-account-instructions.tsx
+msgid "Otherwise, enter the mobile phone number linked to your account and an SMS code received from the Perfect World client or website."
+msgstr ""
+
+#: src/ui/downloads/perfect-world/perfect-world-current-match.tsx
+msgctxt "Button"
+msgid "See source match"
+msgstr ""
+
+#: src/ui/downloads/perfect-world/perfect-world-last-matches-loader.tsx
+msgid "Fetching last Perfect World matches..."
+msgstr ""
+
+#: src/ui/downloads/perfect-world/perfect-world-last-matches-loader.tsx
+msgid "An error occurred while fetching Perfect World matches."
+msgstr ""
+
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+msgid "Perfect World scouting session started."
+msgstr ""
+
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+msgid "Perfect World scouting session deleted."
+msgstr ""
+
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+msgid "Loading Perfect World scouting..."
+msgstr ""
+
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+msgid "Perfect World Scouting"
+msgstr ""
+
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+msgid "Paste a Perfect World match ID to find the opponent's recent matches on the same map. Matching demos are downloaded, imported and analyzed automatically."
+msgstr ""
+
+#. placeholder {0}: currentAccount.nickname
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+msgid "Current Perfect World account: {0}"
+msgstr ""
+
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+msgid "The desktop client does not need to stay open after the account session has been imported."
+msgstr ""
+
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+msgctxt "Input label"
+msgid "Perfect World match ID"
+msgstr ""
+
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+msgctxt "Input placeholder"
+msgid "PVP@1234567890 or 1234567890"
+msgstr ""
+
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+msgctxt "Input label"
+msgid "Participant Steam ID (required for ongoing matches)"
+msgstr ""
+
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+msgctxt "Input placeholder"
+msgid "Required when public match detail is unavailable for an ongoing room"
+msgstr ""
+
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+msgid "See source room"
+msgstr ""
 
 #: src/ui/downloads/renown/current-match.tsx
 msgctxt "Button"
@@ -7265,6 +7494,15 @@ msgid "Search"
 msgstr "搜索"
 
 #: src/ui/settings/about/about.tsx
+msgid "This beta uses manual updates from the GitHub pre-release page instead of in-app auto updates."
+msgstr ""
+
+#: src/ui/settings/about/about.tsx
+msgctxt "Settings title"
+msgid "Update channel"
+msgstr ""
+
+#: src/ui/settings/about/about.tsx
 msgid "Automatically download updates."
 msgstr "自動下載更新。"
 
@@ -7282,36 +7520,60 @@ msgid "Logs"
 msgstr "日誌"
 
 #: src/ui/settings/about/about.tsx
+#: src/ui/settings/about/about.tsx
 msgid "Credits"
 msgstr "鳴謝"
 
 #: src/ui/settings/about/about.tsx
-msgid "Special thanks to the following developers for their open-source work related to Counter-Strike that at some point helped create CS Demo Manager ❤️."
-msgstr "特別感謝以下開發人員所做的與《Counter-Strike》相關的開源工作，他們的工作在一定程度上幫助創建了 CS Demo Manager ❤️。"
+msgid "Special thanks to the open-source Counter-Strike developers whose tools, research, and reverse engineering work helped shape this release."
+msgstr ""
 
+#: src/ui/settings/about/about.tsx
 #: src/ui/settings/about/about.tsx
 msgid "<0>@DandrewsDev</0> for his work on CS2 demos <1>voice data extraction</1>."
 msgstr "<0>@DandrewsDev</0>因他在 CS2Demo上的<1>語音數據提取</1>。"
 
 #: src/ui/settings/about/about.tsx
-msgid "<0>@dtugend</0>, the main developer of <1>HLAE</1> which CS Demo Manager uses to generate videos. Without HLAE the CS moviemaking community would not be the same. You can support the HLAE team <2>here</2>."
-msgstr "<0>@dtugend</0>, CS Demo Manager用於生成視頻的<1>HLAE</1>的主要開發者。 沒有HLAE，CS視頻製作社區將截然不同。您可以<2>在此處</2>支持HLAE團隊。"
+msgid "<0>@dtugend</0>, the main developer of <1>HLAE</1>, which is used here to generate videos. You can support the HLAE team <2>here</2>."
+msgstr ""
 
 #: src/ui/settings/about/about.tsx
-msgid "<0>@GAMMACASE</0>, <1>@zer0.k</1> and other AlliedModders contributors to the <2>CS2 SDK</2> internally used by CS Demo Manager."
-msgstr "<0>@GAMMACASE</0>，<1>@zer0.k</1> 和其他 AlliedModders 對<2> CS2 SDK</2> 的貢獻已經在 CS:DM 中實裝。"
+msgid "<0>@GAMMACASE</0>, <1>@zer0.k</1>, and other AlliedModders contributors to the <2>CS2 SDK</2> used by this app."
+msgstr ""
+
+#: src/ui/settings/about/about.tsx
+msgid "<0>@LaihoE</0> for reverse engineering work on CS2 demo parsing. His parser is available on <1>GitHub</1>."
+msgstr ""
+
+#: src/ui/settings/about/about.tsx
+#: src/ui/settings/about/about.tsx
+msgid "<0>@main--</0> and <1>@moritzuehling</1> for creating <2>DemoInfo</2>, one of the first CSGO demo parsers used in earlier versions of this project."
+msgstr ""
+
+#: src/ui/settings/about/about.tsx
+#: src/ui/settings/about/about.tsx
+msgid "<0>@markus-wa</0> for creating and maintaining <1>demoinfocs-golang</1>, the demo parser used by the current desktop app."
+msgstr ""
+
+#: src/ui/settings/about/about.tsx
+msgid "<0>@saul</0>, a Source Engine and Counter-Strike specialist who created <1>CSGO</1> and <2>CS2</2> demo parsers and shares CS-related knowledge through various <3>open-source</3> <4>projects</4>. You can support him on <5>GitHub</5>."
+msgstr ""
+
+#: src/ui/settings/about/about.tsx
+msgid "Special thanks to the following developers for their open-source work related to Counter-Strike that at some point helped shape this release."
+msgstr ""
+
+#: src/ui/settings/about/about.tsx
+msgid "<0>@dtugend</0>, the main developer of <1>HLAE</1> which is used here to generate videos. Without HLAE the CS moviemaking community would not be the same. You can support the HLAE team <2>here</2>."
+msgstr ""
+
+#: src/ui/settings/about/about.tsx
+msgid "<0>@GAMMACASE</0>, <1>@zer0.k</1> and other AlliedModders contributors to the <2>CS2 SDK</2> used by this app."
+msgstr ""
 
 #: src/ui/settings/about/about.tsx
 msgid "<0>@LaihoE</0> for his reverse engineering work on CS2 demo parsing. His parser is available on <1>GitHub</1>."
 msgstr "<0>@LaihoE</0>用於逆向CS2 Demo解析。他的逆向工程可在<1>GitHub</1>上查閱。"
-
-#: src/ui/settings/about/about.tsx
-msgid "<0>@main--</0> and <1>@moritzuehling</1> for creating <2>DemoInfo</2>, one of the first CSGO demo parsers used for years in CSGO Demo Manager V2."
-msgstr "<0>@main--</0>和<1>@moritzuehling</1>用於創建<2>Demo信息</2>，是多年來在CSGO Demo Manager V2中使用的第一個CSGODemo解析器。"
-
-#: src/ui/settings/about/about.tsx
-msgid "<0>@markus-wa</0> for creating and maintaining <1>demoinfocs-golang</1>, the demo parser internally used by CS Demo Manager V3."
-msgstr "<0>@markus-wa</0>用於創建和維護<1>deminfocs-golang</1>，CS Demo Manager V3 內使用的 Demo 解析器。"
 
 #: src/ui/settings/about/about.tsx
 msgid "<0>@saul</0>, a Source Engine/CS wizard who created a <1>CSGO</1> and <2>CS2</2> demo parser and share his CS related knowledge through various <3>open-source</3> <4>projects</4>. You can support him on <5>GitHub</5>."
@@ -7601,8 +7863,8 @@ msgid "You must select at least one data to import."
 msgstr "您必須選擇至少一項數據進行導入。"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
-msgid "You must select a CS:DM V2 backup file."
-msgstr "你必須選擇一個CS:DM V2的備份文件。"
+msgid "You must select a legacy V2 backup file."
+msgstr ""
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgid "You need at least one folder."
@@ -7617,8 +7879,8 @@ msgid "A required tag has not been found."
 msgstr "未找到所需的標籤。"
 
 #: src/ui/settings/database/import-v2-data-button.tsx
-msgid "Select the JSON backup file generated from the CS:DM V2."
-msgstr "選擇從CS:DM V2生成的JSON備份文件。"
+msgid "Select the JSON backup file generated from the legacy V2 app."
+msgstr ""
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgctxt "Button"
@@ -7651,8 +7913,8 @@ msgstr "{demoToImportCount, plural, other {<1>{updatedDemoCount}</1> 個 demo �
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgctxt "Dialog title"
-msgid "Import CS:DM V2"
-msgstr "導入 CS:DM V2"
+msgid "Import legacy V2 data"
+msgstr ""
 
 #: src/ui/settings/database/import-v2-data-button.tsx
 msgctxt "Button"
@@ -7739,18 +8001,6 @@ msgstr "啟動下載"
 msgid "Download folder"
 msgstr "下載文件夾路徑"
 
-#: src/ui/settings/downloads/faceit-downloads-warning.tsx
-msgid "FACEIT restricted demo downloads through a <0>private API</0> and recently gave us a server-side API key with the maximum rate limit."
-msgstr "FACEIT 限制只有通過 <0>私有 API</0> 來下載 Demo，不過他們已為 CSDM 提供了一個最高可用費率限制的服務器端 API 密鑰。"
-
-#: src/ui/settings/downloads/faceit-downloads-warning.tsx
-msgid "You <0>don't have to ask</0> FACEIT for an API key. It requires some work, but demo downloads will be back in a near future."
-msgstr "你<0>無需詢問</0> FACEIT 來獲取一個 API 密鑰。Demo 下載將在不久的將來恢復，但目前還需要點準備工作。"
-
-#: src/ui/settings/downloads/faceit-downloads-warning.tsx
-msgid "In the meantime, you have to download demos from your browser."
-msgstr "在這期間，您必須從您的瀏覽器手動下載 Demo。"
-
 #: src/ui/settings/downloads/faceit-settings.tsx
 msgid "Add FACEIT account"
 msgstr "添加FACEIT帳戶"
@@ -7764,6 +8014,56 @@ msgstr "FACEIT暱稱"
 msgctxt "Input placeholder"
 msgid "Nickname"
 msgstr "暱稱"
+
+#: src/ui/settings/downloads/perfect-world-settings.tsx
+msgid "Active"
+msgstr ""
+
+#: src/ui/settings/downloads/perfect-world-settings.tsx
+msgid "Stale"
+msgstr ""
+
+#: src/ui/settings/downloads/perfect-world-settings.tsx
+msgid "Login to Perfect World"
+msgstr ""
+
+#: src/ui/settings/downloads/perfect-world-settings.tsx
+msgctxt "Input label"
+msgid "Mobile phone"
+msgstr ""
+
+#: src/ui/settings/downloads/perfect-world-settings.tsx
+msgctxt "Input placeholder"
+msgid "Phone number"
+msgstr ""
+
+#: src/ui/settings/downloads/perfect-world-settings.tsx
+msgctxt "Input label"
+msgid "Security code"
+msgstr ""
+
+#: src/ui/settings/downloads/perfect-world-settings.tsx
+msgctxt "Input placeholder"
+msgid "SMS code"
+msgstr ""
+
+#: src/ui/settings/downloads/perfect-world-settings.tsx
+msgid "This stores your Perfect World token locally so the app can fetch match history and scouting demos without keeping the desktop client open."
+msgstr ""
+
+#: src/ui/settings/downloads/perfect-world-settings.tsx
+msgid "Current account"
+msgstr ""
+
+#: src/ui/settings/downloads/perfect-world-settings.tsx
+msgctxt "Button"
+msgid "Import current client session"
+msgstr ""
+
+#: src/ui/settings/downloads/perfect-world-settings.tsx
+msgctxt "Button"
+msgid "Validate current account"
+msgstr ""
 
 #: src/ui/settings/downloads/renown-settings.tsx
 msgid "Add Renown account"
@@ -7800,6 +8100,18 @@ msgstr "增加一個賬號"
 msgid "The API returned a 401 code, please check you API key."
 msgstr "API返回了一個401碼，請檢查您 API 密鑰。"
 
+#: src/ui/settings/downloads/use-add-perfect-world-account.tsx
+msgid "An error occurred while logging into Perfect World."
+msgstr ""
+
+#: src/ui/settings/downloads/use-import-perfect-world-client-account.tsx
+msgid "Could not import the current Perfect World desktop client session."
+msgstr ""
+
+#: src/ui/settings/downloads/use-validate-perfect-world-account.tsx
+msgid "An error occurred while validating the Perfect World account."
+msgstr ""
+
 #: src/ui/settings/folders/add-folder-button.tsx
 msgctxt "Button"
 msgid "Add a folder"
@@ -7833,10 +8145,9 @@ msgid "Network error"
 msgstr "網絡錯誤"
 
 #: src/ui/settings/integrations/faceit-api-key.tsx
-#: src/ui/settings/integrations/steam-api-key.tsx
 msgctxt "Input placeholder"
-msgid "API key"
-msgstr "API 密鑰"
+msgid "Optional override"
+msgstr ""
 
 #: src/ui/settings/integrations/integrations-settings.tsx
 msgid "Steam API key"
@@ -7847,12 +8158,17 @@ msgid "Custom Steam API key used to retrieve information from Steam"
 msgstr "用於從 Steam 獲取信息的自定義 Steam API 密鑰"
 
 #: src/ui/settings/integrations/integrations-settings.tsx
-msgid "FACEIT API key"
-msgstr "FACEIT API密鑰"
+msgid "FACEIT API key override"
+msgstr ""
 
 #: src/ui/settings/integrations/integrations-settings.tsx
-msgid "Custom FACEIT API key used to retrieve information from FACEIT"
-msgstr "用於從 FACEIT 獲取信息的自定義 FACEIT API 密鑰"
+msgid "Optional custom FACEIT API key. Leave it empty to use the built-in key bundled with this beta."
+msgstr ""
+
+#: src/ui/settings/integrations/steam-api-key.tsx
+msgctxt "Input placeholder"
+msgid "API key"
+msgstr "API 密鑰"
 
 #: src/ui/settings/maps/add-map-button.tsx
 msgctxt "Button"

@@ -1,4 +1,4 @@
-import { exec, type ExecException } from 'node:child_process';
+import { execFile, type ExecFileException } from 'node:child_process';
 import { findPsqlBinaryPath } from './find-psql-binary-path';
 import { PsqlTimeout } from './errors/psql-timeout';
 
@@ -12,18 +12,19 @@ type Options = {
   timeoutMs: number;
 };
 
-export async function executePsql(command: string, options?: Options) {
+export async function executePsql(args: string[], options?: Options) {
   const psqlBinaryPath = await findPsqlBinaryPath();
-  const executable = psqlBinaryPath.includes(' ') ? `"${psqlBinaryPath}"` : psqlBinaryPath;
 
   return new Promise<void>((resolve, reject) => {
-    exec(
-      `${executable} ${command}`,
+    execFile(
+      psqlBinaryPath,
+      args,
       {
         env: { ...process.env, PGCONNECT_TIMEOUT: '10' },
         timeout: options?.timeoutMs ?? 0,
+        windowsHide: true,
       },
-      (error: ExecException | null) => {
+      (error: ExecFileException | null) => {
         if (error !== null) {
           const isTimeout =
             (error.code === null && error.signal === 'SIGTERM') ||

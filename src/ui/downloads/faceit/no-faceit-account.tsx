@@ -5,11 +5,30 @@ import { TextInput } from 'csdm/ui/components/inputs/text-input';
 import { useAddFaceitAccount } from '../../settings/downloads/use-add-faceit-account';
 import { ErrorMessage } from 'csdm/ui/components/error-message';
 import { ExclamationTriangleIcon } from 'csdm/ui/icons/exclamation-triangle-icon';
+import { useLocale } from 'csdm/ui/settings/ui/use-locale';
 
 export function NoFaceitAccount() {
   const { t } = useLingui();
+  const locale = useLocale();
   const [nickname, setNickname] = useState('');
   const { addFaceitAccount, errorMessage, isBusy } = useAddFaceitAccount();
+  const isSimplifiedChinese = locale === 'zh-CN';
+  const isTraditionalChinese = locale === 'zh-TW';
+
+  const title = isSimplifiedChinese
+    ? '若要添加 FACEIT 账号，请输入你的 FACEIT 昵称。'
+    : isTraditionalChinese
+      ? '若要新增 FACEIT 帳號，請輸入你的 FACEIT 暱稱。'
+      : 'To add a FACEIT account, enter your FACEIT nickname.';
+  const placeholder = isSimplifiedChinese ? 'FACEIT 昵称' : isTraditionalChinese ? 'FACEIT 暱稱' : t({
+    message: 'FACEIT nickname',
+    context: 'Input placeholder',
+  });
+  const caseSensitiveMessage = isSimplifiedChinese
+    ? '昵称区分大小写！'
+    : isTraditionalChinese
+      ? '暱稱區分大小寫！'
+      : 'The nickname is case sensitive!';
 
   const submit = async () => {
     await addFaceitAccount(nickname);
@@ -19,12 +38,10 @@ export function NoFaceitAccount() {
 
   return (
     <div className="mx-auto mt-48 flex max-w-[600px] flex-col">
-      <p className="text-body-strong">
-        <Trans>To add a FACEIT account, enter your FACEIT nickname.</Trans>
-      </p>
+      <p className="text-body-strong">{title}</p>
       <div className="mt-8 w-[228px]">
         <TextInput
-          placeholder={t({ message: 'FACEIT nickname', context: 'Input placeholder' })}
+          placeholder={placeholder}
           onChange={(event) => {
             setNickname(event.target.value);
           }}
@@ -36,9 +53,7 @@ export function NoFaceitAccount() {
       </div>
       <div className="mt-4 flex items-center gap-x-8">
         <ExclamationTriangleIcon className="size-12 text-orange-700" />
-        <p className="text-caption">
-          <Trans>The nickname is case sensitive!</Trans>
-        </p>
+        <p className="text-caption">{caseSensitiveMessage}</p>
       </div>
       <div className="my-8">
         <Button variant={ButtonVariant.Primary} onClick={submit} isDisabled={isDisabled}>

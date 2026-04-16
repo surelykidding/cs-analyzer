@@ -21,7 +21,9 @@ async function findPsqlFromWhere() {
   }
 
   try {
-    const { stdout } = await execFileAsync('where.exe', ['psql']);
+    const systemRoot = process.env.SystemRoot ?? 'C:\\Windows';
+    const wherePath = path.join(systemRoot, 'System32', 'where.exe');
+    const { stdout } = await execFileAsync(wherePath, ['psql'], { windowsHide: true });
     const candidates = stdout
       .split(/\r?\n/)
       .map((line) => line.trim())
@@ -40,9 +42,19 @@ async function findPsqlFromWhere() {
 }
 
 async function findPsqlInCommonWindowsInstallLocations() {
-  const roots = [process.env.ProgramFiles, process.env['ProgramFiles(x86)']].filter((value): value is string => {
-    return value !== undefined && value !== '';
-  });
+  const roots = Array.from(
+    new Set(
+      [
+        process.env.ProgramFiles,
+        process.env.ProgramW6432,
+        process.env['ProgramFiles(x86)'],
+        'C:\\Program Files',
+        'C:\\Program Files (x86)',
+      ].filter((value): value is string => {
+        return value !== undefined && value !== '';
+      }),
+    ),
+  );
 
   for (const root of roots) {
     const postgresqlRootPath = path.join(root, 'PostgreSQL');

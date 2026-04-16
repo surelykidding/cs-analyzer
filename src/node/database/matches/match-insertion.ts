@@ -41,10 +41,12 @@ export async function insertFromCsv<Table>({
   const { database, username, hostname, port, password } = databaseSettings;
   const columnNames = columns.join(',');
   const escapedCsvFilePath = csvFilePath.replaceAll("'", "''");
-  const command = `-c "\\copy ${tableName}(${columnNames}) FROM '${escapedCsvFilePath}' ENCODING 'UTF8' CSV DELIMITER ','" "postgresql://${username}:${encodeURIComponent(
-    password,
-  )}@${formatHostnameForUri(hostname)}:${port}/${database}"`;
-  await executePsql(command);
+  const connectionUri = `postgresql://${username}:${encodeURIComponent(password)}@${formatHostnameForUri(hostname)}:${port}/${database}`;
+  await executePsql([
+    '-c',
+    `\\copy ${tableName}(${columnNames}) FROM '${escapedCsvFilePath}' ENCODING 'UTF8' CSV DELIMITER ','`,
+    connectionUri,
+  ]);
 }
 
 export async function deleteCsvFilesInOutputFolder(outputFolderPath: string) {

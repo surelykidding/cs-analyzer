@@ -11,7 +11,10 @@ export function createTrayMenu() {
     {
       label: i18n.t({
         id: 'trayMenu.openAnalyzer',
-        message: `Open ${APP_DISPLAY_NAME}`,
+        message: 'Open {appName}',
+        values: {
+          appName: APP_DISPLAY_NAME,
+        },
       }),
       click: async () => {
         const mainWindow = await windowManager.getOrCreateMainWindow();
