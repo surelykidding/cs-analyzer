@@ -11,8 +11,8 @@ Highlights:
 
 Guides:
 
-- Testing Guide (EN): https://github.com/akiver/cs-demo-manager/blob/main/TESTING-GUIDE.en.md
-- Testing Guide (ZH-CN): https://github.com/akiver/cs-demo-manager/blob/main/TESTING-GUIDE.zh-CN.md
+- Testing Guide (EN): https://github.com/surelykidding/cs-analyzer/blob/main/TESTING-GUIDE.en.md
+- Testing Guide (ZH-CN): https://github.com/surelykidding/cs-analyzer/blob/main/TESTING-GUIDE.zh-CN.md
 
 ## 简体中文
 

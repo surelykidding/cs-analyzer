@@ -8,10 +8,10 @@ body:
         **Please read this entire template before posting any feature request. If your issue does not follow the instructions, it might be closed without notice.**
 
         This form is only for submitting feature requests and **must be written in English**.
-        If you have a usage question please post a question in the [Discussions tab](https://github.com/akiver/cs-demo-manager/discussions).
-        If you encountered a bug, please use the [bug report template](https://github.com/akiver/cs-demo-manager/issues/new?assignees=&labels=&projects=&template=bug_report.yml).
+        If you have a usage question please post a question in the [Discussions tab](https://github.com/surelykidding/cs-analyzer/discussions).
+        If you encountered a bug, please use the [bug report template](https://github.com/surelykidding/cs-analyzer/issues/new?assignees=&labels=&projects=&template=bug_report.yml).
 
-        **Before creating a feature request make sure that this hasn't been [requested before](https://github.com/akiver/cs-demo-manager/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Aenhancement).**
+        **Before creating a feature request make sure that this hasn't been [requested before](https://github.com/surelykidding/cs-analyzer/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Aenhancement).**
 
   - type: textarea
     id: feature-description

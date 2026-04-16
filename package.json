@@ -11,16 +11,16 @@
     "electron",
     "react"
   ],
-  "homepage": "https://github.com/akiver/cs-demo-manager/releases",
+  "homepage": "https://github.com/surelykidding/cs-analyzer/releases",
   "bugs": {
-    "url": "https://github.com/akiver/cs-demo-manager/issues"
+    "url": "https://github.com/surelykidding/cs-analyzer/issues"
   },
   "license": "MIT",
   "author": {
     "name": "AkiVer",
     "email": "ys.renaud@gmail.com"
   },
-  "repository": "https://github.com/akiver/cs-demo-manager",
+  "repository": "https://github.com/surelykidding/cs-analyzer",
   "main": "main.js",
   "scripts": {
     "build": "node ./scripts/build.mjs",
@@ -147,9 +147,9 @@
   },
   "packageManager": "npm@11.12.1",
   "download": {
-    "url": "https://github.com/akiver/cs-demo-manager/releases"
+    "url": "https://github.com/surelykidding/cs-analyzer/releases"
   },
   "tutorial": {
-    "url": "https://github.com/akiver/cs-demo-manager/blob/main/TESTING-GUIDE.en.md"
+    "url": "https://github.com/surelykidding/cs-analyzer/blob/main/TESTING-GUIDE.en.md"
   }
 }

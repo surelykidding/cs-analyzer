@@ -209,5 +209,5 @@ When reporting feedback, please include:
 
 ## GitHub Links
 
-- Releases: <https://github.com/akiver/cs-demo-manager/releases>
-- Issues / Feedback: <https://github.com/akiver/cs-demo-manager/issues>
+- Releases: <https://github.com/surelykidding/cs-analyzer/releases>
+- Issues / Feedback: <https://github.com/surelykidding/cs-analyzer/issues>

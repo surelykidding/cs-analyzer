@@ -209,5 +209,5 @@ psql --version
 
 ## GitHub 链接
 
-- Releases：<https://github.com/akiver/cs-demo-manager/releases>
-- Issues / 反馈：<https://github.com/akiver/cs-demo-manager/issues>
+- Releases：<https://github.com/surelykidding/cs-analyzer/releases>
+- Issues / 反馈：<https://github.com/surelykidding/cs-analyzer/issues>

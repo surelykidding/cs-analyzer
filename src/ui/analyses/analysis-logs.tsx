@@ -124,7 +124,7 @@ export function AnalysisLogs() {
           <p>
             <Trans>
               Please read and follow the instructions on{' '}
-              <ExternalLink href="https://github.com/akiver/cs-demo-manager/issues/new?assignees=&labels=&projects=&template=bug_report.yml">
+              <ExternalLink href="https://github.com/surelykidding/cs-analyzer/issues/new?assignees=&labels=&projects=&template=bug_report.yml">
                 GitHub
               </ExternalLink>{' '}
               to report the issue <strong>only if the documentation says you should for this error code</strong>.
@@ -137,7 +137,7 @@ export function AnalysisLogs() {
         <p>
           <Trans>
             Please read and follow the instructions on{' '}
-            <ExternalLink href="https://github.com/akiver/cs-demo-manager/issues/new?assignees=&labels=&projects=&template=bug_report.yml">
+            <ExternalLink href="https://github.com/surelykidding/cs-analyzer/issues/new?assignees=&labels=&projects=&template=bug_report.yml">
               GitHub
             </ExternalLink>{' '}
             to report the issue.

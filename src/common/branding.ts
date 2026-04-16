@@ -1,4 +1,4 @@
-const REPOSITORY_URL = 'https://github.com/akiver/cs-demo-manager';
+const REPOSITORY_URL = 'https://github.com/surelykidding/cs-analyzer';
 
 export const APP_DISPLAY_NAME = 'CS Analyzer';
 export const APP_BASED_ON_LABEL = 'Based on CS Demo Manager';

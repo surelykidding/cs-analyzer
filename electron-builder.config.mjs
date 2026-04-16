@@ -1,7 +1,7 @@
 import { Arch } from 'electron-builder';
 import pkg from './package.json' with { type: 'json' };
 
-const repositoryUrl = 'https://github.com/akiver/cs-demo-manager';
+const repositoryUrl = 'https://github.com/surelykidding/cs-analyzer';
 const releasesUrl = `${repositoryUrl}/releases`;
 const releaseTag = `cs-analyzer-v${pkg.version}`;
 

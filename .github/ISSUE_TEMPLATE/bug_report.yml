@@ -8,16 +8,16 @@ body:
 
         This form is only for submitting bug reports and **must be written in English**.
         If you have a usage question or are unsure if it's a bug, please post a question in the 
-        [Discussions tab](https://github.com/akiver/cs-demo-manager/discussions).
-        If it's a feature request please use the [feature request form](https://github.com/akiver/cs-demo-manager/issues/new?template=feature_request.yml).
+        [Discussions tab](https://github.com/surelykidding/cs-analyzer/discussions).
+        If it's a feature request please use the [feature request form](https://github.com/surelykidding/cs-analyzer/issues/new?template=feature_request.yml).
 
         Before submitting a new bug/issue, please **make sure your application is up-to-date** and check the links below to see if there is a solution or question posted there already:
-         - [Testing Guide (English)](https://github.com/akiver/cs-demo-manager/blob/main/TESTING-GUIDE.en.md)
-         - [Testing Guide (Simplified Chinese)](https://github.com/akiver/cs-demo-manager/blob/main/TESTING-GUIDE.zh-CN.md)
-         - [Latest pre-releases](https://github.com/akiver/cs-demo-manager/releases)
-         - [Open issues](https://github.com/akiver/cs-demo-manager/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
-         - [Closed issues](https://github.com/akiver/cs-demo-manager/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed)
-         - [Discussions tab](https://github.com/akiver/cs-demo-manager/discussions)
+         - [Testing Guide (English)](https://github.com/surelykidding/cs-analyzer/blob/main/TESTING-GUIDE.en.md)
+         - [Testing Guide (Simplified Chinese)](https://github.com/surelykidding/cs-analyzer/blob/main/TESTING-GUIDE.zh-CN.md)
+         - [Latest pre-releases](https://github.com/surelykidding/cs-analyzer/releases)
+         - [Open issues](https://github.com/surelykidding/cs-analyzer/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
+         - [Closed issues](https://github.com/surelykidding/cs-analyzer/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed)
+         - [Discussions tab](https://github.com/surelykidding/cs-analyzer/discussions)
 
         If an issue already exists do not create a new one, and instead 👍 upvote the existing one.
 
