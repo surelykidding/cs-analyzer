@@ -2,6 +2,11 @@ name: Windows prerelease
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/windows-prerelease.yml
 
 permissions:
   contents: write
@@ -39,6 +44,20 @@ jobs:
           "RELEASE_VERSION=$version" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
           "RELEASE_TAG=cs-analyzer-v$version" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
           "RELEASE_NAME=CS Analyzer $version" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+      - name: Validate release secrets
+        shell: pwsh
+        env:
+          STEAM_API_KEYS: ${{ secrets.STEAM_API_KEYS }}
+          FACEIT_API_KEY: ${{ secrets.FACEIT_API_KEY }}
+        run: |
+          if ([string]::IsNullOrWhiteSpace($env:STEAM_API_KEYS)) {
+            throw "Missing repository secret: STEAM_API_KEYS"
+          }
+
+          if ([string]::IsNullOrWhiteSpace($env:FACEIT_API_KEY)) {
+            throw "Missing repository secret: FACEIT_API_KEY"
+          }
 
       - name: Install dependencies
         run: npm install
