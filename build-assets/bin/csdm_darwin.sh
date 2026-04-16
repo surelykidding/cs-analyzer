@@ -19,7 +19,7 @@ if [ -z "$APP_PATH" ]; then
 	exit 1
 fi
 CONTENTS="$APP_PATH/Contents"
-ELECTRON="$CONTENTS/MacOS/CS Demo Manager"
+ELECTRON="$CONTENTS/MacOS/CS Analyzer"
 CLI="$CONTENTS/Resources/app.asar/cli.js"
 ELECTRON_RUN_AS_NODE=1 "$ELECTRON" "$CLI" "$@"
 exit $?

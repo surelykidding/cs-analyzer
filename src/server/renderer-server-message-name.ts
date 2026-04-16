@@ -15,6 +15,7 @@ import type { ExportToXlsxProgressPayload, ExportToXlsxSuccessPayload } from 'cs
 import type { CounterStrikeErrorPayload } from 'csdm/server/counter-strike';
 import type { FaceitScoutingSession } from 'csdm/common/types/faceit-scouting';
 import type { FiveEPlayScoutingSession } from 'csdm/common/types/5eplay-scouting';
+import type { PerfectWorldScoutingSession } from 'csdm/common/types/perfect-world-scouting';
 
 // Message names sent from the WebSocket server to the renderer Electron process.
 export const RendererServerMessageName = {
@@ -60,6 +61,7 @@ export const RendererServerMessageName = {
   TeamNamesUpdated: 'team-names-updated',
   FaceitScoutingSessionUpdated: 'faceit-scouting-session-updated',
   FiveEPlayScoutingSessionUpdated: '5eplay-scouting-session-updated',
+  PerfectWorldScoutingSessionUpdated: 'perfect-world-scouting-session-updated',
 } as const;
 
 export type RendererServerMessageName =
@@ -112,4 +114,5 @@ export interface RendererServerMessagePayload extends SharedServerMessagePayload
   [RendererServerMessageName.TeamNamesUpdated]: number;
   [RendererServerMessageName.FaceitScoutingSessionUpdated]: FaceitScoutingSession | undefined;
   [RendererServerMessageName.FiveEPlayScoutingSessionUpdated]: FiveEPlayScoutingSession | undefined;
+  [RendererServerMessageName.PerfectWorldScoutingSessionUpdated]: PerfectWorldScoutingSession | undefined;
 }

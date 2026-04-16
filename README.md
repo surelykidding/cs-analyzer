@@ -1,15 +1,15 @@
-# CS Demo Manager
+# CS Analyzer
 
-Companion application for your Counter-Strike demos.
+Counter-Strike tactics and scouting desktop app built for demo review, team prep, and opponent study.
 
-![Preview](https://github.com/akiver/cs-demo-manager/blob/main/preview.png)
+![Preview](preview.png)
 
 ## Links
 
-[Download](https://cs-demo-manager.com/download)  
-[User manual](https://cs-demo-manager.com/docs)  
-[Developer manual](https://cs-demo-manager.com/docs/development/architecture)  
-[Contributing](https://cs-demo-manager.com/docs/contributing)
+[GitHub Releases](https://github.com/akiver/cs-demo-manager/releases)  
+[Testing Guide (English)](https://github.com/akiver/cs-demo-manager/blob/main/TESTING-GUIDE.en.md)  
+[测试指南（简体中文）](https://github.com/akiver/cs-demo-manager/blob/main/TESTING-GUIDE.zh-CN.md)  
+[Issues / Feedback](https://github.com/akiver/cs-demo-manager/issues)
 
 ## License
 

@@ -29,6 +29,8 @@ export const RoutePath = {
   DownloadsRenown: 'renown',
   Downloads5EPlay: '5eplay',
   Downloads5EPlayScouting: '5eplay-scouting',
+  DownloadsPerfectWorld: 'perfect-world',
+  DownloadsPerfectWorldScouting: 'perfect-world-scouting',
   DownloadsPending: 'pending',
   Ban: '/ban',
   Teams: '/teams',

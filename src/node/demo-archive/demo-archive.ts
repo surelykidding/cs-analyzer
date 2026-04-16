@@ -1,10 +1,11 @@
 import fs from 'fs-extra';
 import zlib from 'node:zlib';
+import { PassThrough } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import unzipper from 'unzipper';
 import b2 from 'unbzip2-stream';
 
-export type DemoArchiveFormat = 'gz' | 'bz2' | 'zip' | 'zst';
+export type DemoArchiveFormat = 'dem' | 'gz' | 'bz2' | 'zip' | 'zst';
 
 export function isPotentialDemoDownloadPath(filePath: string) {
   const lowerPath = filePath.toLowerCase();
@@ -44,11 +45,17 @@ export function detectDemoArchiveFormat(filePathOrUrl: string, contentType: stri
     return 'zst';
   }
 
+  if (lowerPathname.endsWith('.dem')) {
+    return 'dem';
+  }
+
   return null;
 }
 
 export function createDemoArchiveExtractStream(archiveFormat: DemoArchiveFormat): NodeJS.ReadWriteStream {
   switch (archiveFormat) {
+    case 'dem':
+      return new PassThrough();
     case 'gz':
       return zlib.createGunzip();
     case 'bz2':

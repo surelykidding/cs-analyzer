@@ -1,16 +1,10 @@
 import React from 'react';
 import { Trans } from '@lingui/react/macro';
+import { APP_DOCUMENTATION_URL } from 'csdm/common/branding';
 import { ExternalLink } from 'csdm/ui/components/external-link';
 
 function getDocumentationLink() {
-  let platform = 'windows';
-  if (window.csdm.isMac) {
-    platform = 'macos';
-  } else if (window.csdm.isLinux) {
-    platform = 'linux';
-  }
-
-  return `https://cs-demo-manager.com/docs/installation#${platform}`;
+  return APP_DOCUMENTATION_URL;
 }
 
 export function HelpLink() {

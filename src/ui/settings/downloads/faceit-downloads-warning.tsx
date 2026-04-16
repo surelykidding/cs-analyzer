@@ -10,19 +10,22 @@ export function FaceitDownloadsWarning() {
       <div>
         <p className="selectable">
           <Trans>
-            FACEIT restricted demo downloads through a{' '}
-            <ExternalLink href="https://docs.faceit.com/getting-started/Guides/download-api">private API</ExternalLink>{' '}
-            and recently gave us a server-side API key with the maximum rate limit.
+            This beta already includes a built-in FACEIT API key, so testers do not need to request or paste one
+            before using scouting, tactics, or account import flows.
           </Trans>
         </p>
         <p className="selectable">
           <Trans>
-            You <strong>don't have to ask</strong> FACEIT for an API key. It requires some work, but demo downloads will
-            be back in a near future.
+            If you want to use your own FACEIT quota, you can still add an optional override in Settings {'>'}{' '}
+            Integrations.
           </Trans>
         </p>
         <p className="selectable">
-          <Trans>In the meantime, you have to download demos from your browser.</Trans>
+          <Trans>
+            FACEIT still controls access to some download endpoints through a{' '}
+            <ExternalLink href="https://docs.faceit.com/getting-started/Guides/download-api">private API</ExternalLink>
+            , so availability may depend on the current server-side allowance.
+          </Trans>
         </p>
       </div>
     </div>

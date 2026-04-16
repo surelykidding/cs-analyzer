@@ -9,11 +9,11 @@ else
 		APP_PATH="$(dirname "$(readlink -f "$0")")"
 	else
 		# else use the standard install location
-		APP_PATH="/usr/share/cs-demo-manager"
+		APP_PATH="/usr/share/cs-analyzer"
 	fi
 fi
 
-ELECTRON="$APP_PATH/cs-demo-manager"
+ELECTRON="$APP_PATH/cs-analyzer"
 CLI="$APP_PATH/resources/app.asar/cli.js"
 ELECTRON_RUN_AS_NODE=1 "$ELECTRON" "$CLI" "$@"
 exit $?

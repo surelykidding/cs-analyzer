@@ -4,11 +4,13 @@ import { faceitReducer } from 'csdm/ui/downloads/faceit/faceit-reducer';
 import { valveReducer } from 'csdm/ui/downloads/valve/valve-reducer';
 import { fiveEPlayReducer } from './five-eplay/5eplay-reducer';
 import { renownReducer } from './renown/renown-reducer';
+import { perfectWorldReducer } from './perfect-world/perfect-world-reducer';
 
 export const downloadsReducer = combineReducers({
   valve: valveReducer,
   faceit: faceitReducer,
   renown: renownReducer,
   '5eplay': fiveEPlayReducer,
+  perfectWorld: perfectWorldReducer,
   pending: pendingDownloadsReducer,
 });

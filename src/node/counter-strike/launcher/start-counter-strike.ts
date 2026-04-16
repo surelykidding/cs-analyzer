@@ -216,7 +216,7 @@ sv_cheats 1
 bot_quota 0
 cl_draw_only_deathnotices 1
 spec_mode 6
-echo "CS:DM config loaded"
+echo "CS Analyzer config loaded"
       `;
     } else {
       launchParameters.push('+game_alias custom');
@@ -232,7 +232,7 @@ cl_hud_telemetry_ping_show 0
 cl_hud_telemetry_serverrecvmargin_graph_show 0
 cl_trueview_show_status 0
 r_show_build_info 0
-echo "CS:DM config loaded"
+echo "CS Analyzer config loaded"
 `;
     }
     await fs.writeFile(path.join(cfgFolderPath, 'gamemode_custom_server.cfg'), cfg);

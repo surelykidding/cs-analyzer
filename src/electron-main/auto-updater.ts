@@ -1,9 +1,10 @@
-import { ipcMain } from 'electron';
+import { app, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import { Notification } from 'electron';
 import { i18n } from '@lingui/core';
 import { windowManager } from './window-manager';
 import { IPCChannel } from 'csdm/common/ipc-channel';
+import { isPrereleaseVersion } from 'csdm/common/branding';
 
 autoUpdater.logger = {
   error: logger.error,
@@ -18,6 +19,30 @@ export async function initialize(autoDownloadUpdates: boolean) {
   let lastDownloadedVersion: string | null = null;
   let isDownloading = false;
   let shouldDownloadUpdatesAutomatically = autoDownloadUpdates;
+  const isPrerelease = isPrereleaseVersion(app.getVersion());
+
+  ipcMain.removeHandler(IPCChannel.InstallUpdate);
+  ipcMain.removeHandler(IPCChannel.HasUpdateReadyToInstall);
+  ipcMain.removeHandler(IPCChannel.ToggleAutoUpdate);
+
+  if (isPrerelease) {
+    ipcMain.handle(IPCChannel.InstallUpdate, () => {});
+    ipcMain.handle(IPCChannel.HasUpdateReadyToInstall, () => false);
+    ipcMain.handle(IPCChannel.ToggleAutoUpdate, () => {});
+    return;
+  }
+
+  ipcMain.handle(IPCChannel.InstallUpdate, () => {
+    autoUpdater.quitAndInstall();
+  });
+
+  ipcMain.handle(IPCChannel.HasUpdateReadyToInstall, () => {
+    return lastDownloadedVersion !== null;
+  });
+
+  ipcMain.handle(IPCChannel.ToggleAutoUpdate, (event, isEnabled: boolean) => {
+    shouldDownloadUpdatesAutomatically = isEnabled;
+  });
 
   autoUpdater.on('update-available', async (event) => {
     const isAlreadyDownloadedVersion = lastDownloadedVersion !== null && lastDownloadedVersion === event.version;
@@ -55,18 +80,6 @@ export async function initialize(autoDownloadUpdates: boolean) {
 
     lastDownloadedVersion = event.version;
     isDownloading = false;
-  });
-
-  ipcMain.handle(IPCChannel.InstallUpdate, () => {
-    autoUpdater.quitAndInstall();
-  });
-
-  ipcMain.handle(IPCChannel.HasUpdateReadyToInstall, () => {
-    return lastDownloadedVersion !== null;
-  });
-
-  ipcMain.handle(IPCChannel.ToggleAutoUpdate, (event, isEnabled: boolean) => {
-    shouldDownloadUpdatesAutomatically = isEnabled;
   });
 
   const checkInterval = 1000 * 60 * 60 * 12; // 12 hours

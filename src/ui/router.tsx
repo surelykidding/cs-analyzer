@@ -55,6 +55,8 @@ import { FiveEPlayLastMatches } from './downloads/five-eplay/5eplay-last-matches
 import { TeamPerformance } from './team/performance/team-performance';
 import { PlayerHeatmap } from './player/heatmap/player-heatmap';
 import { FiveEPlayScouting } from './downloads/five-eplay/5eplay-scouting';
+import { PerfectWorldLastMatches } from './downloads/perfect-world/perfect-world-last-matches';
+import { PerfectWorldScouting } from './downloads/perfect-world/perfect-world-scouting';
 
 export const router = createHashRouter(
   createRoutesFromElements(
@@ -120,6 +122,8 @@ export const router = createHashRouter(
         <Route path={RoutePath.DownloadsRenown} element={<RenownLastMatches />} />
         <Route path={RoutePath.Downloads5EPlay} element={<FiveEPlayLastMatches />} />
         <Route path={RoutePath.Downloads5EPlayScouting} element={<FiveEPlayScouting />} />
+        <Route path={RoutePath.DownloadsPerfectWorld} element={<PerfectWorldLastMatches />} />
+        <Route path={RoutePath.DownloadsPerfectWorldScouting} element={<PerfectWorldScouting />} />
         <Route path={RoutePath.DownloadsPending} element={<PendingDownloads />} />
       </Route>
       <Route path={RoutePath.Videos} element={<Videos />} />

@@ -1,4 +1,5 @@
 import React from 'react';
+import { APP_DISPLAY_NAME } from 'csdm/common/branding';
 import { DatabaseStatus } from 'csdm/ui/bootstrap/database-status';
 import { useDatabaseStatus } from 'csdm/ui/bootstrap/use-database-status';
 import { HistoryNavigation } from './history/history-navigation';
@@ -29,7 +30,7 @@ export function TitleBar() {
       {!window.csdm.isMac && <MenuButton />}
       <div className="mx-auto flex items-center gap-x-16">
         {databaseStatus === DatabaseStatus.Connected && <HistoryNavigation />}
-        <p>{`CS Demo Manager ${APP_VERSION}`}</p>
+        <p>{`${APP_DISPLAY_NAME} ${APP_VERSION}`}</p>
         <UpdateAvailableButton />
       </div>
       {!window.csdm.isMac && <WindowControls />}

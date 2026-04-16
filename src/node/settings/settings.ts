@@ -124,6 +124,8 @@ export type DownloadSettings = {
   downloadRenownDemosInBackground: boolean;
   download5EPlayDemosAtStartup: boolean;
   download5EPlayDemosInBackground: boolean;
+  downloadPerfectWorldDemosAtStartup: boolean;
+  downloadPerfectWorldDemosInBackground: boolean;
 };
 
 export type MatchesSettings = MatchFilters;

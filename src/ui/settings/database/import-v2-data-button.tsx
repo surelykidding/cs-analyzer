@@ -60,7 +60,7 @@ function ImportV2DataDialog() {
       return setError(<Trans>You must select at least one data to import.</Trans>);
     }
     if (backupFilePath === '') {
-      return setError(<Trans>You must select a CS:DM V2 backup file.</Trans>);
+      return setError(<Trans>You must select a legacy V2 backup file.</Trans>);
     }
     if (folders.length === 0) {
       return setError(<Trans>You need at least one folder.</Trans>);
@@ -100,7 +100,7 @@ function ImportV2DataDialog() {
       <>
         <div className="flex flex-col gap-y-4">
           <p>
-            <Trans>Select the JSON backup file generated from the CS:DM V2.</Trans>
+            <Trans>Select the JSON backup file generated from the legacy V2 app.</Trans>
           </p>
           <div>
             <Button onClick={onSelectBackupFileClick} variant={ButtonVariant.Primary}>
@@ -213,7 +213,7 @@ function ImportV2DataDialog() {
     <Dialog closeOnBackgroundClicked={!isBusy} closeOnEscPressed={!isBusy}>
       <DialogHeader>
         <DialogTitle>
-          <Trans context="Dialog title">Import CS:DM V2</Trans>
+          <Trans context="Dialog title">Import legacy V2 data</Trans>
         </DialogTitle>
       </DialogHeader>
       <DialogContent>

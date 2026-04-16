@@ -2,6 +2,12 @@ import type { MenuItemConstructorOptions } from 'electron';
 import { ipcMain, Menu, app, screen, shell } from 'electron';
 import { i18n } from '@lingui/core';
 import { IPCChannel } from 'csdm/common/ipc-channel';
+import {
+  APP_DISPLAY_NAME,
+  APP_DOCUMENTATION_URL,
+  APP_RELEASES_URL,
+  APP_REPOSITORY_URL,
+} from 'csdm/common/branding';
 import { isMac } from 'csdm/node/os/is-mac';
 import { windowManager } from 'csdm/electron-main/window-manager';
 import { Game } from 'csdm/common/types/counter-strike';
@@ -64,8 +70,8 @@ export function createApplicationMenu(client: WebSocketClient) {
         {
           role: 'hide',
           label: i18n.t({
-            id: 'menu.hide',
-            message: 'Hide CS:DM',
+            id: 'menu.hideAnalyzer',
+            message: `Hide ${APP_DISPLAY_NAME}`,
           }),
         },
         {
@@ -86,8 +92,8 @@ export function createApplicationMenu(client: WebSocketClient) {
         { type: 'separator' },
         {
           label: i18n.t({
-            id: 'menu.quit',
-            message: 'Quit CS:DM',
+            id: 'menu.quitAnalyzer',
+            message: `Quit ${APP_DISPLAY_NAME}`,
           }),
           accelerator: 'CommandOrControl+Q',
           click: (menu, window) => {
@@ -131,8 +137,8 @@ export function createApplicationMenu(client: WebSocketClient) {
         {
           role: 'quit',
           label: i18n.t({
-            id: 'menu.quit',
-            message: 'Quit CS:DM',
+            id: 'menu.quitAnalyzer',
+            message: `Quit ${APP_DISPLAY_NAME}`,
           }),
         },
       ],
@@ -367,13 +373,19 @@ export function createApplicationMenu(client: WebSocketClient) {
         message: 'Documentation',
       }),
       click: async () => {
-        await shell.openExternal('https://cs-demo-manager.com/docs');
+        await shell.openExternal(APP_DOCUMENTATION_URL);
+      },
+    },
+    {
+      label: 'Releases',
+      click: async () => {
+        await shell.openExternal(APP_RELEASES_URL);
       },
     },
     {
       label: 'GitHub',
       click: async () => {
-        await shell.openExternal('https://github.com/akiver/cs-demo-manager');
+        await shell.openExternal(APP_REPOSITORY_URL);
       },
     },
   ];

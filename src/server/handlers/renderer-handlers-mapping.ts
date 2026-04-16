@@ -259,6 +259,31 @@ import { deleteRenownAccountHandler } from './renderer-process/renown/delete-ren
 import { updateCurrentRenownAccountHandler } from './renderer-process/renown/update-current-renown-account-handler';
 import type { RenownMatch } from 'csdm/common/types/renown-match';
 import { fetchLastRenownMatchesHandler } from './renderer-process/renown/fetch-last-renown-matches-handler';
+import type {
+  AddPerfectWorldAccountPayload,
+  PerfectWorldAccount,
+  SendPerfectWorldSmsCodePayload,
+} from 'csdm/common/types/perfect-world-account';
+import { addPerfectWorldAccountHandler } from './renderer-process/perfect-world/add-perfect-world-account-handler';
+import { deletePerfectWorldAccountHandler } from './renderer-process/perfect-world/delete-perfect-world-account-handler';
+import { fetchPerfectWorldAccountsHandler } from './renderer-process/perfect-world/fetch-perfect-world-accounts-handler';
+import { updateCurrentPerfectWorldAccountHandler } from './renderer-process/perfect-world/update-current-perfect-world-account-handler';
+import type { PerfectWorldMatch } from 'csdm/common/types/perfect-world-match';
+import { fetchLastPerfectWorldMatchesHandler } from './renderer-process/perfect-world/fetch-last-perfect-world-matches-handler';
+import { sendPerfectWorldSmsCodeHandler } from './renderer-process/perfect-world/send-perfect-world-sms-code-handler';
+import { importPerfectWorldClientAccountHandler } from './renderer-process/perfect-world/import-perfect-world-client-account-handler';
+import { validatePerfectWorldAccountHandler } from './renderer-process/perfect-world/validate-perfect-world-account-handler';
+import type {
+  DeletePerfectWorldScoutingSessionPayload,
+  PerfectWorldScoutingSession,
+  PerfectWorldScoutingTacticsPayload,
+  PerfectWorldScoutingTacticsResponse,
+  StartPerfectWorldScoutingSessionPayload,
+} from 'csdm/common/types/perfect-world-scouting';
+import { startPerfectWorldScoutingSessionHandler } from './renderer-process/perfect-world-scouting/start-perfect-world-scouting-session-handler';
+import { fetchCurrentPerfectWorldScoutingSessionHandler } from './renderer-process/perfect-world-scouting/fetch-current-perfect-world-scouting-session-handler';
+import { deletePerfectWorldScoutingSessionHandler } from './renderer-process/perfect-world-scouting/delete-perfect-world-scouting-session-handler';
+import { fetchPerfectWorldScoutingTacticsHandler } from './renderer-process/perfect-world-scouting/fetch-perfect-world-scouting-tactics-handler';
 
 export interface RendererMessageHandlers {
   [RendererClientMessageName.InitializeApplication]: Handler<void, InitializeApplicationSuccessPayload>;
@@ -403,6 +428,27 @@ export interface RendererMessageHandlers {
     FiveEPlayScoutingTacticsResponse
   >;
   [RendererClientMessageName.Delete5EPlayScoutingSession]: Handler<Delete5EPlayScoutingSessionPayload>;
+  [RendererClientMessageName.SendPerfectWorldSmsCode]: Handler<SendPerfectWorldSmsCodePayload>;
+  [RendererClientMessageName.FetchPerfectWorldAccounts]: Handler<void, PerfectWorldAccount[]>;
+  [RendererClientMessageName.ValidatePerfectWorldAccount]: Handler<string, PerfectWorldAccount[]>;
+  [RendererClientMessageName.FetchLastPerfectWorldMatches]: Handler<string, PerfectWorldMatch[]>;
+  [RendererClientMessageName.AddPerfectWorldAccount]: Handler<AddPerfectWorldAccountPayload, PerfectWorldAccount>;
+  [RendererClientMessageName.ImportPerfectWorldClientAccount]: Handler<void, PerfectWorldAccount>;
+  [RendererClientMessageName.DeletePerfectWorldAccount]: Handler<string, PerfectWorldAccount[]>;
+  [RendererClientMessageName.UpdateCurrentPerfectWorldAccount]: Handler<string, PerfectWorldAccount[]>;
+  [RendererClientMessageName.StartPerfectWorldScoutingSession]: Handler<
+    StartPerfectWorldScoutingSessionPayload,
+    PerfectWorldScoutingSession | undefined
+  >;
+  [RendererClientMessageName.FetchCurrentPerfectWorldScoutingSession]: Handler<
+    void,
+    PerfectWorldScoutingSession | undefined
+  >;
+  [RendererClientMessageName.FetchPerfectWorldScoutingTactics]: Handler<
+    PerfectWorldScoutingTacticsPayload,
+    PerfectWorldScoutingTacticsResponse
+  >;
+  [RendererClientMessageName.DeletePerfectWorldScoutingSession]: Handler<DeletePerfectWorldScoutingSessionPayload>;
   [RendererClientMessageName.FetchLastRenownMatches]: Handler<string, RenownMatch[]>;
   [RendererClientMessageName.AddRenownAccount]: Handler<string, RenownAccount>;
   [RendererClientMessageName.DeleteRenownAccount]: Handler<string, RenownAccount[]>;
@@ -526,6 +572,18 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.FetchCurrent5EPlayScoutingSession]: fetchCurrent5EPlayScoutingSessionHandler,
   [RendererClientMessageName.Fetch5EPlayScoutingTactics]: fetch5EPlayScoutingTacticsHandler,
   [RendererClientMessageName.Delete5EPlayScoutingSession]: delete5EPlayScoutingSessionHandler,
+  [RendererClientMessageName.SendPerfectWorldSmsCode]: sendPerfectWorldSmsCodeHandler,
+  [RendererClientMessageName.FetchPerfectWorldAccounts]: fetchPerfectWorldAccountsHandler,
+  [RendererClientMessageName.ValidatePerfectWorldAccount]: validatePerfectWorldAccountHandler,
+  [RendererClientMessageName.FetchLastPerfectWorldMatches]: fetchLastPerfectWorldMatchesHandler,
+  [RendererClientMessageName.AddPerfectWorldAccount]: addPerfectWorldAccountHandler,
+  [RendererClientMessageName.ImportPerfectWorldClientAccount]: importPerfectWorldClientAccountHandler,
+  [RendererClientMessageName.DeletePerfectWorldAccount]: deletePerfectWorldAccountHandler,
+  [RendererClientMessageName.UpdateCurrentPerfectWorldAccount]: updateCurrentPerfectWorldAccountHandler,
+  [RendererClientMessageName.StartPerfectWorldScoutingSession]: startPerfectWorldScoutingSessionHandler,
+  [RendererClientMessageName.FetchCurrentPerfectWorldScoutingSession]: fetchCurrentPerfectWorldScoutingSessionHandler,
+  [RendererClientMessageName.FetchPerfectWorldScoutingTactics]: fetchPerfectWorldScoutingTacticsHandler,
+  [RendererClientMessageName.DeletePerfectWorldScoutingSession]: deletePerfectWorldScoutingSessionHandler,
   [RendererClientMessageName.FetchLastRenownMatches]: fetchLastRenownMatchesHandler,
   [RendererClientMessageName.AddRenownAccount]: addRenownAccountHandler,
   [RendererClientMessageName.DeleteRenownAccount]: deleteRenownAccountHandler,

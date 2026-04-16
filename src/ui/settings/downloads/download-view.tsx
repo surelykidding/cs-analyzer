@@ -5,6 +5,7 @@ import { FaceitSettings } from './faceit-settings';
 import { ValveSettings } from './valve-settings';
 import { FiveEPlaySettings } from './5eplay-settings';
 import { RenownSettings } from './renown-settings';
+import { PerfectWorldSettings } from './perfect-world-settings';
 
 export function DownloadSettings() {
   return (
@@ -15,6 +16,7 @@ export function DownloadSettings() {
         <FaceitSettings />
         <RenownSettings />
         <FiveEPlaySettings />
+        <PerfectWorldSettings />
       </div>
     </SettingsView>
   );

@@ -22,6 +22,8 @@ import type { Camera } from 'csdm/common/types/camera';
 import { fetchCameras } from 'csdm/node/database/cameras/fetch-cameras';
 import type { RenownAccount } from 'csdm/common/types/renown-account';
 import { fetchRenownAccounts } from 'csdm/node/database/renown-account/fetch-renown-accounts';
+import type { PerfectWorldAccount } from 'csdm/common/types/perfect-world-account';
+import { fetchPerfectWorldAccounts } from 'csdm/node/database/perfect-world-account/fetch-perfect-world-accounts';
 
 export type InitializeApplicationSuccessPayload = {
   matchChecksums: string[];
@@ -32,6 +34,7 @@ export type InitializeApplicationSuccessPayload = {
   settings: Settings;
   faceitAccounts: FaceitAccount[];
   fiveEPlayAccounts: FiveEPlayAccount[];
+  perfectWorldAccounts: PerfectWorldAccount[];
   renownAccounts: RenownAccount[];
   downloads: Download[];
   ignoredSteamAccounts: IgnoredSteamAccount[];
@@ -48,6 +51,7 @@ export async function initializeApplicationHandler() {
       matchChecksums,
       faceitAccounts,
       fiveEPlayAccounts,
+      perfectWorldAccounts,
       renownAccounts,
       ignoredSteamAccounts,
     ] = await Promise.all([
@@ -58,6 +62,7 @@ export async function initializeApplicationHandler() {
       fetchMatchChecksums(),
       fetchFaceitAccounts(),
       fetch5EPlayAccounts(),
+      fetchPerfectWorldAccounts(),
       fetchRenownAccounts(),
       fetchIgnoredSteamAccounts(),
     ]);
@@ -69,6 +74,7 @@ export async function initializeApplicationHandler() {
       settings,
       faceitAccounts,
       fiveEPlayAccounts,
+      perfectWorldAccounts,
       renownAccounts,
       ignoredSteamAccounts,
       analyses: analysesListener.getAnalyses(),

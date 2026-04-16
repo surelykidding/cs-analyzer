@@ -1,6 +1,7 @@
 import { app, Menu } from 'electron';
 import { i18n } from '@lingui/core';
 import { IPCChannel } from 'csdm/common/ipc-channel';
+import { APP_DISPLAY_NAME } from 'csdm/common/branding';
 import { windowManager } from './window-manager';
 import { ArgumentName } from 'csdm/common/argument/argument-name';
 import { StartPath } from 'csdm/common/argument/start-path';
@@ -9,8 +10,8 @@ export function createTrayMenu() {
   const menu = Menu.buildFromTemplate([
     {
       label: i18n.t({
-        id: 'trayMenu.openApp',
-        message: 'Open CS:DM',
+        id: 'trayMenu.openAnalyzer',
+        message: `Open ${APP_DISPLAY_NAME}`,
       }),
       click: async () => {
         const mainWindow = await windowManager.getOrCreateMainWindow();

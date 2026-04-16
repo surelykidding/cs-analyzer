@@ -59,6 +59,9 @@ import type { FaceitScoutingSessionTable } from './faceit-scouting/faceit-scouti
 import type { FaceitScoutingTargetTable } from './faceit-scouting/faceit-scouting-target-row';
 import type { FiveEPlayScoutingSessionTable } from './5eplay-scouting/5eplay-scouting-session-row';
 import type { FiveEPlayScoutingTargetTable } from './5eplay-scouting/5eplay-scouting-target-row';
+import type { PerfectWorldAccountTable } from './perfect-world-account/perfect-world-account-row';
+import type { PerfectWorldScoutingSessionTable } from './perfect-world-scouting/perfect-world-scouting-session-row';
+import type { PerfectWorldScoutingTargetTable } from './perfect-world-scouting/perfect-world-scouting-target-row';
 
 export type Database = {
   bombs_defuse_start: BombDefuseStartTable;
@@ -87,6 +90,9 @@ export type Database = {
   '5eplay_accounts': FiveEPlayAccountTable;
   '5eplay_scouting_sessions': FiveEPlayScoutingSessionTable;
   '5eplay_scouting_targets': FiveEPlayScoutingTargetTable;
+  perfect_world_accounts: PerfectWorldAccountTable;
+  perfect_world_scouting_sessions: PerfectWorldScoutingSessionTable;
+  perfect_world_scouting_targets: PerfectWorldScoutingTargetTable;
   flashbangs_explode: FlashbangExplodeTable;
   grenade_bounces: GrenadeBounceTable;
   grenade_positions: GrenadePositionTable;

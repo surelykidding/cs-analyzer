@@ -21,10 +21,12 @@ export function IntegrationsSettings() {
       <div className="mt-12 flex flex-col gap-y-8">
         <div>
           <p className="text-body-strong">
-            <Trans>FACEIT API key</Trans>
+            <Trans>FACEIT API key override</Trans>
           </p>
           <p>
-            <Trans>Custom FACEIT API key used to retrieve information from FACEIT</Trans>
+            <Trans>
+              Optional custom FACEIT API key. Leave it empty to use the built-in key bundled with this beta.
+            </Trans>
           </p>
         </div>
         <FaceitApiKey />

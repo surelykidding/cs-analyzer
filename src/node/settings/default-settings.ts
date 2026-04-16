@@ -12,7 +12,7 @@ import { DisplayMode } from 'csdm/common/types/display-mode';
 
 export const defaultSettings: Settings = {
   schemaVersion: CURRENT_SCHEMA_VERSION,
-  autoDownloadUpdates: true,
+  autoDownloadUpdates: false,
   database: {
     hostname: '127.0.0.1',
     port: 5432,
@@ -131,6 +131,8 @@ export const defaultSettings: Settings = {
     download5EPlayDemosInBackground: true,
     downloadRenownDemosAtStartup: true,
     downloadRenownDemosInBackground: true,
+    downloadPerfectWorldDemosAtStartup: true,
+    downloadPerfectWorldDemosInBackground: true,
   },
   matches: {
     gameModes: [],

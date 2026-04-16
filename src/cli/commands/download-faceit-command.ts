@@ -4,6 +4,7 @@ import { pipeline } from 'node:stream';
 import path from 'node:path';
 import zlib from 'node:zlib';
 import util from 'node:util';
+import { APP_DOCUMENTATION_URL } from 'csdm/common/branding';
 import { fetchCurrentFaceitAccount } from 'csdm/node/database/faceit-account/fetch-current-faceit-account';
 import { fetchLastFaceitMatches } from 'csdm/node/faceit/fetch-last-faceit-matches';
 import { isDownloadLinkExpired } from 'csdm/node/download/is-download-link-expired';
@@ -54,7 +55,7 @@ export class DownloadFaceitCommand extends DownloadBaseCommand {
 
   public async run() {
     console.warn(
-      `This command is currently disabled, see https://cs-demo-manager.com/docs/guides/downloads#why-faceit-downloads-are-disabled.`,
+      `This command is currently disabled, see ${APP_DOCUMENTATION_URL}.`,
     );
     return;
     // oxlint-disable no-unreachable

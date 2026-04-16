@@ -1,5 +1,6 @@
 import React from 'react';
 import { Trans } from '@lingui/react/macro';
+import { APP_RELEASES_URL } from 'csdm/common/branding';
 import { ExternalLink } from './external-link';
 
 export function Donate() {
@@ -10,18 +11,20 @@ export function Donate() {
       </h3>
       <p>
         <Trans>
-          CS Demo Manager is a project that I started during college in 2014 and maintained as much as I can since then.
+          CS Analyzer is a community Counter-Strike analysis tool focused on tactics review, demo scouting, and match
+          study.
         </Trans>
       </p>
       <p>
         <Trans>
-          It's not backed by any corporate entity and is a free and open-source software that I hope you enjoy using.
+          It is not backed by a corporate entity and remains a free, open-source project maintained with community
+          feedback.
         </Trans>
       </p>
       <p>
         <Trans>
-          Your <ExternalLink href="https://cs-demo-manager.com/download">donation</ExternalLink> is greatly appreciated
-          and motivates me to continue working on CS Demo Manager. Thank you!
+          Your <ExternalLink href={APP_RELEASES_URL}>support</ExternalLink> is greatly appreciated and helps keep this
+          release line moving forward. Thank you!
         </Trans>
       </p>
     </div>

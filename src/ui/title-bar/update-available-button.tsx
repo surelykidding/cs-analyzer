@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Trans } from '@lingui/react/macro';
+import { isPrereleaseVersion } from 'csdm/common/branding';
 import { UpdateIcon } from 'csdm/ui/icons/update-icon';
 import { Tooltip } from 'csdm/ui/components/tooltip';
 
 export function UpdateAvailableButton() {
+  if (isPrereleaseVersion(APP_VERSION)) {
+    return null;
+  }
+
   const [updateAvailable, setUpdateAvailable] = useState(false);
 
   useEffect(() => {

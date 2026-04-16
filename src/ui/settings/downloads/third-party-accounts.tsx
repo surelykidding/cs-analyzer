@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { Trans } from '@lingui/react/macro';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { DeleteButton } from 'csdm/ui/components/buttons/delete-button';
@@ -11,6 +11,7 @@ type Props<Account extends ThirdPartyAccount> = {
   onSetAsCurrentClick: (accountId: string) => Promise<void>;
   onDeleteClick: (accountId: string) => Promise<void>;
   onAddClick: () => void;
+  renderAccountInfo?: (account: Account) => ReactNode;
 };
 
 export function ThirdPartyAccounts<Account extends ThirdPartyAccount>({
@@ -19,6 +20,7 @@ export function ThirdPartyAccounts<Account extends ThirdPartyAccount>({
   onSetAsCurrentClick,
   onDeleteClick,
   onAddClick,
+  renderAccountInfo,
 }: Props<Account>) {
   function renderAccounts() {
     if (accounts.length === 0) {
@@ -34,17 +36,15 @@ export function ThirdPartyAccounts<Account extends ThirdPartyAccount>({
 
       return (
         <div className="flex w-full rounded-8 border border-gray-300 p-8" key={account.id}>
-          <a
-            className="mr-8 flex w-full items-center gap-x-4"
-            href={getAccountUrl(account)}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <AccountAvatar url={avatarSrc} playerName={account.nickname} />
-            <p className="truncate" title={account.nickname}>
-              {account.nickname}
-            </p>
-          </a>
+          <div className="mr-8 min-w-0 flex-1">
+            <a className="flex items-center gap-x-4" href={getAccountUrl(account)} target="_blank" rel="noreferrer">
+              <AccountAvatar url={avatarSrc} playerName={account.nickname} />
+              <p className="truncate" title={account.nickname}>
+                {account.nickname}
+              </p>
+            </a>
+            {renderAccountInfo && <div className="ml-36 mt-4">{renderAccountInfo(account)}</div>}
+          </div>
           <div className="flex items-center gap-x-8">
             <Button
               onClick={async () => {

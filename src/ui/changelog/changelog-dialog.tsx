@@ -1,132 +1,78 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Trans } from '@lingui/react/macro';
-import rehypeStringify from 'rehype-stringify';
-import remarkDirective from 'remark-directive';
-import remarkParse from 'remark-parse';
-import remarkRehype from 'remark-rehype';
-import { unified } from 'unified';
-import { visit } from 'unist-util-visit';
-import type { Root } from 'mdast';
-import rehypeExternalLinks from 'rehype-external-links';
+import {
+  APP_DISPLAY_NAME,
+  APP_DOCUMENTATION_URL,
+  APP_RELEASES_URL,
+  APP_TESTING_GUIDE_ZH_CN_URL,
+} from 'csdm/common/branding';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'csdm/ui/dialogs/dialog';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { CloseButton } from 'csdm/ui/components/buttons/close-button';
 import { ExternalLink } from 'csdm/ui/components/external-link';
 import { Donate } from 'csdm/ui/components/donate';
-import { Status } from 'csdm/common/types/status';
-import { Spinner } from 'csdm/ui/components/spinner';
-
-function directiveStylingPlugin() {
-  return function (tree: Root) {
-    visit(tree, function (node) {
-      if (node.type === 'containerDirective') {
-        const data = node.data ?? (node.data = {});
-        data.hName = 'div';
-        switch (node.name) {
-          case 'warning':
-            data.hProperties = { className: 'directive warning' };
-            break;
-          case 'info':
-            data.hProperties = { className: 'directive info' };
-            break;
-          case 'danger':
-            data.hProperties = { className: 'directive danger' };
-            break;
-        }
-      }
-    });
-  };
-}
 
 export function ChangelogDialog() {
   const { hideDialog } = useDialog();
-  const [status, setStatus] = useState<Status>(Status.Loading);
-  const [html, setHtml] = useState('');
-
-  useEffect(() => {
-    void (async () => {
-      try {
-        const response = await fetch(
-          'https://raw.githubusercontent.com/akiver/cs-demo-manager.com/refs/heads/main/src/pages/changelog.mdx',
-          {
-            headers: {
-              'User-Agent': 'CS:DM',
-            },
-          },
-        );
-        const text = await response.text();
-        const versions = text.split('## v').filter((version) => {
-          const trimmedVersion = version.trim();
-          return trimmedVersion !== '' && trimmedVersion.startsWith('3');
-        });
-        if (versions.length === 0) {
-          throw new Error('No versions found in the changelog');
-        }
-
-        let [markdown] = versions;
-        // remove the version number
-        markdown = markdown.replace(/\d+\.\d+\.\d+/g, '');
-        // remove the OSS info directive
-        markdown = markdown.replace(/:::[\w-]+\n([\s\S]*?):::/g, '');
-        // prepend https://cs-demo-manager.com to links
-        markdown = markdown.replace(/]\((\/[^)]+)\)/g, `](https://cs-demo-manager.com$1)`);
-
-        const processor = unified()
-          .use(remarkParse)
-          .use(remarkDirective)
-          .use(directiveStylingPlugin)
-          .use(remarkRehype, { allowDangerousHtml: true })
-          .use(rehypeExternalLinks, { rel: ['noopener', 'noreferrer'], target: '_blank' })
-          .use(rehypeStringify);
-
-        const file = await processor.process(markdown);
-
-        setHtml(String(file));
-        setStatus(Status.Success);
-      } catch (error) {
-        logger.log('Failed to fetch changelog');
-        logger.error(error);
-        setStatus(Status.Error);
-      }
-    })();
-  }, []);
-
-  const renderChangelog = () => {
-    if (status === Status.Loading) {
-      return (
-        <div className="flex h-[120px] items-center justify-center self-center">
-          <Spinner size={48} />
-        </div>
-      );
-    }
-
-    if (status === Status.Error) {
-      return (
-        <p className="text-body-strong">
-          <Trans>Failed to load changelog.</Trans>
-        </p>
-      );
-    }
-
-    return <div className="changelog" dangerouslySetInnerHTML={{ __html: html }} />;
-  };
 
   return (
     <Dialog>
       <DialogHeader>
         <DialogTitle>
-          <Trans>Changelog version {APP_VERSION}</Trans>
+          <Trans>
+            {APP_DISPLAY_NAME} {APP_VERSION}
+          </Trans>
         </DialogTitle>
       </DialogHeader>
       <DialogContent>
         <div className="flex max-w-[700px] flex-col gap-y-16 **:select-text">
-          {renderChangelog()}
+          <section className="flex flex-col gap-y-8">
+            <p className="text-body-strong">
+              <Trans>Windows beta release focused on tactics analysis and scouting workflows.</Trans>
+            </p>
+            <ul className="list-disc pl-16">
+              <li>
+                <Trans>Team tactics and scouting tactics remain the main focus of this release.</Trans>
+              </li>
+              <li>
+                <Trans>Perfect World account import, validation, match scouting, and demo processing are included.</Trans>
+              </li>
+              <li>
+                <Trans>FACEIT works out of the box with the bundled beta API key, with an optional user override.</Trans>
+              </li>
+              <li>
+                <Trans>Beta builds use manual updates from GitHub pre-releases instead of in-app auto-update.</Trans>
+              </li>
+            </ul>
+          </section>
+          <section className="flex flex-col gap-y-8">
+            <p className="text-body-strong">
+              <Trans>Need setup steps or troubleshooting?</Trans>
+            </p>
+            <p>
+              <Trans>
+                Open the testing guides for detailed installation, PostgreSQL setup, FACEIT scouting, team tactics, and
+                Perfect World workflows.
+              </Trans>
+            </p>
+            <div className="flex flex-wrap gap-12">
+              <ExternalLink href={APP_DOCUMENTATION_URL}>
+                <Trans>Testing guide (EN)</Trans>
+              </ExternalLink>
+              <ExternalLink href={APP_TESTING_GUIDE_ZH_CN_URL}>
+                <Trans>Testing guide (ZH-CN)</Trans>
+              </ExternalLink>
+              <ExternalLink href={APP_RELEASES_URL}>
+                <Trans>GitHub pre-releases</Trans>
+              </ExternalLink>
+            </div>
+          </section>
           <Donate />
         </div>
       </DialogContent>
       <DialogFooter>
-        <ExternalLink href="https://cs-demo-manager.com">
-          <Trans>Visit website</Trans>
+        <ExternalLink href={APP_RELEASES_URL}>
+          <Trans>Open release page</Trans>
         </ExternalLink>
         <CloseButton onClick={hideDialog} />
       </DialogFooter>

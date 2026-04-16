@@ -1,7 +1,7 @@
 {
   "name": "cs-demo-manager",
-  "version": "3.19.0",
-  "description": "Companion application for your Counter-Strike demos.",
+  "version": "1.0.0-beta.1",
+  "description": "Counter-Strike tactics and scouting analyzer for demo review.",
   "keywords": [
     "CS",
     "CS2",
@@ -11,7 +11,7 @@
     "electron",
     "react"
   ],
-  "homepage": "https://cs-demo-manager.com",
+  "homepage": "https://github.com/akiver/cs-demo-manager/releases",
   "bugs": {
     "url": "https://github.com/akiver/cs-demo-manager/issues"
   },
@@ -147,9 +147,9 @@
   },
   "packageManager": "npm@11.12.1",
   "download": {
-    "url": "https://cs-demo-manager.com/download"
+    "url": "https://github.com/akiver/cs-demo-manager/releases"
   },
   "tutorial": {
-    "url": "https://cs-demo-manager.com/docs"
+    "url": "https://github.com/akiver/cs-demo-manager/blob/main/TESTING-GUIDE.en.md"
   }
 }

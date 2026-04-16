@@ -1,5 +1,6 @@
 import React from 'react';
 import { Trans } from '@lingui/react/macro';
+import { rewriteLegacyAppUrl } from 'csdm/common/branding';
 import { QuestionIcon } from 'csdm/ui/icons/question-icon';
 import { Tooltip } from 'csdm/ui/components/tooltip';
 
@@ -17,7 +18,7 @@ export function DocumentationLink({ url }: Props) {
         </p>
       }
     >
-      <a href={url} target="_blank" rel="noreferrer">
+      <a href={rewriteLegacyAppUrl(url)} target="_blank" rel="noreferrer">
         <QuestionIcon className="size-16" />
       </a>
     </Tooltip>

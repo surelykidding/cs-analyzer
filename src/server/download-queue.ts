@@ -243,7 +243,9 @@ class DownloadDemoQueue {
 
       const out = fs.createWriteStream(demoPath);
       const { demoUrl } = currentDownload;
-      const archiveFormat = detectDemoArchiveFormat(demoUrl);
+      const contentTypeHeader = response.headers['content-type'];
+      const contentType = Array.isArray(contentTypeHeader) ? contentTypeHeader[0] : contentTypeHeader ?? null;
+      const archiveFormat = detectDemoArchiveFormat(demoUrl, contentType);
       if (archiveFormat === null) {
         throw new Error('Unsupported demo archive');
       }

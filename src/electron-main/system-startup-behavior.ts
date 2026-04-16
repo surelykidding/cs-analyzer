@@ -106,8 +106,8 @@ export async function updateSystemStartupBehavior(behavior: StartupBehavior) {
 Version=1.0
 Type=Application
 ${execLine}
-Name=CS Demo Manager
-Comment=Counter-Strike Demo Manager
+Name=CS Analyzer
+Comment=Counter-Strike tactics and scouting analyzer
 Terminal=false
 `;
     await fs.writeFile(desktopFilePath, desktopFileContent);

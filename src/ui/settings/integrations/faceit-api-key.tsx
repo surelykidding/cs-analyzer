@@ -70,7 +70,7 @@ export function FaceitApiKey() {
         onEnterKeyDown={testApiKey}
         placeholder={t({
           context: 'Input placeholder',
-          message: 'API key',
+          message: 'Optional override',
         })}
       />
       <ApplyButton onClick={testApiKey} isDisabled={apiKey === '' || currentFaceitApiKey === apiKey} />

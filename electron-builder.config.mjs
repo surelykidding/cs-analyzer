@@ -1,6 +1,10 @@
 import { Arch } from 'electron-builder';
 import pkg from './package.json' with { type: 'json' };
 
+const repositoryUrl = 'https://github.com/akiver/cs-demo-manager';
+const releasesUrl = `${repositoryUrl}/releases`;
+const releaseTag = `cs-analyzer-v${pkg.version}`;
+
 let shouldNotarize = process.platform === 'darwin';
 
 if (shouldNotarize) {
@@ -27,13 +31,13 @@ if (shouldNotarize) {
 const config = {
   appId: 'com.akiver.csdm',
   copyright: 'Copyright © 2014-present AkiVer',
-  productName: 'CS Demo Manager',
+  productName: 'CS Analyzer',
   publish: {
     provider: 'github',
   },
   releaseInfo: {
-    releaseName: `v${pkg.version}`,
-    releaseNotes: `https://cs-demo-manager.com/changelog#v${pkg.version.replaceAll('.', '')}`,
+    releaseName: `CS Analyzer ${pkg.version}`,
+    releaseNotes: `${releasesUrl}/tag/${releaseTag}`,
   },
   fileAssociations: {
     ext: 'dem',
@@ -42,11 +46,17 @@ const config = {
     role: 'Viewer',
   },
   win: {
-    target: {
-      target: 'nsis',
-      arch: ['x64'],
-    },
-    executableName: 'cs-demo-manager',
+    target: [
+      {
+        target: 'nsis',
+        arch: ['x64'],
+      },
+      {
+        target: 'portable',
+        arch: ['x64'],
+      },
+    ],
+    executableName: 'cs-analyzer',
     extraFiles: [
       {
         from: 'build-assets/bin/csdm.cmd',
@@ -60,6 +70,12 @@ const config = {
         filter: ['!**/*.so', '!**/*.dylib'],
       },
     ],
+  },
+  nsis: {
+    artifactName: 'CS Analyzer Setup ${version}.${ext}',
+  },
+  portable: {
+    artifactName: 'CS Analyzer Portable ${version}.${ext}',
   },
   mac: {
     target: [
@@ -84,10 +100,10 @@ const config = {
       // > These will still be signed, but as a resource rather than as code.
       //
       // Trying with extraFiles would result in the following error as it's considered as nested code:
-      // Command failed: codesign --sign XXX --force --timestamp ./dist/mac-arm64/CS Demo Manager.app/Contents/MacOS/CS Demo Manager
-      // ./dist/mac-arm64/CS Demo Manager.app/Contents/MacOS/CS Demo Manager: replacing existing signature
-      // ./dist/mac-arm64/CS Demo Manager.app/Contents/MacOS/CS Demo Manager: code object is not signed at all
-      // In subcomponent: ./dist/mac-arm64/CS Demo Manager.app/Contents/csdm
+      // Command failed: codesign --sign XXX --force --timestamp ./dist/mac-arm64/CS Analyzer.app/Contents/MacOS/CS Analyzer
+      // ./dist/mac-arm64/CS Analyzer.app/Contents/MacOS/CS Analyzer: replacing existing signature
+      // ./dist/mac-arm64/CS Analyzer.app/Contents/MacOS/CS Analyzer: code object is not signed at all
+      // In subcomponent: ./dist/mac-arm64/CS Analyzer.app/Contents/csdm
       {
         from: 'build-assets/bin/csdm_darwin.sh',
         to: './csdm',
@@ -100,7 +116,7 @@ const config = {
     ],
   },
   linux: {
-    executableName: 'cs-demo-manager',
+    executableName: 'cs-analyzer',
     target: [
       { target: 'deb', arch: ['x64'] },
       { target: 'rpm', arch: ['x64'] },

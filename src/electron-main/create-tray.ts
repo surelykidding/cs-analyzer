@@ -2,6 +2,7 @@ import { Tray } from 'electron';
 import path from 'node:path';
 import { createTrayMenu } from './create-tray-menu';
 import { windowManager } from './window-manager';
+import { APP_DISPLAY_NAME } from 'csdm/common/branding';
 import { isMac } from 'csdm/node/os/is-mac';
 import { isWindows } from 'csdm/node/os/is-windows';
 import { getStaticFolderPath } from 'csdm/node/filesystem/get-static-folder-path';
@@ -24,7 +25,7 @@ export function createTray() {
 
   const contextMenu = createTrayMenu();
   tray.setContextMenu(contextMenu);
-  tray.setToolTip('CS Demo Manager');
+  tray.setToolTip(APP_DISPLAY_NAME);
 
   return tray;
 }

@@ -1,5 +1,6 @@
 import { Command } from './command';
 import { commands } from '../commands';
+import { APP_DISPLAY_NAME } from 'csdm/common/branding';
 import pkg from '../../../package.json';
 
 export class HelpCommand extends Command {
@@ -10,7 +11,7 @@ export class HelpCommand extends Command {
   }
 
   public printHelp() {
-    console.log(`CS Demo Manager ${pkg.version}`);
+    console.log(`${APP_DISPLAY_NAME} ${pkg.version}`);
     console.log('');
     console.log('\tUsage: csdm <command> [arguments]');
     console.log('');

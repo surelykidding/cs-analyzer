@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Plural, Trans } from '@lingui/react/macro';
+import { APP_DISPLAY_NAME } from 'csdm/common/branding';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { PortInput } from 'csdm/ui/components/inputs/port-input';
 import { DatabaseNameInput } from 'csdm/ui/components/inputs/database-name-input';
@@ -31,13 +32,13 @@ function DatabaseSchemaVersionMismatch() {
     <div>
       <p>
         <Trans>
-          It looks like you installed an older version of CS Demo Manager and the current database schema is not
+          It looks like you installed an older version of CS Analyzer and the current database schema is not
           compatible with it.
         </Trans>
       </p>
       <p>
         <Trans>
-          You can either update CS Demo Manager to the latest version or reset the database to start from scratch.
+          You can either update CS Analyzer to the latest version or reset the database to start from scratch.
         </Trans>
       </p>
 
@@ -195,7 +196,7 @@ export function ConnectDatabase() {
           <div className="m-auto flex w-[400px] flex-col">
             <div>
               <p>
-                <Trans>CS Demo Manager requires a PostgreSQL database.</Trans>
+                <Trans>{APP_DISPLAY_NAME} requires a PostgreSQL database.</Trans>
               </p>
               <HelpLink />
             </div>
