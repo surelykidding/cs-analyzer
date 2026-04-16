@@ -7,7 +7,11 @@ export async function ensurePsqlIsInstalled() {
   } catch (error) {
     logger.log('psql not found');
     logger.log(error);
-    logger.log(process.env);
+    logger.log({
+      PATH: process.env.PATH,
+      ProgramFiles: process.env.ProgramFiles,
+      ProgramFilesX86: process.env['ProgramFiles(x86)'],
+    });
     throw new PsqlNotFound();
   }
 }

@@ -1,4 +1,5 @@
 import { exec, type ExecException } from 'node:child_process';
+import { findPsqlBinaryPath } from './find-psql-binary-path';
 import { PsqlTimeout } from './errors/psql-timeout';
 
 function removeDatabaseInformationFromMessage(message: string) {
@@ -12,9 +13,12 @@ type Options = {
 };
 
 export async function executePsql(command: string, options?: Options) {
+  const psqlBinaryPath = await findPsqlBinaryPath();
+  const executable = psqlBinaryPath.includes(' ') ? `"${psqlBinaryPath}"` : psqlBinaryPath;
+
   return new Promise<void>((resolve, reject) => {
     exec(
-      `psql ${command}`,
+      `${executable} ${command}`,
       {
         env: { ...process.env, PGCONNECT_TIMEOUT: '10' },
         timeout: options?.timeoutMs ?? 0,
