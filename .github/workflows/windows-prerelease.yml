@@ -9,6 +9,7 @@ on:
     paths:
       # Touch this workflow when we need a fresh beta rebuild from main fixes.
       # Keep this workflow self-triggerable for refreshed prerelease assets.
+      # Beta refresh includes locale and default-download behavior changes.
       - .github/workflows/windows-prerelease.yml
 
 permissions:

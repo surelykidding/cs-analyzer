@@ -1,5 +1,6 @@
 import type { Settings } from '../settings';
 import type { Migration } from '../migration';
+import { normalizeLocale } from 'csdm/common/locale';
 
 const initializeLocale: Migration = {
   schemaVersion: 1,
@@ -9,7 +10,7 @@ const initializeLocale: Migration = {
       const electron = require('electron');
       if (electron) {
         const locale = electron.app.getLocale();
-        settings.ui.locale = locale;
+        settings.ui.locale = normalizeLocale(locale);
       }
     } catch (error) {
       // Allow to run this migration from the CLI where Electron is not available (Node.js environment).

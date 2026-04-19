@@ -18,6 +18,7 @@ import { ErrorMessage } from 'csdm/ui/components/error-message';
 import { FaceitDownloadsWarning } from './faceit-downloads-warning';
 import { ThirdPartyAccounts } from './third-party-accounts';
 import { FaceitLogo } from 'csdm/ui/logos/faceit-logo';
+import { isChineseLocale } from 'csdm/common/locale';
 import { useLocale } from 'csdm/ui/settings/ui/use-locale';
 
 function AddAccountDialog() {
@@ -26,35 +27,22 @@ function AddAccountDialog() {
   const { hideDialog } = useDialog();
   const { t } = useLingui();
   const locale = useLocale();
-  const isSimplifiedChinese = locale === 'zh-CN';
-  const isTraditionalChinese = locale === 'zh-TW';
+  const isChinese = isChineseLocale(locale);
 
-  const title = isSimplifiedChinese
-    ? '添加 FACEIT 账号'
-    : isTraditionalChinese
-      ? '新增 FACEIT 帳號'
-      : <Trans>Add FACEIT account</Trans>;
-  const label = isSimplifiedChinese
+  const title = isChinese ? '添加 FACEIT 账号' : <Trans>Add FACEIT account</Trans>;
+  const label = isChinese
     ? 'FACEIT 昵称'
-    : isTraditionalChinese
-      ? 'FACEIT 暱稱'
-      : t({
-          context: 'Input label',
-          message: 'FACEIT nickname',
-        });
-  const placeholder = isSimplifiedChinese
+    : t({
+        context: 'Input label',
+        message: 'FACEIT nickname',
+      });
+  const placeholder = isChinese
     ? '昵称'
-    : isTraditionalChinese
-      ? '暱稱'
-      : t({
-          context: 'Input placeholder',
-          message: 'Nickname',
-        });
-  const caseSensitiveMessage = isSimplifiedChinese
-    ? '昵称区分大小写！'
-    : isTraditionalChinese
-      ? '暱稱區分大小寫！'
-      : 'The nickname is case sensitive!';
+    : t({
+        context: 'Input placeholder',
+        message: 'Nickname',
+      });
+  const caseSensitiveMessage = isChinese ? '昵称区分大小写！' : 'The nickname is case sensitive!';
 
   const onConfirm = async () => {
     const accountAdded = await addFaceitAccount(nickname);

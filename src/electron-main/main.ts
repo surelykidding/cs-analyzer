@@ -25,6 +25,7 @@ import { updateSystemStartupBehavior } from 'csdm/electron-main/system-startup-b
 import { StartupBehavior } from 'csdm/common/types/startup-behavior';
 import { initialize } from './auto-updater';
 import { getSettingsSync } from 'csdm/node/settings/get-settings';
+import type { SupportedLocale } from 'csdm/common/locale';
 
 process.on('uncaughtException', logger.error);
 process.on('unhandledRejection', logger.error);
@@ -149,7 +150,7 @@ async function start() {
     await windowManager.getOrCreateMainWindow();
   }
 
-  ipcMain.handle(IPCChannel.LocaleChanged, async (event, locale: string) => {
+  ipcMain.handle(IPCChannel.LocaleChanged, async (event, locale: SupportedLocale) => {
     await loadI18n(locale);
     tray?.setContextMenu(createTrayMenu());
     createApplicationMenu(client);

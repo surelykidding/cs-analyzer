@@ -11,6 +11,7 @@ import type { TeamsTableFilter } from 'csdm/node/database/teams/teams-table-filt
 import type { RecordingSystem } from 'csdm/common/types/recording-system';
 import type { RecordingOutput } from 'csdm/common/types/recording-output';
 import type { DisplayMode } from 'csdm/common/types/display-mode';
+import type { SupportedLocale } from 'csdm/common/locale';
 
 export type Folder = {
   path: string;
@@ -31,9 +32,7 @@ type DemosSettings = DemosTableFilter & {
 };
 
 type UISettings = {
-  // Comes from the Electron API app.getLocale();
-  // Possible values https://source.chromium.org/chromium/chromium/src/+/main:ui/base/l10n/l10n_util.cc
-  locale: string;
+  locale: SupportedLocale;
   theme: ThemeName;
   initialPage: Page;
   redirectDemoToMatch: boolean;

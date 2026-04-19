@@ -59,6 +59,11 @@ You can use different values, but using the defaults makes testing easier.
 
 Set a dedicated folder in `Settings > Downloads`.
 
+All startup/background demo auto-download switches are disabled by default in this beta.
+
+- Enable them manually only if you want polling or unattended downloads.
+- Leaving them off is the expected default behavior for this test build.
+
 Recommendations:
 
 - Use an empty folder created just for this beta.
@@ -126,7 +131,8 @@ What to do:
 
 Recommended checks:
 
-- Leave the 5EPlay auto-download settings enabled for this beta.
+- 5EPlay auto-download switches are now off by default.
+- Enable them manually if you specifically want to test startup/background downloads.
 - Confirm the current account switches correctly after restart.
 
 ## 5EPlay Recent Matches Workflow

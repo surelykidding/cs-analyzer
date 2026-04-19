@@ -25,6 +25,7 @@ import type { getDemoAudioData } from 'csdm/preload/get-demo-audio-data';
 import type { getDemoAudioFilePath } from 'csdm/node/demo/get-demo-audio-file-path';
 import type { getCameraPreviewBase64 } from 'csdm/node/filesystem/cameras/get-camera-preview-base64';
 import type { getImageInformation } from 'csdm/node/filesystem/get-image-information';
+import type { SupportedLocale } from 'csdm/common/locale';
 
 declare global {
   interface PreloadApi {
@@ -75,7 +76,7 @@ declare global {
     elementToImage: (options: ElementToImageOptions) => Promise<string | undefined>;
     browseToFolder: (folderPath: string) => void;
     browseToFile: (filePath: string) => void;
-    localeChanged: (locale: string) => void;
+    localeChanged: (locale: SupportedLocale) => void;
     canGoBack: () => Promise<boolean>;
     canGoForward: () => Promise<boolean>;
     showTitleBarMenu: () => void;

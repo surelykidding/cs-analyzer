@@ -3468,18 +3468,9 @@ msgid "No matches found for the current account."
 msgstr "No matches found for the current account."
 
 #: src/ui/downloads/faceit/no-faceit-account.tsx
-msgid "To add a FACEIT account, enter your FACEIT nickname."
-msgstr "To add a FACEIT account, enter your FACEIT nickname."
-
-#: src/ui/downloads/faceit/no-faceit-account.tsx
 msgctxt "Input placeholder"
 msgid "FACEIT nickname"
 msgstr "FACEIT nickname"
-
-#: src/ui/downloads/faceit/no-faceit-account.tsx
-#: src/ui/settings/downloads/faceit-settings.tsx
-msgid "The nickname is case sensitive!"
-msgstr "The nickname is case sensitive!"
 
 #: src/ui/downloads/faceit/no-faceit-account.tsx
 #: src/ui/downloads/five-eplay/no-5eplay-account.tsx
@@ -7979,22 +7970,22 @@ msgid "ID"
 msgstr "ID"
 
 #: src/ui/settings/downloads/auto-download-third-party-demos-background.tsx
-msgid "Automatically download {name} demos in the background."
-msgstr "Automatically download {name} demos in the background."
-
-#: src/ui/settings/downloads/auto-download-third-party-demos-background.tsx
 msgctxt "Settings title"
 msgid "Background download"
 msgstr "Background download"
 
-#: src/ui/settings/downloads/auto-download-third-party-demos.tsx
-msgid "Automatically download {name} demos at application startup."
-msgstr "Automatically download {name} demos at application startup."
+#: src/ui/settings/downloads/auto-download-third-party-demos-background.tsx
+msgid "Automatically download {name} demos in the background."
+msgstr "Automatically download {name} demos in the background."
 
 #: src/ui/settings/downloads/auto-download-third-party-demos.tsx
 msgctxt "Settings title"
 msgid "Startup download"
 msgstr "Startup download"
+
+#: src/ui/settings/downloads/auto-download-third-party-demos.tsx
+msgid "Automatically download {name} demos at application startup."
+msgstr "Automatically download {name} demos at application startup."
 
 #: src/ui/settings/downloads/download-folder-path.tsx
 msgid "Download folder"

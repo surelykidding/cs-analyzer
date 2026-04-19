@@ -1,5 +1,6 @@
 import React from 'react';
 import { Trans } from '@lingui/react/macro';
+import type { SupportedLocale } from 'csdm/common/locale';
 import type { SelectOption } from 'csdm/ui/components/inputs/select';
 import { Select } from 'csdm/ui/components/inputs/select';
 import { SettingsEntry } from 'csdm/ui/settings/settings-entry';
@@ -11,30 +12,14 @@ export function LanguageSelect() {
   const updateSettings = useUpdateSettings();
 
   /* oxlint-disable lingui/no-unlocalized-strings */
-  const options: SelectOption[] = [
+  const options: SelectOption<SupportedLocale>[] = [
     {
       value: 'en',
       label: 'English',
     },
     {
-      value: 'fr',
-      label: 'Français',
-    },
-    {
-      value: 'pt-BR',
-      label: 'Português (Brasil)',
-    },
-    {
       value: 'zh-CN',
-      label: '简体中文',
-    },
-    {
-      value: 'zh-TW',
-      label: '繁體中文',
-    },
-    {
-      value: 'de',
-      label: 'Deutsch',
+      label: '中文',
     },
   ];
   /* oxlint-enable lingui/no-unlocalized-strings */

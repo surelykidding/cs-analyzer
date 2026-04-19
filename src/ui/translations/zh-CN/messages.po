@@ -410,52 +410,52 @@ msgstr "连接到远程服务器时出错。"
 
 #: src/ui/changelog/changelog-dialog.tsx
 msgid "{APP_DISPLAY_NAME} {APP_VERSION}"
-msgstr ""
+msgstr "{APP_DISPLAY_NAME} {APP_VERSION}"
 
 #: src/ui/changelog/changelog-dialog.tsx
 msgid "Windows beta release focused on tactics analysis and scouting workflows."
-msgstr ""
+msgstr "这个 Windows beta 版本主打 tactics 分析和 scouting 流程。"
 
 #: src/ui/changelog/changelog-dialog.tsx
 msgid "Team tactics and scouting tactics remain the main focus of this release."
-msgstr ""
+msgstr "Team tactics 和 scouting tactics 仍然是这次发布的核心能力。"
 
 #: src/ui/changelog/changelog-dialog.tsx
 msgid "Perfect World account import, validation, match scouting, and demo processing are included."
-msgstr ""
+msgstr "包含完美账号导入、校验、比赛 scouting 和 demo 处理流程。"
 
 #: src/ui/changelog/changelog-dialog.tsx
 msgid "FACEIT works out of the box with the bundled beta API key, with an optional user override."
-msgstr ""
+msgstr "FACEIT 已内置 beta API key，开箱即用，也支持可选的用户覆盖值。"
 
 #: src/ui/changelog/changelog-dialog.tsx
 msgid "Beta builds use manual updates from GitHub pre-releases instead of in-app auto-update."
-msgstr ""
+msgstr "beta 版本通过 GitHub pre-release 手动更新，不使用应用内自动更新。"
 
 #: src/ui/changelog/changelog-dialog.tsx
 msgid "Need setup steps or troubleshooting?"
-msgstr ""
+msgstr "需要查看安装步骤或排障说明吗？"
 
 #: src/ui/changelog/changelog-dialog.tsx
 msgid "Open the testing guides for detailed installation, PostgreSQL setup, FACEIT scouting, team tactics, and Perfect World workflows."
-msgstr ""
+msgstr "打开测试指南即可查看详细安装步骤、PostgreSQL 配置、FACEIT scouting、team tactics 和完美流程说明。"
 
 #: src/ui/changelog/changelog-dialog.tsx
 msgid "Testing guide (EN)"
-msgstr ""
+msgstr "测试指南（英文）"
 
 #: src/ui/changelog/changelog-dialog.tsx
 msgid "Testing guide (ZH-CN)"
-msgstr ""
+msgstr "测试指南（中文）"
 
 #: src/ui/changelog/changelog-dialog.tsx
 #: src/ui/settings/about/about.tsx
 msgid "GitHub pre-releases"
-msgstr ""
+msgstr "GitHub 预发布"
 
 #: src/ui/changelog/changelog-dialog.tsx
 msgid "Open release page"
-msgstr ""
+msgstr "打开发布页面"
 
 #: src/ui/components/buttons/analyze-button.tsx
 msgctxt "Button"
@@ -910,7 +910,7 @@ msgstr "忽略玩家的封禁"
 #: src/ui/components/context-menu/items/open-faceit-profile-item.tsx
 msgctxt "Context menu"
 msgid "Open FACEIT profile"
-msgstr "打开 FACEIT 配置文件"
+msgstr "打开 FACEIT 资料页"
 
 #: src/ui/components/context-menu/items/open-leetify-profile-item.tsx
 msgctxt "Context menu"
@@ -3473,18 +3473,9 @@ msgid "No matches found for the current account."
 msgstr "当前帐户没有比赛。"
 
 #: src/ui/downloads/faceit/no-faceit-account.tsx
-msgid "To add a FACEIT account, enter your FACEIT nickname."
-msgstr "请输入你的 FACEIT 昵称以添加 FACEIT 账号."
-
-#: src/ui/downloads/faceit/no-faceit-account.tsx
 msgctxt "Input placeholder"
 msgid "FACEIT nickname"
 msgstr "FACEIT 昵称"
-
-#: src/ui/downloads/faceit/no-faceit-account.tsx
-#: src/ui/settings/downloads/faceit-settings.tsx
-msgid "The nickname is case sensitive!"
-msgstr "昵称对大小写敏感!"
 
 #: src/ui/downloads/faceit/no-faceit-account.tsx
 #: src/ui/downloads/five-eplay/no-5eplay-account.tsx
@@ -3567,7 +3558,7 @@ msgstr "无效请求。"
 #: src/ui/downloads/five-eplay/5eplay-scoreboard-context-menu.tsx
 msgctxt "Context menu"
 msgid "Open 5EPlay profile"
-msgstr "打开 5EPlay 配置文件"
+msgstr "打开 5EPlay 资料页"
 
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "5EPlay scouting session started."
@@ -7980,22 +7971,22 @@ msgid "ID"
 msgstr "ID"
 
 #: src/ui/settings/downloads/auto-download-third-party-demos-background.tsx
-msgid "Automatically download {name} demos in the background."
-msgstr "在后台自动下载 {name} 的 Demo。"
-
-#: src/ui/settings/downloads/auto-download-third-party-demos-background.tsx
 msgctxt "Settings title"
 msgid "Background download"
 msgstr "后台下载"
 
-#: src/ui/settings/downloads/auto-download-third-party-demos.tsx
-msgid "Automatically download {name} demos at application startup."
-msgstr "在本程序启动时自动下载 {name} 的 demo。"
+#: src/ui/settings/downloads/auto-download-third-party-demos-background.tsx
+msgid "Automatically download {name} demos in the background."
+msgstr "在后台自动下载 {name} 的 Demo。"
 
 #: src/ui/settings/downloads/auto-download-third-party-demos.tsx
 msgctxt "Settings title"
 msgid "Startup download"
 msgstr "启动下载"
+
+#: src/ui/settings/downloads/auto-download-third-party-demos.tsx
+msgid "Automatically download {name} demos at application startup."
+msgstr "在本程序启动时自动下载 {name} 的 demo。"
 
 #: src/ui/settings/downloads/download-folder-path.tsx
 msgid "Download folder"

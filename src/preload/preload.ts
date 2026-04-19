@@ -44,6 +44,7 @@ import { getImageInformation } from 'csdm/node/filesystem/get-image-information'
 import { readImageFile } from 'csdm/node/filesystem/image';
 import { writeJsonFile } from 'csdm/node/filesystem/write-json-file';
 import { ErrorCode } from 'csdm/common/error-code';
+import type { SupportedLocale } from 'csdm/common/locale';
 
 window.addEventListener('error', onWindowError);
 window.addEventListener('unhandledrejection', (error) => {
@@ -127,7 +128,7 @@ const api: PreloadApi = {
     await ipcRenderer.invoke(IPCChannel.ShowWindow);
   },
 
-  localeChanged: async (locale: string) => {
+  localeChanged: async (locale: SupportedLocale) => {
     await ipcRenderer.invoke(IPCChannel.LocaleChanged, locale);
   },
 

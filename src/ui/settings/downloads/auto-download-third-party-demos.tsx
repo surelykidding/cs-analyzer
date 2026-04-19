@@ -5,6 +5,7 @@ import { SettingsEntry } from 'csdm/ui/settings/settings-entry';
 import { useSettings } from '../use-settings';
 import { useUpdateSettings } from '../use-update-settings';
 import type { DownloadSettings } from 'csdm/node/settings/settings';
+import { isChineseLocale } from 'csdm/common/locale';
 import { useLocale } from 'csdm/ui/settings/ui/use-locale';
 
 type Props = {
@@ -16,8 +17,7 @@ export function AutoDownloadThirdPartyDemos({ name, settingsKey }: Props) {
   const { download } = useSettings();
   const updateSettings = useUpdateSettings();
   const locale = useLocale();
-  const isSimplifiedChinese = locale === 'zh-CN';
-  const isTraditionalChinese = locale === 'zh-TW';
+  const isChinese = isChineseLocale(locale);
 
   const onChange = async (isChecked: boolean) => {
     await updateSettings({
@@ -27,16 +27,8 @@ export function AutoDownloadThirdPartyDemos({ name, settingsKey }: Props) {
     });
   };
 
-  const title = isSimplifiedChinese
-    ? '启动时下载'
-    : isTraditionalChinese
-      ? '啟動時下載'
-      : <Trans context="Settings title">Startup download</Trans>;
-  const description = isSimplifiedChinese
-    ? `应用启动时自动下载 ${name} demo。`
-    : isTraditionalChinese
-      ? `應用程式啟動時自動下載 ${name} demo。`
-      : <Trans>Automatically download {name} demos at application startup.</Trans>;
+  const title = isChinese ? '启动时下载' : <Trans context="Settings title">Startup download</Trans>;
+  const description = isChinese ? `应用启动时自动下载 ${name} demo。` : <Trans>Automatically download {name} demos at application startup.</Trans>;
 
   return (
     <SettingsEntry

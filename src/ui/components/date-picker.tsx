@@ -1,23 +1,13 @@
 import React, { type ReactNode } from 'react';
-import { enUS, fr, zhCN, ptBR, de } from 'react-day-picker/locale';
+import { enUS, zhCN } from 'react-day-picker/locale';
 import { DayPicker } from 'react-day-picker';
 import type { DateRange } from 'react-day-picker';
 import { useReducedMotion } from 'motion/react';
+import type { SupportedLocale } from 'csdm/common/locale';
 import { useLocale } from 'csdm/ui/settings/ui/use-locale';
 
-function getLocaleObject(locale: string) {
-  switch (locale) {
-    case 'fr':
-      return fr;
-    case 'pt-BR':
-      return ptBR;
-    case 'zh-CN':
-      return zhCN;
-    case 'de':
-      return de;
-    default:
-      return enUS;
-  }
+function getLocaleObject(locale: SupportedLocale) {
+  return locale === 'zh-CN' ? zhCN : enUS;
 }
 
 type Props = {

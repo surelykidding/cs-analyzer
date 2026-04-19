@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import type { ReactNode } from 'react';
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
+import { DEFAULT_LOCALE } from 'csdm/common/locale';
 import { useLocale } from 'csdm/ui/settings/ui/use-locale';
 import { getLocaleFolderName } from 'csdm/common/get-locale-folder-name';
 
@@ -19,8 +20,8 @@ export function LocaleProvider({ children }: Props) {
         const po = await import(`../translations/${folderName}/messages.po`);
         i18n.loadAndActivate({ locale, messages: po.messages });
       } catch (error) {
-        const en = await import('../translations/en/messages.po');
-        i18n.loadAndActivate({ locale: 'en', messages: en.messages });
+        const en = await import(`../translations/${DEFAULT_LOCALE}/messages.po`);
+        i18n.loadAndActivate({ locale: DEFAULT_LOCALE, messages: en.messages });
       }
     };
 

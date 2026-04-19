@@ -5,11 +5,11 @@ export function onDownload5EplayDemoStarted() {
   return onDownloadThirdPartyServiceDemosStarted({
     title: i18n.t({
       id: 'notification.downloading5EplayDemo.title',
-      message: 'Downloading 5Eplay demos',
+      message: 'Downloading 5EPlay demos',
     }),
     message: i18n.t({
       id: 'notification.downloading5EplayDemo.message',
-      message: 'New 5Eplay demos are being downloaded, click here to show them',
+      message: 'New 5EPlay demos are being downloaded, click here to show them',
     }),
   });
 }
