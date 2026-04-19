@@ -9,7 +9,7 @@ on:
     paths:
       # Touch this workflow when we need a fresh beta rebuild from main fixes.
       # Keep this workflow self-triggerable for refreshed prerelease assets.
-      # Beta refresh includes locale and default-download behavior changes.
+      # Beta refresh includes locale, default-download, and release upload retry changes.
       - .github/workflows/windows-prerelease.yml
 
 permissions:
@@ -75,18 +75,53 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish GitHub prerelease
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ env.RELEASE_TAG }}
-          name: ${{ env.RELEASE_NAME }}
-          body_path: .github/release-body.md
-          prerelease: true
-          draft: false
-          generate_release_notes: false
-          files: |
-            dist/CS Analyzer Setup ${{ env.RELEASE_VERSION }}.exe
-            dist/CS Analyzer Portable ${{ env.RELEASE_VERSION }}.exe
-            TESTING-GUIDE.en.md
-            TESTING-GUIDE.zh-CN.md
+        shell: pwsh
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $tag = $env:RELEASE_TAG
+          $releaseName = $env:RELEASE_NAME
+          $assets = @(
+            "dist/CS Analyzer Setup $($env:RELEASE_VERSION).exe",
+            "dist/CS Analyzer Portable $($env:RELEASE_VERSION).exe",
+            "TESTING-GUIDE.en.md",
+            "TESTING-GUIDE.zh-CN.md"
+          )
+
+          & gh release view $tag *> $null
+          if ($LASTEXITCODE -eq 0) {
+            & gh release edit $tag --title $releaseName --notes-file .github/release-body.md --prerelease
+            if ($LASTEXITCODE -ne 0) {
+              throw "Failed to update prerelease metadata for $tag."
+            }
+          }
+          else {
+            & gh release create $tag --title $releaseName --notes-file .github/release-body.md --prerelease
+            if ($LASTEXITCODE -ne 0) {
+              throw "Failed to create prerelease $tag."
+            }
+          }
+
+          foreach ($asset in $assets) {
+            $uploaded = $false
+
+            for ($attempt = 1; $attempt -le 5 -and -not $uploaded; $attempt++) {
+              Write-Host "Uploading $asset (attempt $attempt/5)..."
+              & gh release upload $tag $asset --clobber
+
+              if ($LASTEXITCODE -eq 0) {
+                $uploaded = $true
+                continue
+              }
+
+              if ($attempt -lt 5) {
+                $delay = [Math]::Min(30, $attempt * 5)
+                Write-Warning "Upload failed for $asset, retrying in $delay seconds."
+                Start-Sleep -Seconds $delay
+              }
+            }
+
+            if (-not $uploaded) {
+              throw "Failed to upload $asset after multiple attempts."
+            }
+          }
