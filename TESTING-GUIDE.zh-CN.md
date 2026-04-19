@@ -283,6 +283,11 @@ psql --version
 - 实际发生了什么
 - 如果有的话，附上截图或日志
 
+## 致谢
+
+CS Analyzer 基于 AkiVer 开源的 [cs-demo-manager](https://github.com/akiver/cs-demo-manager) 项目构建。
+本仓库已按照上游 MIT 协议保留原始许可证声明。
+
 ## GitHub 链接
 
 - Releases: <https://github.com/surelykidding/cs-analyzer/releases>

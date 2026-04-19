@@ -7517,7 +7517,11 @@ msgstr "鸣谢"
 
 #: src/ui/settings/about/about.tsx
 msgid "Special thanks to the open-source Counter-Strike developers whose tools, research, and reverse engineering work helped shape this release."
-msgstr ""
+msgstr "特别感谢那些在 Counter-Strike 开源生态中做出贡献的开发者，他们的工具、研究和逆向成果帮助塑造了这个版本。"
+
+#: src/ui/settings/about/about.tsx
+msgid "CS Analyzer is based on the open-source <0>cs-demo-manager</0> project by AkiVer, and the original MIT license notice is preserved in this repository."
+msgstr "CS Analyzer 基于 AkiVer 开源的 <0>cs-demo-manager</0> 项目构建，本仓库也按要求保留了原始 MIT 许可证声明。"
 
 #: src/ui/settings/about/about.tsx
 #: src/ui/settings/about/about.tsx

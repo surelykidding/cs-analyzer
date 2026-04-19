@@ -283,6 +283,11 @@ When reporting feedback, please include:
 - What actually happened
 - Screenshots or logs if available
 
+## Acknowledgement
+
+CS Analyzer is based on the open-source [cs-demo-manager](https://github.com/akiver/cs-demo-manager) project by AkiVer.
+The original MIT license notice is preserved in this repository in accordance with the upstream license.
+
 ## GitHub Links
 
 - Releases: <https://github.com/surelykidding/cs-analyzer/releases>

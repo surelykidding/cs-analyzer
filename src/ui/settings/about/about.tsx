@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Trans } from '@lingui/react/macro';
-import {
-  APP_BASED_ON_LABEL,
-  APP_DISPLAY_NAME,
-  APP_RELEASES_URL,
-  isPrereleaseVersion,
-} from 'csdm/common/branding';
+import { APP_BASED_ON_LABEL, APP_DISPLAY_NAME, APP_RELEASES_URL, isPrereleaseVersion } from 'csdm/common/branding';
 import { SettingsView } from 'csdm/ui/settings/settings-view';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
@@ -130,8 +125,15 @@ export function About() {
           </h3>
           <p>
             <Trans>
-              Special thanks to the open-source Counter-Strike developers whose tools, research, and reverse
-              engineering work helped shape this release.
+              Special thanks to the open-source Counter-Strike developers whose tools, research, and reverse engineering
+              work helped shape this release.
+            </Trans>
+          </p>
+          <p className="mt-8">
+            <Trans>
+              CS Analyzer is based on the open-source{' '}
+              <ExternalLink href="https://github.com/akiver/cs-demo-manager">cs-demo-manager</ExternalLink> project by
+              AkiVer, and the original MIT license notice is preserved in this repository.
             </Trans>
           </p>
           <ul className="mt-4 selectable">
@@ -145,8 +147,8 @@ export function About() {
             <li>
               <Trans>
                 <ExternalLink href="https://github.com/dtugend">@dtugend</ExternalLink>, the main developer of{' '}
-                <ExternalLink href="https://github.com/advancedfx/advancedfx">HLAE</ExternalLink>, which is used here
-                to generate videos. You can support the HLAE team{' '}
+                <ExternalLink href="https://github.com/advancedfx/advancedfx">HLAE</ExternalLink>, which is used here to
+                generate videos. You can support the HLAE team{' '}
                 <ExternalLink href="https://www.advancedfx.org/credits/#donors">here</ExternalLink>.
               </Trans>
             </li>
@@ -154,8 +156,9 @@ export function About() {
               <Trans>
                 <ExternalLink href="https://github.com/GAMMACASE">@GAMMACASE</ExternalLink>,{' '}
                 <ExternalLink href="https://github.com/zer0k-z">@zer0.k</ExternalLink>, and other AlliedModders
-                contributors to the <ExternalLink href="https://github.com/alliedmodders/hl2sdk/tree/cs2">CS2 SDK</ExternalLink>{' '}
-                used by this app.
+                contributors to the{' '}
+                <ExternalLink href="https://github.com/alliedmodders/hl2sdk/tree/cs2">CS2 SDK</ExternalLink> used by
+                this app.
               </Trans>
             </li>
             <li>
@@ -175,8 +178,8 @@ export function About() {
             </li>
             <li>
               <Trans>
-                <ExternalLink href="https://github.com/markus-wa">@markus-wa</ExternalLink> for creating and
-                maintaining <ExternalLink href="https://github.com/markus-wa/demoinfocs-golang">demoinfocs-golang</ExternalLink>,
+                <ExternalLink href="https://github.com/markus-wa">@markus-wa</ExternalLink> for creating and maintaining{' '}
+                <ExternalLink href="https://github.com/markus-wa/demoinfocs-golang">demoinfocs-golang</ExternalLink>,
                 the demo parser used by the current desktop app.
               </Trans>
             </li>
@@ -216,9 +219,8 @@ export function About() {
               <Trans>
                 <ExternalLink href="https://github.com/dtugend">@dtugend</ExternalLink>, the main developer of{' '}
                 <ExternalLink href="https://github.com/advancedfx/advancedfx">HLAE</ExternalLink> which is used here to
-                generate videos. Without HLAE the CS moviemaking community would not be the same. You can
-                support the HLAE team{' '}
-                <ExternalLink href="https://www.advancedfx.org/credits/#donors">here</ExternalLink>.
+                generate videos. Without HLAE the CS moviemaking community would not be the same. You can support the
+                HLAE team <ExternalLink href="https://www.advancedfx.org/credits/#donors">here</ExternalLink>.
               </Trans>
             </li>
             <li>

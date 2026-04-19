@@ -7519,6 +7519,10 @@ msgid "Special thanks to the open-source Counter-Strike developers whose tools, 
 msgstr "Special thanks to the open-source Counter-Strike developers whose tools, research, and reverse engineering work helped shape this release."
 
 #: src/ui/settings/about/about.tsx
+msgid "CS Analyzer is based on the open-source <0>cs-demo-manager</0> project by AkiVer, and the original MIT license notice is preserved in this repository."
+msgstr "CS Analyzer is based on the open-source <0>cs-demo-manager</0> project by AkiVer, and the original MIT license notice is preserved in this repository."
+
+#: src/ui/settings/about/about.tsx
 #: src/ui/settings/about/about.tsx
 msgid "<0>@DandrewsDev</0> for his work on CS2 demos <1>voice data extraction</1>."
 msgstr "<0>@DandrewsDev</0> for his work on CS2 demos <1>voice data extraction</1>."

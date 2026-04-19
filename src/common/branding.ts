@@ -1,8 +1,10 @@
 const REPOSITORY_URL = 'https://github.com/surelykidding/cs-analyzer';
 
+/* oxlint-disable lingui/no-unlocalized-strings */
 export const APP_DISPLAY_NAME = 'CS Analyzer';
-export const APP_BASED_ON_LABEL = 'Based on CS Demo Manager';
+export const APP_BASED_ON_LABEL = 'Based on CS Demo Manager by AkiVer';
 export const APP_RELEASE_TAG_PREFIX = 'cs-analyzer-v';
+/* oxlint-enable lingui/no-unlocalized-strings */
 export const APP_REPOSITORY_URL = REPOSITORY_URL;
 export const APP_RELEASES_URL = `${REPOSITORY_URL}/releases`;
 export const APP_ISSUES_URL = `${REPOSITORY_URL}/issues`;
