@@ -51,7 +51,31 @@ const sideOptions: SelectOption<TeamNumber>[] = [
   { label: 'CT', value: TeamNumber.CT },
 ];
 
+function translateScoutingStatus(t: ReturnType<typeof useLingui>['t'], status: string) {
+  switch (status) {
+    case 'discovering':
+      return t`Discovering`;
+    case 'awaiting-downloads':
+      return t`Awaiting downloads`;
+    case 'awaiting-download':
+      return t`Awaiting download`;
+    case 'downloading':
+      return t`Downloading`;
+    case 'processing':
+      return t`Processing`;
+    case 'ready':
+      return t`Ready`;
+    case 'error':
+      return t`Error`;
+    case 'deleting':
+      return t`Deleting`;
+    default:
+      return status;
+  }
+}
+
 function TargetStatusBadge({ status }: { status: PerfectWorldScoutingSession['targets'][number]['status'] }) {
+  const { t } = useLingui();
   const className =
     status === PerfectWorldScoutingTargetStatus.Ready
       ? 'bg-green-100 text-green-900'
@@ -61,7 +85,7 @@ function TargetStatusBadge({ status }: { status: PerfectWorldScoutingSession['ta
           ? 'bg-red-100 text-red-900'
           : 'bg-gray-200 text-gray-900';
 
-  return <span className={`rounded-999 px-8 py-4 text-caption ${className}`}>{status}</span>;
+  return <span className={`rounded-999 px-8 py-4 text-caption ${className}`}>{translateScoutingStatus(t, status)}</span>;
 }
 
 export function PerfectWorldScouting() {
@@ -378,7 +402,7 @@ export function PerfectWorldScouting() {
               <Trans>Current Perfect World account: {currentAccount.nickname}</Trans>
             </p>
             <p className="mt-4 text-caption text-gray-800">
-              <Trans>Status: {currentAccount.isValid ? 'active' : 'stale'}</Trans>
+              <Trans>Status: {currentAccount.isValid ? t`Active` : t`Stale`}</Trans>
             </p>
             <p className="mt-4 text-caption text-gray-800">
               <Trans>The desktop client does not need to stay open after the account session has been imported.</Trans>
@@ -443,7 +467,7 @@ export function PerfectWorldScouting() {
                   </Trans>
                 </p>
                 <p className="mt-4 text-caption text-gray-800">
-                  <Trans>Status: {session.status}</Trans>
+                  <Trans>Status: {translateScoutingStatus(t, session.status)}</Trans>
                 </p>
                 {session.errorMessage && (
                   <div className="mt-8">

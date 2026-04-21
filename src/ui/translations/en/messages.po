@@ -3039,6 +3039,42 @@ msgctxt "Button"
 msgid "Select downloads folder"
 msgstr "Select downloads folder"
 
+#: src/ui/downloads/downloads.tsx
+msgid "Valve"
+msgstr "Valve"
+
+#: src/ui/downloads/downloads.tsx
+msgid "FACEIT"
+msgstr "FACEIT"
+
+#: src/ui/downloads/downloads.tsx
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "FACEIT Scouting"
+msgstr "FACEIT Scouting"
+
+#: src/ui/downloads/downloads.tsx
+msgid "Renown"
+msgstr "Renown"
+
+#: src/ui/downloads/downloads.tsx
+msgid "5EPlay"
+msgstr "5EPlay"
+
+#: src/ui/downloads/downloads.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+msgid "5EPlay Scouting"
+msgstr "5EPlay Scouting"
+
+#: src/ui/downloads/downloads.tsx
+#: src/ui/settings/downloads/perfect-world-settings.tsx
+msgid "Perfect World"
+msgstr "Perfect World"
+
+#: src/ui/downloads/downloads.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+msgid "Perfect World Scouting"
+msgstr "Perfect World Scouting"
+
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
@@ -3093,10 +3129,6 @@ msgstr "An error occurred while generating tactics positions."
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 msgid "Loading FACEIT scouting..."
 msgstr "Loading FACEIT scouting..."
-
-#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
-msgid "FACEIT Scouting"
-msgstr "FACEIT Scouting"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 msgid "Paste a FACEIT room URL or match ID, find the opponent's recent matches on the same map, then download them from your browser. Keep the downloaded file name unchanged so the app can match it automatically."
@@ -3157,8 +3189,8 @@ msgstr "Map: {0}"
 msgid "{0} {1} - {2} {3}"
 msgstr "{0} {1} - {2} {3}"
 
-#. placeholder {0}: currentAccount.isValid ? 'active' : 'stale'
-#. placeholder {0}: session.status
+#. placeholder {0}: currentAccount.isValid ? t`Active` : t`Stale`
+#. placeholder {0}: translateScoutingStatus(t, session.status)
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
@@ -3568,10 +3600,6 @@ msgid "Loading 5EPlay scouting..."
 msgstr "Loading 5EPlay scouting..."
 
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
-msgid "5EPlay Scouting"
-msgstr "5EPlay Scouting"
-
-#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "Paste a 5EPlay room URL or match ID to find the opponent's recent matches on the same map. Matching demos are downloaded, imported and analyzed automatically."
 msgstr "Paste a 5EPlay room URL or match ID to find the opponent's recent matches on the same map. Matching demos are downloaded, imported and analyzed automatically."
 
@@ -3830,10 +3858,6 @@ msgid "Loading Perfect World scouting..."
 msgstr "Loading Perfect World scouting..."
 
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
-msgid "Perfect World Scouting"
-msgstr "Perfect World Scouting"
-
-#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Paste a Perfect World match ID to find the opponent's recent matches on the same map. Matching demos are downloaded, imported and analyzed automatically."
 msgstr "Paste a Perfect World match ID to find the opponent's recent matches on the same map. Matching demos are downloaded, imported and analyzed automatically."
 
@@ -3841,6 +3865,16 @@ msgstr "Paste a Perfect World match ID to find the opponent's recent matches on 
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Current Perfect World account: {0}"
 msgstr "Current Perfect World account: {0}"
+
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/settings/downloads/perfect-world-settings.tsx
+msgid "Active"
+msgstr "Active"
+
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/settings/downloads/perfect-world-settings.tsx
+msgid "Stale"
+msgstr "Stale"
 
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "The desktop client does not need to stay open after the account session has been imported."
@@ -8008,14 +8042,6 @@ msgstr "FACEIT nickname"
 msgctxt "Input placeholder"
 msgid "Nickname"
 msgstr "Nickname"
-
-#: src/ui/settings/downloads/perfect-world-settings.tsx
-msgid "Active"
-msgstr "Active"
-
-#: src/ui/settings/downloads/perfect-world-settings.tsx
-msgid "Stale"
-msgstr "Stale"
 
 #: src/ui/settings/downloads/perfect-world-settings.tsx
 msgid "Login to Perfect World"

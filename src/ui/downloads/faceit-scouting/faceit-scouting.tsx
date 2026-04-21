@@ -48,7 +48,29 @@ const sideOptions: SelectOption<TeamNumber>[] = [
   { label: 'CT', value: TeamNumber.CT },
 ];
 
+function translateScoutingStatus(t: ReturnType<typeof useLingui>['t'], status: string) {
+  switch (status) {
+    case 'discovering':
+      return t`Discovering`;
+    case 'awaiting-downloads':
+      return t`Awaiting downloads`;
+    case 'awaiting-download':
+      return t`Awaiting download`;
+    case 'processing':
+      return t`Processing`;
+    case 'ready':
+      return t`Ready`;
+    case 'error':
+      return t`Error`;
+    case 'deleting':
+      return t`Deleting`;
+    default:
+      return status;
+  }
+}
+
 function TargetStatusBadge({ status }: { status: FaceitScoutingSession['targets'][number]['status'] }) {
+  const { t } = useLingui();
   const className =
     status === FaceitScoutingTargetStatus.Ready
       ? 'bg-green-100 text-green-900'
@@ -58,7 +80,7 @@ function TargetStatusBadge({ status }: { status: FaceitScoutingSession['targets'
           ? 'bg-red-100 text-red-900'
           : 'bg-gray-200 text-gray-900';
 
-  return <span className={`rounded-999 px-8 py-4 text-caption ${className}`}>{status}</span>;
+  return <span className={`rounded-999 px-8 py-4 text-caption ${className}`}>{translateScoutingStatus(t, status)}</span>;
 }
 
 export function FaceitScouting() {
@@ -432,7 +454,7 @@ export function FaceitScouting() {
                   </Trans>
                 </p>
                 <p className="mt-4 text-caption text-gray-800">
-                  <Trans>Status: {session.status}</Trans>
+                  <Trans>Status: {translateScoutingStatus(t, session.status)}</Trans>
                 </p>
                 {session.errorMessage && (
                   <div className="mt-8">

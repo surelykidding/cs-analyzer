@@ -1193,7 +1193,7 @@ msgstr "捐助"
 
 #: src/ui/components/donate.tsx
 msgid "CS Analyzer is a community Counter-Strike analysis tool focused on tactics review, demo scouting, and match study."
-msgstr ""
+msgstr "CS Analyzer 是一个社区驱动的 Counter-Strike 分析工具，专注于战术复盘、demo 侦察和比赛研究。"
 
 #: src/ui/components/donate.tsx
 msgid "It is not backed by a corporate entity and remains a free, open-source project maintained with community feedback."
@@ -2873,7 +2873,7 @@ msgstr "MatchZy"
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "Perfect World"
-msgstr "完美世界"
+msgstr "完美"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
@@ -3044,6 +3044,42 @@ msgctxt "Button"
 msgid "Select downloads folder"
 msgstr "选择下载文件夹"
 
+#: src/ui/downloads/downloads.tsx
+msgid "Valve"
+msgstr "Valve"
+
+#: src/ui/downloads/downloads.tsx
+msgid "FACEIT"
+msgstr "FACEIT"
+
+#: src/ui/downloads/downloads.tsx
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "FACEIT Scouting"
+msgstr "FACEIT 侦察"
+
+#: src/ui/downloads/downloads.tsx
+msgid "Renown"
+msgstr "Renown"
+
+#: src/ui/downloads/downloads.tsx
+msgid "5EPlay"
+msgstr "5EPlay"
+
+#: src/ui/downloads/downloads.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+msgid "5EPlay Scouting"
+msgstr "5EPlay 侦察"
+
+#: src/ui/downloads/downloads.tsx
+#: src/ui/settings/downloads/perfect-world-settings.tsx
+msgid "Perfect World"
+msgstr "完美"
+
+#: src/ui/downloads/downloads.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+msgid "Perfect World Scouting"
+msgstr "完美侦察"
+
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
@@ -3051,7 +3087,7 @@ msgstr "选择下载文件夹"
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "An error occurred while loading the scouting session."
-msgstr ""
+msgstr "加载侦察会话时发生错误。"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
@@ -3060,97 +3096,93 @@ msgstr ""
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "An error occurred while loading scouting tactics."
-msgstr ""
+msgstr "加载侦察战术时发生错误。"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 msgid "FACEIT scouting session started."
-msgstr ""
+msgstr "FACEIT 侦察会话已开始。"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "An error occurred while starting the scouting session."
-msgstr ""
+msgstr "启动侦察会话时发生错误。"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 msgid "FACEIT scouting session deleted."
-msgstr ""
+msgstr "FACEIT 侦察会话已删除。"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "An error occurred while deleting the scouting session."
-msgstr ""
+msgstr "删除侦察会话时发生错误。"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Tactics positions generated for imported scouting demos."
-msgstr ""
+msgstr "已为导入的侦察 demo 生成战术站位。"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "An error occurred while generating tactics positions."
-msgstr ""
+msgstr "生成战术站位时发生错误。"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 msgid "Loading FACEIT scouting..."
-msgstr ""
-
-#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
-msgid "FACEIT Scouting"
-msgstr ""
+msgstr "正在加载 FACEIT 侦察..."
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 msgid "Paste a FACEIT room URL or match ID, find the opponent's recent matches on the same map, then download them from your browser. Keep the downloaded file name unchanged so the app can match it automatically."
-msgstr ""
+msgstr "粘贴 FACEIT 房间 URL 或比赛 ID，查找对手在同地图上的近期比赛，然后从浏览器下载它们。请保持下载后的文件名不变，应用才能自动匹配。"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "Imported demos use the same shared tactics positions pipeline for pistol, eco, semi, force buy and full buy rounds."
-msgstr ""
+msgstr "导入的 demo 会使用同一套共享的战术站位流程，覆盖手枪局、纯 ECO、半起、强起和全起回合。"
 
 #. placeholder {0}: currentAccount.nickname
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 msgid "Current FACEIT account: {0}"
-msgstr ""
+msgstr "当前 FACEIT 账号：{0}"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 msgctxt "Input label"
 msgid "FACEIT room URL or match ID"
-msgstr ""
+msgstr "FACEIT 房间 URL 或比赛 ID"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 msgctxt "Input placeholder"
 msgid "https://www.faceit.com/en/cs2/room/1-..."
-msgstr ""
+msgstr "https://www.faceit.com/en/cs2/room/1-..."
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Start scouting session"
-msgstr ""
+msgstr "开始侦察会话"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Refresh"
-msgstr ""
+msgstr "刷新"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Source Match"
-msgstr ""
+msgstr "源比赛"
 
 #. placeholder {0}: session.sourceMatch.mapName
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Map: {0}"
-msgstr ""
+msgstr "地图：{0}"
 
 #. placeholder {0}: session.sourceMatch.ourTeamName
 #. placeholder {1}: session.sourceMatch.ourTeamScore
@@ -3160,64 +3192,105 @@ msgstr ""
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "{0} {1} - {2} {3}"
-msgstr ""
+msgstr "{0} {1} - {2} {3}"
 
-#. placeholder {0}: currentAccount.isValid ? 'active' : 'stale'
-#. placeholder {0}: session.status
+#. placeholder {0}: currentAccount.isValid ? t`Active` : t`Stale`
+#. placeholder {0}: translateScoutingStatus(t, session.status)
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Status: {0}"
-msgstr ""
+msgstr "状态：{0}"
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+msgid "Discovering"
+msgstr "发现中"
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+msgid "Awaiting downloads"
+msgstr "等待下载"
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+msgid "Awaiting download"
+msgstr "等待下载"
+
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+msgid "Downloading"
+msgstr "下载中"
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+msgid "Processing"
+msgstr "处理中"
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+msgid "Ready"
+msgstr "就绪"
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+msgid "Deleting"
+msgstr "删除中"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 msgid "See source room on FACEIT"
-msgstr ""
+msgstr "在 FACEIT 中查看源房间"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 msgid "Open next pending match"
-msgstr ""
+msgstr "打开下一个待处理比赛"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Refresh session"
-msgstr ""
+msgstr "刷新会话"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Delete scouting session"
-msgstr ""
+msgstr "删除侦察会话"
 
 #. placeholder {0}: session.readyTargetCount
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Targets ready: {0}"
-msgstr ""
+msgstr "已就绪目标：{0}"
 
 #. placeholder {0}: session.awaitingDownloadTargetCount
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Targets waiting for download: {0}"
-msgstr ""
+msgstr "等待下载的目标：{0}"
 
 #. placeholder {0}: session.processingTargetCount
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Targets processing: {0}"
-msgstr ""
+msgstr "正在处理的目标：{0}"
 
 #. placeholder {0}: session.errorTargetCount
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Targets with errors: {0}"
-msgstr ""
+msgstr "出错目标：{0}"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
@@ -3255,26 +3328,26 @@ msgstr ""
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Some imported matches are still missing player positions required for the tactics heatmap."
-msgstr ""
+msgstr "部分导入比赛仍缺少战术热力图所需的玩家站位数据。"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Generate tactics positions for imported demos"
-msgstr ""
+msgstr "为导入的 demo 生成战术站位"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Targets"
-msgstr ""
+msgstr "目标比赛"
 
 #. placeholder {0}: target.order + 1
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Match {0}"
-msgstr ""
+msgstr "比赛 {0}"
 
 #. placeholder {0}: target.sharedHistoryPlayerCount
 #. placeholder {1}: target.rosterOverlapCount
@@ -3282,27 +3355,27 @@ msgstr ""
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Shared history players: {0}, roster overlap: {1}"
-msgstr ""
+msgstr "共享历史玩家：{0}，阵容重合：{1}"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 msgid "See on FACEIT"
-msgstr ""
+msgstr "在 FACEIT 中查看"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Start a scouting session to see opponent tactics."
-msgstr ""
+msgstr "开始一个侦察会话以查看对手战术。"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 msgid "Download opponent demos from your browser and this page will import them automatically."
-msgstr ""
+msgstr "请从浏览器下载对手 demo，此页面会自动导入。"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Loading scouting tactics..."
-msgstr ""
+msgstr "正在加载侦察战术..."
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
@@ -3562,57 +3635,53 @@ msgstr "打开 5EPlay 资料页"
 
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "5EPlay scouting session started."
-msgstr ""
+msgstr "5EPlay 侦察会话已开始。"
 
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "5EPlay scouting session deleted."
-msgstr ""
+msgstr "5EPlay 侦察会话已删除。"
 
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "Loading 5EPlay scouting..."
-msgstr ""
-
-#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
-msgid "5EPlay Scouting"
-msgstr ""
+msgstr "正在加载 5EPlay 侦察..."
 
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "Paste a 5EPlay room URL or match ID to find the opponent's recent matches on the same map. Matching demos are downloaded, imported and analyzed automatically."
-msgstr ""
+msgstr "粘贴 5EPlay 房间 URL 或比赛 ID，查找对手在同地图上的近期比赛。匹配的 demo 会自动下载、导入并分析。"
 
 #. placeholder {0}: currentAccount.nickname
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "Current 5EPlay account: {0}"
-msgstr ""
+msgstr "当前 5EPlay 账号：{0}"
 
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgctxt "Input label"
 msgid "5EPlay room URL or match ID"
-msgstr ""
+msgstr "5EPlay 房间 URL 或比赛 ID"
 
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgctxt "Input placeholder"
 msgid "https://arena.5eplay.com/data/match/..."
-msgstr ""
+msgstr "https://arena.5eplay.com/data/match/..."
 
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "See source room on 5EPlay"
-msgstr ""
+msgstr "在 5EPlay 中查看源房间"
 
 #. placeholder {0}: session.downloadingTargetCount
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Targets downloading: {0}"
-msgstr ""
+msgstr "正在下载的目标：{0}"
 
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 msgid "See on 5EPlay"
-msgstr ""
+msgstr "在 5EPlay 中查看"
 
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Opponent demos are being downloaded, imported and analyzed automatically."
-msgstr ""
+msgstr "对手 demo 正在自动下载、导入并分析。"
 
 #: src/ui/downloads/five-eplay/five-eplay-account-instructions.tsx
 msgid "How can I find my 5EPlay ID?"
@@ -3742,119 +3811,125 @@ msgstr "删除下载"
 
 #: src/ui/downloads/perfect-world/get-perfect-world-error-message.tsx
 msgid "Add a Perfect World account before using Perfect World downloads or scouting."
-msgstr ""
+msgstr "使用完美下载或侦察前，请先添加完美账号。"
 
 #: src/ui/downloads/perfect-world/get-perfect-world-error-message.tsx
 msgid "The saved Perfect World session has expired. Re-import it from the client or sign in again to continue."
-msgstr ""
+msgstr "已保存的完美会话已过期。请从客户端重新导入，或重新登录后继续。"
 
 #: src/ui/downloads/perfect-world/get-perfect-world-error-message.tsx
 msgid "This match needs a participant Steam ID to resolve the live room. Enter a player Steam ID from the ongoing match and try again."
-msgstr ""
+msgstr "这场比赛需要一个参赛 Steam ID 才能解析实时房间。请输入正在进行中的比赛里任意一名玩家的 Steam ID 后重试。"
 
 #: src/ui/downloads/perfect-world/get-perfect-world-error-message.tsx
 msgid "The provided participant Steam ID is not part of this match room."
-msgstr ""
+msgstr "提供的参赛 Steam ID 不属于这个比赛房间。"
 
 #. placeholder {0}: currentAccount?.nickname ?? 'this account'
 #: src/ui/downloads/perfect-world/no-perfect-world-account.tsx
 msgid "The saved Perfect World session for {0} has expired. Import a fresh client session, or sign in again with your mobile phone and SMS security code."
-msgstr ""
+msgstr "{0} 的已保存完美会话已过期。请导入新的客户端会话，或使用手机号和短信验证码重新登录。"
 
 #: src/ui/downloads/perfect-world/no-perfect-world-account.tsx
 msgid "Import your current Perfect World desktop client session, or enter your mobile phone number and SMS security code."
-msgstr ""
+msgstr "导入当前完美桌面客户端会话，或输入你的手机号和短信验证码。"
 
 #: src/ui/downloads/perfect-world/no-perfect-world-account.tsx
 msgctxt "Button"
 msgid "Import from client"
-msgstr ""
+msgstr "从客户端导入"
 
 #: src/ui/downloads/perfect-world/no-perfect-world-account.tsx
 msgid "Or refresh the saved login manually:"
-msgstr ""
+msgstr "或手动刷新已保存的登录："
 
 #: src/ui/downloads/perfect-world/no-perfect-world-account.tsx
 msgid "Or sign in manually:"
-msgstr ""
+msgstr "或手动登录："
 
 #: src/ui/downloads/perfect-world/no-perfect-world-account.tsx
 msgctxt "Input placeholder"
 msgid "Mobile phone"
-msgstr ""
+msgstr "手机号"
 
 #: src/ui/downloads/perfect-world/no-perfect-world-account.tsx
 msgctxt "Input placeholder"
 msgid "Security code"
-msgstr ""
+msgstr "验证码"
 
 #: src/ui/downloads/perfect-world/no-perfect-world-account.tsx
 msgctxt "Button"
 msgid "Login"
-msgstr ""
+msgstr "登录"
 
 #: src/ui/downloads/perfect-world/perfect-world-account-instructions.tsx
 msgid "Perfect World scouting requires a logged-in platform account stored in the app."
-msgstr ""
+msgstr "完美侦察需要先在应用中保存一个已登录的平台账号。"
 
 #: src/ui/downloads/perfect-world/perfect-world-account-instructions.tsx
 msgid "If the Perfect World desktop client is already logged in, you can import that session directly."
-msgstr ""
+msgstr "如果完美桌面客户端已经登录，可以直接导入该会话。"
 
 #: src/ui/downloads/perfect-world/perfect-world-account-instructions.tsx
 msgid "After importing, the desktop client does not need to keep running. You only need to refresh the saved session if the token expires."
-msgstr ""
+msgstr "导入后不需要继续保持桌面客户端运行，只有 token 过期时才需要刷新已保存的会话。"
 
 #: src/ui/downloads/perfect-world/perfect-world-account-instructions.tsx
 msgid "Otherwise, enter the mobile phone number linked to your account and an SMS code received from the Perfect World client or website."
-msgstr ""
+msgstr "否则，请输入与你账号绑定的手机号，以及来自完美客户端或网站的短信验证码。"
 
 #: src/ui/downloads/perfect-world/perfect-world-current-match.tsx
 msgctxt "Button"
 msgid "See source match"
-msgstr ""
+msgstr "查看源比赛"
 
 #: src/ui/downloads/perfect-world/perfect-world-last-matches-loader.tsx
 msgid "Fetching last Perfect World matches..."
-msgstr ""
+msgstr "正在获取最近的完美比赛..."
 
 #: src/ui/downloads/perfect-world/perfect-world-last-matches-loader.tsx
 msgid "An error occurred while fetching Perfect World matches."
-msgstr ""
+msgstr "获取完美比赛时发生错误。"
 
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Perfect World scouting session started."
-msgstr ""
+msgstr "完美侦察会话已开始。"
 
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Perfect World scouting session deleted."
-msgstr ""
+msgstr "完美侦察会话已删除。"
 
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Loading Perfect World scouting..."
-msgstr ""
-
-#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
-msgid "Perfect World Scouting"
-msgstr ""
+msgstr "正在加载完美侦察..."
 
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Paste a Perfect World match ID to find the opponent's recent matches on the same map. Matching demos are downloaded, imported and analyzed automatically."
-msgstr ""
+msgstr "粘贴完美比赛 ID，查找对手在同地图上的近期比赛。匹配的 demo 会自动下载、导入并分析。"
 
 #. placeholder {0}: currentAccount.nickname
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Current Perfect World account: {0}"
-msgstr ""
+msgstr "当前完美账号：{0}"
+
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/settings/downloads/perfect-world-settings.tsx
+msgid "Active"
+msgstr "有效"
+
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/settings/downloads/perfect-world-settings.tsx
+msgid "Stale"
+msgstr "过期"
 
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "The desktop client does not need to stay open after the account session has been imported."
-msgstr ""
+msgstr "导入账号会话后，不需要继续保持桌面客户端开启。"
 
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgctxt "Input label"
 msgid "Perfect World match ID"
-msgstr ""
+msgstr "完美比赛 ID"
 
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgctxt "Input placeholder"
@@ -3864,17 +3939,17 @@ msgstr ""
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgctxt "Input label"
 msgid "Participant Steam ID (required for ongoing matches)"
-msgstr ""
+msgstr "参赛 Steam ID（进行中的比赛需要）"
 
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgctxt "Input placeholder"
 msgid "Required when public match detail is unavailable for an ongoing room"
-msgstr ""
+msgstr "当进行中的房间无法获取公开比赛详情时必填"
 
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "See source room"
-msgstr ""
+msgstr "查看源房间"
 
 #: src/ui/downloads/renown/current-match.tsx
 msgctxt "Button"
@@ -8011,54 +8086,46 @@ msgid "Nickname"
 msgstr "昵称"
 
 #: src/ui/settings/downloads/perfect-world-settings.tsx
-msgid "Active"
-msgstr ""
-
-#: src/ui/settings/downloads/perfect-world-settings.tsx
-msgid "Stale"
-msgstr ""
-
-#: src/ui/settings/downloads/perfect-world-settings.tsx
 msgid "Login to Perfect World"
-msgstr ""
+msgstr "登录完美"
 
 #: src/ui/settings/downloads/perfect-world-settings.tsx
 msgctxt "Input label"
 msgid "Mobile phone"
-msgstr ""
+msgstr "手机号"
 
 #: src/ui/settings/downloads/perfect-world-settings.tsx
 msgctxt "Input placeholder"
 msgid "Phone number"
-msgstr ""
+msgstr "手机号"
 
 #: src/ui/settings/downloads/perfect-world-settings.tsx
 msgctxt "Input label"
 msgid "Security code"
-msgstr ""
+msgstr "验证码"
 
 #: src/ui/settings/downloads/perfect-world-settings.tsx
 msgctxt "Input placeholder"
 msgid "SMS code"
-msgstr ""
+msgstr "短信验证码"
 
 #: src/ui/settings/downloads/perfect-world-settings.tsx
 msgid "This stores your Perfect World token locally so the app can fetch match history and scouting demos without keeping the desktop client open."
-msgstr ""
+msgstr "应用会在本地保存你的完美 token，这样无需保持桌面客户端开启也能获取比赛历史和侦察 demo。"
 
 #: src/ui/settings/downloads/perfect-world-settings.tsx
 msgid "Current account"
-msgstr ""
+msgstr "当前账号"
 
 #: src/ui/settings/downloads/perfect-world-settings.tsx
 msgctxt "Button"
 msgid "Import current client session"
-msgstr ""
+msgstr "导入当前客户端会话"
 
 #: src/ui/settings/downloads/perfect-world-settings.tsx
 msgctxt "Button"
 msgid "Validate current account"
-msgstr ""
+msgstr "校验当前账号"
 
 #: src/ui/settings/downloads/renown-settings.tsx
 msgid "Add Renown account"
@@ -8097,15 +8164,15 @@ msgstr "API返回了一个401码，请检查您 API 密钥。"
 
 #: src/ui/settings/downloads/use-add-perfect-world-account.tsx
 msgid "An error occurred while logging into Perfect World."
-msgstr ""
+msgstr "登录完美时发生错误。"
 
 #: src/ui/settings/downloads/use-import-perfect-world-client-account.tsx
 msgid "Could not import the current Perfect World desktop client session."
-msgstr ""
+msgstr "无法导入当前完美桌面客户端会话。"
 
 #: src/ui/settings/downloads/use-validate-perfect-world-account.tsx
 msgid "An error occurred while validating the Perfect World account."
-msgstr ""
+msgstr "校验完美账号时发生错误。"
 
 #: src/ui/settings/folders/add-folder-button.tsx
 msgctxt "Button"
@@ -8142,7 +8209,7 @@ msgstr "网络错误"
 #: src/ui/settings/integrations/faceit-api-key.tsx
 msgctxt "Input placeholder"
 msgid "Optional override"
-msgstr ""
+msgstr "可选覆盖值"
 
 #: src/ui/settings/integrations/integrations-settings.tsx
 msgid "Steam API key"
@@ -8154,11 +8221,11 @@ msgstr "用于从 Steam 获取信息的自定义 Steam API 密钥"
 
 #: src/ui/settings/integrations/integrations-settings.tsx
 msgid "FACEIT API key override"
-msgstr ""
+msgstr "FACEIT API key 覆盖值"
 
 #: src/ui/settings/integrations/integrations-settings.tsx
 msgid "Optional custom FACEIT API key. Leave it empty to use the built-in key bundled with this beta."
-msgstr ""
+msgstr "可选的自定义 FACEIT API key。留空则使用此 beta 内置的 key。"
 
 #: src/ui/settings/integrations/steam-api-key.tsx
 msgctxt "Input placeholder"

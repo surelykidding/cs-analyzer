@@ -96,6 +96,7 @@ function AddAccountDialog() {
 }
 
 export function PerfectWorldSettings() {
+  const { t } = useLingui();
   const showToast = useShowToast();
   const accounts = usePerfectWorldAccounts();
   const client = useWebSocketClient();
@@ -132,7 +133,7 @@ export function PerfectWorldSettings() {
 
   return (
     <ThirdPartySettings
-      name="Perfect World"
+      name={t`Perfect World`}
       logo={<span className="rounded-4 bg-gray-200 px-6 py-2 text-caption">PW</span>}
       autoDownloadAtStartupSettingsKey="downloadPerfectWorldDemosAtStartup"
       autoDownloadInBackgroundSettingsKey="downloadPerfectWorldDemosInBackground"
