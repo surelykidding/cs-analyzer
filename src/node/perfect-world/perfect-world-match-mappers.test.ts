@@ -157,4 +157,41 @@ describe('perfectWorldMatchMappers', () => {
       ]),
     );
   });
+
+  it('should ignore non-map status strings when merging detail seeds', () => {
+    const liveSeed = createPerfectWorldMatchSeed(
+      {
+        matchId: '9219960560245258665',
+        map: 'de_dust2',
+        ctScore: 9,
+        terroristScore: 8,
+        playerList: [
+          {
+            steamId: '76561198741643064',
+            side: 'CT',
+          },
+        ],
+      },
+      '9219960560245258665',
+    );
+    const detailSeed = createPerfectWorldMatchSeed(
+      {
+        status: 'success',
+        result: [],
+      },
+      '9219960560245258665',
+    );
+
+    const mergedSeed = mergePerfectWorldMatchSeeds(
+      {
+        ...liveSeed,
+        demoUrl: '',
+      },
+      detailSeed,
+    );
+
+    expect(detailSeed.mapName).toBe('');
+    expect(mergedSeed.mapName).toBe('de_dust2');
+    expect(mergedSeed.demoUrl).toBe('');
+  });
 });

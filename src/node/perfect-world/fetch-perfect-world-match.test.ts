@@ -2,16 +2,16 @@ import { describe, expect, it, vi } from 'vite-plus/test';
 import type { PerfectWorldAccount } from 'csdm/common/types/perfect-world-account';
 import { PerfectWorldErrorCode } from 'csdm/common/types/perfect-world-errors';
 import { fetchPerfectWorldMatch } from './fetch-perfect-world-match';
-import {
-  fetchPerfectWorldLiveMatchPayload,
-  fetchPerfectWorldPublicMatchDetail,
-} from './perfect-world-api';
+import { fetchPerfectWorldLiveMatchPayload, fetchPerfectWorldPublicMatchDetail } from './perfect-world-api';
 import { fetchPerfectWorldMatchHistoryMatches } from './fetch-last-perfect-world-matches';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { getDownloadStatus } from 'csdm/node/download/get-download-status';
 
-vi.mock('./perfect-world-api', () => {
+vi.mock('./perfect-world-api', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('./perfect-world-api')>();
+
   return {
+    ...actual,
     fetchPerfectWorldPublicMatchDetail: vi.fn(),
     fetchPerfectWorldLiveMatchPayload: vi.fn(),
   };
@@ -163,8 +163,8 @@ describe('fetchPerfectWorldMatch', () => {
       isCurrent: true,
     };
 
-    await expect(
-      fetchPerfectWorldMatch('9219960560245258665', currentAccount, '76561198741643064'),
-    ).rejects.toBe(PerfectWorldErrorCode.ParticipantSteamIdNotInRoom);
+    await expect(fetchPerfectWorldMatch('9219960560245258665', currentAccount, '76561198741643064')).rejects.toBe(
+      PerfectWorldErrorCode.ParticipantSteamIdNotInRoom,
+    );
   });
 });

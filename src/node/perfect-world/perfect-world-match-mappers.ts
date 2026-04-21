@@ -52,7 +52,12 @@ function getTeamNumber(value: unknown): number | null {
     return 1;
   }
 
-  if (normalizedValue === 'T' || normalizedValue === 'TR' || normalizedValue === 'TERRORIST' || normalizedValue === 'TERRORISTS') {
+  if (
+    normalizedValue === 'T' ||
+    normalizedValue === 'TR' ||
+    normalizedValue === 'TERRORIST' ||
+    normalizedValue === 'TERRORISTS'
+  ) {
     return 2;
   }
 
@@ -71,9 +76,7 @@ function getField<T>(record: JsonRecord, keys: string[], mapper: (value: unknown
 }
 
 function normalizePerfectWorldMapName(values: Array<string | null | undefined>) {
-  const normalizedValues = values
-    .map((value) => value?.toLowerCase() ?? '')
-    .filter((value) => value !== '');
+  const normalizedValues = values.map((value) => value?.toLowerCase() ?? '').filter((value) => value !== '');
 
   const mapping: Array<{ matchers: string[]; mapName: string }> = [
     { matchers: ['de_ancient', 'ancient', '远古遗迹'], mapName: 'de_ancient' },
@@ -97,7 +100,14 @@ function normalizePerfectWorldMapName(values: Array<string | null | undefined>) 
     }
   }
 
-  return values.find((value) => value !== null && value !== undefined && value.trim() !== '') ?? '';
+  for (const value of normalizedValues) {
+    const directMapName = value.match(/\b(de_[a-z0-9]+)\b/i)?.[1];
+    if (directMapName !== undefined) {
+      return directMapName.toLowerCase();
+    }
+  }
+
+  return '';
 }
 
 function parsePerfectWorldDateString(dateString: string | null) {
@@ -172,7 +182,13 @@ function mapPlayerCandidate(record: JsonRecord): PerfectWorldPlayer | null {
   const pwRating = getField(record, ['pwRating'], getNumber);
   const hasWonValue = getField(record, ['hasWon', 'win', 'isWin'], getNumber);
   const hasEnoughPlayerFields =
-    name !== null || avatarUrl !== null || userId !== null || team !== null || killCount > 0 || assistCount > 0 || deathCount > 0;
+    name !== null ||
+    avatarUrl !== null ||
+    userId !== null ||
+    team !== null ||
+    killCount > 0 ||
+    assistCount > 0 ||
+    deathCount > 0;
 
   if (steamId === null || !hasEnoughPlayerFields) {
     return null;
@@ -260,9 +276,7 @@ function buildTeams(players: PerfectWorldPlayer[], score1: number, score2: numbe
     return {
       name: `Team ${teamNumber}`,
       score: teamNumber === 1 ? score1 : score2,
-      playerSteamIds: players
-        .filter((player) => player.team === teamNumber)
-        .map((player) => player.steamId),
+      playerSteamIds: players.filter((player) => player.team === teamNumber).map((player) => player.steamId),
     };
   });
 
@@ -325,10 +339,9 @@ function extractPotentialUrl(strings: string[], pattern: RegExp) {
 export function createPerfectWorldMatchSeed(value: unknown, fallbackMatchId: string): MatchSeed {
   const record = isRecord(value) ? value : {};
   const strings = extractStringCandidates(value);
-  const rawMatchId =
-    getField(record, ['matchId', 'match_id', 'id'], getString) ??
-    strings.find((entry) => normalizePerfectWorldComparableMatchId(entry).length >= 10) ??
-    fallbackMatchId;
+  const recordMatchId = getField(record, ['matchId', 'match_id', 'id'], getString);
+  const stringMatchId = strings.find((entry) => normalizePerfectWorldComparableMatchId(entry).length >= 10);
+  const rawMatchId = recordMatchId ?? stringMatchId ?? fallbackMatchId;
   const players = extractPlayers(value);
   const score1 = getField(record, ['score1', 'team1Score', 'ctScore'], getNumber) ?? 0;
   const score2 = getField(record, ['score2', 'team2Score', 'terroristScore'], getNumber) ?? 0;
@@ -340,13 +353,14 @@ export function createPerfectWorldMatchSeed(value: unknown, fallbackMatchId: str
   ]);
   const explicitDemoUrl = extractPotentialUrl(strings, /\/demo\/|\.dem(\.zip)?$/i);
   const cupId = getField(record, ['cupId', 'cup_id'], getString);
+  const canBuildDemoUrlFromPayload = recordMatchId !== null || stringMatchId !== undefined || cupId !== null;
 
   return {
     id: rawMatchId.startsWith('PVP@') ? rawMatchId : buildPerfectWorldMatchId(rawMatchId),
     game: Game.CS2,
     date: pickDate(record),
     durationInSeconds: pickDurationInSeconds(record),
-    demoUrl: explicitDemoUrl ?? buildPerfectWorldDemoUrl(rawMatchId, cupId),
+    demoUrl: explicitDemoUrl ?? (canBuildDemoUrlFromPayload ? buildPerfectWorldDemoUrl(rawMatchId, cupId) : ''),
     mapName,
     url: extractPotentialUrl(strings, /\/match\/|\/room\/|inframe\/get-match-detail/i),
     cupId,
@@ -360,6 +374,7 @@ export function createPerfectWorldMatchSeed(value: unknown, fallbackMatchId: str
 export function mergePerfectWorldMatchSeeds(...seeds: Array<Partial<MatchSeed>>): MatchSeed {
   const mergedPlayers = new Map<string, PerfectWorldPlayer>();
   let latestSeedWithTeams: MatchSeed | null = null;
+  const hasExplicitEmptyDemoUrl = seeds.some((seed) => seed.demoUrl === '');
 
   for (const seed of seeds) {
     for (const player of seed.players ?? []) {
@@ -374,7 +389,9 @@ export function mergePerfectWorldMatchSeeds(...seeds: Array<Partial<MatchSeed>>)
   const mergedSeed = seeds.reduce<Partial<MatchSeed>>((result, seed) => {
     return {
       ...result,
-      ...Object.fromEntries(Object.entries(seed).filter(([, value]) => value !== null && value !== '' && value !== undefined)),
+      ...Object.fromEntries(
+        Object.entries(seed).filter(([, value]) => value !== null && value !== '' && value !== undefined),
+      ),
     };
   }, {});
   const players = [...mergedPlayers.values()];
@@ -386,7 +403,9 @@ export function mergePerfectWorldMatchSeeds(...seeds: Array<Partial<MatchSeed>>)
     game: Game.CS2,
     date: mergedSeed.date ?? new Date().toISOString(),
     durationInSeconds: mergedSeed.durationInSeconds ?? 0,
-    demoUrl: mergedSeed.demoUrl ?? buildPerfectWorldDemoUrl(mergedSeed.id ?? '', mergedSeed.cupId ?? null),
+    demoUrl:
+      mergedSeed.demoUrl ??
+      (hasExplicitEmptyDemoUrl ? '' : buildPerfectWorldDemoUrl(mergedSeed.id ?? '', mergedSeed.cupId ?? null)),
     mapName: mergedSeed.mapName ?? '',
     url: mergedSeed.url ?? null,
     cupId: mergedSeed.cupId ?? null,

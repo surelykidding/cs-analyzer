@@ -17,7 +17,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
+      - name: Check Crowdin credentials
+        id: check-credentials
+        run: |
+          if [ -z "${{ secrets.CROWDIN_PERSONAL_TOKEN }}" ] || [ -z "${{ secrets.CROWDIN_GH_TOKEN }}" ]; then
+            echo "::notice title=Skipping Crowdin upload::Missing CROWDIN_PERSONAL_TOKEN or CROWDIN_GH_TOKEN secret."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Upload translations to Crowdin
+        if: steps.check-credentials.outputs.ready == 'true'
         uses: crowdin/github-action@v2
         with:
           upload_sources: true
