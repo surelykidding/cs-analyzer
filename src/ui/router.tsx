@@ -1,5 +1,5 @@
 import React from 'react';
-import { createHashRouter, createRoutesFromElements, Route } from 'react-router';
+import { createHashRouter, createRoutesFromElements, Navigate, Route } from 'react-router';
 import { Root } from 'csdm/ui/bootstrap/root';
 import { Downloads } from 'csdm/ui/downloads/downloads';
 import { Matches } from 'csdm/ui/matches/matches';
@@ -114,16 +114,33 @@ export const router = createHashRouter(
       </Route>
       <Route path={RoutePath.Search} element={<Search />} />
       <Route path={RoutePath.Ban} element={<BanStats />} />
-      <Route path={RoutePath.Analyses} element={<Analyses />} />
+      <Route path={RoutePath.Analyses} element={<Analyses />}>
+        <Route
+          index={true}
+          element={<Navigate replace={true} to={`${RoutePath.Analyses}/${RoutePath.AnalysesFaceitScouting}`} />}
+        />
+        <Route path={RoutePath.AnalysesFaceitScouting} element={<FaceitScouting />} />
+        <Route path={RoutePath.Analyses5EPlayScouting} element={<FiveEPlayScouting />} />
+        <Route path={RoutePath.AnalysesPerfectWorldScouting} element={<PerfectWorldScouting />} />
+      </Route>
       <Route path={RoutePath.Downloads} element={<Downloads />}>
         <Route index={true} element={<ValveLastMatchesLoader />} />
         <Route path={RoutePath.DownloadsFaceit} element={<FaceitLastMatches />} />
-        <Route path={RoutePath.DownloadsFaceitScouting} element={<FaceitScouting />} />
+        <Route
+          path={RoutePath.DownloadsFaceitScouting}
+          element={<Navigate replace={true} to={`${RoutePath.Analyses}/${RoutePath.AnalysesFaceitScouting}`} />}
+        />
         <Route path={RoutePath.DownloadsRenown} element={<RenownLastMatches />} />
         <Route path={RoutePath.Downloads5EPlay} element={<FiveEPlayLastMatches />} />
-        <Route path={RoutePath.Downloads5EPlayScouting} element={<FiveEPlayScouting />} />
+        <Route
+          path={RoutePath.Downloads5EPlayScouting}
+          element={<Navigate replace={true} to={`${RoutePath.Analyses}/${RoutePath.Analyses5EPlayScouting}`} />}
+        />
         <Route path={RoutePath.DownloadsPerfectWorld} element={<PerfectWorldLastMatches />} />
-        <Route path={RoutePath.DownloadsPerfectWorldScouting} element={<PerfectWorldScouting />} />
+        <Route
+          path={RoutePath.DownloadsPerfectWorldScouting}
+          element={<Navigate replace={true} to={`${RoutePath.Analyses}/${RoutePath.AnalysesPerfectWorldScouting}`} />}
+        />
         <Route path={RoutePath.DownloadsPending} element={<PendingDownloads />} />
       </Route>
       <Route path={RoutePath.Videos} element={<Videos />} />

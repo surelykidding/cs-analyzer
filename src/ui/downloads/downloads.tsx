@@ -16,23 +16,14 @@ export function Downloads() {
         <TabLink url={RoutePath.DownloadsFaceit}>
           <Trans>FACEIT</Trans>
         </TabLink>
-        <TabLink url={RoutePath.DownloadsFaceitScouting}>
-          <Trans>FACEIT Scouting</Trans>
-        </TabLink>
         <TabLink url={RoutePath.DownloadsRenown}>
           <Trans>Renown</Trans>
         </TabLink>
         <TabLink url={RoutePath.Downloads5EPlay}>
           <Trans>5EPlay</Trans>
         </TabLink>
-        <TabLink url={RoutePath.Downloads5EPlayScouting}>
-          <Trans>5EPlay Scouting</Trans>
-        </TabLink>
         <TabLink url={RoutePath.DownloadsPerfectWorld}>
           <Trans>Perfect World</Trans>
-        </TabLink>
-        <TabLink url={RoutePath.DownloadsPerfectWorldScouting}>
-          <Trans>Perfect World Scouting</Trans>
         </TabLink>
         <PendingDownloadsLink />
       </TabLinks>
