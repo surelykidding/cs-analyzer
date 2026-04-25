@@ -1,6 +1,6 @@
 {
   "name": "cs-demo-manager",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0",
   "description": "Counter-Strike tactics and scouting analyzer for demo review.",
   "keywords": [
     "CS",
