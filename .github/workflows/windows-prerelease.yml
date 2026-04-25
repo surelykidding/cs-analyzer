@@ -11,6 +11,7 @@ on:
       # Keep this workflow self-triggerable for refreshed prerelease assets.
       # Beta refresh includes locale, default-download, release upload retry, and MIT attribution updates.
       # 2026-04-25: refresh prerelease assets after the FACEIT scouting re-extraction fix.
+      # 2026-04-25: refresh prerelease assets after the FACEIT manual-download filename compatibility fix.
       - .github/workflows/windows-prerelease.yml
 
 permissions:

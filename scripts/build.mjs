@@ -17,6 +17,11 @@ const commonDefine = {
   IS_DEV: 'false',
 };
 
+const buildTimeEnvDefine = {
+  'process.env.STEAM_API_KEYS': `"${process.env.STEAM_API_KEYS ?? ''}"`,
+  'process.env.FACEIT_API_KEY': `"${process.env.FACEIT_API_KEY ?? ''}"`,
+};
+
 async function buildRendererProcessBundle() {
   await build({
     mode: 'production',
@@ -59,8 +64,7 @@ async function buildWebSocketServerBundle() {
     ],
     define: {
       ...commonDefine,
-      'process.env.STEAM_API_KEYS': `"${process.env.STEAM_API_KEYS}"`,
-      'process.env.FACEIT_API_KEY': `"${process.env.FACEIT_API_KEY}"`,
+      ...buildTimeEnvDefine,
     },
     alias: {
       // Force fdir to use the CJS version to avoid createRequire(import.meta.url) not working
@@ -81,7 +85,10 @@ async function buildMainProcessBundle() {
     target: `node${node}`,
     mainFields: ['module', 'main'],
     external: ['electron'],
-    define: commonDefine,
+    define: {
+      ...commonDefine,
+      ...buildTimeEnvDefine,
+    },
     plugins: [nativeNodeModulesPlugin],
   });
 
@@ -124,8 +131,7 @@ async function buildCliBundle() {
     mainFields: ['module', 'main'],
     define: {
       ...commonDefine,
-      'process.env.STEAM_API_KEYS': `"${process.env.STEAM_API_KEYS}"`,
-      'process.env.FACEIT_API_KEY': `"${process.env.FACEIT_API_KEY}"`,
+      ...buildTimeEnvDefine,
     },
     external: ['pg-native', '@aws-sdk/client-s3'],
     alias: {

@@ -20,10 +20,10 @@ import { getFaceitApiKey } from 'csdm/node/faceit-web-api/get-faceit-api-key';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { fetchCurrentFaceitAccount } from 'csdm/node/database/faceit-account/fetch-current-faceit-account';
 import {
-  detectDemoArchiveFormat,
+  detectDemoArchiveFormatFromFile,
   extractDemoArchiveToFile,
+  getEmbeddedDemoEntryName,
   isCompressedDemoArchiveFormat,
-  isPotentialDemoDownloadPath,
 } from 'csdm/node/demo-archive/demo-archive';
 import {
   DEFAULT_MAX_CONCURRENT_TACTICS_POSITION_GENERATIONS,
@@ -37,15 +37,64 @@ function buildTargetOutputFolderPath(sessionId: string, faceitMatchId: string) {
   return path.join(os.tmpdir(), 'cs-demo-manager', 'faceit-scouting', sessionId, faceitMatchId);
 }
 
-async function buildExtractedDemoPath(filePath: string) {
+function getFileNameWithoutKnownArchiveExtensions(fileName: string) {
+  const lowerFileName = fileName.toLowerCase();
+  if (lowerFileName.endsWith('.dem.gz')) {
+    return fileName.slice(0, -'.dem.gz'.length);
+  }
+
+  if (lowerFileName.endsWith('.dem.bz2')) {
+    return fileName.slice(0, -'.dem.bz2'.length);
+  }
+
+  if (lowerFileName.endsWith('.dem.zst')) {
+    return fileName.slice(0, -'.dem.zst'.length);
+  }
+
+  if (lowerFileName.endsWith('.zip')) {
+    return fileName.slice(0, -'.zip'.length);
+  }
+
+  if (lowerFileName.endsWith('.gz')) {
+    return fileName.slice(0, -'.gz'.length);
+  }
+
+  if (lowerFileName.endsWith('.bz2')) {
+    return fileName.slice(0, -'.bz2'.length);
+  }
+
+  if (lowerFileName.endsWith('.zst')) {
+    return fileName.slice(0, -'.zst'.length);
+  }
+
+  if (lowerFileName.endsWith('.dem')) {
+    return fileName.slice(0, -'.dem'.length);
+  }
+
+  return fileName;
+}
+
+function getNormalizedDownloadNameCandidates(filePath: string, embeddedEntryName: string | null) {
+  const candidates = [path.basename(filePath)];
+  if (embeddedEntryName !== null && embeddedEntryName !== '') {
+    candidates.push(path.basename(embeddedEntryName));
+  }
+
+  return [...new Set(candidates.map((candidate) => getFileNameWithoutKnownArchiveExtensions(candidate).toLowerCase()))];
+}
+
+async function buildExtractedDemoPath(filePath: string, embeddedEntryName: string | null) {
   const directoryPath = path.dirname(filePath);
-  const archiveFormat = detectDemoArchiveFormat(filePath);
+  const archiveFormat = await detectDemoArchiveFormatFromFile(filePath);
   if (!isCompressedDemoArchiveFormat(archiveFormat)) {
     return filePath;
   }
 
-  const baseName = path.parse(filePath).name;
-  const extractedBaseName = baseName.toLowerCase().endsWith('.dem') ? path.parse(baseName).name : baseName;
+  const baseName =
+    embeddedEntryName !== null && embeddedEntryName !== ''
+      ? path.basename(embeddedEntryName)
+      : path.basename(filePath);
+  const extractedBaseName = getFileNameWithoutKnownArchiveExtensions(baseName);
 
   let candidatePath = path.join(directoryPath, `${extractedBaseName}.dem`);
   if (!(await fs.pathExists(candidatePath))) {
@@ -320,10 +369,6 @@ class FaceitScoutingSessionManager {
   };
 
   private onFileAdded = (filePath: string) => {
-    if (!isPotentialDemoDownloadPath(filePath)) {
-      return;
-    }
-
     this.queuedFilePaths.add(filePath);
     void this.startQueueWorkers();
   };
@@ -382,12 +427,16 @@ class FaceitScoutingSessionManager {
       return;
     }
 
-    const fileName = path.basename(filePath).toLowerCase();
+    const archiveFormat = await detectDemoArchiveFormatFromFile(filePath);
+    const embeddedEntryName = isCompressedDemoArchiveFormat(archiveFormat)
+      ? await getEmbeddedDemoEntryName(filePath, archiveFormat)
+      : null;
+    const fileNameCandidates = getNormalizedDownloadNameCandidates(filePath, embeddedEntryName);
     const target = session.targets.find((target) => {
       return (
         (target.status === FaceitScoutingTargetStatus.AwaitingDownload ||
           target.status === FaceitScoutingTargetStatus.Error) &&
-        fileName.includes(target.faceitMatchId.toLowerCase())
+        fileNameCandidates.some((fileName) => fileName.includes(target.faceitMatchId.toLowerCase()))
       );
     });
     if (target === undefined || this.processingTargetIds.has(target.id)) {
@@ -416,10 +465,9 @@ class FaceitScoutingSessionManager {
         .where('id', '=', session.id)
         .executeTakeFirstOrThrow();
       const opponentSteamIds: string[] = JSON.parse(sessionRow.opponent_steam_ids_json);
-      const archiveFormat = detectDemoArchiveFormat(filePath);
       demoFilePath = filePath;
       if (isCompressedDemoArchiveFormat(archiveFormat)) {
-        const extractedDemoPath = await buildExtractedDemoPath(filePath);
+        const extractedDemoPath = await buildExtractedDemoPath(filePath, embeddedEntryName);
         await extractDemoArchiveToFile(filePath, extractedDemoPath, archiveFormat);
         demoFilePath = extractedDemoPath;
         ownedDownloadFilePath = extractedDemoPath;
@@ -522,7 +570,7 @@ class FaceitScoutingSessionManager {
     for (const entry of entries) {
       const filePath = path.join(downloadFolderPath, entry);
       const stat = await fs.stat(filePath).catch(() => undefined);
-      if (stat?.isFile() && isPotentialDemoDownloadPath(filePath)) {
+      if (stat?.isFile()) {
         this.queuedFilePaths.add(filePath);
       }
     }

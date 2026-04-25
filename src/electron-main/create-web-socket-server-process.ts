@@ -7,7 +7,11 @@ export function createWebSocketServerProcess() {
   const serverFilePath = path.join(app.getAppPath(), 'server.js');
   const serverProcess: ChildProcess = fork(serverFilePath, {
     silent: true, // pipe back all outputs to the main process to log possible fork() errors
-    env: process.env, // Inject all variables created from the main Electron process to make them accessible from the server process.
+    env: {
+      ...process.env,
+      FACEIT_API_KEY: process.env.FACEIT_API_KEY,
+      STEAM_API_KEYS: process.env.STEAM_API_KEYS,
+    }, // Pass bundled API keys through the forked server process in production builds.
   });
   let isProcessStarted = false;
 
