@@ -22,6 +22,7 @@ import { fetchCurrentFaceitAccount } from 'csdm/node/database/faceit-account/fet
 import {
   detectDemoArchiveFormat,
   extractDemoArchiveToFile,
+  isCompressedDemoArchiveFormat,
   isPotentialDemoDownloadPath,
 } from 'csdm/node/demo-archive/demo-archive';
 import {
@@ -39,35 +40,21 @@ function buildTargetOutputFolderPath(sessionId: string, faceitMatchId: string) {
 async function buildExtractedDemoPath(filePath: string) {
   const directoryPath = path.dirname(filePath);
   const archiveFormat = detectDemoArchiveFormat(filePath);
-  if (archiveFormat === null) {
+  if (!isCompressedDemoArchiveFormat(archiveFormat)) {
     return filePath;
   }
 
-  let baseName = path.parse(filePath).name;
-  if (baseName.toLowerCase().endsWith('.dem')) {
-    let candidatePath = path.join(directoryPath, baseName);
-    if (!(await fs.pathExists(candidatePath))) {
-      return candidatePath;
-    }
+  const baseName = path.parse(filePath).name;
+  const extractedBaseName = baseName.toLowerCase().endsWith('.dem') ? path.parse(baseName).name : baseName;
 
-    let index = 1;
-    while (true) {
-      candidatePath = path.join(directoryPath, `${path.parse(baseName).name}-${index}.dem`);
-      if (!(await fs.pathExists(candidatePath))) {
-        return candidatePath;
-      }
-      index += 1;
-    }
-  }
-
-  let candidatePath = path.join(directoryPath, `${baseName}.dem`);
+  let candidatePath = path.join(directoryPath, `${extractedBaseName}.dem`);
   if (!(await fs.pathExists(candidatePath))) {
     return candidatePath;
   }
 
   let index = 1;
   while (true) {
-    candidatePath = path.join(directoryPath, `${baseName}-${index}.dem`);
+    candidatePath = path.join(directoryPath, `${extractedBaseName}-${index}.dem`);
     if (!(await fs.pathExists(candidatePath))) {
       return candidatePath;
     }
@@ -431,7 +418,7 @@ class FaceitScoutingSessionManager {
       const opponentSteamIds: string[] = JSON.parse(sessionRow.opponent_steam_ids_json);
       const archiveFormat = detectDemoArchiveFormat(filePath);
       demoFilePath = filePath;
-      if (archiveFormat !== null) {
+      if (isCompressedDemoArchiveFormat(archiveFormat)) {
         const extractedDemoPath = await buildExtractedDemoPath(filePath);
         await extractDemoArchiveToFile(filePath, extractedDemoPath, archiveFormat);
         demoFilePath = extractedDemoPath;

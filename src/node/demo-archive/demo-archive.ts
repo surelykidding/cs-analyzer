@@ -6,6 +6,7 @@ import unzipper from 'unzipper';
 import b2 from 'unbzip2-stream';
 
 export type DemoArchiveFormat = 'dem' | 'gz' | 'bz2' | 'zip' | 'zst';
+export type CompressedDemoArchiveFormat = Exclude<DemoArchiveFormat, 'dem'>;
 
 export function isPotentialDemoDownloadPath(filePath: string) {
   const lowerPath = filePath.toLowerCase();
@@ -50,6 +51,12 @@ export function detectDemoArchiveFormat(filePathOrUrl: string, contentType: stri
   }
 
   return null;
+}
+
+export function isCompressedDemoArchiveFormat(
+  archiveFormat: DemoArchiveFormat | null,
+): archiveFormat is CompressedDemoArchiveFormat {
+  return archiveFormat !== null && archiveFormat !== 'dem';
 }
 
 export function createDemoArchiveExtractStream(archiveFormat: DemoArchiveFormat): NodeJS.ReadWriteStream {
