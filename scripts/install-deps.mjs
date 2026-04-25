@@ -84,7 +84,9 @@ export async function installDemoAnalyzer(platform = process.platform, arch = pr
 
   const npmBinPath = path.join(projectPath, 'node_modules/@akiver/cs-demo-analyzer/dist/bin', getBinarySubpath());
   const destinationPath = path.join(staticFolderPath, platform === 'win32' ? 'csda.exe' : 'csda');
-  if (await supportsEnhancedDemoAnalyzer(destinationPath)) {
+  const npmBinarySupportsEnhancedFlags = await supportsEnhancedDemoAnalyzer(npmBinPath);
+  const destinationSupportsEnhancedFlags = await supportsEnhancedDemoAnalyzer(destinationPath);
+  if (!npmBinarySupportsEnhancedFlags && destinationSupportsEnhancedFlags) {
     return;
   }
 

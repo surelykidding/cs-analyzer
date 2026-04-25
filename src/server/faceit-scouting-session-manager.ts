@@ -120,6 +120,38 @@ async function deleteOwnedFile(filePath: string) {
   }
 }
 
+function shouldIgnoreDownloadFile(filePath: string) {
+  const fileName = path.basename(filePath).toLowerCase();
+
+  return fileName.endsWith('.crdownload') || fileName.endsWith('.part');
+}
+
+function normalizeFilePathForComparison(filePath: string | null) {
+  return filePath === null ? null : path.normalize(filePath).toLowerCase();
+}
+
+function canRetryErroredTarget(
+  target: {
+    status: FaceitScoutingTargetStatus;
+    ownedArchiveFilePath: string | null;
+    ownedDownloadFilePath: string | null;
+    demoFilePath: string | null;
+  },
+  filePath: string,
+) {
+  if (target.status !== FaceitScoutingTargetStatus.Error) {
+    return false;
+  }
+
+  const normalizedFilePath = normalizeFilePathForComparison(filePath);
+
+  return ![
+    normalizeFilePathForComparison(target.ownedArchiveFilePath),
+    normalizeFilePathForComparison(target.ownedDownloadFilePath),
+    normalizeFilePathForComparison(target.demoFilePath),
+  ].includes(normalizedFilePath);
+}
+
 function shouldDeleteTargetDemoFile(target: {
   demoFilePath: string | null;
   ownedDownloadFilePath: string | null;
@@ -422,6 +454,10 @@ class FaceitScoutingSessionManager {
   };
 
   private processDownloadedFile = async (filePath: string) => {
+    if (shouldIgnoreDownloadFile(filePath)) {
+      return;
+    }
+
     const session = await fetchCurrentFaceitScoutingSession();
     if (session === undefined) {
       return;
@@ -435,7 +471,7 @@ class FaceitScoutingSessionManager {
     const target = session.targets.find((target) => {
       return (
         (target.status === FaceitScoutingTargetStatus.AwaitingDownload ||
-          target.status === FaceitScoutingTargetStatus.Error) &&
+          canRetryErroredTarget(target, filePath)) &&
         fileNameCandidates.some((fileName) => fileName.includes(target.faceitMatchId.toLowerCase()))
       );
     });
