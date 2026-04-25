@@ -1,9 +1,14 @@
 import { Arch } from 'electron-builder';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import fs from 'fs-extra';
 import pkg from './package.json' with { type: 'json' };
 
 const repositoryUrl = 'https://github.com/surelykidding/cs-analyzer';
 const releasesUrl = `${repositoryUrl}/releases`;
 const releaseTag = `cs-analyzer-v${pkg.version}`;
+const rootFolderPath = fileURLToPath(new URL('.', import.meta.url));
+const staticFolderPath = path.join(rootFolderPath, 'static');
 
 let shouldNotarize = process.platform === 'darwin';
 
@@ -153,11 +158,18 @@ const config = {
       await import('./scripts/install-deps.mjs');
     const arch = Arch[context.arch];
     const platform = context.packager.platform.nodeName;
-    await Promise.all([
-      installDemoAnalyzer(platform, arch),
-      installBoilerWritter(platform, arch),
-      installCounterStrikeVoiceExtractor(platform),
-    ]);
+
+    const installTasks = [installDemoAnalyzer(platform, arch)];
+
+    if (!(await fs.pathExists(path.join(staticFolderPath, 'boiler-writter')))) {
+      installTasks.push(installBoilerWritter(platform, arch));
+    }
+
+    if (!(await fs.pathExists(path.join(staticFolderPath, 'csgove')))) {
+      installTasks.push(installCounterStrikeVoiceExtractor(platform));
+    }
+
+    await Promise.all(installTasks);
   },
 };
 

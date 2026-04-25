@@ -1,27 +1,11 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { execFile } from 'node:child_process';
-import { promisify } from 'node:util';
 import fs from 'fs-extra';
 
 const projectPath = fileURLToPath(new URL('..', import.meta.url));
 const staticFolderPath = fileURLToPath(new URL('../static', import.meta.url));
-const execFileAsync = promisify(execFile);
 
-const enhancedAnalyzerFlags = [
-  '-rounds',
-  '-position-entities',
-  '-position-window-start-seconds',
-  '-position-window-end-seconds',
-];
-
-function outputChunkToString(chunk) {
-  if (chunk === undefined) {
-    return '';
-  }
-
-  return typeof chunk === 'string' ? chunk : chunk.toString();
-}
+const enhancedAnalyzerFlags = ['position-entities', 'position-window-start-seconds', 'position-window-end-seconds'];
 
 async function supportsEnhancedDemoAnalyzer(binaryPath) {
   if (!(await fs.pathExists(binaryPath))) {
@@ -29,14 +13,10 @@ async function supportsEnhancedDemoAnalyzer(binaryPath) {
   }
 
   try {
-    const { stdout, stderr } = await execFileAsync(binaryPath, ['--help'], {
-      windowsHide: true,
-    });
-    const output = `${stdout}\n${stderr}`;
+    const output = (await fs.readFile(binaryPath)).toString('latin1');
     return enhancedAnalyzerFlags.every((flag) => output.includes(flag));
   } catch (error) {
-    const output = `${outputChunkToString(error?.stdout)}\n${outputChunkToString(error?.stderr)}`;
-    return enhancedAnalyzerFlags.every((flag) => output.includes(flag));
+    return false;
   }
 }
 
