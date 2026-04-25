@@ -20,9 +20,16 @@ export type DemoAnalyzerCapabilities = {
 
 const capabilitiesCache = new Map<string, Promise<DemoAnalyzerCapabilities>>();
 
+function isEmbeddedBinaryScannableFlag(flag: string) {
+  return tacticsDemoAnalyzerFlags.includes(flag);
+}
+
 export function parseSupportedDemoAnalyzerFlags(output: string, knownFlags = allKnownDemoAnalyzerFlags) {
   return knownFlags.filter((flag) => {
-    return output.includes(`-${flag}`) || output.includes(flag);
+    const escapedFlag = flag.replaceAll('-', '\\-');
+    const flagPattern = new RegExp(`(^|[^A-Za-z0-9-])-?${escapedFlag}($|[^A-Za-z0-9-])`);
+
+    return flagPattern.test(output) || (isEmbeddedBinaryScannableFlag(flag) && output.includes(flag));
   });
 }
 

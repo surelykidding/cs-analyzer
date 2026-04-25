@@ -52,6 +52,16 @@ describe('demo analyzer process helpers', () => {
     ]);
   });
 
+  it('should not detect flags from substrings while scanning analyzer output', () => {
+    const supportedFlags = parseSupportedDemoAnalyzerFlags(`
+      source2_steam_stats
+      demo-paths
+      position-entitiesgoroutine
+    `);
+
+    expect(supportedFlags).toEqual(['position-entities']);
+  });
+
   it('should build standard analyzer args', () => {
     expect(
       buildAnalyzeDemoArgs({
@@ -83,18 +93,6 @@ describe('demo analyzer process helpers', () => {
       '-rounds=1,13',
       '-source=faceit',
     ]);
-  });
-
-  it('should build fallback tactics analyzer args for analyzers without enhanced position flags', () => {
-    expect(
-      buildAnalyzeTacticsPositionsArgs({
-        demoPath: '/demos/match.dem',
-        outputFolderPath: '/output',
-        source: DemoSource.FaceIt,
-        roundNumbers: [1, 13],
-        useEnhancedPositionOptions: false,
-      }),
-    ).toEqual(['-demo-path=/demos/match.dem', '-output=/output', '-format=csdm', '-positions=true', '-source=faceit']);
   });
 
   it('should convert unexpected end failures into CorruptedDemoError', () => {

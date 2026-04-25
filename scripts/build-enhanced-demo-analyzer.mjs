@@ -8,7 +8,12 @@ const rootFolderPath = path.resolve(currentFolderPath, '..');
 const analyzerSourcePath = path.join(rootFolderPath, 'tools', 'demo-analyzer', 'cs-demo-analyzer-enhanced');
 const staticFolderPath = path.join(rootFolderPath, 'static');
 const tempFolderPath = path.join(rootFolderPath, '.tmp');
-const enhancedAnalyzerFlags = ['position-entities', 'position-window-start-seconds', 'position-window-end-seconds'];
+const enhancedAnalyzerFlags = [
+  'position-entities',
+  'position-window-start-seconds',
+  'position-window-end-seconds',
+  'rounds',
+];
 
 const supportedTargets = {
   'darwin-arm64': { goos: 'darwin', goarch: 'arm64', binaryName: 'csda' },
@@ -103,7 +108,12 @@ export async function supportsEnhancedDemoAnalyzer(binaryPath) {
   }
 
   const binaryContent = (await fs.readFile(binaryPath)).toString('latin1');
-  return enhancedAnalyzerFlags.every((flag) => binaryContent.includes(flag));
+  return enhancedAnalyzerFlags.every((flag) => {
+    const escapedFlag = flag.replaceAll('-', '\\-');
+    const flagPattern = new RegExp(`(^|[^A-Za-z0-9-])-?${escapedFlag}($|[^A-Za-z0-9-])`);
+
+    return flagPattern.test(binaryContent) || binaryContent.includes(flag);
+  });
 }
 
 export async function buildEnhancedDemoAnalyzer({

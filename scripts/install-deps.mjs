@@ -11,6 +11,13 @@ async function getAnalyzerFlags() {
   return fs.readJson(analyzerFlagsPath);
 }
 
+function hasDemoAnalyzerFlag(output, flag) {
+  const escapedFlag = flag.replaceAll('-', '\\-');
+  const flagPattern = new RegExp(`(^|[^A-Za-z0-9-])-?${escapedFlag}($|[^A-Za-z0-9-])`);
+
+  return flagPattern.test(output) || output.includes(flag);
+}
+
 async function supportsDemoAnalyzerFlags(binaryPath, flags) {
   if (!(await fs.pathExists(binaryPath))) {
     return false;
@@ -18,7 +25,7 @@ async function supportsDemoAnalyzerFlags(binaryPath, flags) {
 
   try {
     const output = (await fs.readFile(binaryPath)).toString('latin1');
-    return flags.every((flag) => output.includes(flag));
+    return flags.every((flag) => hasDemoAnalyzerFlag(output, flag));
   } catch (error) {
     return false;
   }
@@ -88,7 +95,7 @@ export async function installDemoAnalyzer(
   );
   const destinationPath = path.join(staticFolderPath, platform === 'win32' ? 'csda.exe' : 'csda');
   const analyzerFlags = await getAnalyzerFlags();
-  const enhancedAnalyzerFlags = [...analyzerFlags.core, ...analyzerFlags.tactics];
+  const enhancedAnalyzerFlags = analyzerFlags.tactics;
 
   getEnhancedDemoAnalyzerTarget(platformKey);
   try {
