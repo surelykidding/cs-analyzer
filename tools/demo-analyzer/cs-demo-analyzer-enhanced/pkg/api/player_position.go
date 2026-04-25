@@ -1,6 +1,8 @@
 package api
 
 import (
+	"sort"
+
 	"github.com/akiver/cs-demo-analyzer/internal/slice"
 	"github.com/akiver/cs-demo-analyzer/pkg/api/constants"
 	common "github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/common"
@@ -85,6 +87,13 @@ func newPlayerPosition(analyzer *Analyzer, player *common.Player) *PlayerPositio
 		activeWeapon = equipmentToWeaponName[player.ActiveWeapon().Type]
 	}
 
+	sortWeaponNames(equipments)
+	sortWeaponNames(grenades)
+	sortWeaponNames(pistols)
+	sortWeaponNames(smgs)
+	sortWeaponNames(rifles)
+	sortWeaponNames(heavy)
+
 	return &PlayerPosition{
 		Frame:                  parser.CurrentFrame(),
 		Tick:                   analyzer.currentTick(),
@@ -118,4 +127,10 @@ func newPlayerPosition(analyzer *Analyzer, player *common.Player) *PlayerPositio
 		Rifles:                 rifles,
 		Heavy:                  heavy,
 	}
+}
+
+func sortWeaponNames(weaponNames []constants.WeaponName) {
+	sort.Slice(weaponNames, func(firstIndex int, secondIndex int) bool {
+		return weaponNames[firstIndex] < weaponNames[secondIndex]
+	})
 }

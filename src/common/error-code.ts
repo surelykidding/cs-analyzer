@@ -108,6 +108,7 @@ export const ErrorCode = {
   InvalidMatchDate: 3101,
   AnalyzeCorruptedDemo: 3200,
   InsertMatchDuplicatedChecksum: 3201,
+  DemoAnalyzerIncompatible: 3202,
   InsertRoundsError: 3210,
 
   SteamNotRunning: 4000,

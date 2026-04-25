@@ -1,6 +1,6 @@
 import path from 'node:path';
 import { spawn } from 'node:child_process';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import fs from 'fs-extra';
 
 const currentFolderPath = fileURLToPath(new URL('.', import.meta.url));
@@ -17,6 +17,17 @@ const supportedTargets = {
   'linux-x64': { goos: 'linux', goarch: 'amd64', binaryName: 'csda' },
   'win32-x64': { goos: 'windows', goarch: 'amd64', binaryName: 'csda.exe' },
 };
+
+export function getEnhancedDemoAnalyzerTarget(targetName) {
+  const target = supportedTargets[targetName];
+  if (target === undefined) {
+    throw new Error(
+      `Unsupported target "${targetName}". Supported targets: ${Object.keys(supportedTargets).join(', ')}`,
+    );
+  }
+
+  return target;
+}
 
 function parseArgs(argv) {
   const options = {};
@@ -86,7 +97,7 @@ function run(command, args, options) {
   });
 }
 
-async function supportsEnhancedDemoAnalyzer(binaryPath) {
+export async function supportsEnhancedDemoAnalyzer(binaryPath) {
   if (!(await fs.pathExists(binaryPath))) {
     return false;
   }
@@ -95,26 +106,18 @@ async function supportsEnhancedDemoAnalyzer(binaryPath) {
   return enhancedAnalyzerFlags.every((flag) => binaryContent.includes(flag));
 }
 
-async function main() {
-  const options = parseArgs(process.argv.slice(2));
-  if (options.help) {
-    printUsage();
-    return;
-  }
-
-  const targetName = options.target ?? `${process.platform}-${process.arch}`;
-  const target = supportedTargets[targetName];
-  if (target === undefined) {
-    throw new Error(`Unsupported target "${targetName}". Supported targets: ${Object.keys(supportedTargets).join(', ')}`);
-  }
-
-  const outputPath = path.resolve(options.output ?? path.join(staticFolderPath, target.binaryName));
+export async function buildEnhancedDemoAnalyzer({
+  targetName = `${process.platform}-${process.arch}`,
+  outputPath,
+} = {}) {
+  const target = getEnhancedDemoAnalyzerTarget(targetName);
+  const resolvedOutputPath = path.resolve(outputPath ?? path.join(staticFolderPath, target.binaryName));
   const goBuildCachePath = process.env.GOCACHE ?? path.join(tempFolderPath, 'go-build-cache');
   const goModCachePath = process.env.GOMODCACHE ?? path.join(tempFolderPath, 'go-mod-cache');
   const goPath = process.env.GOPATH ?? path.join(tempFolderPath, 'go');
 
   await Promise.all([
-    fs.ensureDir(path.dirname(outputPath)),
+    fs.ensureDir(path.dirname(resolvedOutputPath)),
     fs.ensureDir(goBuildCachePath),
     fs.ensureDir(goModCachePath),
     fs.ensureDir(goPath),
@@ -131,21 +134,38 @@ async function main() {
     GOOS: target.goos,
   };
 
-  await run('go', ['build', '-trimpath', '-o', outputPath, './cmd/cli'], {
+  await run('go', ['build', '-trimpath', '-o', resolvedOutputPath, './cmd/cli'], {
     cwd: analyzerSourcePath,
     env: environment,
   });
 
-  if (!(await supportsEnhancedDemoAnalyzer(outputPath))) {
-    throw new Error(`Built analyzer at ${outputPath} is missing the enhanced tactics flags`);
+  if (!(await supportsEnhancedDemoAnalyzer(resolvedOutputPath))) {
+    throw new Error(`Built analyzer at ${resolvedOutputPath} is missing the enhanced tactics flags`);
   }
 
-  console.log(`Built enhanced demo analyzer for ${targetName}: ${outputPath}`);
+  console.log(`Built enhanced demo analyzer for ${targetName}: ${resolvedOutputPath}`);
+
+  return resolvedOutputPath;
 }
 
-try {
-  await main();
-} catch (error) {
-  console.error(error);
-  process.exit(1);
+async function main() {
+  const options = parseArgs(process.argv.slice(2));
+  if (options.help) {
+    printUsage();
+    return;
+  }
+
+  await buildEnhancedDemoAnalyzer({
+    targetName: options.target,
+    outputPath: options.output,
+  });
+}
+
+if (process.argv[1] !== undefined && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  try {
+    await main();
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
 }

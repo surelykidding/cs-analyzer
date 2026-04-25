@@ -35,8 +35,7 @@ The key custom flags are implemented in `tools/demo-analyzer/cs-demo-analyzer-en
   Ignores positions before the configured point after freeze time ends.
 - `-position-window-end-seconds`
   Stops capturing positions once the configured time window is over.
-
-On the app side, `src/node/demo/analyze-tactics-positions.ts` only requests player positions for a short time window, and the UI still parallelizes multiple demos at the task layer with `src/common/run-tasks-with-concurrency.ts`.
+  On the app side, `src/node/demo/analyze-tactics-positions.ts` only requests player positions for a short time window, and the UI still parallelizes multiple demos at the task layer with `src/common/run-tasks-with-concurrency.ts`.
 
 ## CS2 compatibility patches
 
@@ -78,6 +77,22 @@ npm run analyzer:build -- --target win32-x64 --output D:\\temp\\csda.exe
 
 The build script verifies that the resulting binary still contains the enhanced tactics flags before it succeeds.
 
+## Release flow
+
+Do not publish packages with the stock npm analyzer copied into `static`.
+
+The release/build flow must compile the enhanced analyzer from the vendored source first, then let Electron Builder package the platform-specific binary:
+
+```bash
+npm run analyzer:build -- --target darwin-arm64
+npm run analyzer:build -- --target darwin-x64
+npm run analyzer:build -- --target linux-x64
+npm run analyzer:build -- --target win32-x64
+npm run build
+```
+
+`electron-builder` also calls `installDemoAnalyzer(..., { requireEnhanced: true })` in `beforePack`, so packaging fails instead of silently falling back to an incompatible stock analyzer.
+
 ## Benchmarks
 
 The benchmark sources are intentionally kept in the repository because they are useful whenever we change the analyzer or the tactics import flow.
@@ -86,7 +101,7 @@ Available commands:
 
 ```bash
 npm run benchmark:analyzer:positions
-npm run benchmark:analyzer:pistol-concurrency
+npm run benchmark:analyzer:tactics-concurrency
 ```
 
 What they do:
@@ -95,9 +110,8 @@ What they do:
   Clones the current Postgres database, clears stored positions for the two latest imported CS2 demos, and compares:
   - full position generation
   - tactics position generation
-  - pistol-round position generation
-- `benchmark:analyzer:pistol-concurrency`
-  Clones the current Postgres database and compares serial pistol generation versus a 2-worker parallel batch.
+- `benchmark:analyzer:tactics-concurrency`
+  Clones the current Postgres database and compares serial tactics generation versus a 2-worker parallel batch.
 
 Benchmark prerequisites:
 

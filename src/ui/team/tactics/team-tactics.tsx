@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Trans } from '@lingui/react/macro';
 import { uniqueArray } from 'csdm/common/array/unique-array';
 import { DEFAULT_MAX_CONCURRENT_TACTICS_POSITION_GENERATIONS } from 'csdm/common/analyses';
+import { ErrorCode } from 'csdm/common/error-code';
 import { runTasksWithConcurrency } from 'csdm/common/run-tasks-with-concurrency';
 import { EconomyType, Game, TeamNumber } from 'csdm/common/types/counter-strike';
 import { Status } from 'csdm/common/types/status';
@@ -53,13 +54,24 @@ export function TeamTactics() {
   const [refreshToken, setRefreshToken] = useState(0);
   const autoSwitchedRadarLevelKeyRef = useRef<string | null>(null);
 
-  const cs2Matches = team.matches.filter((match) => {
-    return match.game === Game.CS2;
-  });
-  const mapNames = uniqueArray(cs2Matches.map((match) => match.mapName)).sort((mapA, mapB) => mapA.localeCompare(mapB));
-  const mapNamesKey = mapNames.join(',');
-  const matchChecksumsKey = cs2Matches.map((match) => match.checksum).sort().join(',');
-  const stableMatchChecksums = matchChecksumsKey === '' ? [] : matchChecksumsKey.split(',');
+  const cs2Matches = React.useMemo(() => {
+    return team.matches.filter((match) => {
+      return match.game === Game.CS2;
+    });
+  }, [team.matches]);
+  const mapNames = React.useMemo(() => {
+    return uniqueArray(cs2Matches.map((match) => match.mapName)).sort((mapA, mapB) => mapA.localeCompare(mapB));
+  }, [cs2Matches]);
+  const matchChecksumsKey = React.useMemo(() => {
+    return cs2Matches
+      .map((match) => match.checksum)
+      .sort()
+      .join(',');
+  }, [cs2Matches]);
+  const stableMatchChecksums = React.useMemo(() => {
+    return matchChecksumsKey === '' ? [] : matchChecksumsKey.split(',');
+  }, [matchChecksumsKey]);
+  const skippedMatchesWithoutPositions = response?.skippedMatchesWithoutPositions ?? 0;
   const map = maps.find((map) => map.name === mapName && map.game === Game.CS2);
   const thresholdZ = map?.lowerRadarFilePath ? map.thresholdZ : null;
   const windowStartSeconds = side === TeamNumber.CT ? ctWindowStartSeconds : tWindowStartSeconds;
@@ -102,10 +114,10 @@ export function TeamTactics() {
       setMapName(mapNames[0]);
       setRadarLevel(RadarLevel.Upper);
     }
-  }, [mapName, mapNamesKey, response, status]);
+  }, [mapName, mapNames, response, status]);
 
   useEffect(() => {
-    if (matchChecksumsKey === '' || mapName === '' || map === undefined) {
+    if (stableMatchChecksums.length === 0 || mapName === '' || map === undefined) {
       return;
     }
 
@@ -160,9 +172,9 @@ export function TeamTactics() {
     mapName,
     radarLevel,
     refreshToken,
-    matchChecksumsKey,
     showToast,
     side,
+    stableMatchChecksums,
     teamName,
     thresholdZ,
     windowEndSeconds,
@@ -268,8 +280,16 @@ export function TeamTactics() {
       setRefreshToken((value) => value + 1);
       setStatus(Status.Loading);
     } catch (error) {
+      const isAnalyzerIncompatible = error === ErrorCode.DemoAnalyzerIncompatible;
       showToast({
-        content: <Trans>An error occurred while generating tactics positions.</Trans>,
+        content: isAnalyzerIncompatible ? (
+          <Trans>
+            The bundled demo analyzer is not compatible with tactics analysis. Update the analyzer adapter or reinstall
+            a compatible analyzer binary.
+          </Trans>
+        ) : (
+          <Trans>An error occurred while generating tactics positions.</Trans>
+        ),
         id: 'team-tactics-generate-positions-error',
         type: 'error',
       });
@@ -380,15 +400,15 @@ export function TeamTactics() {
             </div>
           ) : (
             <>
-              {response !== undefined && response.skippedMatchesWithoutPositions > 0 && (
+              {response !== undefined && skippedMatchesWithoutPositions > 0 && (
                 <div className="rounded-8 border border-gray-300 bg-gray-50 p-12">
                   <p className="text-body-strong">
                     <Trans>Missing Positions</Trans>
                   </p>
                   <p className="mt-8 text-caption text-gray-800">
                     <Trans>
-                      {response.skippedMatchesWithoutPositions} matches on this map are missing player positions for the
-                      tactics heatmap.
+                      {skippedMatchesWithoutPositions} matches on this map are missing player positions for the tactics
+                      heatmap.
                     </Trans>
                   </p>
                   <div className="mt-12">

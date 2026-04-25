@@ -24,7 +24,7 @@ type MatchRow = {
   mapName: string;
 };
 
-type BenchmarkMode = 'full' | 'tactics' | 'pistol';
+type BenchmarkMode = 'full' | 'tactics';
 
 function toBenchmarkDatabaseName(sourceDatabaseName: string, benchmarkName: string) {
   return `${sourceDatabaseName}_bench_${benchmarkName}_${Date.now()}_${Math.floor(Math.random() * 10_000)}`.replaceAll(
@@ -194,7 +194,6 @@ async function benchmarkMatch({
   mode,
   match,
   originalSettings,
-  pistolPositionsModule,
   settingsFilePath,
   tacticsPositionsModule,
 }: {
@@ -205,7 +204,6 @@ async function benchmarkMatch({
   mode: BenchmarkMode;
   match: MatchRow;
   originalSettings: Settings;
-  pistolPositionsModule: Awaited<typeof import('csdm/node/database/matches/generate-match-pistol-round-positions')>;
   settingsFilePath: string;
   tacticsPositionsModule: Awaited<typeof import('csdm/node/database/matches/generate-match-tactics-positions')>;
 }) {
@@ -233,13 +231,6 @@ async function benchmarkMatch({
       });
     } else if (mode === 'tactics') {
       await tacticsPositionsModule.generateMatchTacticsPositions({
-        checksum: match.checksum,
-        demoPath: match.demoPath,
-        source: match.source,
-        onInsertionStart: () => {},
-      });
-    } else {
-      await pistolPositionsModule.generateMatchPistolRoundPositions({
         checksum: match.checksum,
         demoPath: match.demoPath,
         source: match.source,
@@ -278,7 +269,6 @@ async function main() {
   const migrationsModule = await import('csdm/node/database/migrations/migrate-database');
   const fullPositionsModule = await import('csdm/node/database/matches/generate-match-positions');
   const tacticsPositionsModule = await import('csdm/node/database/matches/generate-match-tactics-positions');
-  const pistolPositionsModule = await import('csdm/node/database/matches/generate-match-pistol-round-positions');
 
   const settingsFilePath = settingsModule.getSettingsFilePath();
   const settingsContent = await fs.readFile(settingsFilePath, 'utf8');
@@ -306,7 +296,6 @@ async function main() {
           mode: 'full',
           match,
           originalSettings,
-          pistolPositionsModule,
           settingsFilePath,
           tacticsPositionsModule,
         }),
@@ -320,21 +309,6 @@ async function main() {
           mode: 'tactics',
           match,
           originalSettings,
-          pistolPositionsModule,
-          settingsFilePath,
-          tacticsPositionsModule,
-        }),
-      );
-      results.push(
-        await benchmarkMatch({
-          adminDatabaseSettings,
-          databaseModule,
-          fullPositionsModule,
-          migrationsModule,
-          mode: 'pistol',
-          match,
-          originalSettings,
-          pistolPositionsModule,
           settingsFilePath,
           tacticsPositionsModule,
         }),
@@ -346,11 +320,9 @@ async function main() {
 
   const fullResults = results.filter((result) => result.mode === 'full');
   const tacticsResults = results.filter((result) => result.mode === 'tactics');
-  const pistolResults = results.filter((result) => result.mode === 'pistol');
   const average = (values: number[]) => values.reduce((sum, value) => sum + value, 0) / values.length;
   const averageFullMs = average(fullResults.map((result) => result.durationMs));
   const averageTacticsMs = average(tacticsResults.map((result) => result.durationMs));
-  const averagePistolMs = average(pistolResults.map((result) => result.durationMs));
 
   console.log(
     JSON.stringify(
@@ -369,10 +341,7 @@ async function main() {
         summary: {
           averageFullMs,
           averageTacticsMs,
-          averagePistolMs,
           tacticsSpeedupVsFull: averageFullMs / averageTacticsMs,
-          pistolSpeedupVsFull: averageFullMs / averagePistolMs,
-          pistolSpeedupVsTactics: averageTacticsMs / averagePistolMs,
         },
       },
       null,

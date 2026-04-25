@@ -159,7 +159,7 @@ const config = {
     const arch = Arch[context.arch];
     const platform = context.packager.platform.nodeName;
 
-    const installTasks = [installDemoAnalyzer(platform, arch)];
+    const installTasks = [installDemoAnalyzer(platform, arch, { requireEnhanced: true })];
 
     if (!(await fs.pathExists(path.join(staticFolderPath, 'boiler-writter')))) {
       installTasks.push(installBoilerWritter(platform, arch));

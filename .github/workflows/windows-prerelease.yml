@@ -42,6 +42,11 @@ jobs:
           node-version-file: .node-version
           cache: npm
 
+      - name: Setup Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: tools/demo-analyzer/cs-demo-analyzer-enhanced/go.mod
+
       - name: Read release metadata
         shell: pwsh
         run: |

@@ -74,6 +74,11 @@ jobs:
         with:
           node-version-file: .node-version
 
+      - name: Setup Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: tools/demo-analyzer/cs-demo-analyzer-enhanced/go.mod
+
       - name: Create new version
         run: |
           git config --global user.name 'github-actions[bot]'
@@ -107,6 +112,11 @@ jobs:
         with:
           node-version-file: .node-version
 
+      - name: Setup Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: tools/demo-analyzer/cs-demo-analyzer-enhanced/go.mod
+
       - name: Create new version
         run: |
           git config --global user.name 'github-actions[bot]'
@@ -136,6 +146,11 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version-file: .node-version
+
+      - name: Setup Go
+        uses: actions/setup-go@v6
+        with:
+          go-version-file: tools/demo-analyzer/cs-demo-analyzer-enhanced/go.mod
 
       - name: Create new version
         run: |

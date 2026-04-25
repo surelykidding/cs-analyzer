@@ -25,7 +25,7 @@
   "scripts": {
     "analyzer:build": "node ./scripts/build-enhanced-demo-analyzer.mjs",
     "benchmark:analyzer:build": "node ./scripts/build-analyzer-benchmarks.mjs",
-    "benchmark:analyzer:pistol-concurrency": "node ./scripts/build-analyzer-benchmarks.mjs pistol-batch-concurrency && node ./out/benchmarks/pistol-batch-concurrency.cjs",
+    "benchmark:analyzer:tactics-concurrency": "node ./scripts/build-analyzer-benchmarks.mjs tactics-batch-concurrency && node ./out/benchmarks/tactics-batch-concurrency.cjs",
     "benchmark:analyzer:positions": "node ./scripts/build-analyzer-benchmarks.mjs generate-positions && node ./out/benchmarks/generate-positions.cjs",
     "build": "node ./scripts/build.mjs",
     "compile": "tsc --noEmit",

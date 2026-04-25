@@ -145,16 +145,16 @@ async function destroyDatabaseConnection(databaseModule: Awaited<typeof import('
   }
 }
 
-async function runPistolBatch(
+async function runTacticsBatch(
   mode: BatchBenchmarkMode,
   matches: MatchRow[],
-  pistolPositionsModule: Awaited<typeof import('csdm/node/database/matches/generate-match-pistol-round-positions')>,
+  tacticsPositionsModule: Awaited<typeof import('csdm/node/database/matches/generate-match-tactics-positions')>,
 ) {
   const startedAt = performance.now();
 
   if (mode === 'serial') {
     for (const match of matches) {
-      await pistolPositionsModule.generateMatchPistolRoundPositions({
+      await tacticsPositionsModule.generateMatchTacticsPositions({
         checksum: match.checksum,
         demoPath: match.demoPath,
         source: match.source,
@@ -171,7 +171,7 @@ async function runPistolBatch(
           return;
         }
 
-        await pistolPositionsModule.generateMatchPistolRoundPositions({
+        await tacticsPositionsModule.generateMatchTacticsPositions({
           checksum: match.checksum,
           demoPath: match.demoPath,
           source: match.source,
@@ -193,7 +193,7 @@ async function benchmarkBatchMode({
   migrationsModule,
   mode,
   originalSettings,
-  pistolPositionsModule,
+  tacticsPositionsModule,
   settingsFilePath,
 }: {
   adminDatabaseSettings: DatabaseSettings;
@@ -202,7 +202,7 @@ async function benchmarkBatchMode({
   migrationsModule: Awaited<typeof import('csdm/node/database/migrations/migrate-database')>;
   mode: BatchBenchmarkMode;
   originalSettings: Settings;
-  pistolPositionsModule: Awaited<typeof import('csdm/node/database/matches/generate-match-pistol-round-positions')>;
+  tacticsPositionsModule: Awaited<typeof import('csdm/node/database/matches/generate-match-tactics-positions')>;
   settingsFilePath: string;
 }) {
   const benchmarkDatabaseName = await createBenchmarkDatabase(
@@ -223,7 +223,7 @@ async function benchmarkBatchMode({
       databaseModule,
       matches.map((match) => match.checksum),
     );
-    const durationMs = await runPistolBatch(mode, matches, pistolPositionsModule);
+    const durationMs = await runTacticsBatch(mode, matches, tacticsPositionsModule);
     const afterCounts = await fetchPositionCounts(
       databaseModule,
       matches.map((match) => match.checksum),
@@ -252,7 +252,7 @@ async function main() {
   const settingsModule = await import('csdm/node/settings/get-settings-file-path');
   const databaseModule = await import('csdm/node/database/database');
   const migrationsModule = await import('csdm/node/database/migrations/migrate-database');
-  const pistolPositionsModule = await import('csdm/node/database/matches/generate-match-pistol-round-positions');
+  const tacticsPositionsModule = await import('csdm/node/database/matches/generate-match-tactics-positions');
 
   const settingsFilePath = settingsModule.getSettingsFilePath();
   const settingsContent = await fs.readFile(settingsFilePath, 'utf8');
@@ -278,7 +278,7 @@ async function main() {
         migrationsModule,
         mode: 'serial',
         originalSettings,
-        pistolPositionsModule,
+        tacticsPositionsModule,
         settingsFilePath,
       });
       const parallelResult = await benchmarkBatchMode({
@@ -288,7 +288,7 @@ async function main() {
         migrationsModule,
         mode: 'parallel2',
         originalSettings,
-        pistolPositionsModule,
+        tacticsPositionsModule,
         settingsFilePath,
       });
 

@@ -15,8 +15,7 @@ export function MaxConcurrentTacticsPositionGenerationsSelect() {
     value: index + 1,
     label: index + 1,
   }));
-  const value =
-    maxConcurrentTacticsPositionGenerations ?? DEFAULT_MAX_CONCURRENT_TACTICS_POSITION_GENERATIONS;
+  const value = maxConcurrentTacticsPositionGenerations ?? DEFAULT_MAX_CONCURRENT_TACTICS_POSITION_GENERATIONS;
 
   return (
     <SettingsEntry
@@ -34,9 +33,7 @@ export function MaxConcurrentTacticsPositionGenerationsSelect() {
         />
       }
       title={<Trans context="Settings title">Maximum number of concurrent tactics position generations</Trans>}
-      description={
-        <Trans>Maximum number of pistol-round tactics position generations that can run at the same time.</Trans>
-      }
+      description={<Trans>Maximum number of tactics position generations that can run at the same time.</Trans>}
     />
   );
 }

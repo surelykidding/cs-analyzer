@@ -15,9 +15,9 @@ const benchmarkEntries = {
     entryPoint: path.join(rootFolderPath, 'scripts', 'benchmarks', 'generate-positions.ts'),
     outputFile: path.join(outputFolderPath, 'generate-positions.cjs'),
   },
-  'pistol-batch-concurrency': {
-    entryPoint: path.join(rootFolderPath, 'scripts', 'benchmarks', 'pistol-batch-concurrency.ts'),
-    outputFile: path.join(outputFolderPath, 'pistol-batch-concurrency.cjs'),
+  'tactics-batch-concurrency': {
+    entryPoint: path.join(rootFolderPath, 'scripts', 'benchmarks', 'tactics-batch-concurrency.ts'),
+    outputFile: path.join(outputFolderPath, 'tactics-batch-concurrency.cjs'),
   },
 };
 

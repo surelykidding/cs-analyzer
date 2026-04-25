@@ -1,0 +1,5 @@
+{
+  "core": ["demo-path", "output", "format", "source", "positions"],
+  "optional": ["minify"],
+  "tactics": ["position-entities", "position-window-start-seconds", "position-window-end-seconds", "rounds"]
+}
