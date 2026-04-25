@@ -10,6 +10,14 @@ on:
         options:
           - patch
           - minor
+      sign-macos:
+        type: boolean
+        description: Sign and notarize macOS artifacts with Apple certificate secrets
+        required: true
+        default: false
+
+permissions:
+  contents: write
 
 jobs:
   ensure-changes:
@@ -40,14 +48,30 @@ jobs:
     needs: ensure-changes
 
     steps:
+      - name: Validate Apple signing secrets
+        if: ${{ github.event.inputs['sign-macos'] == 'true' }}
+        run: |
+          if [ -z "$BUILD_CERTIFICATE_BASE64" ] || [ -z "$P12_PASSWORD" ] || [ -z "$KEYCHAIN_PASSWORD" ]; then
+            echo "::error title=Missing Apple signing secret::APPLE_APPLICATION_CERTIFICATE, APPLE_P12_PASSWORD, and KEYCHAIN_PASSWORD are required when sign-macos is enabled."
+            exit 1
+          fi
+        env:
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.APPLE_APPLICATION_CERTIFICATE }}
+          P12_PASSWORD: ${{ secrets.APPLE_P12_PASSWORD }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+
       - name: Install Apple certificate
+        if: ${{ github.event.inputs['sign-macos'] == 'true' }}
         run: |
           # create variables
           CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
           KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
 
           # import certificate and provisioning profile from secrets
-          echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
+          if ! echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH; then
+            echo "::error title=Invalid Apple certificate secret::APPLE_APPLICATION_CERTIFICATE must be a base64-encoded .p12 certificate."
+            exit 1
+          fi
 
           # create temporary keychain
           security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
@@ -55,12 +79,19 @@ jobs:
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
 
           # import certificate to keychain
-          security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          if ! security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH; then
+            echo "::error title=Invalid Apple certificate::Decoded APPLE_APPLICATION_CERTIFICATE is not an importable .p12 certificate, or APPLE_P12_PASSWORD is incorrect."
+            exit 1
+          fi
           security list-keychain -d user -s $KEYCHAIN_PATH
         env:
           BUILD_CERTIFICATE_BASE64: ${{ secrets.APPLE_APPLICATION_CERTIFICATE }}
           P12_PASSWORD: ${{ secrets.APPLE_P12_PASSWORD }}
           KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+
+      - name: Disable macOS code signing
+        if: ${{ github.event.inputs['sign-macos'] != 'true' }}
+        run: echo "CSC_IDENTITY_AUTO_DISCOVERY=false" >> "$GITHUB_ENV"
 
       - name: Install required tools
         run: |
@@ -78,6 +109,7 @@ jobs:
         uses: actions/setup-go@v6
         with:
           go-version-file: tools/demo-analyzer/cs-demo-analyzer-enhanced/go.mod
+          cache-dependency-path: tools/demo-analyzer/cs-demo-analyzer-enhanced/go.sum
 
       - name: Create new version
         run: |
@@ -93,10 +125,10 @@ jobs:
         env:
           STEAM_API_KEYS: ${{ secrets.STEAM_API_KEYS }}
           FACEIT_API_KEY: ${{ secrets.FACEIT_API_KEY }}
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          APPLE_ID: ${{ secrets.APPLE_ID }}
-          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
-          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          APPLE_ID: ${{ github.event.inputs['sign-macos'] == 'true' && secrets.APPLE_ID || '' }}
+          APPLE_TEAM_ID: ${{ github.event.inputs['sign-macos'] == 'true' && secrets.APPLE_TEAM_ID || '' }}
+          APPLE_APP_SPECIFIC_PASSWORD: ${{ github.event.inputs['sign-macos'] == 'true' && secrets.APPLE_APP_SPECIFIC_PASSWORD || '' }}
 
   build-linux:
     name: Build Linux
@@ -116,6 +148,7 @@ jobs:
         uses: actions/setup-go@v6
         with:
           go-version-file: tools/demo-analyzer/cs-demo-analyzer-enhanced/go.mod
+          cache-dependency-path: tools/demo-analyzer/cs-demo-analyzer-enhanced/go.sum
 
       - name: Create new version
         run: |
@@ -131,7 +164,7 @@ jobs:
         env:
           STEAM_API_KEYS: ${{ secrets.STEAM_API_KEYS }}
           FACEIT_API_KEY: ${{ secrets.FACEIT_API_KEY }}
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build-windows:
     name: Build Windows
@@ -151,6 +184,7 @@ jobs:
         uses: actions/setup-go@v6
         with:
           go-version-file: tools/demo-analyzer/cs-demo-analyzer-enhanced/go.mod
+          cache-dependency-path: tools/demo-analyzer/cs-demo-analyzer-enhanced/go.sum
 
       - name: Create new version
         run: |
@@ -166,7 +200,7 @@ jobs:
         env:
           STEAM_API_KEYS: ${{ secrets.STEAM_API_KEYS }}
           FACEIT_API_KEY: ${{ secrets.FACEIT_API_KEY }}
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   publish-on-github:
     name: Publish on GitHub
@@ -177,8 +211,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
         with:
-          ssh-key: ${{ secrets.SSH_DEPLOYMENT_PRIVATE_KEY }}
-          persist-credentials: true
+          fetch-depth: 0
+          fetch-tags: true
 
       - name: Setup node
         uses: actions/setup-node@v6
