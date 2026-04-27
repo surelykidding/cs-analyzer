@@ -1,6 +1,6 @@
 {
   "name": "cs-analyzer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Counter-Strike tactics and scouting analyzer for demo review.",
   "keywords": [
     "CS",
