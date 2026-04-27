@@ -145,6 +145,7 @@ jobs:
             dist/*.dmg
             dist/*.zip
             dist/*.yml
+            !dist/builder-debug.yml
             dist/*.blockmap
           if-no-files-found: error
 
@@ -200,6 +201,7 @@ jobs:
             dist/*.deb
             dist/*.rpm
             dist/*.yml
+            !dist/builder-debug.yml
             dist/*.blockmap
           if-no-files-found: error
 
@@ -265,6 +267,7 @@ jobs:
             dist/CS Analyzer Setup *.exe
             dist/CS Analyzer Portable *.exe
             dist/*.yml
+            !dist/builder-debug.yml
             dist/*.blockmap
           if-no-files-found: error
 
@@ -305,9 +308,18 @@ jobs:
 
       - name: Validate release artifacts
         run: |
+          find release-artifacts -type f -name builder-debug.yml -delete
+
           if find release-artifacts -type f -iname '*cs-demo-manager*' | grep -q .; then
             echo "::error title=Unexpected artifact name::Found cs-demo-manager artifact in release artifacts."
             find release-artifacts -type f -iname '*cs-demo-manager*'
+            exit 1
+          fi
+
+          DUPLICATE_ASSETS=$(find release-artifacts -type f -printf '%f\n' | sort | uniq -d)
+          if [ -n "$DUPLICATE_ASSETS" ]; then
+            echo "::error title=Duplicate release asset names::Release assets must have unique file names."
+            echo "$DUPLICATE_ASSETS"
             exit 1
           fi
 
