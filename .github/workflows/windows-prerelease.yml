@@ -81,6 +81,24 @@ jobs:
           FACEIT_API_KEY: ${{ secrets.FACEIT_API_KEY }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Validate Windows artifact names
+        shell: pwsh
+        run: |
+          $expectedAssets = @(
+            "CS Analyzer Setup $($env:RELEASE_VERSION).exe",
+            "CS Analyzer Portable $($env:RELEASE_VERSION).exe"
+          )
+          $unexpectedAssets = Get-ChildItem dist -File | Where-Object { $_.Name -like '*cs-demo-manager*' }
+          if ($unexpectedAssets.Count -gt 0) {
+            $unexpectedAssets | ForEach-Object { Write-Error "Unexpected artifact: $($_.FullName)" }
+            throw "Found cs-demo-manager artifact in dist."
+          }
+          foreach ($asset in $expectedAssets) {
+            if (-not (Test-Path (Join-Path dist $asset))) {
+              throw "Missing expected artifact: $asset"
+            }
+          }
+
       - name: Publish GitHub prerelease
         shell: pwsh
         env:

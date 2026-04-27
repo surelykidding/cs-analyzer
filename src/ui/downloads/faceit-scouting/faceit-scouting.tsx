@@ -10,10 +10,8 @@ import {
 } from 'csdm/common/types/faceit-scouting';
 import { Status } from 'csdm/common/types/status';
 import {
-  DEFAULT_TACTICS_CT_WINDOW_END_SECONDS,
-  DEFAULT_TACTICS_CT_WINDOW_START_SECONDS,
-  DEFAULT_TACTICS_T_WINDOW_END_SECONDS,
-  DEFAULT_TACTICS_T_WINDOW_START_SECONDS,
+  DEFAULT_TACTICS_WINDOW_END_SECONDS,
+  DEFAULT_TACTICS_WINDOW_START_SECONDS,
   TACTICS_POSITIONS_WINDOW_MAX_SECONDS,
   TACTICS_POSITIONS_WINDOW_MIN_SECONDS,
 } from 'csdm/common/types/team-tactics';
@@ -92,6 +90,10 @@ export function FaceitScouting() {
   const downloadFolderPath = useDownloadFolderPath();
   const settings = useSettings();
   const maps = useMaps();
+  const defaultTacticsWindowStartSeconds =
+    settings.analyze.defaultTacticsWindowStartSeconds ?? DEFAULT_TACTICS_WINDOW_START_SECONDS;
+  const defaultTacticsWindowEndSeconds =
+    settings.analyze.defaultTacticsWindowEndSeconds ?? DEFAULT_TACTICS_WINDOW_END_SECONDS;
   const [matchIdOrUrl, setMatchIdOrUrl] = useState('');
   const [session, setSession] = useState<FaceitScoutingSession | undefined>(undefined);
   const [sessionStatus, setSessionStatus] = useState<Status>(Status.Loading);
@@ -104,10 +106,10 @@ export function FaceitScouting() {
   const [side, setSide] = useState<TeamNumber>(TeamNumber.T);
   const [economyType, setEconomyType] = useState<EconomyType>(EconomyType.Pistol);
   const [radarLevel, setRadarLevel] = useState<RadarLevel>(RadarLevel.Upper);
-  const [tWindowStartSeconds, setTWindowStartSeconds] = useState(DEFAULT_TACTICS_T_WINDOW_START_SECONDS);
-  const [tWindowEndSeconds, setTWindowEndSeconds] = useState(DEFAULT_TACTICS_T_WINDOW_END_SECONDS);
-  const [ctWindowStartSeconds, setCtWindowStartSeconds] = useState(DEFAULT_TACTICS_CT_WINDOW_START_SECONDS);
-  const [ctWindowEndSeconds, setCtWindowEndSeconds] = useState(DEFAULT_TACTICS_CT_WINDOW_END_SECONDS);
+  const [tWindowStartSeconds, setTWindowStartSeconds] = useState(defaultTacticsWindowStartSeconds);
+  const [tWindowEndSeconds, setTWindowEndSeconds] = useState(defaultTacticsWindowEndSeconds);
+  const [ctWindowStartSeconds, setCtWindowStartSeconds] = useState(defaultTacticsWindowStartSeconds);
+  const [ctWindowEndSeconds, setCtWindowEndSeconds] = useState(defaultTacticsWindowEndSeconds);
   const [refreshToken, setRefreshToken] = useState(0);
   const maxConcurrentTacticsPositionGenerations =
     settings.analyze.maxConcurrentTacticsPositionGenerations ?? DEFAULT_MAX_CONCURRENT_TACTICS_POSITION_GENERATIONS;
@@ -680,7 +682,37 @@ export function FaceitScouting() {
               />
             </div>
           ) : (
-            <div className="grid min-h-0 flex-1 gap-16 xl:grid-cols-3">
+            <div className="grid min-h-0 flex-1 gap-16 xl:grid-cols-2 2xl:grid-cols-3">
+              <TeamTacticsMap
+                title={<Trans>Fire Grenades</Trans>}
+                game={Game.CS2}
+                mapName={session.sourceMatch.mapName}
+                radarLevel={radarLevel}
+                points={response?.fireGrenadePoints ?? []}
+                variant="heatmap"
+                heatmapStyle="event"
+                emptyMessage={<Trans>No fire grenade data found for the current filters.</Trans>}
+              />
+              <TeamTacticsMap
+                title={<Trans>Smoke Grenades</Trans>}
+                game={Game.CS2}
+                mapName={session.sourceMatch.mapName}
+                radarLevel={radarLevel}
+                points={response?.smokeGrenadePoints ?? []}
+                variant="heatmap"
+                heatmapStyle="event"
+                emptyMessage={<Trans>No smoke grenade data found for the current filters.</Trans>}
+              />
+              <TeamTacticsMap
+                title={<Trans>Flashbangs</Trans>}
+                game={Game.CS2}
+                mapName={session.sourceMatch.mapName}
+                radarLevel={radarLevel}
+                points={response?.flashGrenadePoints ?? []}
+                variant="heatmap"
+                heatmapStyle="event"
+                emptyMessage={<Trans>No flashbang data found for the current filters.</Trans>}
+              />
               <TeamTacticsMap
                 title={<Trans>HE Grenades</Trans>}
                 game={Game.CS2}

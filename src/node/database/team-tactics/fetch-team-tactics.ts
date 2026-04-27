@@ -115,10 +115,20 @@ export async function fetchTeamTactics(payload: TeamTacticsPayload): Promise<Tea
   const skippedRounds = rounds.filter((round) => {
     return !availablePositionRounds.has(`${round.matchChecksum}:${round.roundNumber}`);
   });
-  const [ctHeatmapPoints, ctAwpHeatmapPoints, heGrenadePoints] = await Promise.all([
+  const [
+    ctHeatmapPoints,
+    ctAwpHeatmapPoints,
+    heGrenadePoints,
+    fireGrenadePoints,
+    smokeGrenadePoints,
+    flashGrenadePoints,
+  ] = await Promise.all([
     fetchCtFirst20SecondsHeatmap(roundsWithPositions, payload, mapScale),
     fetchCtAwpHolderHeatmap(roundsWithPositions, payload, mapScale),
     fetchTeamGrenadeFrequency(rounds, payload, mapScale, TeamTacticsGrenadeType.HeGrenade),
+    fetchTeamGrenadeFrequency(rounds, payload, mapScale, TeamTacticsGrenadeType.Fire),
+    fetchTeamGrenadeFrequency(rounds, payload, mapScale, TeamTacticsGrenadeType.Smoke),
+    fetchTeamGrenadeFrequency(rounds, payload, mapScale, TeamTacticsGrenadeType.Flashbang),
   ]);
 
   return {
@@ -131,9 +141,9 @@ export async function fetchTeamTactics(payload: TeamTacticsPayload): Promise<Tea
     skippedRoundCount: skippedRounds.length,
     heGrenadePoints,
     ctAwpHeatmapPoints,
-    fireGrenadePoints: [],
-    smokeGrenadePoints: [],
-    flashGrenadePoints: [],
+    fireGrenadePoints,
+    smokeGrenadePoints,
+    flashGrenadePoints,
     tHeatmapPoints: [],
     killPoints: [],
     deathPoints: [],

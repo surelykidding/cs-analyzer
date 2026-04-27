@@ -35,7 +35,8 @@
 
     ; Delete the CSDM folder
     RMDir /r "$PROFILE\.csdm"
-    ; Delete the updater folder
+    ; Delete the updater folders
     RMDir /r "$PROFILE\AppData\Local\cs-demo-manager-updater"
+    RMDir /r "$PROFILE\AppData\Local\cs-analyzer-updater"
   ${endIf}
 !macroend

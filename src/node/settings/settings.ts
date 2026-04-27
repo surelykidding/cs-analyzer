@@ -44,6 +44,8 @@ type UISettings = {
 type AnalyzeSettings = {
   maxConcurrentAnalyses?: number;
   maxConcurrentTacticsPositionGenerations?: number;
+  defaultTacticsWindowStartSeconds?: number;
+  defaultTacticsWindowEndSeconds?: number;
 };
 
 export type HlaeSettings = {

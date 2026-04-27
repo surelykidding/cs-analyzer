@@ -1,5 +1,9 @@
 import { CURRENT_SCHEMA_VERSION } from './schema-version';
 import { DEFAULT_MAX_CONCURRENT_TACTICS_POSITION_GENERATIONS } from 'csdm/common/analyses';
+import {
+  DEFAULT_TACTICS_WINDOW_END_SECONDS,
+  DEFAULT_TACTICS_WINDOW_START_SECONDS,
+} from 'csdm/common/types/team-tactics';
 import type { Settings } from './settings';
 import { Page } from 'csdm/node/settings/page';
 import { RankingFilter } from 'csdm/common/types/ranking-filter';
@@ -45,6 +49,8 @@ export const defaultSettings: Settings = {
   analyze: {
     maxConcurrentAnalyses: 4,
     maxConcurrentTacticsPositionGenerations: DEFAULT_MAX_CONCURRENT_TACTICS_POSITION_GENERATIONS,
+    defaultTacticsWindowStartSeconds: DEFAULT_TACTICS_WINDOW_START_SECONDS,
+    defaultTacticsWindowEndSeconds: DEFAULT_TACTICS_WINDOW_END_SECONDS,
   },
   playback: {
     width: 1024,
