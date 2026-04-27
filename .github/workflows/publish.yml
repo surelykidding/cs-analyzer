@@ -121,7 +121,7 @@ jobs:
         run: |
           npm install
           npm run build
-          npm run package -- --mac
+          npm run package -- --mac --publish never
         env:
           STEAM_API_KEYS: ${{ secrets.STEAM_API_KEYS }}
           FACEIT_API_KEY: ${{ secrets.FACEIT_API_KEY }}
@@ -178,7 +178,7 @@ jobs:
         run: |
           npm install
           npm run build
-          npm run package -- --linux
+          npm run package -- --linux --publish never
         env:
           STEAM_API_KEYS: ${{ secrets.STEAM_API_KEYS }}
           FACEIT_API_KEY: ${{ secrets.FACEIT_API_KEY }}
@@ -233,7 +233,7 @@ jobs:
         run: |
           npm install
           npm run build
-          npm run package -- --win
+          npm run package -- --win --publish never
         env:
           STEAM_API_KEYS: ${{ secrets.STEAM_API_KEYS }}
           FACEIT_API_KEY: ${{ secrets.FACEIT_API_KEY }}
