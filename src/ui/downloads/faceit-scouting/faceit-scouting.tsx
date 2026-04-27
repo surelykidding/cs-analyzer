@@ -714,6 +714,15 @@ export function FaceitScouting() {
                 emptyMessage={<Trans>No flashbang data found for the current filters.</Trans>}
               />
               <TeamTacticsMap
+                title={<Trans>CT Heatmap</Trans>}
+                game={Game.CS2}
+                mapName={session.sourceMatch.mapName}
+                radarLevel={radarLevel}
+                points={response?.ctHeatmapPoints ?? []}
+                variant="heatmap"
+                emptyMessage={<Trans>No CT position data found for the current filters.</Trans>}
+              />
+              <TeamTacticsMap
                 title={<Trans>HE Grenades</Trans>}
                 game={Game.CS2}
                 mapName={session.sourceMatch.mapName}
@@ -731,15 +740,6 @@ export function FaceitScouting() {
                 points={response?.ctAwpHeatmapPoints ?? []}
                 variant="heatmap"
                 emptyMessage={<Trans>No AWP holder position data found for the current filters.</Trans>}
-              />
-              <TeamTacticsMap
-                title={<Trans>CT Heatmap</Trans>}
-                game={Game.CS2}
-                mapName={session.sourceMatch.mapName}
-                radarLevel={radarLevel}
-                points={response?.ctHeatmapPoints ?? []}
-                variant="heatmap"
-                emptyMessage={<Trans>No CT position data found for the current filters.</Trans>}
               />
             </div>
           )}

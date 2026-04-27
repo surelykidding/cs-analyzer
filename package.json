@@ -35,6 +35,7 @@
     "electron": "electron ./out/main.js",
     "format": "vp fmt",
     "i18n:extract": "lingui extract --config ./lingui.config.ts --clean --overwrite && lingui extract --config ./src/electron-main/lingui.config.ts --clean --overwrite",
+    "i18n:validate": "node ./scripts/validate-ui-translations.mjs",
     "lint": "vp lint",
     "lint:fix": "vp lint --fix",
     "package": "electron-builder --config electron-builder.config.mjs",

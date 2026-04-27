@@ -5,7 +5,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: @lingui/cli\n"
-"Language: zh\n"
+"Language: zh-CN\n"
 "Project-Id-Version: cs-demo-manager\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: \n"
@@ -25,6 +25,21 @@ msgstr "移除所有"
 #: src/ui/analyses/action-bar/remove-analyses-succeed-button.tsx
 msgid "Remove succeed analyses"
 msgstr "删除已成功分析的结果"
+
+#: src/ui/analyses/analyses.tsx
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "FACEIT Scouting"
+msgstr "FACEIT 侦察"
+
+#: src/ui/analyses/analyses.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+msgid "5EPlay Scouting"
+msgstr "5EPlay 侦察"
+
+#: src/ui/analyses/analyses.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+msgid "Perfect World Scouting"
+msgstr "完美侦察"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgctxt "Analysis status"
@@ -3053,11 +3068,6 @@ msgid "FACEIT"
 msgstr "FACEIT"
 
 #: src/ui/downloads/downloads.tsx
-#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
-msgid "FACEIT Scouting"
-msgstr "FACEIT 侦察"
-
-#: src/ui/downloads/downloads.tsx
 msgid "Renown"
 msgstr "Renown"
 
@@ -3066,19 +3076,9 @@ msgid "5EPlay"
 msgstr "5EPlay"
 
 #: src/ui/downloads/downloads.tsx
-#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
-msgid "5EPlay Scouting"
-msgstr "5EPlay 侦察"
-
-#: src/ui/downloads/downloads.tsx
 #: src/ui/settings/downloads/perfect-world-settings.tsx
 msgid "Perfect World"
 msgstr "完美"
-
-#: src/ui/downloads/downloads.tsx
-#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
-msgid "Perfect World Scouting"
-msgstr "完美侦察"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
@@ -3204,47 +3204,6 @@ msgid "Status: {0}"
 msgstr "状态：{0}"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
-#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
-#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
-msgid "Discovering"
-msgstr "发现中"
-
-#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
-#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
-#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
-msgid "Awaiting downloads"
-msgstr "等待下载"
-
-#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
-#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
-#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
-msgid "Awaiting download"
-msgstr "等待下载"
-
-#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
-#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
-msgid "Downloading"
-msgstr "下载中"
-
-#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
-#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
-#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
-msgid "Processing"
-msgstr "处理中"
-
-#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
-#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
-#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
-msgid "Ready"
-msgstr "就绪"
-
-#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
-#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
-#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
-msgid "Deleting"
-msgstr "删除中"
-
-#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 msgid "See source room on FACEIT"
 msgstr "在 FACEIT 中查看源房间"
 
@@ -3298,7 +3257,7 @@ msgstr "出错目标：{0}"
 #: src/ui/team/tactics/team-tactics-filters.tsx
 msgctxt "Input label"
 msgid "Side"
-msgstr ""
+msgstr "阵营"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
@@ -3306,7 +3265,7 @@ msgstr ""
 #: src/ui/team/tactics/team-tactics-filters.tsx
 msgctxt "Input label"
 msgid "Economy"
-msgstr ""
+msgstr "经济"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
@@ -3314,7 +3273,7 @@ msgstr ""
 #: src/ui/team/tactics/team-tactics-filters.tsx
 msgctxt "Input label"
 msgid "Window start"
-msgstr ""
+msgstr "窗口开始"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
@@ -3322,7 +3281,7 @@ msgstr ""
 #: src/ui/team/tactics/team-tactics-filters.tsx
 msgctxt "Input label"
 msgid "Window end"
-msgstr ""
+msgstr "窗口结束"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
@@ -3378,129 +3337,153 @@ msgid "Loading scouting tactics..."
 msgstr "正在加载侦察战术..."
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "Fire Grenades"
-msgstr ""
+msgstr "燃烧弹"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No fire grenade data found for the current filters."
-msgstr ""
+msgstr "当前筛选条件下没有燃烧弹数据。"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "Smoke Grenades"
-msgstr ""
+msgstr "烟雾弹"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No smoke grenade data found for the current filters."
-msgstr ""
+msgstr "当前筛选条件下没有烟雾弹数据。"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "Flashbangs"
-msgstr ""
+msgstr "闪光弹"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No flashbang data found for the current filters."
-msgstr ""
+msgstr "当前筛选条件下没有闪光弹数据。"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "T Heatmap"
-msgstr ""
+msgstr "T 热力图"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No T position data found for the current filters."
-msgstr ""
+msgstr "当前筛选条件下没有 T 位置数据。"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "Kill Positions"
-msgstr ""
+msgstr "击杀位置"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No kill data found for the current filters."
-msgstr ""
+msgstr "当前筛选条件下没有击杀数据。"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "Death Positions"
-msgstr ""
+msgstr "死亡位置"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No death data found for the current filters."
-msgstr ""
-
-#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
-#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
-#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
-#: src/ui/team/tactics/team-tactics.tsx
-msgid "HE Grenades"
-msgstr ""
-
-#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
-#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
-#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
-#: src/ui/team/tactics/team-tactics.tsx
-msgid "No HE grenade data found for the current filters."
-msgstr ""
-
-#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
-#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
-#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
-#: src/ui/team/tactics/team-tactics.tsx
-msgid "AWP Holder Heatmap"
-msgstr ""
-
-#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
-#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
-#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
-#: src/ui/team/tactics/team-tactics.tsx
-msgid "No AWP holder position data found for the current filters."
-msgstr ""
+msgstr "当前筛选条件下没有死亡数据。"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "CT Heatmap"
-msgstr ""
+msgstr "CT 热力图"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "No CT position data found for the current filters."
-msgstr ""
+msgstr "当前筛选条件下没有 CT 位置数据。"
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "HE Grenades"
+msgstr "高爆手雷"
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "No HE grenade data found for the current filters."
+msgstr "当前筛选条件下没有高爆手雷数据。"
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "AWP Holder Heatmap"
+msgstr "AWP 持有者热力图"
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "No AWP holder position data found for the current filters."
+msgstr "当前筛选条件下没有 AWP 持有者位置数据。"
 
 #: src/ui/downloads/faceit/current-match.tsx
 msgctxt "Button"
@@ -3934,7 +3917,7 @@ msgstr "完美比赛 ID"
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgctxt "Input placeholder"
 msgid "PVP@1234567890 or 1234567890"
-msgstr ""
+msgstr "PVP@1234567890 或 1234567890"
 
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgctxt "Input label"
@@ -7679,6 +7662,25 @@ msgctxt "Button"
 msgid "See Changelog"
 msgstr "查看更新说明"
 
+#: src/ui/settings/analyze/default-tactics-window-inputs.tsx
+msgctxt "Input label"
+msgid "Start"
+msgstr "开始"
+
+#: src/ui/settings/analyze/default-tactics-window-inputs.tsx
+msgctxt "Input label"
+msgid "End"
+msgstr "结束"
+
+#: src/ui/settings/analyze/default-tactics-window-inputs.tsx
+msgctxt "Settings title"
+msgid "Default tactics window"
+msgstr "默认战术时间窗口"
+
+#: src/ui/settings/analyze/default-tactics-window-inputs.tsx
+msgid "Default freeze-end time window used when opening tactics and scouting pages."
+msgstr "打开战术分析和侦察页面时默认使用的冻结结束后时间窗口。"
+
 #: src/ui/settings/analyze/ignore-ban-before-first-seen.tsx
 msgid "Bans that happened before the player was first seen in a match will be ignored."
 msgstr "忽略遇到该玩家之前的封禁事件"
@@ -7699,11 +7701,11 @@ msgstr "可同时进行分析的最大数量。"
 #: src/ui/settings/analyze/max-concurrent-tactics-position-generations-select.tsx
 msgctxt "Settings title"
 msgid "Maximum number of concurrent tactics position generations"
-msgstr ""
+msgstr "最大并发战术位置生成数量"
 
 #: src/ui/settings/analyze/max-concurrent-tactics-position-generations-select.tsx
-msgid "Maximum number of pistol-round tactics position generations that can run at the same time."
-msgstr ""
+msgid "Maximum number of tactics position generations that can run at the same time."
+msgstr "可同时生成战术位置数据的最大数量。"
 
 #: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
 msgctxt "Dialog title"
@@ -9142,99 +9144,102 @@ msgstr "阵营"
 
 #: src/ui/team/tactics/team-tactics-filters.tsx
 msgid "Tactics v1"
-msgstr ""
+msgstr "战术 v1"
 
 #: src/ui/team/tactics/team-tactics-filters.tsx
 msgid "CS2 tactics filters the currently loaded team matches by map, side and economy type. Position heatmaps use only the freeze-end window needed for tactics."
-msgstr ""
+msgstr "CS2 战术会按地图、阵营和经济类型筛选当前加载的队伍比赛。位置热力图只使用战术所需的冻结结束后时间窗口。"
 
 #: src/ui/team/tactics/team-tactics-filters.tsx
 msgid "Some matches on the current map are missing player positions required for the tactics heatmap."
-msgstr ""
+msgstr "当前地图上的部分比赛缺少战术热力图所需的玩家位置数据。"
 
 #: src/ui/team/tactics/team-tactics-filters.tsx
 msgid "Generate tactics positions once for the current map matches to cover pistol, eco, semi, force buy and full buy rounds."
-msgstr ""
+msgstr "为当前地图的比赛生成一次战术位置数据，覆盖手枪局、eco、半起、强起和长枪局。"
 
 #. placeholder {0}: response.skippedMatchesWithoutPositions
 #. placeholder {1}: response.skippedRoundCount
 #: src/ui/team/tactics/team-tactics-filters.tsx
 msgid "Missing matches: {0}, missing rounds: {1}"
-msgstr ""
+msgstr "缺少比赛：{0}，缺少回合：{1}"
 
 #: src/ui/team/tactics/team-tactics-filters.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "Generate tactics positions for current map matches"
-msgstr ""
+msgstr "为当前地图比赛生成战术位置数据"
 
 #. placeholder {0}: response.selectedMatchCount
 #: src/ui/team/tactics/team-tactics-filters.tsx
 msgid "Matches in scope: {0}"
-msgstr ""
+msgstr "范围内比赛：{0}"
 
 #. placeholder {0}: response.roundCount
 #: src/ui/team/tactics/team-tactics-filters.tsx
 msgid "Rounds found: {0}"
-msgstr ""
+msgstr "找到回合：{0}"
 
 #. placeholder {0}: response.analyzedMatchCount
 #: src/ui/team/tactics/team-tactics-filters.tsx
 msgid "Matches analyzed: {0}"
-msgstr ""
+msgstr "已分析比赛：{0}"
 
 #. placeholder {0}: response.skippedMatchesWithoutPositions
 #. placeholder {1}: response.skippedRoundCount
 #: src/ui/team/tactics/team-tactics-filters.tsx
 msgid "Skipped matches without positions: {0} ({1} rounds)"
-msgstr ""
+msgstr "因缺少位置数据跳过的比赛：{0}（{1} 个回合）"
 
 #. placeholder {0}: points.length
 #: src/ui/team/tactics/team-tactics-map.tsx
 msgid "{0} samples"
-msgstr ""
+msgstr "{0} 个样本"
 
 #. placeholder {0}: points.length
 #: src/ui/team/tactics/team-tactics-map.tsx
 msgid "{0} points"
-msgstr ""
+msgstr "{0} 个点位"
 
 #. placeholder {0}: points.length
 #: src/ui/team/tactics/team-tactics-map.tsx
 msgid "{0} cells"
-msgstr ""
+msgstr "{0} 个格子"
 
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No CT position data was found on the current radar level for these filters. Switched to the other level."
-msgstr ""
+msgstr "当前筛选条件下，在当前雷达层级没有找到 CT 位置数据。已切换到另一个层级。"
 
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "Tactics positions generated for skipped matches."
-msgstr ""
+msgstr "已为跳过的比赛生成战术位置数据。"
+
+#: src/ui/team/tactics/team-tactics.tsx
+msgid "The bundled demo analyzer is not compatible with tactics analysis. Update the analyzer adapter or reinstall a compatible analyzer binary."
+msgstr "内置 demo 分析器与战术分析不兼容。请更新分析器适配器，或重新安装兼容的分析器二进制文件。"
 
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "Tactics v1 only supports teams with CS2 matches."
-msgstr ""
+msgstr "战术 v1 仅支持拥有 CS2 比赛的队伍。"
 
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "Loading tactics..."
-msgstr ""
+msgstr "正在加载战术..."
 
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "An error occurred while loading tactics."
-msgstr ""
+msgstr "加载战术时发生错误。"
 
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "Missing Positions"
-msgstr ""
+msgstr "缺少位置数据"
 
-#. placeholder {0}: response.skippedMatchesWithoutPositions
 #: src/ui/team/tactics/team-tactics.tsx
-msgid "{0} matches on this map are missing player positions for the tactics heatmap."
-msgstr ""
+msgid "{skippedMatchesWithoutPositions} matches on this map are missing player positions for the tactics heatmap."
+msgstr "此地图上有 {skippedMatchesWithoutPositions} 场比赛缺少用于战术热力图的玩家位置数据。"
 
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No position data found for the current filters."
-msgstr ""
+msgstr "当前筛选条件下没有位置数据。"
 
 #: src/ui/team/team-loader.tsx
 msgid "Loading team…"
@@ -9243,7 +9248,7 @@ msgstr "加载队伍中…"
 #: src/ui/team/team-tabs.tsx
 msgctxt "Tab link"
 msgid "Tactics"
-msgstr ""
+msgstr "战术"
 
 #: src/ui/team/team-tabs.tsx
 msgctxt "Tab link"

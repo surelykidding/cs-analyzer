@@ -21,6 +21,21 @@ msgstr "Remove all"
 msgid "Remove succeed analyses"
 msgstr "Remove succeed analyses"
 
+#: src/ui/analyses/analyses.tsx
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+msgid "FACEIT Scouting"
+msgstr "FACEIT Scouting"
+
+#: src/ui/analyses/analyses.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+msgid "5EPlay Scouting"
+msgstr "5EPlay Scouting"
+
+#: src/ui/analyses/analyses.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+msgid "Perfect World Scouting"
+msgstr "Perfect World Scouting"
+
 #: src/ui/analyses/analysis-logs.tsx
 msgctxt "Analysis status"
 msgid "Pending analysis…"
@@ -3048,11 +3063,6 @@ msgid "FACEIT"
 msgstr "FACEIT"
 
 #: src/ui/downloads/downloads.tsx
-#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
-msgid "FACEIT Scouting"
-msgstr "FACEIT Scouting"
-
-#: src/ui/downloads/downloads.tsx
 msgid "Renown"
 msgstr "Renown"
 
@@ -3061,19 +3071,9 @@ msgid "5EPlay"
 msgstr "5EPlay"
 
 #: src/ui/downloads/downloads.tsx
-#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
-msgid "5EPlay Scouting"
-msgstr "5EPlay Scouting"
-
-#: src/ui/downloads/downloads.tsx
 #: src/ui/settings/downloads/perfect-world-settings.tsx
 msgid "Perfect World"
 msgstr "Perfect World"
-
-#: src/ui/downloads/downloads.tsx
-#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
-msgid "Perfect World Scouting"
-msgstr "Perfect World Scouting"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
@@ -3332,43 +3332,67 @@ msgid "Loading scouting tactics..."
 msgstr "Loading scouting tactics..."
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "Fire Grenades"
 msgstr "Fire Grenades"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No fire grenade data found for the current filters."
 msgstr "No fire grenade data found for the current filters."
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "Smoke Grenades"
 msgstr "Smoke Grenades"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No smoke grenade data found for the current filters."
 msgstr "No smoke grenade data found for the current filters."
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "Flashbangs"
 msgstr "Flashbangs"
 
 #: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No flashbang data found for the current filters."
 msgstr "No flashbang data found for the current filters."
@@ -3419,6 +3443,19 @@ msgstr "No death data found for the current filters."
 #: src/ui/downloads/five-eplay/5eplay-scouting.tsx
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 #: src/ui/team/tactics/team-tactics.tsx
+msgid "CT Heatmap"
+msgstr "CT Heatmap"
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+msgid "No CT position data found for the current filters."
+msgstr "No CT position data found for the current filters."
+
+#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
+#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
+#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
+#: src/ui/team/tactics/team-tactics.tsx
 msgid "HE Grenades"
 msgstr "HE Grenades"
 
@@ -3442,19 +3479,6 @@ msgstr "AWP Holder Heatmap"
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No AWP holder position data found for the current filters."
 msgstr "No AWP holder position data found for the current filters."
-
-#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
-#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
-#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
-#: src/ui/team/tactics/team-tactics.tsx
-msgid "CT Heatmap"
-msgstr "CT Heatmap"
-
-#: src/ui/downloads/faceit-scouting/faceit-scouting.tsx
-#: src/ui/downloads/five-eplay/5eplay-scouting.tsx
-#: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
-msgid "No CT position data found for the current filters."
-msgstr "No CT position data found for the current filters."
 
 #: src/ui/downloads/faceit/current-match.tsx
 msgctxt "Button"
@@ -7637,6 +7661,25 @@ msgctxt "Button"
 msgid "See Changelog"
 msgstr "See Changelog"
 
+#: src/ui/settings/analyze/default-tactics-window-inputs.tsx
+msgctxt "Input label"
+msgid "Start"
+msgstr "Start"
+
+#: src/ui/settings/analyze/default-tactics-window-inputs.tsx
+msgctxt "Input label"
+msgid "End"
+msgstr "End"
+
+#: src/ui/settings/analyze/default-tactics-window-inputs.tsx
+msgctxt "Settings title"
+msgid "Default tactics window"
+msgstr "Default tactics window"
+
+#: src/ui/settings/analyze/default-tactics-window-inputs.tsx
+msgid "Default freeze-end time window used when opening tactics and scouting pages."
+msgstr "Default freeze-end time window used when opening tactics and scouting pages."
+
 #: src/ui/settings/analyze/ignore-ban-before-first-seen.tsx
 msgid "Bans that happened before the player was first seen in a match will be ignored."
 msgstr "Bans that happened before the player was first seen in a match will be ignored."
@@ -7660,8 +7703,8 @@ msgid "Maximum number of concurrent tactics position generations"
 msgstr "Maximum number of concurrent tactics position generations"
 
 #: src/ui/settings/analyze/max-concurrent-tactics-position-generations-select.tsx
-msgid "Maximum number of pistol-round tactics position generations that can run at the same time."
-msgstr "Maximum number of pistol-round tactics position generations that can run at the same time."
+msgid "Maximum number of tactics position generations that can run at the same time."
+msgstr "Maximum number of tactics position generations that can run at the same time."
 
 #: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
 msgctxt "Dialog title"
@@ -9170,6 +9213,10 @@ msgid "Tactics positions generated for skipped matches."
 msgstr "Tactics positions generated for skipped matches."
 
 #: src/ui/team/tactics/team-tactics.tsx
+msgid "The bundled demo analyzer is not compatible with tactics analysis. Update the analyzer adapter or reinstall a compatible analyzer binary."
+msgstr "The bundled demo analyzer is not compatible with tactics analysis. Update the analyzer adapter or reinstall a compatible analyzer binary."
+
+#: src/ui/team/tactics/team-tactics.tsx
 msgid "Tactics v1 only supports teams with CS2 matches."
 msgstr "Tactics v1 only supports teams with CS2 matches."
 
@@ -9185,10 +9232,9 @@ msgstr "An error occurred while loading tactics."
 msgid "Missing Positions"
 msgstr "Missing Positions"
 
-#. placeholder {0}: response.skippedMatchesWithoutPositions
 #: src/ui/team/tactics/team-tactics.tsx
-msgid "{0} matches on this map are missing player positions for the tactics heatmap."
-msgstr "{0} matches on this map are missing player positions for the tactics heatmap."
+msgid "{skippedMatchesWithoutPositions} matches on this map are missing player positions for the tactics heatmap."
+msgstr "{skippedMatchesWithoutPositions} matches on this map are missing player positions for the tactics heatmap."
 
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No position data found for the current filters."

@@ -84,5 +84,8 @@ jobs:
           echo "::error title=Translations not up-to-date::Some translations are not extracted. Please run 'npm run i18n:extract' and commit the changes."
           exit 1
 
+      - name: Validate required translations
+        run: npm run i18n:validate
+
       - name: Find dead code
         run: npm run deadcode
