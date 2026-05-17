@@ -18,31 +18,12 @@ import { ErrorMessage } from 'csdm/ui/components/error-message';
 import { FaceitDownloadsWarning } from './faceit-downloads-warning';
 import { ThirdPartyAccounts } from './third-party-accounts';
 import { FaceitLogo } from 'csdm/ui/logos/faceit-logo';
-import { isChineseLocale } from 'csdm/common/locale';
-import { useLocale } from 'csdm/ui/settings/ui/use-locale';
 
 function AddAccountDialog() {
   const [nickname, setNickname] = useState('');
   const { addFaceitAccount, errorMessage, isBusy } = useAddFaceitAccount();
   const { hideDialog } = useDialog();
   const { t } = useLingui();
-  const locale = useLocale();
-  const isChinese = isChineseLocale(locale);
-
-  const title = isChinese ? '添加 FACEIT 账号' : <Trans>Add FACEIT account</Trans>;
-  const label = isChinese
-    ? 'FACEIT 昵称'
-    : t({
-        context: 'Input label',
-        message: 'FACEIT nickname',
-      });
-  const placeholder = isChinese
-    ? '昵称'
-    : t({
-        context: 'Input placeholder',
-        message: 'Nickname',
-      });
-  const caseSensitiveMessage = isChinese ? '昵称区分大小写！' : 'The nickname is case sensitive!';
 
   const onConfirm = async () => {
     const accountAdded = await addFaceitAccount(nickname);
@@ -53,14 +34,20 @@ function AddAccountDialog() {
 
   return (
     <ConfirmDialog
-      title={title}
+      title={<Trans>Add FACEIT account</Trans>}
       onConfirm={onConfirm}
       closeOnConfirm={false}
       isBusy={isBusy}
     >
       <TextInput
-        label={label}
-        placeholder={placeholder}
+        label={t({
+          context: 'Input label',
+          message: 'FACEIT nickname',
+        })}
+        placeholder={t({
+          context: 'Input placeholder',
+          message: 'Nickname',
+        })}
         value={nickname}
         onChange={(event) => {
           setNickname(event.target.value);
@@ -71,7 +58,9 @@ function AddAccountDialog() {
       />
       <div className="mt-4 flex items-center gap-x-4">
         <ExclamationTriangleIcon className="size-12 text-orange-700" />
-        <p className="text-caption">{caseSensitiveMessage}</p>
+        <p className="text-caption">
+          <Trans>The nickname is case sensitive!</Trans>
+        </p>
       </div>
       {errorMessage && (
         <div className="mt-8">

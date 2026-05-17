@@ -43,7 +43,7 @@ export function ThirdPartyAccounts<Account extends ThirdPartyAccount>({
                 {account.nickname}
               </p>
             </a>
-            {renderAccountInfo && <div className="ml-36 mt-4">{renderAccountInfo(account)}</div>}
+            {renderAccountInfo && <div className="mt-4 ml-40">{renderAccountInfo(account)}</div>}
           </div>
           <div className="flex items-center gap-x-8">
             <Button

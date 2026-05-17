@@ -182,8 +182,9 @@ export function TeamTacticsMap({
 }: Props) {
   const maps = useMaps();
   const map = maps.find((map) => map.name === mapName && map.game === game);
+  const pointCount = points.length;
   const pointCountLabel =
-    variant === 'heatmap' ? <Trans>{points.length} samples</Trans> : variant === 'marker' ? <Trans>{points.length} points</Trans> : <Trans>{points.length} cells</Trans>;
+    variant === 'heatmap' ? <Trans>{pointCount} samples</Trans> : variant === 'marker' ? <Trans>{pointCount} points</Trans> : <Trans>{pointCount} cells</Trans>;
 
   return (
     <section className="flex min-h-0 flex-1 flex-col gap-y-12 rounded-8 border border-gray-300 bg-gray-50 p-12">

@@ -634,7 +634,9 @@ class FaceitScoutingSessionManager {
       teamToOverlapCount.set(row.teamName, currentCount + (steamIdSet.has(row.steamId) ? 1 : 0));
     }
 
-    const bestTeamEntry = [...teamToOverlapCount.entries()].sort((entryA, entryB) => entryB[1] - entryA[1])[0];
+    const bestTeamEntry = [...teamToOverlapCount.entries()].toSorted(
+      (entryA, entryB) => entryB[1] - entryA[1],
+    )[0];
     if (bestTeamEntry !== undefined && bestTeamEntry[1] >= 2) {
       return bestTeamEntry[0];
     }

@@ -7,6 +7,7 @@ export function applyMatchRoundsFilter(query: any, rounds: MatchRoundFilter[], m
     return query.where(sql<boolean>`false`);
   }
 
+  // oxlint-disable-next-line typescript/no-explicit-any
   return query.where((eb: any) => {
     return eb.or(
       rounds.map((round) => {

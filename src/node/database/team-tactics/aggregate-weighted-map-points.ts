@@ -29,8 +29,7 @@ export function aggregateWeightedMapPoints(points: WeightedMapPoint[], gridSize:
     });
   }
 
-  return [...buckets.values()]
-    .map((bucket) => {
+  return Array.from(buckets.values(), (bucket) => {
       return {
         x: bucket.totalX / bucket.count,
         y: bucket.totalY / bucket.count,

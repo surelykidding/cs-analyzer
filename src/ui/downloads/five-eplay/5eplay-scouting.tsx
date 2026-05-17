@@ -1,3 +1,5 @@
+/* oxlint-disable lingui/no-expression-in-message */
+
 import React, { useEffect, useState } from 'react';
 import { Trans, useLingui } from '@lingui/react/macro';
 import { DEFAULT_MAX_CONCURRENT_TACTICS_POSITION_GENERATIONS } from 'csdm/common/analyses';
@@ -73,14 +75,14 @@ function TargetStatusBadge({ status }: { status: FiveEPlayScoutingSession['targe
   const { t } = useLingui();
   const className =
     status === FiveEPlayScoutingTargetStatus.Ready
-      ? 'bg-green-100 text-green-900'
+      ? 'bg-green-700 text-white'
       : status === FiveEPlayScoutingTargetStatus.Processing || status === FiveEPlayScoutingTargetStatus.Downloading
-        ? 'bg-blue-100 text-blue-900'
+        ? 'bg-blue-700 text-white'
         : status === FiveEPlayScoutingTargetStatus.Error
-          ? 'bg-red-100 text-red-900'
+          ? 'bg-red-700 text-white'
           : 'bg-gray-200 text-gray-900';
 
-  return <span className={`rounded-999 px-8 py-4 text-caption ${className}`}>{translateScoutingStatus(t, status)}</span>;
+  return <span className={`rounded-full px-8 py-4 text-caption ${className}`}>{translateScoutingStatus(t, status)}</span>;
 }
 
 export function FiveEPlayScouting() {
@@ -168,9 +170,7 @@ export function FiveEPlayScouting() {
   useEffect(() => {
     if (session === undefined || session.readyTargetCount === 0 || map === undefined) {
       setResponse(undefined);
-      if (tacticsStatus !== Status.Idle) {
-        setTacticsStatus(Status.Idle);
-      }
+      setTacticsStatus(Status.Idle);
       return;
     }
 
@@ -555,7 +555,7 @@ export function FiveEPlayScouting() {
                             <p className="text-body-strong">
                               <Trans>Match {target.order + 1}</Trans>
                             </p>
-                            <p className="mt-4 break-all text-caption text-gray-800">{target.fiveEPlayMatchId}</p>
+                            <p className="mt-4 text-caption break-all text-gray-800">{target.fiveEPlayMatchId}</p>
                           </div>
                           <TargetStatusBadge status={target.status} />
                         </div>
@@ -569,7 +569,7 @@ export function FiveEPlayScouting() {
                             <ErrorMessage message={target.failureMessage} />
                           </div>
                         )}
-                        {target.demoFilePath && <p className="mt-8 break-all text-caption text-gray-800">{target.demoFilePath}</p>}
+                        {target.demoFilePath && <p className="mt-8 text-caption break-all text-gray-800">{target.demoFilePath}</p>}
                         <div className="mt-12 flex flex-wrap gap-8">
                           <OpenLinkButton url={target.url}>
                             <Trans>See on 5EPlay</Trans>

@@ -196,6 +196,7 @@ async function downloadArchive(url: string, destinationPath: string) {
     }
 
     await pipeline(
+      // oxlint-disable-next-line typescript/no-explicit-any
       Readable.fromWeb(response.body as any),
       fs.createWriteStream(destinationPath),
     );

@@ -419,10 +419,6 @@ msgid "An error occurred connecting to the WebSocket server."
 msgstr "An error occurred connecting to the WebSocket server."
 
 #: src/ui/changelog/changelog-dialog.tsx
-msgid "{APP_DISPLAY_NAME} {APP_VERSION}"
-msgstr "{APP_DISPLAY_NAME} {APP_VERSION}"
-
-#: src/ui/changelog/changelog-dialog.tsx
 msgid "Windows beta release focused on tactics analysis and scouting workflows."
 msgstr "Windows beta release focused on tactics analysis and scouting workflows."
 
@@ -1569,6 +1565,7 @@ msgid "Opening duel result"
 msgstr "Opening duel result"
 
 #: src/ui/components/inputs/select/perspective-select.tsx
+#: src/ui/downloads/perfect-world/perfect-world-match.tsx
 msgid "Player"
 msgstr "Player"
 
@@ -3524,9 +3521,18 @@ msgid "No matches found for the current account."
 msgstr "No matches found for the current account."
 
 #: src/ui/downloads/faceit/no-faceit-account.tsx
+msgid "To add a FACEIT account, enter your FACEIT nickname."
+msgstr "To add a FACEIT account, enter your FACEIT nickname."
+
+#: src/ui/downloads/faceit/no-faceit-account.tsx
 msgctxt "Input placeholder"
 msgid "FACEIT nickname"
 msgstr "FACEIT nickname"
+
+#: src/ui/downloads/faceit/no-faceit-account.tsx
+#: src/ui/settings/downloads/faceit-settings.tsx
+msgid "The nickname is case sensitive!"
+msgstr "The nickname is case sensitive!"
 
 #: src/ui/downloads/faceit/no-faceit-account.tsx
 #: src/ui/downloads/five-eplay/no-5eplay-account.tsx
@@ -3803,10 +3809,13 @@ msgstr "This match needs a participant Steam ID to resolve the live room. Enter 
 msgid "The provided participant Steam ID is not part of this match room."
 msgstr "The provided participant Steam ID is not part of this match room."
 
-#. placeholder {0}: currentAccount?.nickname ?? 'this account'
 #: src/ui/downloads/perfect-world/no-perfect-world-account.tsx
-msgid "The saved Perfect World session for {0} has expired. Import a fresh client session, or sign in again with your mobile phone and SMS security code."
-msgstr "The saved Perfect World session for {0} has expired. Import a fresh client session, or sign in again with your mobile phone and SMS security code."
+msgid "this account"
+msgstr "this account"
+
+#: src/ui/downloads/perfect-world/no-perfect-world-account.tsx
+msgid "The saved Perfect World session for {accountName} has expired. Import a fresh client session, or sign in again with your mobile phone and SMS security code."
+msgstr "The saved Perfect World session for {accountName} has expired. Import a fresh client session, or sign in again with your mobile phone and SMS security code."
 
 #: src/ui/downloads/perfect-world/no-perfect-world-account.tsx
 msgid "Import your current Perfect World desktop client session, or enter your mobile phone number and SMS security code."
@@ -3868,6 +3877,14 @@ msgstr "Fetching last Perfect World matches..."
 #: src/ui/downloads/perfect-world/perfect-world-last-matches-loader.tsx
 msgid "An error occurred while fetching Perfect World matches."
 msgstr "An error occurred while fetching Perfect World matches."
+
+#: src/ui/downloads/perfect-world/perfect-world-match.tsx
+msgid "Rating"
+msgstr "Rating"
+
+#: src/ui/downloads/perfect-world/perfect-world-match.tsx
+msgid "PW Rating"
+msgstr "PW Rating"
 
 #: src/ui/downloads/perfect-world/perfect-world-scouting.tsx
 msgid "Perfect World scouting session started."
@@ -8051,26 +8068,38 @@ msgid "ID"
 msgstr "ID"
 
 #: src/ui/settings/downloads/auto-download-third-party-demos-background.tsx
+msgid "Automatically download {name} demos in the background."
+msgstr "Automatically download {name} demos in the background."
+
+#: src/ui/settings/downloads/auto-download-third-party-demos-background.tsx
 msgctxt "Settings title"
 msgid "Background download"
 msgstr "Background download"
 
-#: src/ui/settings/downloads/auto-download-third-party-demos-background.tsx
-msgid "Automatically download {name} demos in the background."
-msgstr "Automatically download {name} demos in the background."
+#: src/ui/settings/downloads/auto-download-third-party-demos.tsx
+msgid "Automatically download {name} demos at application startup."
+msgstr "Automatically download {name} demos at application startup."
 
 #: src/ui/settings/downloads/auto-download-third-party-demos.tsx
 msgctxt "Settings title"
 msgid "Startup download"
 msgstr "Startup download"
 
-#: src/ui/settings/downloads/auto-download-third-party-demos.tsx
-msgid "Automatically download {name} demos at application startup."
-msgstr "Automatically download {name} demos at application startup."
-
 #: src/ui/settings/downloads/download-folder-path.tsx
 msgid "Download folder"
 msgstr "Download folder"
+
+#: src/ui/settings/downloads/faceit-downloads-warning.tsx
+msgid "This beta already includes a built-in FACEIT API key, so testers can use account import, scouting, and tactics without requesting or pasting one."
+msgstr "This beta already includes a built-in FACEIT API key, so testers can use account import, scouting, and tactics without requesting or pasting one."
+
+#: src/ui/settings/downloads/faceit-downloads-warning.tsx
+msgid "If you want to use your own FACEIT quota, you can still add an optional override in Settings > Integrations > FACEIT API key override."
+msgstr "If you want to use your own FACEIT quota, you can still add an optional override in Settings > Integrations > FACEIT API key override."
+
+#: src/ui/settings/downloads/faceit-downloads-warning.tsx
+msgid "FACEIT still restricts some download endpoints on the server side, so demo availability may change over time."
+msgstr "FACEIT still restricts some download endpoints on the server side, so demo availability may change over time."
 
 #: src/ui/settings/downloads/faceit-settings.tsx
 msgid "Add FACEIT account"
@@ -9157,52 +9186,42 @@ msgstr "Some matches on the current map are missing player positions required fo
 msgid "Generate tactics positions once for the current map matches to cover pistol, eco, semi, force buy and full buy rounds."
 msgstr "Generate tactics positions once for the current map matches to cover pistol, eco, semi, force buy and full buy rounds."
 
-#. placeholder {0}: response.skippedMatchesWithoutPositions
-#. placeholder {1}: response.skippedRoundCount
 #: src/ui/team/tactics/team-tactics-filters.tsx
-msgid "Missing matches: {0}, missing rounds: {1}"
-msgstr "Missing matches: {0}, missing rounds: {1}"
+msgid "Missing matches: {skippedMatchesWithoutPositions}, missing rounds: {skippedRoundCount}"
+msgstr "Missing matches: {skippedMatchesWithoutPositions}, missing rounds: {skippedRoundCount}"
 
 #: src/ui/team/tactics/team-tactics-filters.tsx
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "Generate tactics positions for current map matches"
 msgstr "Generate tactics positions for current map matches"
 
-#. placeholder {0}: response.selectedMatchCount
 #: src/ui/team/tactics/team-tactics-filters.tsx
-msgid "Matches in scope: {0}"
-msgstr "Matches in scope: {0}"
+msgid "Matches in scope: {selectedMatchCount}"
+msgstr "Matches in scope: {selectedMatchCount}"
 
-#. placeholder {0}: response.roundCount
 #: src/ui/team/tactics/team-tactics-filters.tsx
-msgid "Rounds found: {0}"
-msgstr "Rounds found: {0}"
+msgid "Rounds found: {roundCount}"
+msgstr "Rounds found: {roundCount}"
 
-#. placeholder {0}: response.analyzedMatchCount
 #: src/ui/team/tactics/team-tactics-filters.tsx
-msgid "Matches analyzed: {0}"
-msgstr "Matches analyzed: {0}"
+msgid "Matches analyzed: {analyzedMatchCount}"
+msgstr "Matches analyzed: {analyzedMatchCount}"
 
-#. placeholder {0}: response.skippedMatchesWithoutPositions
-#. placeholder {1}: response.skippedRoundCount
 #: src/ui/team/tactics/team-tactics-filters.tsx
-msgid "Skipped matches without positions: {0} ({1} rounds)"
-msgstr "Skipped matches without positions: {0} ({1} rounds)"
+msgid "Skipped matches without positions: {skippedMatchesWithoutPositions} ({skippedRoundCount} rounds)"
+msgstr "Skipped matches without positions: {skippedMatchesWithoutPositions} ({skippedRoundCount} rounds)"
 
-#. placeholder {0}: points.length
 #: src/ui/team/tactics/team-tactics-map.tsx
-msgid "{0} samples"
-msgstr "{0} samples"
+msgid "{pointCount} samples"
+msgstr "{pointCount} samples"
 
-#. placeholder {0}: points.length
 #: src/ui/team/tactics/team-tactics-map.tsx
-msgid "{0} points"
-msgstr "{0} points"
+msgid "{pointCount} points"
+msgstr "{pointCount} points"
 
-#. placeholder {0}: points.length
 #: src/ui/team/tactics/team-tactics-map.tsx
-msgid "{0} cells"
-msgstr "{0} cells"
+msgid "{pointCount} cells"
+msgstr "{pointCount} cells"
 
 #: src/ui/team/tactics/team-tactics.tsx
 msgid "No CT position data was found on the current radar level for these filters. Switched to the other level."

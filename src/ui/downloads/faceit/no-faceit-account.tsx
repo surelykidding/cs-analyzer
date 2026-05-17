@@ -5,24 +5,11 @@ import { TextInput } from 'csdm/ui/components/inputs/text-input';
 import { useAddFaceitAccount } from '../../settings/downloads/use-add-faceit-account';
 import { ErrorMessage } from 'csdm/ui/components/error-message';
 import { ExclamationTriangleIcon } from 'csdm/ui/icons/exclamation-triangle-icon';
-import { isChineseLocale } from 'csdm/common/locale';
-import { useLocale } from 'csdm/ui/settings/ui/use-locale';
 
 export function NoFaceitAccount() {
   const { t } = useLingui();
-  const locale = useLocale();
   const [nickname, setNickname] = useState('');
   const { addFaceitAccount, errorMessage, isBusy } = useAddFaceitAccount();
-  const isChinese = isChineseLocale(locale);
-
-  const title = isChinese ? '若要添加 FACEIT 账号，请输入你的 FACEIT 昵称。' : 'To add a FACEIT account, enter your FACEIT nickname.';
-  const placeholder = isChinese
-    ? 'FACEIT 昵称'
-    : t({
-        message: 'FACEIT nickname',
-        context: 'Input placeholder',
-      });
-  const caseSensitiveMessage = isChinese ? '昵称区分大小写！' : 'The nickname is case sensitive!';
 
   const submit = async () => {
     await addFaceitAccount(nickname);
@@ -32,10 +19,15 @@ export function NoFaceitAccount() {
 
   return (
     <div className="mx-auto mt-48 flex max-w-[600px] flex-col">
-      <p className="text-body-strong">{title}</p>
+      <p className="text-body-strong">
+        <Trans>To add a FACEIT account, enter your FACEIT nickname.</Trans>
+      </p>
       <div className="mt-8 w-[228px]">
         <TextInput
-          placeholder={placeholder}
+          placeholder={t({
+            message: 'FACEIT nickname',
+            context: 'Input placeholder',
+          })}
           onChange={(event) => {
             setNickname(event.target.value);
           }}
@@ -47,7 +39,9 @@ export function NoFaceitAccount() {
       </div>
       <div className="mt-4 flex items-center gap-x-8">
         <ExclamationTriangleIcon className="size-12 text-orange-700" />
-        <p className="text-caption">{caseSensitiveMessage}</p>
+        <p className="text-caption">
+          <Trans>The nickname is case sensitive!</Trans>
+        </p>
       </div>
       <div className="my-8">
         <Button variant={ButtonVariant.Primary} onClick={submit} isDisabled={isDisabled}>

@@ -21,10 +21,10 @@ import { RendererClientMessageName } from 'csdm/server/renderer-client-message-n
 import type { PerfectWorldAccount } from 'csdm/common/types/perfect-world-account';
 
 function AccountStateBadge({ account }: { account: PerfectWorldAccount }) {
-  const className = account.isValid ? 'bg-green-100 text-green-900' : 'bg-red-100 text-red-900';
+  const className = account.isValid ? 'bg-green-700 text-white' : 'bg-red-700 text-white';
   const label = account.isValid ? <Trans>Active</Trans> : <Trans>Stale</Trans>;
 
-  return <span className={`rounded-999 px-8 py-4 text-caption ${className}`}>{label}</span>;
+  return <span className={`rounded-full px-8 py-4 text-caption ${className}`}>{label}</span>;
 }
 
 function AddAccountDialog() {
@@ -134,7 +134,7 @@ export function PerfectWorldSettings() {
   return (
     <ThirdPartySettings
       name={t`Perfect World`}
-      logo={<span className="rounded-4 bg-gray-200 px-6 py-2 text-caption">PW</span>}
+      logo={<span className="rounded-4 bg-gray-200 px-8 py-4 text-caption">PW</span>}
       autoDownloadAtStartupSettingsKey="downloadPerfectWorldDemosAtStartup"
       autoDownloadInBackgroundSettingsKey="downloadPerfectWorldDemosInBackground"
       warning={
@@ -164,7 +164,7 @@ export function PerfectWorldSettings() {
               {account.lastValidatedAt && <span>{new Date(account.lastValidatedAt).toLocaleString()}</span>}
               {account.isCurrent && <span><Trans>Current account</Trans></span>}
               {!account.isValid && account.lastError && (
-                <span className="text-red-900" title={account.lastError}>
+                <span className="text-red-700" title={account.lastError}>
                   {account.lastError}
                 </span>
               )}

@@ -1,3 +1,5 @@
+/* oxlint-disable lingui/no-unlocalized-strings */
+
 export const PerfectWorldErrorCode = {
   AccountMissing: 'PerfectWorldAccountMissing',
   AccountExpired: 'PerfectWorldAccountExpired',

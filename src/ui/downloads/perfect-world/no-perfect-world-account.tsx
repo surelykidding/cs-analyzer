@@ -30,14 +30,15 @@ export function NoPerfectWorldAccount({ status = 'missing', currentAccount }: Pr
 
   const isDisabled = isBusy || isImportBusy || mobilePhone === '' || securityCode === '';
   const isLoading = isBusy || isImportBusy;
+  const accountName = currentAccount?.nickname ?? t`this account`;
 
   return (
     <div className="mx-auto mt-48 flex w-[320px] flex-col">
       <p className="text-body-strong">
         {status === 'stale' ? (
           <Trans>
-            The saved Perfect World session for {currentAccount?.nickname ?? 'this account'} has expired. Import a fresh
-            client session, or sign in again with your mobile phone and SMS security code.
+            The saved Perfect World session for {accountName} has expired. Import a fresh client session, or sign in
+            again with your mobile phone and SMS security code.
           </Trans>
         ) : (
           <Trans>

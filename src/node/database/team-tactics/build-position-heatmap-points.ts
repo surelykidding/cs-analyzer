@@ -52,7 +52,7 @@ function dedupeRowsPerTick(rows: PositionHeatmapRow[]) {
   const dedupedRows: PositionHeatmapRow[] = [];
 
   for (const row of rows) {
-    const previousRow = dedupedRows[dedupedRows.length - 1];
+    const previousRow = dedupedRows.at(-1);
     if (previousRow && isSamePlayerPositionStream(previousRow, row) && previousRow.tick === row.tick) {
       continue;
     }
@@ -78,7 +78,7 @@ function mergeExactWeightedPoints(points: WeightedMapPoint[]) {
     mergedPoints.set(key, { ...point });
   }
 
-  return [...mergedPoints.values()].sort((pointA, pointB) => {
+  return [...mergedPoints.values()].toSorted((pointA, pointB) => {
     if (pointA.count !== pointB.count) {
       return pointB.count - pointA.count;
     }
@@ -97,11 +97,13 @@ export function buildPositionHeatmapPoints(
   thresholdZ: number | null,
   _mapScale: number,
 ): WeightedMapPoint[] {
+  void _mapScale;
+
   if (rows.length === 0) {
     return [];
   }
 
-  const sortedRows = [...rows].sort(compareRows);
+  const sortedRows = rows.toSorted(compareRows);
   const dedupedRows = dedupeRowsPerTick(sortedRows);
   const weightedPoints: WeightedMapPoint[] = [];
 

@@ -178,12 +178,14 @@ const api: PreloadApi = {
   },
 
   onOpenDemoFile: (callback: (event: IpcRendererEvent, demoPath: string) => void) => {
-    ipcRenderer.on(IPCChannel.OpenDemFile, (event, demoPath: string) => {
+    const listener = (event: IpcRendererEvent, demoPath: string) => {
       callback(event, demoPath);
-    });
+    };
+
+    ipcRenderer.on(IPCChannel.OpenDemFile, listener);
 
     return () => {
-      ipcRenderer.removeListener(IPCChannel.OpenDemFile, callback);
+      ipcRenderer.removeListener(IPCChannel.OpenDemFile, listener);
     };
   },
 

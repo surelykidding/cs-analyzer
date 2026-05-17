@@ -1,3 +1,5 @@
+/* oxlint-disable typescript-eslint/require-await */
+
 import { describe, expect, it, vi } from 'vite-plus/test';
 import { Game } from 'csdm/common/types/counter-strike';
 import { discover5EPlayScoutingTargets } from './discover-5eplay-scouting-targets';

@@ -182,20 +182,14 @@ export async function loginPerfectWorld({
 
 export async function fetchPerfectWorldSelfProfile(auth: PerfectWorldAuth) {
   const defaultErrorMessage = 'Failed to fetch Perfect World profile.';
-  let response: Response;
-
-  try {
-    response = await fetch(`${PERFECT_WORLD_API_URL}/api/csgo/home/pvp/detailStats`, {
-      method: 'POST',
-      headers: buildJsonHeaders(auth.token),
-      body: JSON.stringify({
-        mySteamId: auth.mySteamId,
-        toSteamId: auth.mySteamId,
-      }),
-    });
-  } catch (error) {
-    throw error;
-  }
+  const response = await fetch(`${PERFECT_WORLD_API_URL}/api/csgo/home/pvp/detailStats`, {
+    method: 'POST',
+    headers: buildJsonHeaders(auth.token),
+    body: JSON.stringify({
+      mySteamId: auth.mySteamId,
+      toSteamId: auth.mySteamId,
+    }),
+  });
 
   const text = await response.text();
   let payload: unknown = undefined;
@@ -392,7 +386,14 @@ export async function fetchPerfectWorldLiveMatchPayload({
     });
 
     websocket.on('message', (data) => {
-      const text = typeof data === 'string' ? data : data.toString();
+      const text =
+        typeof data === 'string'
+          ? data
+          : Buffer.isBuffer(data)
+            ? data.toString('utf8')
+            : Array.isArray(data)
+              ? Buffer.concat(data).toString('utf8')
+              : Buffer.from(data).toString('utf8');
       if (text === 'pong') {
         requestSnapshot();
         return;

@@ -22,5 +22,5 @@ export function aggregateMapPoints(points: Point[], gridSize: number): WeightedM
     });
   }
 
-  return [...buckets.values()].sort((pointA, pointB) => pointB.count - pointA.count);
+  return [...buckets.values()].toSorted((pointA, pointB) => pointB.count - pointA.count);
 }

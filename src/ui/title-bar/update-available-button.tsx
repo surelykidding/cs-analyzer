@@ -5,21 +5,27 @@ import { UpdateIcon } from 'csdm/ui/icons/update-icon';
 import { Tooltip } from 'csdm/ui/components/tooltip';
 
 export function UpdateAvailableButton() {
-  if (isPrereleaseVersion(APP_VERSION)) {
-    return null;
-  }
+  const isPrerelease = isPrereleaseVersion(APP_VERSION);
 
   const [updateAvailable, setUpdateAvailable] = useState(false);
 
   useEffect(() => {
+    if (isPrerelease) {
+      return;
+    }
+
     void window.csdm.hasUpdateReadyToInstall().then(setUpdateAvailable);
-  }, []);
+  }, [isPrerelease]);
 
   const onClick = () => {
     window.csdm.installUpdate();
   };
 
   useEffect(() => {
+    if (isPrerelease) {
+      return;
+    }
+
     const onUpdateDownloaded = () => {
       setUpdateAvailable(true);
     };
@@ -29,9 +35,9 @@ export function UpdateAvailableButton() {
     return () => {
       unListen();
     };
-  }, []);
+  }, [isPrerelease]);
 
-  if (!updateAvailable) {
+  if (isPrerelease || !updateAvailable) {
     return null;
   }
 

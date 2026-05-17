@@ -11,6 +11,8 @@ export async function fetchTKillPositions(
   payload: TeamTacticsPayload,
   _mapScale: number,
 ): Promise<WeightedMapPoint[]> {
+  void _mapScale;
+
   if (rounds.length === 0) {
     return [];
   }

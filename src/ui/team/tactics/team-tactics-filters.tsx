@@ -84,6 +84,11 @@ export function TeamTacticsFilters({
       label: translateEconomyType(economyType),
     };
   });
+  const skippedMatchesWithoutPositions = response?.skippedMatchesWithoutPositions ?? 0;
+  const skippedRoundCount = response?.skippedRoundCount ?? 0;
+  const selectedMatchCount = response?.selectedMatchCount ?? 0;
+  const roundCount = response?.roundCount ?? 0;
+  const analyzedMatchCount = response?.analyzedMatchCount ?? 0;
 
   return (
     <HeatmapFilters>
@@ -153,7 +158,7 @@ export function TeamTacticsFilters({
           </p>
           <p className="mt-8 text-caption text-gray-800">
             <Trans>
-              Missing matches: {response.skippedMatchesWithoutPositions}, missing rounds: {response.skippedRoundCount}
+              Missing matches: {skippedMatchesWithoutPositions}, missing rounds: {skippedRoundCount}
             </Trans>
           </p>
           <div className="mt-12">
@@ -166,19 +171,18 @@ export function TeamTacticsFilters({
       {response && (
         <div className="rounded-8 border border-gray-300 bg-gray-50 p-12 text-caption text-gray-800">
           <p>
-            <Trans>Matches in scope: {response.selectedMatchCount}</Trans>
+            <Trans>Matches in scope: {selectedMatchCount}</Trans>
           </p>
           <p>
-            <Trans>Rounds found: {response.roundCount}</Trans>
+            <Trans>Rounds found: {roundCount}</Trans>
           </p>
           <p>
-            <Trans>Matches analyzed: {response.analyzedMatchCount}</Trans>
+            <Trans>Matches analyzed: {analyzedMatchCount}</Trans>
           </p>
           {response.skippedMatchesWithoutPositions > 0 && (
             <p>
               <Trans>
-                Skipped matches without positions: {response.skippedMatchesWithoutPositions} ({response.skippedRoundCount}
-                {' '}rounds)
+                Skipped matches without positions: {skippedMatchesWithoutPositions} ({skippedRoundCount} rounds)
               </Trans>
             </p>
           )}

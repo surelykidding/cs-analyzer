@@ -135,8 +135,7 @@ export async function discoverPerfectWorldScoutingTargets({
     }
   }
 
-  const targets = [...candidateMatches.values()]
-    .sort((candidateA, candidateB) => {
+  const targets = [...candidateMatches.values()].toSorted((candidateA, candidateB) => {
       const dateDifference = Date.parse(candidateB.match.date) - Date.parse(candidateA.match.date);
       if (dateDifference !== 0) {
         return dateDifference;

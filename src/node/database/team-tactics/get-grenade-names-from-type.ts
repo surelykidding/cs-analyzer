@@ -27,6 +27,6 @@ export function getGrenadeNamesFromType(grenadeType: TeamTacticsGrenadeTypeName)
     case TeamTacticsGrenadeType.Decoy:
       return [GrenadeName.Decoy];
     default:
-      return assertNever(grenadeType, `Unsupported team tactics grenade type: ${grenadeType}`);
+      return assertNever(grenadeType, 'Unsupported team tactics grenade type');
   }
 }

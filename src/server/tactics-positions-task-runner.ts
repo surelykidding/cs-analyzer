@@ -36,7 +36,7 @@ export function runTacticsPositionsTask<T>(checksum: string, kind: TaskKind, tas
   });
   activeTaskByKey.set(taskKey, trackedTaskPromise as Promise<void>);
 
-  queueCompletion.finally(() => {
+  void queueCompletion.finally(() => {
     if (taskQueueByChecksum.get(checksum) === queueCompletion) {
       taskQueueByChecksum.delete(checksum);
     }

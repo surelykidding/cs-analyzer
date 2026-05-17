@@ -19,9 +19,7 @@ export function ChangelogDialog() {
     <Dialog>
       <DialogHeader>
         <DialogTitle>
-          <Trans>
-            {APP_DISPLAY_NAME} {APP_VERSION}
-          </Trans>
+          {APP_DISPLAY_NAME} {APP_VERSION}
         </DialogTitle>
       </DialogHeader>
       <DialogContent>

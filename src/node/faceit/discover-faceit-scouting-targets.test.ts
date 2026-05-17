@@ -1,3 +1,5 @@
+/* oxlint-disable typescript-eslint/require-await */
+
 import { describe, expect, it, vi } from 'vite-plus/test';
 import { Game } from 'csdm/common/types/counter-strike';
 import { FaceitResourceNotFound } from 'csdm/node/faceit-web-api/errors/faceit-resource-not-found';
@@ -116,7 +118,7 @@ describe('discoverFaceitScoutingTargets', () => {
       throw new Error(`Unexpected match id: ${matchId}`);
     });
 
-    mockedFetchPlayerMatchesHistory.mockImplementation(async ({ playerId, offset }: { playerId: string; offset?: number }) => {
+    mockedFetchPlayerMatchesHistory.mockImplementation(async ({ offset }: { playerId: string; offset?: number }) => {
       if (offset !== 0) {
         return [];
       }

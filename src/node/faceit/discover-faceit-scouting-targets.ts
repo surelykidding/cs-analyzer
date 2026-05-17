@@ -174,8 +174,7 @@ export async function discoverFaceitScoutingTargets({
         continue;
       }
 
-      const matchedTeam = [...candidateMatch.teams]
-        .map((team) => {
+      const matchedTeam = Array.from(candidateMatch.teams, (team) => {
           return {
             team,
             overlapCount: getTeamOverlapCount(

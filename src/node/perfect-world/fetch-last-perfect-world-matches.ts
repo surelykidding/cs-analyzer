@@ -35,7 +35,9 @@ export async function fetchPerfectWorldMatchHistoryMatches({
 
   return Promise.all(
     rawMatches.map(async (rawMatch) => {
-      const seed = createPerfectWorldMatchSeed(rawMatch, String(rawMatch.matchId ?? ''));
+      const matchId = rawMatch.matchId;
+      const fallbackMatchId = typeof matchId === 'string' || typeof matchId === 'number' ? String(matchId) : '';
+      const seed = createPerfectWorldMatchSeed(rawMatch, fallbackMatchId);
 
       return {
         ...seed,

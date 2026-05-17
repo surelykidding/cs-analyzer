@@ -1,3 +1,5 @@
+/* oxlint-disable typescript-eslint/require-await */
+
 import { describe, expect, it } from 'vite-plus/test';
 import { runTasksWithConcurrency } from './run-tasks-with-concurrency';
 

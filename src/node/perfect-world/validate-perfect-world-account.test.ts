@@ -1,3 +1,5 @@
+/* oxlint-disable typescript-eslint/require-await */
+
 import { describe, expect, it, vi } from 'vite-plus/test';
 import { PerfectWorldErrorCode } from 'csdm/common/types/perfect-world-errors';
 import { validatePerfectWorldAccount } from './validate-perfect-world-account';

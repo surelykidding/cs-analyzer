@@ -1,4 +1,5 @@
 import React from 'react';
+import { Trans } from '@lingui/react/macro';
 import type { PerfectWorldMatch as PerfectWorldMatchType } from 'csdm/common/types/perfect-world-match';
 
 type Props = {
@@ -28,12 +29,18 @@ export function PerfectWorldMatch({ match }: Props) {
                 <table className="w-full text-left text-caption">
                   <thead>
                     <tr className="text-gray-800">
-                      <th className="pb-8 pr-12">Player</th>
-                      <th className="pb-8 pr-12">K</th>
-                      <th className="pb-8 pr-12">A</th>
-                      <th className="pb-8 pr-12">D</th>
-                      <th className="pb-8 pr-12">Rating</th>
-                      <th className="pb-8">PW Rating</th>
+                      <th className="pr-12 pb-8">
+                        <Trans>Player</Trans>
+                      </th>
+                      <th className="pr-12 pb-8">K</th>
+                      <th className="pr-12 pb-8">A</th>
+                      <th className="pr-12 pb-8">D</th>
+                      <th className="pr-12 pb-8">
+                        <Trans>Rating</Trans>
+                      </th>
+                      <th className="pb-8">
+                        <Trans>PW Rating</Trans>
+                      </th>
                     </tr>
                   </thead>
                   <tbody>

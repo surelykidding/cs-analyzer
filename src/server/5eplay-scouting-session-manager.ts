@@ -528,7 +528,9 @@ class FiveEPlayScoutingSessionManager {
       );
     }
 
-    const bestTeamEntry = [...teamToOverlapCount.entries()].sort((entryA, entryB) => entryB[1] - entryA[1])[0];
+    const bestTeamEntry = [...teamToOverlapCount.entries()].toSorted(
+      (entryA, entryB) => entryB[1] - entryA[1],
+    )[0];
     if (bestTeamEntry !== undefined && bestTeamEntry[1] >= 3) {
       return bestTeamEntry[0];
     }
