@@ -15,6 +15,9 @@ on:
         description: Sign and notarize macOS artifacts with Apple certificate secrets
         required: true
         default: false
+  push:
+    tags:
+      - 'cs-analyzer-v*'
 
 permissions:
   contents: write
@@ -33,6 +36,10 @@ jobs:
 
       - name: Stop if there are no new changes
         run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            echo "Tag-triggered release; skipping latest-tag change guard."
+            exit 0
+          fi
           LATEST_TAG=$(git describe --tags --abbrev=0 --always)
           LAST_COMMIT=$(git rev-parse HEAD)
           LASTEST_TAG_COMMIT=$(git rev-list -n 1 $LATEST_TAG)
@@ -112,10 +119,20 @@ jobs:
           cache-dependency-path: tools/demo-analyzer/cs-demo-analyzer-enhanced/go.sum
 
       - name: Create new version
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
           npm version ${{ github.event.inputs.release-type }} -m "chore: v%s"
+
+      - name: Validate tag version
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          if [ "${GITHUB_REF_NAME}" != "cs-analyzer-v$VERSION" ]; then
+            echo "::error title=Tag/version mismatch::Expected cs-analyzer-v$VERSION but got ${GITHUB_REF_NAME}."
+            exit 1
+          fi
 
       - name: Package macOS artifacts
         run: |
@@ -170,10 +187,20 @@ jobs:
           cache-dependency-path: tools/demo-analyzer/cs-demo-analyzer-enhanced/go.sum
 
       - name: Create new version
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
           npm version ${{ github.event.inputs.release-type }} -m "chore: v%s"
+
+      - name: Validate tag version
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          if [ "${GITHUB_REF_NAME}" != "cs-analyzer-v$VERSION" ]; then
+            echo "::error title=Tag/version mismatch::Expected cs-analyzer-v$VERSION but got ${GITHUB_REF_NAME}."
+            exit 1
+          fi
 
       - name: Package Linux artifacts
         run: |
@@ -226,10 +253,21 @@ jobs:
           cache-dependency-path: tools/demo-analyzer/cs-demo-analyzer-enhanced/go.sum
 
       - name: Create new version
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
           npm version ${{ github.event.inputs.release-type }} -m "chore: v%s"
+
+      - name: Validate tag version
+        if: ${{ github.event_name == 'push' }}
+        shell: bash
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          if [ "${GITHUB_REF_NAME}" != "cs-analyzer-v$VERSION" ]; then
+            echo "::error title=Tag/version mismatch::Expected cs-analyzer-v$VERSION but got ${GITHUB_REF_NAME}."
+            exit 1
+          fi
 
       - name: Package Windows artifacts
         run: |
@@ -289,6 +327,7 @@ jobs:
           node-version-file: .node-version
 
       - name: Create new version
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email '41898282+github-actions[bot]@users.noreply.github.com'
@@ -299,7 +338,20 @@ jobs:
           echo "RELEASE_NAME=CS Analyzer $VERSION" >> "$GITHUB_ENV"
 
       - name: Push the tag to GitHub
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         run: git push origin main --tags
+
+      - name: Use tag version
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          if [ "${GITHUB_REF_NAME}" != "cs-analyzer-v$VERSION" ]; then
+            echo "::error title=Tag/version mismatch::Expected cs-analyzer-v$VERSION but got ${GITHUB_REF_NAME}."
+            exit 1
+          fi
+          echo "RELEASE_VERSION=$VERSION" >> "$GITHUB_ENV"
+          echo "RELEASE_TAG=${GITHUB_REF_NAME}" >> "$GITHUB_ENV"
+          echo "RELEASE_NAME=CS Analyzer $VERSION" >> "$GITHUB_ENV"
 
       - name: Download packaged artifacts
         uses: actions/download-artifact@v4
