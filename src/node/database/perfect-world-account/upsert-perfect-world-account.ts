@@ -88,7 +88,9 @@ export async function upsertPerfectWorldAccount(account: Omit<PerfectWorldAccoun
       throw error;
     }
 
-    logger.warn('Perfect World account import is retrying without the jt column because the local database schema is older than expected.');
+    logger.warn(
+      'Perfect World account import is retrying without the jt column because the local database schema is older than expected.',
+    );
     logger.warn(error);
     await upsertPerfectWorldAccountRow(account, {
       includeJt: false,

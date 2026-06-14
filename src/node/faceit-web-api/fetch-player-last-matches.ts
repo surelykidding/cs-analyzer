@@ -78,12 +78,15 @@ async function fetchPlayerLastMatchesForGame({
     searchParams.set('to', String(to));
   }
 
-  const response = await fetch(`https://open.faceit.com/data/v4/players/${playerId}/history?${searchParams.toString()}`, {
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      'Content-Type': 'application/json',
+  const response = await fetch(
+    `https://open.faceit.com/data/v4/players/${playerId}/history?${searchParams.toString()}`,
+    {
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
     },
-  });
+  );
   const { items: matches }: FaceitHistoryDTO = await response.json();
 
   if (response.status === 401) {

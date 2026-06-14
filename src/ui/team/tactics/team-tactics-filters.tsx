@@ -137,12 +137,7 @@ export function TeamTacticsFilters({
           onChange={onCtWindowEndSecondsChange}
         />
       </div>
-      <RadarLevelSelect
-        game={game}
-        mapName={mapName}
-        onChange={onRadarLevelChange}
-        selectedRadarLevel={radarLevel}
-      />
+      <RadarLevelSelect game={game} mapName={mapName} onChange={onRadarLevelChange} selectedRadarLevel={radarLevel} />
       {response !== undefined && response.skippedMatchesWithoutPositions > 0 && (
         <div className="rounded-8 border border-gray-300 bg-gray-50 p-12">
           <p className="text-caption text-gray-800">

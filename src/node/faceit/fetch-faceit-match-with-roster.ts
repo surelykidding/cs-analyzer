@@ -1,5 +1,10 @@
 import { Game } from 'csdm/common/types/counter-strike';
-import { fetchMatch, type FaceitFactionDTO, type FaceitFactionV1DTO, type FaceitMatchDTO } from 'csdm/node/faceit-web-api/fetch-match';
+import {
+  fetchMatch,
+  type FaceitFactionDTO,
+  type FaceitFactionV1DTO,
+  type FaceitMatchDTO,
+} from 'csdm/node/faceit-web-api/fetch-match';
 import { fetchFaceitMatchStats, type FaceitMatchStatsDTO } from 'csdm/node/faceit-web-api/fetch-match-stats';
 import { FaceitResourceNotFound } from 'csdm/node/faceit-web-api/errors/faceit-resource-not-found';
 

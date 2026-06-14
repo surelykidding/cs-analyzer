@@ -162,7 +162,11 @@ export function PerfectWorldSettings() {
               <AccountStateBadge account={account} />
               {account.maskedPhoneNumber && <span>{account.maskedPhoneNumber}</span>}
               {account.lastValidatedAt && <span>{new Date(account.lastValidatedAt).toLocaleString()}</span>}
-              {account.isCurrent && <span><Trans>Current account</Trans></span>}
+              {account.isCurrent && (
+                <span>
+                  <Trans>Current account</Trans>
+                </span>
+              )}
               {!account.isValid && account.lastError && (
                 <span className="text-red-700" title={account.lastError}>
                   {account.lastError}

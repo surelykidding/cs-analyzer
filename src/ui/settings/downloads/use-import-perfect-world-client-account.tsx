@@ -24,7 +24,11 @@ export function useImportPerfectWorldClientAccount() {
       return true;
     } catch (error) {
       setErrorMessage(
-        typeof error === 'string' ? error : <Trans>Could not import the current Perfect World desktop client session.</Trans>,
+        typeof error === 'string' ? (
+          error
+        ) : (
+          <Trans>Could not import the current Perfect World desktop client session.</Trans>
+        ),
       );
       setIsBusy(false);
 

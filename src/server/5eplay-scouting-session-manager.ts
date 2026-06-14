@@ -245,7 +245,11 @@ class FiveEPlayScoutingSessionManager {
     } catch (error) {
       if (error instanceof MatchAlreadyInDownloadQueue) {
         await this.updateTargetStatus(targetId, FiveEPlayScoutingTargetStatus.Downloading);
-      } else if (error instanceof MatchAlreadyDownloaded && demoFilePath !== '' && (await fs.pathExists(demoFilePath))) {
+      } else if (
+        error instanceof MatchAlreadyDownloaded &&
+        demoFilePath !== '' &&
+        (await fs.pathExists(demoFilePath))
+      ) {
         await this.processDownloadedTarget(sessionId, targetId, match.id, demoFilePath);
         return;
       } else if (error instanceof DownloadLinkExpired) {
@@ -308,7 +312,12 @@ class FiveEPlayScoutingSessionManager {
     }
   };
 
-  private processDownloadedTarget = async (sessionId: string, targetId: number, matchId: string, demoFilePath: string) => {
+  private processDownloadedTarget = async (
+    sessionId: string,
+    targetId: number,
+    matchId: string,
+    demoFilePath: string,
+  ) => {
     if (this.processingTargetIds.has(targetId)) {
       return;
     }
@@ -415,7 +424,8 @@ class FiveEPlayScoutingSessionManager {
         .updateTable('5eplay_scouting_targets')
         .set({
           status: FiveEPlayScoutingTargetStatus.Error,
-          failure_message: 'Demo processing was interrupted. You can delete this scouting session and start again to retry.',
+          failure_message:
+            'Demo processing was interrupted. You can delete this scouting session and start again to retry.',
         })
         .where(
           'id',
@@ -430,7 +440,8 @@ class FiveEPlayScoutingSessionManager {
         .updateTable('5eplay_scouting_targets')
         .set({
           status: FiveEPlayScoutingTargetStatus.Error,
-          failure_message: 'Demo download was interrupted. You can delete this scouting session and start again to retry.',
+          failure_message:
+            'Demo download was interrupted. You can delete this scouting session and start again to retry.',
         })
         .where(
           'id',
@@ -481,9 +492,15 @@ class FiveEPlayScoutingSessionManager {
       .where('session_id', '=', sessionId)
       .execute();
     const hasReadyTargets = targetRows.some((target) => target.status === FiveEPlayScoutingTargetStatus.Ready);
-    const hasDownloadingTargets = targetRows.some((target) => target.status === FiveEPlayScoutingTargetStatus.Downloading);
-    const hasProcessingTargets = targetRows.some((target) => target.status === FiveEPlayScoutingTargetStatus.Processing);
-    const hasAwaitingTargets = targetRows.some((target) => target.status === FiveEPlayScoutingTargetStatus.AwaitingDownload);
+    const hasDownloadingTargets = targetRows.some(
+      (target) => target.status === FiveEPlayScoutingTargetStatus.Downloading,
+    );
+    const hasProcessingTargets = targetRows.some(
+      (target) => target.status === FiveEPlayScoutingTargetStatus.Processing,
+    );
+    const hasAwaitingTargets = targetRows.some(
+      (target) => target.status === FiveEPlayScoutingTargetStatus.AwaitingDownload,
+    );
     let status: FiveEPlayScoutingSessionStatus = FiveEPlayScoutingSessionStatus.Error;
     if (hasDownloadingTargets || hasProcessingTargets) {
       status = FiveEPlayScoutingSessionStatus.Processing;
@@ -528,9 +545,7 @@ class FiveEPlayScoutingSessionManager {
       );
     }
 
-    const bestTeamEntry = [...teamToOverlapCount.entries()].toSorted(
-      (entryA, entryB) => entryB[1] - entryA[1],
-    )[0];
+    const bestTeamEntry = [...teamToOverlapCount.entries()].toSorted((entryA, entryB) => entryB[1] - entryA[1])[0];
     if (bestTeamEntry !== undefined && bestTeamEntry[1] >= 3) {
       return bestTeamEntry[0];
     }

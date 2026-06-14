@@ -77,10 +77,10 @@ const config = {
     ],
   },
   nsis: {
-    artifactName: 'CS Analyzer Setup ${version}.${ext}',
+    artifactName: 'CS-Analyzer-Setup-${version}.${ext}',
   },
   portable: {
-    artifactName: 'CS Analyzer Portable ${version}.${ext}',
+    artifactName: 'CS-Analyzer-Portable-${version}.${ext}',
   },
   mac: {
     target: [

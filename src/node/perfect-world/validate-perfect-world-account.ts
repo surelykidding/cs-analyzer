@@ -3,7 +3,8 @@ import type { PerfectWorldAccount } from 'csdm/common/types/perfect-world-accoun
 import { updatePerfectWorldAccountValidation } from 'csdm/node/database/perfect-world-account/update-perfect-world-account-validation';
 import { fetchPerfectWorldSelfProfile, PerfectWorldSessionValidationError } from './perfect-world-api';
 
-const defaultExpiredMessage = 'The saved Perfect World session has expired. Re-import it from the client or sign in again.';
+const defaultExpiredMessage =
+  'The saved Perfect World session has expired. Re-import it from the client or sign in again.';
 
 export async function validatePerfectWorldAccount(account: PerfectWorldAccount) {
   try {

@@ -25,10 +25,7 @@ import {
   getEmbeddedDemoEntryName,
   isCompressedDemoArchiveFormat,
 } from 'csdm/node/demo-archive/demo-archive';
-import {
-  DEFAULT_MAX_CONCURRENT_TACTICS_POSITION_GENERATIONS,
-  MAX_CONCURRENT_ANALYSES,
-} from 'csdm/common/analyses';
+import { DEFAULT_MAX_CONCURRENT_TACTICS_POSITION_GENERATIONS, MAX_CONCURRENT_ANALYSES } from 'csdm/common/analyses';
 import { RendererServerMessageName } from './renderer-server-message-name';
 import { server } from './server';
 import { processScoutingImportedDemo } from './process-scouting-imported-demo';
@@ -91,9 +88,7 @@ async function buildExtractedDemoPath(filePath: string, embeddedEntryName: strin
   }
 
   const baseName =
-    embeddedEntryName !== null && embeddedEntryName !== ''
-      ? path.basename(embeddedEntryName)
-      : path.basename(filePath);
+    embeddedEntryName !== null && embeddedEntryName !== '' ? path.basename(embeddedEntryName) : path.basename(filePath);
   const extractedBaseName = getFileNameWithoutKnownArchiveExtensions(baseName);
 
   let candidatePath = path.join(directoryPath, `${extractedBaseName}.dem`);
@@ -275,11 +270,13 @@ class FaceitScoutingSessionManager {
     await this.emitSessionUpdate(sessionId);
 
     try {
-      const ownedChecksums = [...new Set(
-        session.targets
-          .filter((target) => target.ownsDatabaseMatch && target.demoChecksum !== null)
-          .map((target) => target.demoChecksum as string),
-      )];
+      const ownedChecksums = [
+        ...new Set(
+          session.targets
+            .filter((target) => target.ownsDatabaseMatch && target.demoChecksum !== null)
+            .map((target) => target.demoChecksum as string),
+        ),
+      ];
       if (ownedChecksums.length > 0) {
         await deleteMatchesByChecksums(ownedChecksums);
         await deleteOrphanDemos();
@@ -386,7 +383,8 @@ class FaceitScoutingSessionManager {
       .updateTable('faceit_scouting_targets')
       .set({
         status: FaceitScoutingTargetStatus.Error,
-        failure_message: 'Demo processing was interrupted. You can delete this scouting session or re-download the demo to retry.',
+        failure_message:
+          'Demo processing was interrupted. You can delete this scouting session or re-download the demo to retry.',
       })
       .where('id', 'in', interruptedTargetIds)
       .execute();
@@ -420,10 +418,7 @@ class FaceitScoutingSessionManager {
   private startQueueWorkers = async () => {
     const maxConcurrentProcessingCount = await this.getMaxConcurrentProcessingCount();
 
-    while (
-      this.activeQueueWorkerCount < maxConcurrentProcessingCount &&
-      this.queuedFilePaths.size > 0
-    ) {
+    while (this.activeQueueWorkerCount < maxConcurrentProcessingCount && this.queuedFilePaths.size > 0) {
       this.activeQueueWorkerCount += 1;
       void this.processQueueWorker();
     }
@@ -470,8 +465,7 @@ class FaceitScoutingSessionManager {
     const fileNameCandidates = getNormalizedDownloadNameCandidates(filePath, embeddedEntryName);
     const target = session.targets.find((target) => {
       return (
-        (target.status === FaceitScoutingTargetStatus.AwaitingDownload ||
-          canRetryErroredTarget(target, filePath)) &&
+        (target.status === FaceitScoutingTargetStatus.AwaitingDownload || canRetryErroredTarget(target, filePath)) &&
         fileNameCandidates.some((fileName) => fileName.includes(target.faceitMatchId.toLowerCase()))
       );
     });
@@ -568,7 +562,9 @@ class FaceitScoutingSessionManager {
       .execute();
     const hasReadyTargets = targetRows.some((target) => target.status === FaceitScoutingTargetStatus.Ready);
     const hasProcessingTargets = targetRows.some((target) => target.status === FaceitScoutingTargetStatus.Processing);
-    const hasAwaitingTargets = targetRows.some((target) => target.status === FaceitScoutingTargetStatus.AwaitingDownload);
+    const hasAwaitingTargets = targetRows.some(
+      (target) => target.status === FaceitScoutingTargetStatus.AwaitingDownload,
+    );
     let status: FaceitScoutingSessionStatus = FaceitScoutingSessionStatus.Error;
     if (hasProcessingTargets) {
       status = FaceitScoutingSessionStatus.Processing;
@@ -634,9 +630,7 @@ class FaceitScoutingSessionManager {
       teamToOverlapCount.set(row.teamName, currentCount + (steamIdSet.has(row.steamId) ? 1 : 0));
     }
 
-    const bestTeamEntry = [...teamToOverlapCount.entries()].toSorted(
-      (entryA, entryB) => entryB[1] - entryA[1],
-    )[0];
+    const bestTeamEntry = [...teamToOverlapCount.entries()].toSorted((entryA, entryB) => entryB[1] - entryA[1])[0];
     if (bestTeamEntry !== undefined && bestTeamEntry[1] >= 2) {
       return bestTeamEntry[0];
     }

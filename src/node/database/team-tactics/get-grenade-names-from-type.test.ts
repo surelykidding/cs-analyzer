@@ -16,9 +16,6 @@ describe('getGrenadeNamesFromType', () => {
   });
 
   it('should merge molotov and incendiary into the fire filter', () => {
-    expect(getGrenadeNamesFromType(TeamTacticsGrenadeType.Fire)).toEqual([
-      GrenadeName.Molotov,
-      GrenadeName.Incendiary,
-    ]);
+    expect(getGrenadeNamesFromType(TeamTacticsGrenadeType.Fire)).toEqual([GrenadeName.Molotov, GrenadeName.Incendiary]);
   });
 });

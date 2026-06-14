@@ -11,5 +11,7 @@ export const fetchLastMatchesError = createAction<{ errorCode: ErrorCode }>(
   'downloads/perfect-world/fetchLastMatchesError',
 );
 export const accountAdded = createAction<{ account: PerfectWorldAccount }>('downloads/perfect-world/accountAdded');
-export const accountsUpdated = createAction<{ accounts: PerfectWorldAccount[] }>('downloads/perfect-world/accountsUpdated');
+export const accountsUpdated = createAction<{ accounts: PerfectWorldAccount[] }>(
+  'downloads/perfect-world/accountsUpdated',
+);
 export const matchSelected = createAction<{ matchId: string }>('downloads/perfect-world/matchSelected');

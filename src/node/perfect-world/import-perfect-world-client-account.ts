@@ -221,7 +221,9 @@ async function fetchPerfectWorldClientBridgeSession(): Promise<PerfectWorldClien
     statusCode = response.statusCode;
     responseBodyText = response.body ? await response.body.text() : '';
   } catch {
-    throw new Error('Perfect World client local login bridge is unavailable. Open the Perfect World client and log in first.');
+    throw new Error(
+      'Perfect World client local login bridge is unavailable. Open the Perfect World client and log in first.',
+    );
   }
 
   if (statusCode === 201) {
@@ -229,8 +231,7 @@ async function fetchPerfectWorldClientBridgeSession(): Promise<PerfectWorldClien
   }
 
   if (statusCode < 200 || statusCode >= 300) {
-    const bridgeErrorMessage =
-      responseBodyText.trim() === '' ? '' : ` ${responseBodyText.trim().slice(0, 200)}`;
+    const bridgeErrorMessage = responseBodyText.trim() === '' ? '' : ` ${responseBodyText.trim().slice(0, 200)}`;
     throw new Error(`Perfect World client session import failed with status ${statusCode}.${bridgeErrorMessage}`);
   }
 
@@ -257,11 +258,7 @@ async function fetchPerfectWorldClientBridgeSession(): Promise<PerfectWorldClien
     steamId,
     nickname: toNonEmptyString(payload.nickname) ?? '',
     avatarUrl: toNonEmptyString(payload.avatar) ?? '',
-    userId:
-      toInteger(payload.userId) ??
-      toInteger(payload.uid) ??
-      toInteger(payload.zqId) ??
-      toInteger(payload.zqid),
+    userId: toInteger(payload.userId) ?? toInteger(payload.uid) ?? toInteger(payload.zqId) ?? toInteger(payload.zqid),
     jt: toNonEmptyString(payload.jt),
     maskedPhoneNumber: maskPhoneNumber(
       toNonEmptyString(payload.mobilePhone) ??
@@ -334,7 +331,10 @@ async function readPerfectWorldClientApiContext(
     });
 
     for (const rawMatch of rawMatches) {
-      const seed = createPerfectWorldMatchSeed(rawMatch, String((rawMatch.matchId ?? rawMatch.match_id ?? '') as string));
+      const seed = createPerfectWorldMatchSeed(
+        rawMatch,
+        String((rawMatch.matchId ?? rawMatch.match_id ?? '') as string),
+      );
       const currentPlayer = seed.players.find((player) => {
         return player.steamId === session.steamId;
       });
@@ -353,7 +353,9 @@ async function readPerfectWorldClientApiContext(
       }
     }
   } catch (error) {
-    logger.warn('Failed to recover Perfect World user details from match history while importing the desktop client session.');
+    logger.warn(
+      'Failed to recover Perfect World user details from match history while importing the desktop client session.',
+    );
     logger.warn(error);
   }
 

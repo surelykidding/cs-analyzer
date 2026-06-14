@@ -2,12 +2,7 @@ import type { MenuItemConstructorOptions } from 'electron';
 import { ipcMain, Menu, app, screen, shell } from 'electron';
 import { i18n } from '@lingui/core';
 import { IPCChannel } from 'csdm/common/ipc-channel';
-import {
-  APP_DISPLAY_NAME,
-  APP_DOCUMENTATION_URL,
-  APP_RELEASES_URL,
-  APP_REPOSITORY_URL,
-} from 'csdm/common/branding';
+import { APP_DISPLAY_NAME, APP_DOCUMENTATION_URL, APP_RELEASES_URL, APP_REPOSITORY_URL } from 'csdm/common/branding';
 import { isMac } from 'csdm/node/os/is-mac';
 import { windowManager } from 'csdm/electron-main/window-manager';
 import { Game } from 'csdm/common/types/counter-strike';

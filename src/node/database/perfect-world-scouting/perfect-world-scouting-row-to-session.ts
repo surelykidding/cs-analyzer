@@ -1,7 +1,4 @@
-import type {
-  PerfectWorldScoutingSession,
-  PerfectWorldScoutingTarget,
-} from 'csdm/common/types/perfect-world-scouting';
+import type { PerfectWorldScoutingSession, PerfectWorldScoutingTarget } from 'csdm/common/types/perfect-world-scouting';
 import type { PerfectWorldScoutingSessionRow } from './perfect-world-scouting-session-row';
 import type { PerfectWorldScoutingTargetRow } from './perfect-world-scouting-target-row';
 

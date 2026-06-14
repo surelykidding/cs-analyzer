@@ -343,7 +343,10 @@ async function probeMatch({
     );
   }
 
-  const archiveFormat = detectDemoArchiveFormat(getResponse.result.finalUrl ?? sample.demoUrl, getResponse.result.contentType);
+  const archiveFormat = detectDemoArchiveFormat(
+    getResponse.result.finalUrl ?? sample.demoUrl,
+    getResponse.result.contentType,
+  );
   result.archiveFormat = archiveFormat;
   if (archiveFormat === null) {
     return setFailure(

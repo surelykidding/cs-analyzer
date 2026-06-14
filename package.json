@@ -40,6 +40,7 @@
     "lint:fix": "vp lint --fix",
     "package": "electron-builder --config electron-builder.config.mjs",
     "package:dir": "npm run package -- --dir",
+    "package:win:verify": "npm run package -- --win --publish never --config.win.signAndEditExecutable=false",
     "postinstall": "electron-builder install-app-deps && node ./scripts/postinstall.mjs && node ./scripts/build-linter-rules.mjs",
     "prepare": "vp config",
     "t": "npm run test",

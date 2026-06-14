@@ -175,15 +175,14 @@ export async function discoverFaceitScoutingTargets({
       }
 
       const matchedTeam = Array.from(candidateMatch.teams, (team) => {
-          return {
-            team,
-            overlapCount: getTeamOverlapCount(
-              team.players.map((player) => player.faceitPlayerId),
-              opponentFaceitPlayerIds,
-            ),
-          };
-        })
-        .sort((teamA, teamB) => teamB.overlapCount - teamA.overlapCount)[0];
+        return {
+          team,
+          overlapCount: getTeamOverlapCount(
+            team.players.map((player) => player.faceitPlayerId),
+            opponentFaceitPlayerIds,
+          ),
+        };
+      }).sort((teamA, teamB) => teamB.overlapCount - teamA.overlapCount)[0];
 
       if (matchedTeam === undefined || matchedTeam.overlapCount < minimumRosterOverlapCount) {
         continue;

@@ -32,8 +32,8 @@ function DatabaseSchemaVersionMismatch() {
     <div>
       <p>
         <Trans>
-          It looks like you installed an older version of CS Analyzer and the current database schema is not
-          compatible with it.
+          It looks like you installed an older version of CS Analyzer and the current database schema is not compatible
+          with it.
         </Trans>
       </p>
       <p>

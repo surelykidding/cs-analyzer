@@ -62,9 +62,7 @@ export async function fetchPerfectWorldScoutingTactics(
     selectedMatchCount: readyTargets.length,
     analyzedMatchCount: responses.reduce((count, response) => count + response.analyzedMatchCount, 0),
     roundCount: responses.reduce((count, response) => count + response.roundCount, 0),
-    skippedMatchesWithoutPositions: new Set(
-      responses.flatMap((response) => response.skippedMatchChecksums),
-    ).size,
+    skippedMatchesWithoutPositions: new Set(responses.flatMap((response) => response.skippedMatchChecksums)).size,
     skippedMatchChecksums: [...new Set(responses.flatMap((response) => response.skippedMatchChecksums))],
     skippedRoundCount: responses.reduce((count, response) => count + response.skippedRoundCount, 0),
     heGrenadePoints: responses.flatMap((response) => response.heGrenadePoints),

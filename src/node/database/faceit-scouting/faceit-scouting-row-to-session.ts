@@ -1,7 +1,4 @@
-import {
-  type FaceitScoutingSession,
-  type FaceitScoutingTarget,
-} from 'csdm/common/types/faceit-scouting';
+import { type FaceitScoutingSession, type FaceitScoutingTarget } from 'csdm/common/types/faceit-scouting';
 import type { FaceitScoutingSessionRow } from './faceit-scouting-session-row';
 import type { FaceitScoutingTargetRow } from './faceit-scouting-target-row';
 
@@ -30,9 +27,7 @@ export function faceitScoutingRowsToSession(
   sessionRow: FaceitScoutingSessionRow,
   targetRows: FaceitScoutingTargetRow[],
 ): FaceitScoutingSession {
-  const targets = targetRows
-    .map(rowToTarget)
-    .sort((targetA, targetB) => targetA.order - targetB.order);
+  const targets = targetRows.map(rowToTarget).sort((targetA, targetB) => targetA.order - targetB.order);
 
   return {
     id: sessionRow.id,

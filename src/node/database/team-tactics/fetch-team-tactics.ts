@@ -67,7 +67,9 @@ export async function fetchTeamTactics(payload: TeamTacticsPayload): Promise<Tea
       uniqueArray(rounds.map((round) => round.matchChecksum)),
       uniqueArray(rounds.map((round) => round.roundNumber)),
     );
-    const availablePositionRounds = new Set(positionRounds.map((round) => `${round.matchChecksum}:${round.roundNumber}`));
+    const availablePositionRounds = new Set(
+      positionRounds.map((round) => `${round.matchChecksum}:${round.roundNumber}`),
+    );
     const roundsWithPositions = rounds.filter((round) => {
       return availablePositionRounds.has(`${round.matchChecksum}:${round.roundNumber}`);
     });
@@ -76,13 +78,13 @@ export async function fetchTeamTactics(payload: TeamTacticsPayload): Promise<Tea
     });
     const [fireGrenadePoints, smokeGrenadePoints, flashGrenadePoints, tHeatmapPoints, killPoints, deathPoints] =
       await Promise.all([
-      fetchTeamGrenadeFrequency(rounds, payload, mapScale, TeamTacticsGrenadeType.Fire),
-      fetchTeamGrenadeFrequency(rounds, payload, mapScale, TeamTacticsGrenadeType.Smoke),
-      fetchTeamGrenadeFrequency(rounds, payload, mapScale, TeamTacticsGrenadeType.Flashbang),
-      fetchTFirst20SecondsHeatmap(roundsWithPositions, payload, mapScale),
-      fetchTKillPositions(rounds, payload, mapScale),
-      fetchTDeathPositions(rounds, payload, mapScale),
-    ]);
+        fetchTeamGrenadeFrequency(rounds, payload, mapScale, TeamTacticsGrenadeType.Fire),
+        fetchTeamGrenadeFrequency(rounds, payload, mapScale, TeamTacticsGrenadeType.Smoke),
+        fetchTeamGrenadeFrequency(rounds, payload, mapScale, TeamTacticsGrenadeType.Flashbang),
+        fetchTFirst20SecondsHeatmap(roundsWithPositions, payload, mapScale),
+        fetchTKillPositions(rounds, payload, mapScale),
+        fetchTDeathPositions(rounds, payload, mapScale),
+      ]);
 
     return {
       side: payload.side,

@@ -139,13 +139,7 @@ export function buildPerfectWorldDemoUrl(matchId: string, cupId: string | null) 
   return `https://pwaweblogin.wmpvp.com/csgo/demo/${normalizedMatchId}_${cupId ?? '0'}.dem`;
 }
 
-export async function loginPerfectWorld({
-  mobilePhone,
-  securityCode,
-}: {
-  mobilePhone: string;
-  securityCode: string;
-}) {
+export async function loginPerfectWorld({ mobilePhone, securityCode }: { mobilePhone: string; securityCode: string }) {
   const response = await fetchJson<PerfectWorldLoginResponse>(
     `${PERFECT_WORLD_PASSPORT_API_URL}/account/login`,
     {
@@ -271,13 +265,7 @@ export async function fetchPerfectWorldMatchHistoryPage({
   return response.data?.matchList ?? [];
 }
 
-export async function fetchPerfectWorldPublicMatchDetail({
-  userId,
-  matchId,
-}: {
-  userId: number;
-  matchId: string;
-}) {
+export async function fetchPerfectWorldPublicMatchDetail({ userId, matchId }: { userId: number; matchId: string }) {
   const url = new URL(`${PERFECT_WORLD_EXPORTS_API_URL}/match-api/detail`);
   url.searchParams.set('uid', String(userId));
   url.searchParams.set('match_id', normalizePerfectWorldComparableMatchId(matchId));

@@ -116,7 +116,10 @@ function TeamTacticsMapCanvas({ game, map, points, radarLevel, heatmapStyle, var
         const renderer = heatmapRendererRef.current;
         renderer.setAlpha(1);
         renderer.setMinOpacity(heatmapStyle === 'event' ? 0.12 : 0.05);
-        renderer.setRadius(interactiveCanvas.zoomedSize(heatmapStyle === 'event' ? 24 : 18), heatmapStyle === 'event' ? 20 : 16);
+        renderer.setRadius(
+          interactiveCanvas.zoomedSize(heatmapStyle === 'event' ? 24 : 18),
+          heatmapStyle === 'event' ? 20 : 16,
+        );
         renderer.setPoints(scaledPoints);
         renderer.draw();
         context.drawImage(heatmapCanvas, 0, 0);
@@ -184,7 +187,13 @@ export function TeamTacticsMap({
   const map = maps.find((map) => map.name === mapName && map.game === game);
   const pointCount = points.length;
   const pointCountLabel =
-    variant === 'heatmap' ? <Trans>{pointCount} samples</Trans> : variant === 'marker' ? <Trans>{pointCount} points</Trans> : <Trans>{pointCount} cells</Trans>;
+    variant === 'heatmap' ? (
+      <Trans>{pointCount} samples</Trans>
+    ) : variant === 'marker' ? (
+      <Trans>{pointCount} points</Trans>
+    ) : (
+      <Trans>{pointCount} cells</Trans>
+    );
 
   return (
     <section className="flex min-h-0 flex-1 flex-col gap-y-12 rounded-8 border border-gray-300 bg-gray-50 p-12">

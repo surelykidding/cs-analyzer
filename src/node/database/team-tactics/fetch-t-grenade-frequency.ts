@@ -25,10 +25,10 @@ export async function fetchTeamGrenadeFrequency(
       grenadeType === TeamTacticsGrenadeType.All
         ? HeatmapEvent.Smoke
         : grenadeType === TeamTacticsGrenadeType.Smoke
-        ? HeatmapEvent.Smoke
-        : grenadeType === TeamTacticsGrenadeType.Flashbang
-          ? HeatmapEvent.Flashbang
-          : HeatmapEvent.Molotov,
+          ? HeatmapEvent.Smoke
+          : grenadeType === TeamTacticsGrenadeType.Flashbang
+            ? HeatmapEvent.Flashbang
+            : HeatmapEvent.Molotov,
     gameModes: [],
     games: [],
     mapName: payload.mapName,

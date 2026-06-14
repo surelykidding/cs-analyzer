@@ -1,7 +1,4 @@
-import {
-  type FiveEPlayScoutingSession,
-  type FiveEPlayScoutingTarget,
-} from 'csdm/common/types/5eplay-scouting';
+import { type FiveEPlayScoutingSession, type FiveEPlayScoutingTarget } from 'csdm/common/types/5eplay-scouting';
 import type { FiveEPlayScoutingSessionRow } from './5eplay-scouting-session-row';
 import type { FiveEPlayScoutingTargetRow } from './5eplay-scouting-target-row';
 
@@ -28,9 +25,7 @@ export function fiveEPlayScoutingRowsToSession(
   sessionRow: FiveEPlayScoutingSessionRow,
   targetRows: FiveEPlayScoutingTargetRow[],
 ): FiveEPlayScoutingSession {
-  const targets = targetRows
-    .map(rowToTarget)
-    .sort((targetA, targetB) => targetA.order - targetB.order);
+  const targets = targetRows.map(rowToTarget).sort((targetA, targetB) => targetA.order - targetB.order);
 
   return {
     id: sessionRow.id,

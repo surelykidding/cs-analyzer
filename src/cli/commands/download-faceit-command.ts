@@ -54,9 +54,7 @@ export class DownloadFaceitCommand extends DownloadBaseCommand {
   }
 
   public async run() {
-    console.warn(
-      `This command is currently disabled, see ${APP_DOCUMENTATION_URL}.`,
-    );
+    console.warn(`This command is currently disabled, see ${APP_DOCUMENTATION_URL}.`);
     return;
     // oxlint-disable no-unreachable
     this.parseArgs();

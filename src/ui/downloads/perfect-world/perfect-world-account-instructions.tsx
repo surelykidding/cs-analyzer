@@ -18,8 +18,8 @@ export function PerfectWorldAccountInstructions() {
       </p>
       <p className="mt-4">
         <Trans>
-          Otherwise, enter the mobile phone number linked to your account and an SMS code received from the Perfect World
-          client or website.
+          Otherwise, enter the mobile phone number linked to your account and an SMS code received from the Perfect
+          World client or website.
         </Trans>
       </p>
     </div>

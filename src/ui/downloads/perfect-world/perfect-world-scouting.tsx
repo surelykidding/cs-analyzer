@@ -79,13 +79,16 @@ function TargetStatusBadge({ status }: { status: PerfectWorldScoutingSession['ta
   const className =
     status === PerfectWorldScoutingTargetStatus.Ready
       ? 'bg-green-700 text-white'
-      : status === PerfectWorldScoutingTargetStatus.Processing || status === PerfectWorldScoutingTargetStatus.Downloading
+      : status === PerfectWorldScoutingTargetStatus.Processing ||
+          status === PerfectWorldScoutingTargetStatus.Downloading
         ? 'bg-blue-700 text-white'
         : status === PerfectWorldScoutingTargetStatus.Error
           ? 'bg-red-700 text-white'
           : 'bg-gray-200 text-gray-900';
 
-  return <span className={`rounded-full px-8 py-4 text-caption ${className}`}>{translateScoutingStatus(t, status)}</span>;
+  return (
+    <span className={`rounded-full px-8 py-4 text-caption ${className}`}>{translateScoutingStatus(t, status)}</span>
+  );
 }
 
 export function PerfectWorldScouting() {
@@ -295,7 +298,8 @@ export function PerfectWorldScouting() {
       showToast({
         id: 'perfect-world-scouting-session-delete-error',
         type: 'error',
-        content: typeof error === 'string' ? error : <Trans>An error occurred while deleting the scouting session.</Trans>,
+        content:
+          typeof error === 'string' ? error : <Trans>An error occurred while deleting the scouting session.</Trans>,
       });
     } finally {
       setIsDeletingSession(false);
@@ -310,9 +314,7 @@ export function PerfectWorldScouting() {
     const skippedChecksums = response.skippedMatchChecksums;
     const skippedTargets = session.targets.filter((target) => {
       return (
-        target.demoChecksum !== null &&
-        target.demoFilePath !== null &&
-        skippedChecksums.includes(target.demoChecksum)
+        target.demoChecksum !== null && target.demoFilePath !== null && skippedChecksums.includes(target.demoChecksum)
       );
     });
     if (skippedTargets.length === 0) {
@@ -380,7 +382,9 @@ export function PerfectWorldScouting() {
     return (
       <Content>
         <div className="max-w-[720px]">
-          <ErrorMessage message={errorMessage || <Trans>An error occurred while loading the scouting session.</Trans>} />
+          <ErrorMessage
+            message={errorMessage || <Trans>An error occurred while loading the scouting session.</Trans>}
+          />
         </div>
       </Content>
     );
@@ -396,8 +400,8 @@ export function PerfectWorldScouting() {
             </p>
             <p className="mt-8 text-caption text-gray-800">
               <Trans>
-                Paste a Perfect World match ID to find the opponent&apos;s recent matches on the same map. Matching demos
-                are downloaded, imported and analyzed automatically.
+                Paste a Perfect World match ID to find the opponent&apos;s recent matches on the same map. Matching
+                demos are downloaded, imported and analyzed automatically.
               </Trans>
             </p>
             <p className="mt-8 text-caption text-gray-800">
@@ -440,7 +444,11 @@ export function PerfectWorldScouting() {
                 />
               </div>
               <div className="mt-12 flex gap-8">
-                <SpinnableButton isLoading={isStartingSession} isDisabled={matchId.trim() === ''} onClick={startSession}>
+                <SpinnableButton
+                  isLoading={isStartingSession}
+                  isDisabled={matchId.trim() === ''}
+                  onClick={startSession}
+                >
                   <Trans>Start scouting session</Trans>
                 </SpinnableButton>
                 <Button onClick={loadSession}>
@@ -464,8 +472,8 @@ export function PerfectWorldScouting() {
                 </p>
                 <p className="mt-4 text-caption text-gray-800">
                   <Trans>
-                    {session.sourceMatch.ourTeamName} {session.sourceMatch.ourTeamScore} - {session.sourceMatch.opponentTeamScore}{' '}
-                    {session.sourceMatch.opponentTeamName}
+                    {session.sourceMatch.ourTeamName} {session.sourceMatch.ourTeamScore} -{' '}
+                    {session.sourceMatch.opponentTeamScore} {session.sourceMatch.opponentTeamName}
                   </Trans>
                 </p>
                 <p className="mt-4 text-caption text-gray-800">
@@ -600,7 +608,8 @@ export function PerfectWorldScouting() {
                         </div>
                         <p className="mt-8 text-caption text-gray-800">
                           <Trans>
-                            Shared history players: {target.sharedHistoryPlayerCount}, roster overlap: {target.rosterOverlapCount}
+                            Shared history players: {target.sharedHistoryPlayerCount}, roster overlap:{' '}
+                            {target.rosterOverlapCount}
                           </Trans>
                         </p>
                         {target.failureMessage && (
@@ -631,7 +640,9 @@ export function PerfectWorldScouting() {
           {session === undefined ? (
             <Message message={<Trans>Start a scouting session to see opponent tactics.</Trans>} />
           ) : session.readyTargetCount === 0 ? (
-            <Message message={<Trans>Opponent demos are being downloaded, imported and analyzed automatically.</Trans>} />
+            <Message
+              message={<Trans>Opponent demos are being downloaded, imported and analyzed automatically.</Trans>}
+            />
           ) : tacticsStatus === Status.Loading && response === undefined ? (
             <Message message={<Trans>Loading scouting tactics...</Trans>} />
           ) : tacticsStatus === Status.Error && response === undefined ? (

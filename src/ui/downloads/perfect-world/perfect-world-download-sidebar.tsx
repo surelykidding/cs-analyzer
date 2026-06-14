@@ -6,7 +6,10 @@ import { usePerfectWorldState } from './use-perfect-world-state';
 import { useCurrentPerfectWorldAccount } from './use-current-perfect-world-account';
 import { matchSelected } from './perfect-world-actions';
 
-function getMatchResult(currentSteamId: string | undefined, match: ReturnType<typeof usePerfectWorldState>['matches'][number]) {
+function getMatchResult(
+  currentSteamId: string | undefined,
+  match: ReturnType<typeof usePerfectWorldState>['matches'][number],
+) {
   if (currentSteamId === undefined) {
     return MatchResult.Unplayed;
   }

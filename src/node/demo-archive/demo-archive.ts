@@ -27,7 +27,10 @@ export function isPotentialDemoDownloadPath(filePath: string) {
   );
 }
 
-export function detectDemoArchiveFormat(filePathOrUrl: string, contentType: string | null = null): DemoArchiveFormat | null {
+export function detectDemoArchiveFormat(
+  filePathOrUrl: string,
+  contentType: string | null = null,
+): DemoArchiveFormat | null {
   const lowerContentType = contentType?.toLowerCase() ?? '';
   let pathname = filePathOrUrl;
   try {
@@ -192,6 +195,14 @@ export function createDemoArchiveExtractStream(archiveFormat: DemoArchiveFormat)
   }
 }
 
-export async function extractDemoArchiveToFile(archivePath: string, demoPath: string, archiveFormat: DemoArchiveFormat) {
-  await pipeline(fs.createReadStream(archivePath), createDemoArchiveExtractStream(archiveFormat), fs.createWriteStream(demoPath));
+export async function extractDemoArchiveToFile(
+  archivePath: string,
+  demoPath: string,
+  archiveFormat: DemoArchiveFormat,
+) {
+  await pipeline(
+    fs.createReadStream(archivePath),
+    createDemoArchiveExtractStream(archiveFormat),
+    fs.createWriteStream(demoPath),
+  );
 }

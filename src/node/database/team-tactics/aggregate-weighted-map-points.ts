@@ -30,11 +30,10 @@ export function aggregateWeightedMapPoints(points: WeightedMapPoint[], gridSize:
   }
 
   return Array.from(buckets.values(), (bucket) => {
-      return {
-        x: bucket.totalX / bucket.count,
-        y: bucket.totalY / bucket.count,
-        count: bucket.count,
-      };
-    })
-    .sort((pointA, pointB) => pointB.count - pointA.count);
+    return {
+      x: bucket.totalX / bucket.count,
+      y: bucket.totalY / bucket.count,
+      count: bucket.count,
+    };
+  }).sort((pointA, pointB) => pointB.count - pointA.count);
 }

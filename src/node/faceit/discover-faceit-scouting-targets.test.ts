@@ -284,8 +284,8 @@ describe('discoverFaceitScoutingTargets', () => {
 
     mockedFetchPlayerMatchesHistory.mockImplementation(
       async ({ playerId, offset, limit }: { playerId: string; offset?: number; limit: number }) => {
-      if (offset === 0) {
-        return Array.from({ length: limit }, (_, index) => {
+        if (offset === 0) {
+          return Array.from({ length: limit }, (_, index) => {
             return {
               competition_id: '',
               competition_name: '',

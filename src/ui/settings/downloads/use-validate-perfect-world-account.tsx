@@ -33,7 +33,11 @@ export function useValidatePerfectWorldAccount() {
 
       setErrorMessage(
         getPerfectWorldErrorMessage(error) ??
-          (typeof error === 'string' ? error : <Trans>An error occurred while validating the Perfect World account.</Trans>),
+          (typeof error === 'string' ? (
+            error
+          ) : (
+            <Trans>An error occurred while validating the Perfect World account.</Trans>
+          )),
       );
       setIsBusy(false);
 

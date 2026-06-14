@@ -31,7 +31,9 @@ export function useAddPerfectWorldAccount() {
 
       return true;
     } catch (error) {
-      setErrorMessage(typeof error === 'string' ? error : <Trans>An error occurred while logging into Perfect World.</Trans>);
+      setErrorMessage(
+        typeof error === 'string' ? error : <Trans>An error occurred while logging into Perfect World.</Trans>,
+      );
       setIsBusy(false);
 
       return false;

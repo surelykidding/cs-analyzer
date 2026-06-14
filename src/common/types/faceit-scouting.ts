@@ -19,8 +19,7 @@ export const FaceitScoutingTargetStatus = {
   Ready: 'ready',
   Error: 'error',
 } as const;
-export type FaceitScoutingTargetStatus =
-  (typeof FaceitScoutingTargetStatus)[keyof typeof FaceitScoutingTargetStatus];
+export type FaceitScoutingTargetStatus = (typeof FaceitScoutingTargetStatus)[keyof typeof FaceitScoutingTargetStatus];
 
 export type FaceitScoutingSourceMatch = {
   id: string;

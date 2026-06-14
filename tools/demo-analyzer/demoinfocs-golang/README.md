@@ -21,17 +21,17 @@ For business inquiries please use the contact information found on the [GitHub p
 
 ### Counter-Strike 2 + Live Broadcast Parsing - aka. CSTV+ (BETA)
 
-	go get -u github.com/markus-wa/demoinfocs-golang/v5/pkg/demoinfocs
+    go get -u github.com/markus-wa/demoinfocs-golang/v5/pkg/demoinfocs
 
 See [v5 branch with broadcast example](https://github.com/markus-wa/demoinfocs-golang/tree/v5/examples/broadcasts)
 
 ### Counter-Strike 2
 
-	go get -u github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs
+    go get -u github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs
 
 ### CS:GO
 
-	go get -u github.com/markus-wa/demoinfocs-golang/v3/pkg/demoinfocs
+    go get -u github.com/markus-wa/demoinfocs-golang/v3/pkg/demoinfocs
 
 ## Table of Contents
 
@@ -152,18 +152,18 @@ The full API documentation is available here on [pkg.go.dev](https://pkg.go.dev/
 
 ## Features
 
-* Game events (kills, shots, round starts/ends, footsteps etc.) - [docs](https://pkg.go.dev/github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/events?tab=doc) / [example](https://github.com/markus-wa/demoinfocs-golang/tree/master/examples/print-events)
-* Tracking of game-state (players, teams, grenades, ConVars etc.) - [docs](https://pkg.go.dev/github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs?tab=doc#GameState)
-* Grenade projectiles / trajectories - [docs](https://pkg.go.dev/github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs?tab=doc#GameState.GrenadeProjectiles) / [example](https://github.com/markus-wa/demoinfocs-golang/tree/master/examples/nade-trajectories)
-* Access to entities, server-classes & data-tables - [docs](https://pkg.go.dev/github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/sendtables?tab=doc#ServerClasses) / [example](https://github.com/markus-wa/demoinfocs-golang/tree/master/examples/entities)
-* Access to all net-messages - [docs](https://pkg.go.dev/github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs?tab=doc#NetMessageCreator) / [example](https://github.com/markus-wa/demoinfocs-golang/tree/master/examples/net-messages)
-* Chat & console messages <sup id="achat1">1</sup> - [docs](https://pkg.go.dev/github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/events?tab=doc#ChatMessage) / [example](https://github.com/markus-wa/demoinfocs-golang/tree/master/examples/print-events)
-* Matchmaking ranks (official MM demos only) - [docs](https://pkg.go.dev/github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/events?tab=doc#RankUpdate)
-* Full POV demo support
-* Support for encrypted net-messages (if the [decryption key](https://pkg.go.dev/github.com/markus-wa/demoinfocs-golang/v4@master/pkg/demoinfocs#ParserConfig) is provided)
-* JavaScript (browser / Node.js) support via WebAssembly - [example](https://github.com/markus-wa/demoinfocs-wasm)
-* [Easy debugging via build-flags](#debugging)
-* Built with performance & concurrency in mind
+- Game events (kills, shots, round starts/ends, footsteps etc.) - [docs](https://pkg.go.dev/github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/events?tab=doc) / [example](https://github.com/markus-wa/demoinfocs-golang/tree/master/examples/print-events)
+- Tracking of game-state (players, teams, grenades, ConVars etc.) - [docs](https://pkg.go.dev/github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs?tab=doc#GameState)
+- Grenade projectiles / trajectories - [docs](https://pkg.go.dev/github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs?tab=doc#GameState.GrenadeProjectiles) / [example](https://github.com/markus-wa/demoinfocs-golang/tree/master/examples/nade-trajectories)
+- Access to entities, server-classes & data-tables - [docs](https://pkg.go.dev/github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/sendtables?tab=doc#ServerClasses) / [example](https://github.com/markus-wa/demoinfocs-golang/tree/master/examples/entities)
+- Access to all net-messages - [docs](https://pkg.go.dev/github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs?tab=doc#NetMessageCreator) / [example](https://github.com/markus-wa/demoinfocs-golang/tree/master/examples/net-messages)
+- Chat & console messages <sup id="achat1">1</sup> - [docs](https://pkg.go.dev/github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/events?tab=doc#ChatMessage) / [example](https://github.com/markus-wa/demoinfocs-golang/tree/master/examples/print-events)
+- Matchmaking ranks (official MM demos only) - [docs](https://pkg.go.dev/github.com/markus-wa/demoinfocs-golang/v4/pkg/demoinfocs/events?tab=doc#RankUpdate)
+- Full POV demo support
+- Support for encrypted net-messages (if the [decryption key](https://pkg.go.dev/github.com/markus-wa/demoinfocs-golang/v4@master/pkg/demoinfocs#ParserConfig) is provided)
+- JavaScript (browser / Node.js) support via WebAssembly - [example](https://github.com/markus-wa/demoinfocs-wasm)
+- [Easy debugging via build-flags](#debugging)
+- Built with performance & concurrency in mind
 
 1. <small id="f1">In MM demos the chat is encrypted, so [`ParserConfig.NetMessageDecryptionKey`](https://pkg.go.dev/github.com/markus-wa/demoinfocs-golang/v4@master/pkg/demoinfocs#ParserConfig) needs to be set - see also [`MatchInfoDecryptionKey()`](https://pkg.go.dev/github.com/markus-wa/demoinfocs-golang/v4@master/pkg/demoinfocs#MatchInfoDecryptionKey).</small>
 
@@ -175,11 +175,11 @@ Here are some benchmark results from a system with an Intel i7 6700k CPU and a S
 
 ### Overview
 
-|Benchmark|Description|Average Duration|Speed|
-|-|-|-|-|
-|`BenchmarkConcurrent`|Read and parse 8 demos concurrently|2.06 s (per 8 demos)|~ 1 h 25 min of gameplay per second|
-|`BenchmarkDemoInfoCs`|Read demo from drive and parse|0.89 s|~ 25 min of gameplay per second|
-|`BenchmarkInMemory`|Read demo from memory and parse|0.88 s|~ 25 min of gameplay per second|
+| Benchmark             | Description                         | Average Duration     | Speed                               |
+| --------------------- | ----------------------------------- | -------------------- | ----------------------------------- |
+| `BenchmarkConcurrent` | Read and parse 8 demos concurrently | 2.06 s (per 8 demos) | ~ 1 h 25 min of gameplay per second |
+| `BenchmarkDemoInfoCs` | Read demo from drive and parse      | 0.89 s               | ~ 25 min of gameplay per second     |
+| `BenchmarkInMemory`   | Read demo from memory and parse     | 0.88 s               | ~ 25 min of gameplay per second     |
 
 ### Raw Output
 
@@ -270,6 +270,7 @@ Running unit tests:
 For the full regression suite you will need to download the test demo-set.
 
 Prerequisites:
+
 - [Git LFS](https://git-lfs.github.com) must be installed
 - [`7z`](https://www.7-zip.org/) must be in your `PATH` environment variable (`p7zip` or `p7zip-full` package on most Linux distros)
 
@@ -284,7 +285,7 @@ The file [`test/default.golden`](https://github.com/markus-wa/demoinfocs-golang/
 If there is a change to game events (new fields etc.) it is necessary to update this file so the regression tests pass.
 To update it you can run the following command:
 
-	go test -run TestDemoInfoCs -update
+    go test -run TestDemoInfoCs -update
 
 Please don't update the `.golden` file if you are not sure it's required. Maybe the failing CI is just pointing out a regression.
 
@@ -315,11 +316,13 @@ To install some (optional, but quite handy) `pre-commit` and `pre-push` hooks, y
     scripts/git-hooks/link-git-hooks.sh
 
 #### `pre-commit`:
+
 - check if [interfaces have been updated](#generating-interfaces)
 - build the code
 - run unit tests
 
 #### `pre-push`:
+
 - run regression tests
 
 ## Acknowledgements

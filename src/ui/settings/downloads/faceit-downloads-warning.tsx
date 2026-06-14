@@ -21,7 +21,8 @@ export function FaceitDownloadsWarning() {
         </p>
         <p className="selectable">
           <Trans>
-            FACEIT still restricts some download endpoints on the server side, so demo availability may change over time.
+            FACEIT still restricts some download endpoints on the server side, so demo availability may change over
+            time.
           </Trans>
         </p>
       </div>

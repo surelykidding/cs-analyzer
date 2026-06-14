@@ -1,14 +1,30 @@
-import { sql } from 'kysely';
+import { sql, type RawBuilder } from 'kysely';
 import type { TeamTacticsRound } from './team-tactics-round';
 
-// oxlint-disable-next-line typescript/no-explicit-any
-export function applyTeamTacticsRoundsFilter(query: any, rounds: TeamTacticsRound[], matchChecksumColumn: string, roundNumberColumn: string) {
+type RoundExpression = unknown;
+
+type RoundExpressionBuilder = {
+  (column: string, operator: '=', value: string | number): RoundExpression;
+  and(expressions: RoundExpression[]): RoundExpression;
+  or(expressions: RoundExpression[]): RoundExpression;
+};
+
+type QueryWithRoundWhere<Query> = {
+  where(condition: RawBuilder<boolean>): Query;
+  where(callback: (eb: RoundExpressionBuilder) => RoundExpression): Query;
+};
+
+export function applyTeamTacticsRoundsFilter<Query extends QueryWithRoundWhere<Query>>(
+  query: Query,
+  rounds: TeamTacticsRound[],
+  matchChecksumColumn: string,
+  roundNumberColumn: string,
+) {
   if (rounds.length === 0) {
     return query.where(sql<boolean>`false`);
   }
 
-  // oxlint-disable-next-line typescript/no-explicit-any
-  return query.where((eb: any) => {
+  return query.where((eb) => {
     return eb.or(
       rounds.map((round) => {
         return eb.and([

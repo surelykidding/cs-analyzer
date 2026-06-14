@@ -33,10 +33,14 @@ export function ChangelogDialog() {
                 <Trans>Team tactics and scouting tactics remain the main focus of this release.</Trans>
               </li>
               <li>
-                <Trans>Perfect World account import, validation, match scouting, and demo processing are included.</Trans>
+                <Trans>
+                  Perfect World account import, validation, match scouting, and demo processing are included.
+                </Trans>
               </li>
               <li>
-                <Trans>FACEIT works out of the box with the bundled beta API key, with an optional user override.</Trans>
+                <Trans>
+                  FACEIT works out of the box with the bundled beta API key, with an optional user override.
+                </Trans>
               </li>
               <li>
                 <Trans>Beta builds use manual updates from GitHub pre-releases instead of in-app auto-update.</Trans>

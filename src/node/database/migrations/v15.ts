@@ -8,7 +8,12 @@ const v15: Migration = {
     await transaction.schema
       .createTable('faceit_scouting_sessions')
       .ifNotExists()
-      .addColumn('id', 'uuid', (col) => col.primaryKey().notNull().defaultTo(sql`gen_random_uuid()`))
+      .addColumn('id', 'uuid', (col) =>
+        col
+          .primaryKey()
+          .notNull()
+          .defaultTo(sql`gen_random_uuid()`),
+      )
       .addColumn('status', 'varchar', (col) => col.notNull())
       .addColumn('source_match_id', 'varchar', (col) => col.notNull())
       .addColumn('source_match_url', 'text', (col) => col.notNull())

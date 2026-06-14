@@ -80,7 +80,9 @@ function TargetStatusBadge({ status }: { status: FaceitScoutingSession['targets'
           ? 'bg-red-700 text-white'
           : 'bg-gray-200 text-gray-900';
 
-  return <span className={`rounded-full px-8 py-4 text-caption ${className}`}>{translateScoutingStatus(t, status)}</span>;
+  return (
+    <span className={`rounded-full px-8 py-4 text-caption ${className}`}>{translateScoutingStatus(t, status)}</span>
+  );
 }
 
 export function FaceitScouting() {
@@ -275,7 +277,8 @@ export function FaceitScouting() {
       showToast({
         id: 'faceit-scouting-session-delete-error',
         type: 'error',
-        content: typeof error === 'string' ? error : <Trans>An error occurred while deleting the scouting session.</Trans>,
+        content:
+          typeof error === 'string' ? error : <Trans>An error occurred while deleting the scouting session.</Trans>,
       });
     } finally {
       setIsDeletingSession(false);
@@ -296,9 +299,7 @@ export function FaceitScouting() {
     ) => {
       const skippedTargets = session.targets.filter((target) => {
         return (
-          target.demoChecksum !== null &&
-          target.demoFilePath !== null &&
-          skippedChecksums.includes(target.demoChecksum)
+          target.demoChecksum !== null && target.demoFilePath !== null && skippedChecksums.includes(target.demoChecksum)
         );
       });
       if (skippedTargets.length === 0) {
@@ -381,7 +382,9 @@ export function FaceitScouting() {
     return (
       <Content>
         <div className="max-w-[720px]">
-          <ErrorMessage message={errorMessage || <Trans>An error occurred while loading the scouting session.</Trans>} />
+          <ErrorMessage
+            message={errorMessage || <Trans>An error occurred while loading the scouting session.</Trans>}
+          />
         </div>
       </Content>
     );
@@ -427,7 +430,11 @@ export function FaceitScouting() {
                 onEnterKeyDown={startSession}
               />
               <div className="mt-12 flex gap-8">
-                <SpinnableButton isLoading={isStartingSession} isDisabled={matchIdOrUrl.trim() === ''} onClick={startSession}>
+                <SpinnableButton
+                  isLoading={isStartingSession}
+                  isDisabled={matchIdOrUrl.trim() === ''}
+                  onClick={startSession}
+                >
                   <Trans>Start scouting session</Trans>
                 </SpinnableButton>
                 <Button onClick={loadSession}>
@@ -451,8 +458,8 @@ export function FaceitScouting() {
                 </p>
                 <p className="mt-4 text-caption text-gray-800">
                   <Trans>
-                    {session.sourceMatch.ourTeamName} {session.sourceMatch.ourTeamScore} - {session.sourceMatch.opponentTeamScore}{' '}
-                    {session.sourceMatch.opponentTeamName}
+                    {session.sourceMatch.ourTeamName} {session.sourceMatch.ourTeamScore} -{' '}
+                    {session.sourceMatch.opponentTeamScore} {session.sourceMatch.opponentTeamName}
                   </Trans>
                 </p>
                 <p className="mt-4 text-caption text-gray-800">
@@ -587,7 +594,8 @@ export function FaceitScouting() {
                         </div>
                         <p className="mt-8 text-caption text-gray-800">
                           <Trans>
-                            Shared history players: {target.sharedHistoryPlayerCount}, roster overlap: {target.rosterOverlapCount}
+                            Shared history players: {target.sharedHistoryPlayerCount}, roster overlap:{' '}
+                            {target.rosterOverlapCount}
                           </Trans>
                         </p>
                         {target.failureMessage && (
@@ -595,7 +603,9 @@ export function FaceitScouting() {
                             <ErrorMessage message={target.failureMessage} />
                           </div>
                         )}
-                        {target.demoFilePath && <p className="mt-8 text-caption break-all text-gray-800">{target.demoFilePath}</p>}
+                        {target.demoFilePath && (
+                          <p className="mt-8 text-caption break-all text-gray-800">{target.demoFilePath}</p>
+                        )}
                         <div className="mt-12 flex flex-wrap gap-8">
                           <OpenLinkButton url={target.url}>
                             <Trans>See on FACEIT</Trans>
@@ -614,7 +624,11 @@ export function FaceitScouting() {
           {session === undefined ? (
             <Message message={<Trans>Start a scouting session to see opponent tactics.</Trans>} />
           ) : session.readyTargetCount === 0 ? (
-            <Message message={<Trans>Download opponent demos from your browser and this page will import them automatically.</Trans>} />
+            <Message
+              message={
+                <Trans>Download opponent demos from your browser and this page will import them automatically.</Trans>
+              }
+            />
           ) : tacticsStatus === Status.Loading && response === undefined ? (
             <Message message={<Trans>Loading scouting tactics...</Trans>} />
           ) : tacticsStatus === Status.Error && response === undefined ? (

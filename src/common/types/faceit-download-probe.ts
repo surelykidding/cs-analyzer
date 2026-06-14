@@ -5,8 +5,7 @@ export const FaceitDownloadProbeSource = {
   CurrentAccountLatest: 'current-account-latest',
   ManualMatch: 'manual-match',
 } as const;
-export type FaceitDownloadProbeSource =
-  (typeof FaceitDownloadProbeSource)[keyof typeof FaceitDownloadProbeSource];
+export type FaceitDownloadProbeSource = (typeof FaceitDownloadProbeSource)[keyof typeof FaceitDownloadProbeSource];
 
 export const FaceitDownloadProbeFailure = {
   MatchFetchFailed: 'match-fetch-failed',
@@ -20,8 +19,7 @@ export const FaceitDownloadProbeFailure = {
   AnalyzeFailed: 'analyze-failed',
   MatchInsertionFailed: 'match-insertion-failed',
 } as const;
-export type FaceitDownloadProbeFailure =
-  (typeof FaceitDownloadProbeFailure)[keyof typeof FaceitDownloadProbeFailure];
+export type FaceitDownloadProbeFailure = (typeof FaceitDownloadProbeFailure)[keyof typeof FaceitDownloadProbeFailure];
 
 export type FaceitDownloadProbeHttpResult = {
   ok: boolean;

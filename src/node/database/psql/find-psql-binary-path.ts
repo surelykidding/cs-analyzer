@@ -42,7 +42,8 @@ async function findPsqlFromWhere() {
 }
 
 async function findPsqlInCommonWindowsInstallLocations() {
-  const roots = [...new Set(
+  const roots = [
+    ...new Set(
       [
         process.env.ProgramFiles,
         process.env.ProgramW6432,
@@ -52,7 +53,8 @@ async function findPsqlInCommonWindowsInstallLocations() {
       ].filter((value): value is string => {
         return value !== undefined && value !== '';
       }),
-    )];
+    ),
+  ];
 
   for (const root of roots) {
     const postgresqlRootPath = path.join(root, 'PostgreSQL');

@@ -283,8 +283,10 @@ jobs:
         run: |
           $version = (Get-Content package.json | ConvertFrom-Json).version
           $expectedAssets = @(
-            "CS Analyzer Setup $version.exe",
-            "CS Analyzer Portable $version.exe"
+            "CS-Analyzer-Setup-$version.exe",
+            "CS-Analyzer-Portable-$version.exe",
+            "CS-Analyzer-Setup-$version.exe.blockmap",
+            "latest.yml"
           )
           $unexpectedAssets = Get-ChildItem dist -File | Where-Object { $_.Name -like '*cs-demo-manager*' }
           if ($unexpectedAssets.Count -gt 0) {
@@ -296,14 +298,18 @@ jobs:
               throw "Missing expected artifact: $asset"
             }
           }
+          $latestPath = Select-String -Path (Join-Path dist "latest.yml") -Pattern "^path: CS-Analyzer-Setup-$version\.exe$"
+          if ($null -eq $latestPath) {
+            throw "latest.yml does not point to CS-Analyzer-Setup-$version.exe"
+          }
 
       - name: Upload Windows artifacts
         uses: actions/upload-artifact@v4
         with:
           name: windows-artifacts
           path: |
-            dist/CS Analyzer Setup *.exe
-            dist/CS Analyzer Portable *.exe
+            dist/CS-Analyzer-Setup-*.exe
+            dist/CS-Analyzer-Portable-*.exe
             dist/*.yml
             !dist/builder-debug.yml
             dist/*.blockmap
@@ -373,6 +379,16 @@ jobs:
             echo "::error title=Duplicate release asset names::Release assets must have unique file names."
             echo "$DUPLICATE_ASSETS"
             exit 1
+          fi
+
+          WINDOWS_LATEST=$(find release-artifacts -type f -name latest.yml -print -quit)
+          if [ -n "$WINDOWS_LATEST" ]; then
+            WINDOWS_DIR=$(dirname "$WINDOWS_LATEST")
+            WINDOWS_PATH=$(awk -F': ' '/^path: / {print $2; exit}' "$WINDOWS_LATEST" | tr -d "'\"")
+            if [ -z "$WINDOWS_PATH" ] || [ ! -f "$WINDOWS_DIR/$WINDOWS_PATH" ]; then
+              echo "::error title=Invalid Windows update metadata::latest.yml points to a missing release asset: $WINDOWS_PATH"
+              exit 1
+            fi
           fi
 
       - name: Publish GitHub release

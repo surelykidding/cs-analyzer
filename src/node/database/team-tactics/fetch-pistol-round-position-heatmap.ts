@@ -49,7 +49,12 @@ async function fetchPositionHeatmapRowsFromFullMatches(
     .where(sql<boolean>`player_positions.tick >= ${windowStartTick}`)
     .where(sql<boolean>`player_positions.tick < ${windowEndTick}`);
 
-  query = applyTeamTacticsRoundsFilter(query, rounds, 'player_positions.match_checksum', 'player_positions.round_number');
+  query = applyTeamTacticsRoundsFilter(
+    query,
+    rounds,
+    'player_positions.match_checksum',
+    'player_positions.round_number',
+  );
   if (payload.players !== undefined && payload.players.length > 0) {
     query = query.where(
       'player_positions.player_steam_id',

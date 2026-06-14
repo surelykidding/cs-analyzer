@@ -243,7 +243,11 @@ class PerfectWorldScoutingSessionManager {
     } catch (error) {
       if (error instanceof MatchAlreadyInDownloadQueue) {
         await this.updateTargetStatus(targetId, PerfectWorldScoutingTargetStatus.Downloading);
-      } else if (error instanceof MatchAlreadyDownloaded && demoFilePath !== '' && (await fs.pathExists(demoFilePath))) {
+      } else if (
+        error instanceof MatchAlreadyDownloaded &&
+        demoFilePath !== '' &&
+        (await fs.pathExists(demoFilePath))
+      ) {
         await this.processDownloadedTarget(sessionId, targetId, match.id, demoFilePath);
         return;
       } else if (error instanceof DownloadLinkExpired) {
@@ -286,7 +290,12 @@ class PerfectWorldScoutingSessionManager {
 
     switch (event.type) {
       case 'success':
-        await this.processDownloadedTarget(session.id, target.id, target.perfectWorldMatchId, event.payload.demoFilePath);
+        await this.processDownloadedTarget(
+          session.id,
+          target.id,
+          target.perfectWorldMatchId,
+          event.payload.demoFilePath,
+        );
         break;
       case 'expired':
         await this.updateTargetError(target.id, 'Demo link expired.');
@@ -306,7 +315,12 @@ class PerfectWorldScoutingSessionManager {
     }
   };
 
-  private processDownloadedTarget = async (sessionId: string, targetId: number, matchId: string, demoFilePath: string) => {
+  private processDownloadedTarget = async (
+    sessionId: string,
+    targetId: number,
+    matchId: string,
+    demoFilePath: string,
+  ) => {
     if (this.processingTargetIds.has(targetId)) {
       return;
     }
@@ -413,7 +427,8 @@ class PerfectWorldScoutingSessionManager {
         .updateTable('perfect_world_scouting_targets')
         .set({
           status: PerfectWorldScoutingTargetStatus.Error,
-          failure_message: 'Demo processing was interrupted. You can delete this scouting session and start again to retry.',
+          failure_message:
+            'Demo processing was interrupted. You can delete this scouting session and start again to retry.',
         })
         .where(
           'id',
@@ -428,7 +443,8 @@ class PerfectWorldScoutingSessionManager {
         .updateTable('perfect_world_scouting_targets')
         .set({
           status: PerfectWorldScoutingTargetStatus.Error,
-          failure_message: 'Demo download was interrupted. You can delete this scouting session and start again to retry.',
+          failure_message:
+            'Demo download was interrupted. You can delete this scouting session and start again to retry.',
         })
         .where(
           'id',
@@ -479,9 +495,15 @@ class PerfectWorldScoutingSessionManager {
       .where('session_id', '=', sessionId)
       .execute();
     const hasReadyTargets = targetRows.some((target) => target.status === PerfectWorldScoutingTargetStatus.Ready);
-    const hasDownloadingTargets = targetRows.some((target) => target.status === PerfectWorldScoutingTargetStatus.Downloading);
-    const hasProcessingTargets = targetRows.some((target) => target.status === PerfectWorldScoutingTargetStatus.Processing);
-    const hasAwaitingTargets = targetRows.some((target) => target.status === PerfectWorldScoutingTargetStatus.AwaitingDownload);
+    const hasDownloadingTargets = targetRows.some(
+      (target) => target.status === PerfectWorldScoutingTargetStatus.Downloading,
+    );
+    const hasProcessingTargets = targetRows.some(
+      (target) => target.status === PerfectWorldScoutingTargetStatus.Processing,
+    );
+    const hasAwaitingTargets = targetRows.some(
+      (target) => target.status === PerfectWorldScoutingTargetStatus.AwaitingDownload,
+    );
     let status: PerfectWorldScoutingSessionStatus = PerfectWorldScoutingSessionStatus.Error;
     if (hasDownloadingTargets || hasProcessingTargets) {
       status = PerfectWorldScoutingSessionStatus.Processing;
@@ -523,9 +545,7 @@ class PerfectWorldScoutingSessionManager {
       teamToOverlapCount.set(row.teamName, currentCount + (opponentSteamIdSet.has(row.steamId) ? 1 : 0));
     }
 
-    const bestTeamEntry = [...teamToOverlapCount.entries()].toSorted(
-      (entryA, entryB) => entryB[1] - entryA[1],
-    )[0];
+    const bestTeamEntry = [...teamToOverlapCount.entries()].toSorted((entryA, entryB) => entryB[1] - entryA[1])[0];
     if (bestTeamEntry !== undefined && bestTeamEntry[1] >= 3) {
       return bestTeamEntry[0];
     }

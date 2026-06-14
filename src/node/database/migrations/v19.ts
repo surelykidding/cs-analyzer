@@ -6,7 +6,10 @@ const v19: Migration = {
   schemaVersion: 19,
   run: async (transaction: Kysely<Database>) => {
     await transaction.schema.alterTable('perfect_world_accounts').addColumn('is_valid', 'boolean').execute();
-    await transaction.schema.alterTable('perfect_world_accounts').addColumn('last_validated_at', 'timestamptz').execute();
+    await transaction.schema
+      .alterTable('perfect_world_accounts')
+      .addColumn('last_validated_at', 'timestamptz')
+      .execute();
     await transaction.schema.alterTable('perfect_world_accounts').addColumn('last_error', 'text').execute();
 
     await transaction

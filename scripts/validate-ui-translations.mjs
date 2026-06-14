@@ -83,10 +83,7 @@ function parsePo(content) {
 }
 
 function getPlaceholderTokens(message) {
-  return [
-    ...message.matchAll(/\{[A-Za-z0-9_.]+\}/g),
-    ...message.matchAll(/<\/?\d+>/g),
-  ].map((match) => match[0]);
+  return [...message.matchAll(/\{[A-Za-z0-9_.]+\}/g), ...message.matchAll(/<\/?\d+>/g)].map((match) => match[0]);
 }
 
 function sortTokens(tokens) {

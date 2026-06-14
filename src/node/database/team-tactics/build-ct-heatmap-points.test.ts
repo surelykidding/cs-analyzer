@@ -40,10 +40,7 @@ describe('buildCtHeatmapPoints', () => {
 
   it('should keep dwell on real occupied cells instead of creating midpoint hotspots', () => {
     const points = buildCtHeatmapPoints(
-      [
-        createRow({ tick: 0, x: 0, windowEndTick: 64 }),
-        createRow({ tick: 32, x: 100, windowEndTick: 64 }),
-      ],
+      [createRow({ tick: 0, x: 0, windowEndTick: 64 }), createRow({ tick: 32, x: 100, windowEndTick: 64 })],
       RadarLevel.Upper,
       0,
       1,
@@ -89,10 +86,7 @@ describe('buildCtHeatmapPoints', () => {
 
   it('should dedupe duplicate ticks from the same player stream', () => {
     const points = buildCtHeatmapPoints(
-      [
-        createRow({ tick: 0, x: 0, windowEndTick: 64 }),
-        createRow({ tick: 0, x: 0, windowEndTick: 64 }),
-      ],
+      [createRow({ tick: 0, x: 0, windowEndTick: 64 }), createRow({ tick: 0, x: 0, windowEndTick: 64 })],
       RadarLevel.Upper,
       0,
       1,
